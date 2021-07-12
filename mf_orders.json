@@ -43,7 +43,7 @@
       "last_price_date": "2021-06-29",
       "status_message": "SIP: Insufficient balance.",
       "fund": "Kotak Flexicap Fund - Direct Plan",
-      "quantity": 0
+      "quantity": 0.0
     },
     {
       "status": "OPEN",
@@ -65,7 +65,7 @@
       "last_price_date": "2021-06-29",
       "status_message": "Insufficient fund. 1/5",
       "fund": "BOI AXA Arbitrage Fund - Direct Plan",
-      "quantity": 0
+      "quantity": 0.0
     },
     {
       "status": "REJECTED",
@@ -109,7 +109,7 @@
       "last_price_date": "2021-06-29",
       "status_message": "Insufficient fund. 3/5",
       "fund": "ICICI Prudential Bond Fund - Direct Plan",
-      "quantity": 0
+      "quantity": 0.0
     }
   ]
 }
