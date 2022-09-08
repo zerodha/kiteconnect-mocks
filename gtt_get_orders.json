@@ -54,6 +54,7 @@
             },
             "orders": [
                 {
+                    "exchange": "NSE",
                     "tradingsymbol": "RAIN",
                     "product": "CNC",
                     "order_type": "LIMIT",
