@@ -1,0 +1,266 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$ref": "#/definitions/MarginCommodity",
+    "definitions": {
+        "MarginCommodity": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "$schema": {
+                    "type": "string",
+                    "format": "uri",
+                    "qt-uri-protocols": [
+                        "http"
+                    ]
+                },
+                "$ref": {
+                    "type": "string"
+                },
+                "definitions": {
+                    "$ref": "#/definitions/Definitions"
+                }
+            },
+            "required": [
+                "$ref",
+                "$schema",
+                "definitions"
+            ],
+            "title": "MarginCommodity"
+        },
+        "Definitions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "MarginCommodity": {
+                    "$ref": "#/definitions/MarginCommodityClass"
+                },
+                "Data": {
+                    "$ref": "#/definitions/Data"
+                },
+                "Available": {
+                    "$ref": "#/definitions/Available"
+                }
+            },
+            "required": [
+                "Available",
+                "Data",
+                "MarginCommodity"
+            ],
+            "title": "Definitions"
+        },
+        "Available": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/AvailableProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "Available"
+        },
+        "AvailableProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "adhoc_margin": {
+                    "$ref": "#/definitions/AdhocMargin"
+                },
+                "cash": {
+                    "$ref": "#/definitions/AdhocMargin"
+                },
+                "opening_balance": {
+                    "$ref": "#/definitions/AdhocMargin"
+                },
+                "live_balance": {
+                    "$ref": "#/definitions/AdhocMargin"
+                },
+                "collateral": {
+                    "$ref": "#/definitions/AdhocMargin"
+                },
+                "intraday_payin": {
+                    "$ref": "#/definitions/AdhocMargin"
+                }
+            },
+            "required": [
+                "adhoc_margin",
+                "cash",
+                "collateral",
+                "intraday_payin",
+                "live_balance",
+                "opening_balance"
+            ],
+            "title": "AvailableProperties"
+        },
+        "AdhocMargin": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "title": "AdhocMargin"
+        },
+        "Data": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/DataProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "Data"
+        },
+        "DataProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "enabled": {
+                    "$ref": "#/definitions/AdhocMargin"
+                },
+                "net": {
+                    "$ref": "#/definitions/AdhocMargin"
+                },
+                "available": {
+                    "$ref": "#/definitions/AvailableClass"
+                },
+                "utilised": {
+                    "$ref": "#/definitions/Utilised"
+                }
+            },
+            "required": [
+                "available",
+                "enabled",
+                "net",
+                "utilised"
+            ],
+            "title": "DataProperties"
+        },
+        "AvailableClass": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "$ref": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "$ref"
+            ],
+            "title": "AvailableClass"
+        },
+        "Utilised": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "$ref": "#/definitions/AdhocMargin"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "type"
+            ],
+            "title": "Utilised"
+        },
+        "MarginCommodityClass": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/MarginCommodityProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "MarginCommodityClass"
+        },
+        "MarginCommodityProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/AdhocMargin"
+                },
+                "data": {
+                    "$ref": "#/definitions/AvailableClass"
+                }
+            },
+            "required": [
+                "data",
+                "status"
+            ],
+            "title": "MarginCommodityProperties"
+        }
+    }
+}

@@ -1,0 +1,296 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$ref": "#/definitions/Holdings",
+    "definitions": {
+        "Holdings": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "$schema": {
+                    "type": "string",
+                    "format": "uri",
+                    "qt-uri-protocols": [
+                        "http"
+                    ]
+                },
+                "$ref": {
+                    "type": "string"
+                },
+                "definitions": {
+                    "$ref": "#/definitions/Definitions"
+                }
+            },
+            "required": [
+                "$ref",
+                "$schema",
+                "definitions"
+            ],
+            "title": "Holdings"
+        },
+        "Definitions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Holdings": {
+                    "$ref": "#/definitions/HoldingsClass"
+                },
+                "Datum": {
+                    "$ref": "#/definitions/Datum"
+                }
+            },
+            "required": [
+                "Datum",
+                "Holdings"
+            ],
+            "title": "Definitions"
+        },
+        "Datum": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/DatumProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "Datum"
+        },
+        "DatumProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "tradingsymbol": {
+                    "$ref": "#/definitions/AuthorisedQuantity"
+                },
+                "exchange": {
+                    "$ref": "#/definitions/AuthorisedQuantity"
+                },
+                "instrument_token": {
+                    "$ref": "#/definitions/AuthorisedQuantity"
+                },
+                "isin": {
+                    "$ref": "#/definitions/AuthorisedQuantity"
+                },
+                "product": {
+                    "$ref": "#/definitions/AuthorisedQuantity"
+                },
+                "price": {
+                    "$ref": "#/definitions/AuthorisedQuantity"
+                },
+                "quantity": {
+                    "$ref": "#/definitions/AuthorisedQuantity"
+                },
+                "used_quantity": {
+                    "$ref": "#/definitions/AuthorisedQuantity"
+                },
+                "t1_quantity": {
+                    "$ref": "#/definitions/AuthorisedQuantity"
+                },
+                "realised_quantity": {
+                    "$ref": "#/definitions/AuthorisedQuantity"
+                },
+                "authorised_quantity": {
+                    "$ref": "#/definitions/AuthorisedQuantity"
+                },
+                "authorised_date": {
+                    "$ref": "#/definitions/AuthorisedDate"
+                },
+                "opening_quantity": {
+                    "$ref": "#/definitions/AuthorisedQuantity"
+                },
+                "collateral_quantity": {
+                    "$ref": "#/definitions/AuthorisedQuantity"
+                },
+                "collateral_type": {
+                    "$ref": "#/definitions/AuthorisedQuantity"
+                },
+                "discrepancy": {
+                    "$ref": "#/definitions/AuthorisedQuantity"
+                },
+                "average_price": {
+                    "$ref": "#/definitions/AuthorisedQuantity"
+                },
+                "last_price": {
+                    "$ref": "#/definitions/AuthorisedQuantity"
+                },
+                "close_price": {
+                    "$ref": "#/definitions/AuthorisedQuantity"
+                },
+                "pnl": {
+                    "$ref": "#/definitions/AuthorisedQuantity"
+                },
+                "day_change": {
+                    "$ref": "#/definitions/AuthorisedQuantity"
+                },
+                "day_change_percentage": {
+                    "$ref": "#/definitions/AuthorisedQuantity"
+                }
+            },
+            "required": [
+                "authorised_date",
+                "authorised_quantity",
+                "average_price",
+                "close_price",
+                "collateral_quantity",
+                "collateral_type",
+                "day_change",
+                "day_change_percentage",
+                "discrepancy",
+                "exchange",
+                "instrument_token",
+                "isin",
+                "last_price",
+                "opening_quantity",
+                "pnl",
+                "price",
+                "product",
+                "quantity",
+                "realised_quantity",
+                "t1_quantity",
+                "tradingsymbol",
+                "used_quantity"
+            ],
+            "title": "DatumProperties"
+        },
+        "AuthorisedDate": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "$ref": "#/definitions/Type"
+                },
+                "format": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "format",
+                "type"
+            ],
+            "title": "AuthorisedDate"
+        },
+        "AuthorisedQuantity": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "$ref": "#/definitions/Type"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "title": "AuthorisedQuantity"
+        },
+        "HoldingsClass": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/HoldingsProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "HoldingsClass"
+        },
+        "HoldingsProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/AuthorisedQuantity"
+                },
+                "data": {
+                    "$ref": "#/definitions/Data"
+                }
+            },
+            "required": [
+                "data",
+                "status"
+            ],
+            "title": "HoldingsProperties"
+        },
+        "Data": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "items": {
+                    "$ref": "#/definitions/Items"
+                }
+            },
+            "required": [
+                "items",
+                "type"
+            ],
+            "title": "Data"
+        },
+        "Items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "$ref": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "$ref"
+            ],
+            "title": "Items"
+        },
+        "Type": {
+            "type": "string",
+            "enum": [
+                "integer",
+                "number",
+                "string",
+                "boolean"
+            ],
+            "title": "Type"
+        }
+    }
+}

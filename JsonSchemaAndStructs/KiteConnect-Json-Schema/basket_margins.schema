@@ -1,0 +1,348 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$ref": "#/definitions/BasketMargins",
+    "definitions": {
+        "BasketMargins": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "$schema": {
+                    "type": "string",
+                    "format": "uri",
+                    "qt-uri-protocols": [
+                        "http"
+                    ]
+                },
+                "$ref": {
+                    "type": "string"
+                },
+                "definitions": {
+                    "$ref": "#/definitions/Definitions"
+                }
+            },
+            "required": [
+                "$ref",
+                "$schema",
+                "definitions"
+            ],
+            "title": "BasketMargins"
+        },
+        "Definitions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "BasketMargins": {
+                    "$ref": "#/definitions/BasketMarginsClass"
+                },
+                "Data": {
+                    "$ref": "#/definitions/DataClass"
+                },
+                "Pnl": {
+                    "$ref": "#/definitions/Pnl"
+                },
+                "Final": {
+                    "$ref": "#/definitions/Final"
+                }
+            },
+            "required": [
+                "BasketMargins",
+                "Data",
+                "Final",
+                "Pnl"
+            ],
+            "title": "Definitions"
+        },
+        "BasketMarginsClass": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/BasketMarginsProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "BasketMarginsClass"
+        },
+        "BasketMarginsProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/Status"
+                },
+                "data": {
+                    "$ref": "#/definitions/Data"
+                }
+            },
+            "required": [
+                "data",
+                "status"
+            ],
+            "title": "BasketMarginsProperties"
+        },
+        "Data": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "$ref": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "$ref"
+            ],
+            "title": "Data"
+        },
+        "Status": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "$ref": "#/definitions/Type"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "title": "Status"
+        },
+        "DataClass": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/DataProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "DataClass"
+        },
+        "DataProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "initial": {
+                    "$ref": "#/definitions/Data"
+                },
+                "final": {
+                    "$ref": "#/definitions/Data"
+                },
+                "orders": {
+                    "$ref": "#/definitions/Orders"
+                }
+            },
+            "required": [
+                "final",
+                "initial",
+                "orders"
+            ],
+            "title": "DataProperties"
+        },
+        "Orders": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "items": {
+                    "$ref": "#/definitions/Data"
+                }
+            },
+            "required": [
+                "items",
+                "type"
+            ],
+            "title": "Orders"
+        },
+        "Final": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/FinalProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "Final"
+        },
+        "FinalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "$ref": "#/definitions/Status"
+                },
+                "tradingsymbol": {
+                    "$ref": "#/definitions/Status"
+                },
+                "exchange": {
+                    "$ref": "#/definitions/Status"
+                },
+                "span": {
+                    "$ref": "#/definitions/Status"
+                },
+                "exposure": {
+                    "$ref": "#/definitions/Status"
+                },
+                "option_premium": {
+                    "$ref": "#/definitions/Status"
+                },
+                "additional": {
+                    "$ref": "#/definitions/Status"
+                },
+                "bo": {
+                    "$ref": "#/definitions/Status"
+                },
+                "cash": {
+                    "$ref": "#/definitions/Status"
+                },
+                "var": {
+                    "$ref": "#/definitions/Status"
+                },
+                "pnl": {
+                    "$ref": "#/definitions/Data"
+                },
+                "total": {
+                    "$ref": "#/definitions/Status"
+                }
+            },
+            "required": [
+                "additional",
+                "bo",
+                "cash",
+                "exchange",
+                "exposure",
+                "option_premium",
+                "pnl",
+                "span",
+                "total",
+                "tradingsymbol",
+                "type",
+                "var"
+            ],
+            "title": "FinalProperties"
+        },
+        "Pnl": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/PnlProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "Pnl"
+        },
+        "PnlProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "realised": {
+                    "$ref": "#/definitions/Status"
+                },
+                "unrealised": {
+                    "$ref": "#/definitions/Status"
+                }
+            },
+            "required": [
+                "realised",
+                "unrealised"
+            ],
+            "title": "PnlProperties"
+        },
+        "Type": {
+            "type": "string",
+            "enum": [
+                "string",
+                "integer",
+                "number"
+            ],
+            "title": "Type"
+        }
+    }
+}

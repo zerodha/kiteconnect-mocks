@@ -1,0 +1,168 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$ref": "#/definitions/OrderCancel",
+    "definitions": {
+        "OrderCancel": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "$schema": {
+                    "type": "string",
+                    "format": "uri",
+                    "qt-uri-protocols": [
+                        "http"
+                    ]
+                },
+                "$ref": {
+                    "type": "string"
+                },
+                "definitions": {
+                    "$ref": "#/definitions/Definitions"
+                }
+            },
+            "required": [
+                "$ref",
+                "$schema",
+                "definitions"
+            ],
+            "title": "OrderCancel"
+        },
+        "Definitions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "OrderCancel": {
+                    "$ref": "#/definitions/OrderCancelClass"
+                },
+                "Data": {
+                    "$ref": "#/definitions/Data"
+                }
+            },
+            "required": [
+                "Data",
+                "OrderCancel"
+            ],
+            "title": "Definitions"
+        },
+        "Data": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/DataProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "Data"
+        },
+        "DataProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "order_id": {
+                    "$ref": "#/definitions/OrderID"
+                }
+            },
+            "required": [
+                "order_id"
+            ],
+            "title": "DataProperties"
+        },
+        "OrderID": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "title": "OrderID"
+        },
+        "OrderCancelClass": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/OrderCancelProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "OrderCancelClass"
+        },
+        "OrderCancelProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/OrderID"
+                },
+                "data": {
+                    "$ref": "#/definitions/DataClass"
+                }
+            },
+            "required": [
+                "data",
+                "status"
+            ],
+            "title": "OrderCancelProperties"
+        },
+        "DataClass": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "$ref": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "$ref"
+            ],
+            "title": "DataClass"
+        }
+    }
+}

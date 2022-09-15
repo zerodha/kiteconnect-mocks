@@ -1,0 +1,221 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$ref": "#/definitions/Ltp",
+    "definitions": {
+        "Ltp": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "$schema": {
+                    "type": "string",
+                    "format": "uri",
+                    "qt-uri-protocols": [
+                        "http"
+                    ]
+                },
+                "$ref": {
+                    "type": "string"
+                },
+                "definitions": {
+                    "$ref": "#/definitions/Definitions"
+                }
+            },
+            "required": [
+                "$ref",
+                "$schema",
+                "definitions"
+            ],
+            "title": "Ltp"
+        },
+        "Definitions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Ltp": {
+                    "$ref": "#/definitions/LtpClass"
+                },
+                "Data": {
+                    "$ref": "#/definitions/Data"
+                },
+                "NseInfy": {
+                    "$ref": "#/definitions/NseInfyClass"
+                }
+            },
+            "required": [
+                "Data",
+                "Ltp",
+                "NseInfy"
+            ],
+            "title": "Definitions"
+        },
+        "Data": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/DataProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "Data"
+        },
+        "DataProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "NSE:INFY": {
+                    "$ref": "#/definitions/NseInfy"
+                }
+            },
+            "required": [
+                "NSE:INFY"
+            ],
+            "title": "DataProperties"
+        },
+        "NseInfy": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "$ref": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "$ref"
+            ],
+            "title": "NseInfy"
+        },
+        "LtpClass": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/LtpProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "LtpClass"
+        },
+        "LtpProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/Status"
+                },
+                "data": {
+                    "$ref": "#/definitions/NseInfy"
+                }
+            },
+            "required": [
+                "data",
+                "status"
+            ],
+            "title": "LtpProperties"
+        },
+        "Status": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "title": "Status"
+        },
+        "NseInfyClass": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/NseInfyProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "NseInfyClass"
+        },
+        "NseInfyProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "instrument_token": {
+                    "$ref": "#/definitions/Status"
+                },
+                "last_price": {
+                    "$ref": "#/definitions/Status"
+                }
+            },
+            "required": [
+                "instrument_token",
+                "last_price"
+            ],
+            "title": "NseInfyProperties"
+        }
+    }
+}

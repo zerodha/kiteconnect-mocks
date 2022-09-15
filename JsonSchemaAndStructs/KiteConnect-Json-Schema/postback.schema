@@ -1,0 +1,298 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$ref": "#/definitions/Postback",
+    "definitions": {
+        "Postback": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "$schema": {
+                    "type": "string",
+                    "format": "uri",
+                    "qt-uri-protocols": [
+                        "http"
+                    ]
+                },
+                "$ref": {
+                    "type": "string"
+                },
+                "definitions": {
+                    "$ref": "#/definitions/Definitions"
+                }
+            },
+            "required": [
+                "$ref",
+                "$schema",
+                "definitions"
+            ],
+            "title": "Postback"
+        },
+        "Definitions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Postback": {
+                    "$ref": "#/definitions/PostbackClass"
+                },
+                "Meta": {
+                    "$ref": "#/definitions/Meta"
+                }
+            },
+            "required": [
+                "Meta",
+                "Postback"
+            ],
+            "title": "Definitions"
+        },
+        "Meta": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "title",
+                "type"
+            ],
+            "title": "Meta"
+        },
+        "PostbackClass": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/Properties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "PostbackClass"
+        },
+        "Properties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "user_id": {
+                    "$ref": "#/definitions/AppID"
+                },
+                "unfilled_quantity": {
+                    "$ref": "#/definitions/AppID"
+                },
+                "app_id": {
+                    "$ref": "#/definitions/AppID"
+                },
+                "checksum": {
+                    "$ref": "#/definitions/AppID"
+                },
+                "placed_by": {
+                    "$ref": "#/definitions/AppID"
+                },
+                "order_id": {
+                    "$ref": "#/definitions/AppID"
+                },
+                "exchange_order_id": {
+                    "$ref": "#/definitions/AppID"
+                },
+                "parent_order_id": {
+                    "$ref": "#/definitions/AppID"
+                },
+                "status": {
+                    "$ref": "#/definitions/AppID"
+                },
+                "status_message": {
+                    "$ref": "#/definitions/AppID"
+                },
+                "status_message_raw": {
+                    "$ref": "#/definitions/AppID"
+                },
+                "order_timestamp": {
+                    "$ref": "#/definitions/Timestamp"
+                },
+                "exchange_update_timestamp": {
+                    "$ref": "#/definitions/Timestamp"
+                },
+                "exchange_timestamp": {
+                    "$ref": "#/definitions/Timestamp"
+                },
+                "variety": {
+                    "$ref": "#/definitions/AppID"
+                },
+                "exchange": {
+                    "$ref": "#/definitions/AppID"
+                },
+                "tradingsymbol": {
+                    "$ref": "#/definitions/AppID"
+                },
+                "instrument_token": {
+                    "$ref": "#/definitions/AppID"
+                },
+                "order_type": {
+                    "$ref": "#/definitions/AppID"
+                },
+                "transaction_type": {
+                    "$ref": "#/definitions/AppID"
+                },
+                "validity": {
+                    "$ref": "#/definitions/AppID"
+                },
+                "product": {
+                    "$ref": "#/definitions/AppID"
+                },
+                "quantity": {
+                    "$ref": "#/definitions/AppID"
+                },
+                "disclosed_quantity": {
+                    "$ref": "#/definitions/AppID"
+                },
+                "price": {
+                    "$ref": "#/definitions/AppID"
+                },
+                "trigger_price": {
+                    "$ref": "#/definitions/AppID"
+                },
+                "average_price": {
+                    "$ref": "#/definitions/AppID"
+                },
+                "filled_quantity": {
+                    "$ref": "#/definitions/AppID"
+                },
+                "pending_quantity": {
+                    "$ref": "#/definitions/AppID"
+                },
+                "cancelled_quantity": {
+                    "$ref": "#/definitions/AppID"
+                },
+                "market_protection": {
+                    "$ref": "#/definitions/AppID"
+                },
+                "meta": {
+                    "$ref": "#/definitions/MetaClass"
+                },
+                "tag": {
+                    "$ref": "#/definitions/AppID"
+                },
+                "guid": {
+                    "$ref": "#/definitions/AppID"
+                }
+            },
+            "required": [
+                "app_id",
+                "average_price",
+                "cancelled_quantity",
+                "checksum",
+                "disclosed_quantity",
+                "exchange",
+                "exchange_order_id",
+                "exchange_timestamp",
+                "exchange_update_timestamp",
+                "filled_quantity",
+                "guid",
+                "instrument_token",
+                "market_protection",
+                "meta",
+                "order_id",
+                "order_timestamp",
+                "order_type",
+                "parent_order_id",
+                "pending_quantity",
+                "placed_by",
+                "price",
+                "product",
+                "quantity",
+                "status",
+                "status_message",
+                "status_message_raw",
+                "tag",
+                "tradingsymbol",
+                "transaction_type",
+                "trigger_price",
+                "unfilled_quantity",
+                "user_id",
+                "validity",
+                "variety"
+            ],
+            "title": "Properties"
+        },
+        "AppID": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "$ref": "#/definitions/Type"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "title": "AppID"
+        },
+        "Timestamp": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "$ref": "#/definitions/Type"
+                },
+                "format": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "format",
+                "type"
+            ],
+            "title": "Timestamp"
+        },
+        "MetaClass": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "$ref": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "$ref"
+            ],
+            "title": "MetaClass"
+        },
+        "Type": {
+            "type": "string",
+            "enum": [
+                "integer",
+                "string",
+                "null"
+            ],
+            "title": "Type"
+        }
+    }
+}

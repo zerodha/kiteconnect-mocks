@@ -1,0 +1,271 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$ref": "#/definitions/MFOrdersInfo",
+    "definitions": {
+        "MFOrdersInfo": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "$schema": {
+                    "type": "string",
+                    "format": "uri",
+                    "qt-uri-protocols": [
+                        "http"
+                    ]
+                },
+                "$ref": {
+                    "type": "string"
+                },
+                "definitions": {
+                    "$ref": "#/definitions/Definitions"
+                }
+            },
+            "required": [
+                "$ref",
+                "$schema",
+                "definitions"
+            ],
+            "title": "MFOrdersInfo"
+        },
+        "Definitions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "MFOrdersInfo": {
+                    "$ref": "#/definitions/MFOrdersInfoClass"
+                },
+                "Data": {
+                    "$ref": "#/definitions/Data"
+                }
+            },
+            "required": [
+                "Data",
+                "MFOrdersInfo"
+            ],
+            "title": "Definitions"
+        },
+        "Data": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/DataProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "Data"
+        },
+        "DataProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/Amount"
+                },
+                "purchase_type": {
+                    "$ref": "#/definitions/Amount"
+                },
+                "exchange_order_id": {
+                    "$ref": "#/definitions/Amount"
+                },
+                "last_price": {
+                    "$ref": "#/definitions/Amount"
+                },
+                "order_timestamp": {
+                    "$ref": "#/definitions/LastPriceDate"
+                },
+                "fund": {
+                    "$ref": "#/definitions/Amount"
+                },
+                "tradingsymbol": {
+                    "$ref": "#/definitions/Amount"
+                },
+                "tag": {
+                    "$ref": "#/definitions/Amount"
+                },
+                "placed_by": {
+                    "$ref": "#/definitions/Amount"
+                },
+                "last_price_date": {
+                    "$ref": "#/definitions/LastPriceDate"
+                },
+                "folio": {
+                    "$ref": "#/definitions/Amount"
+                },
+                "variety": {
+                    "$ref": "#/definitions/Amount"
+                },
+                "exchange_timestamp": {
+                    "$ref": "#/definitions/Amount"
+                },
+                "average_price": {
+                    "$ref": "#/definitions/Amount"
+                },
+                "settlement_id": {
+                    "$ref": "#/definitions/Amount"
+                },
+                "transaction_type": {
+                    "$ref": "#/definitions/Amount"
+                },
+                "order_id": {
+                    "$ref": "#/definitions/LastPriceDate"
+                },
+                "amount": {
+                    "$ref": "#/definitions/Amount"
+                },
+                "status_message": {
+                    "$ref": "#/definitions/Amount"
+                },
+                "quantity": {
+                    "$ref": "#/definitions/Amount"
+                }
+            },
+            "required": [
+                "amount",
+                "average_price",
+                "exchange_order_id",
+                "exchange_timestamp",
+                "folio",
+                "fund",
+                "last_price",
+                "last_price_date",
+                "order_id",
+                "order_timestamp",
+                "placed_by",
+                "purchase_type",
+                "quantity",
+                "settlement_id",
+                "status",
+                "status_message",
+                "tag",
+                "tradingsymbol",
+                "transaction_type",
+                "variety"
+            ],
+            "title": "DataProperties"
+        },
+        "Amount": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "$ref": "#/definitions/Type"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "title": "Amount"
+        },
+        "LastPriceDate": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "$ref": "#/definitions/Type"
+                },
+                "format": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "format",
+                "type"
+            ],
+            "title": "LastPriceDate"
+        },
+        "MFOrdersInfoClass": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/MFOrdersInfoProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "MFOrdersInfoClass"
+        },
+        "MFOrdersInfoProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/Amount"
+                },
+                "data": {
+                    "$ref": "#/definitions/DataClass"
+                }
+            },
+            "required": [
+                "data",
+                "status"
+            ],
+            "title": "MFOrdersInfoProperties"
+        },
+        "DataClass": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "$ref": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "$ref"
+            ],
+            "title": "DataClass"
+        },
+        "Type": {
+            "type": "string",
+            "enum": [
+                "number",
+                "null",
+                "string",
+                "integer"
+            ],
+            "title": "Type"
+        }
+    }
+}

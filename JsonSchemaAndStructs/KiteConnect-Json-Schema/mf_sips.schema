@@ -1,0 +1,315 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$ref": "#/definitions/MFSips",
+    "definitions": {
+        "MFSips": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "$schema": {
+                    "type": "string",
+                    "format": "uri",
+                    "qt-uri-protocols": [
+                        "http"
+                    ]
+                },
+                "$ref": {
+                    "type": "string"
+                },
+                "definitions": {
+                    "$ref": "#/definitions/Definitions"
+                }
+            },
+            "required": [
+                "$ref",
+                "$schema",
+                "definitions"
+            ],
+            "title": "MFSips"
+        },
+        "Definitions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "MFSips": {
+                    "$ref": "#/definitions/MFSipsClass"
+                },
+                "Datum": {
+                    "$ref": "#/definitions/Datum"
+                }
+            },
+            "required": [
+                "Datum",
+                "MFSips"
+            ],
+            "title": "Definitions"
+        },
+        "Datum": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/DatumProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "Datum"
+        },
+        "DatumProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/CompletedInstalments"
+                },
+                "sip_reg_num": {
+                    "$ref": "#/definitions/SIPRegNum"
+                },
+                "created": {
+                    "$ref": "#/definitions/Created"
+                },
+                "dividend_type": {
+                    "$ref": "#/definitions/CompletedInstalments"
+                },
+                "instalment_amount": {
+                    "$ref": "#/definitions/CompletedInstalments"
+                },
+                "fund": {
+                    "$ref": "#/definitions/CompletedInstalments"
+                },
+                "instalments": {
+                    "$ref": "#/definitions/CompletedInstalments"
+                },
+                "next_instalment": {
+                    "$ref": "#/definitions/Created"
+                },
+                "transaction_type": {
+                    "$ref": "#/definitions/CompletedInstalments"
+                },
+                "trigger_price": {
+                    "$ref": "#/definitions/CompletedInstalments"
+                },
+                "step_up": {
+                    "$ref": "#/definitions/StepUp"
+                },
+                "tradingsymbol": {
+                    "$ref": "#/definitions/CompletedInstalments"
+                },
+                "tag": {
+                    "$ref": "#/definitions/CompletedInstalments"
+                },
+                "frequency": {
+                    "$ref": "#/definitions/CompletedInstalments"
+                },
+                "last_instalment": {
+                    "$ref": "#/definitions/Created"
+                },
+                "pending_instalments": {
+                    "$ref": "#/definitions/CompletedInstalments"
+                },
+                "instalment_day": {
+                    "$ref": "#/definitions/CompletedInstalments"
+                },
+                "sip_type": {
+                    "$ref": "#/definitions/CompletedInstalments"
+                },
+                "completed_instalments": {
+                    "$ref": "#/definitions/CompletedInstalments"
+                },
+                "sip_id": {
+                    "$ref": "#/definitions/CompletedInstalments"
+                }
+            },
+            "required": [
+                "completed_instalments",
+                "created",
+                "dividend_type",
+                "frequency",
+                "fund",
+                "instalment_amount",
+                "instalment_day",
+                "instalments",
+                "last_instalment",
+                "next_instalment",
+                "pending_instalments",
+                "sip_id",
+                "sip_reg_num",
+                "sip_type",
+                "status",
+                "step_up",
+                "tag",
+                "tradingsymbol",
+                "transaction_type",
+                "trigger_price"
+            ],
+            "title": "DatumProperties"
+        },
+        "CompletedInstalments": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "$ref": "#/definitions/Type"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "title": "CompletedInstalments"
+        },
+        "SIPRegNum": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "anyOf": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Created"
+                    }
+                }
+            },
+            "required": [
+                "anyOf"
+            ],
+            "title": "SIPRegNum"
+        },
+        "Created": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "format": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "title": "Created"
+        },
+        "StepUp": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "$ref": "#/definitions/CompletedInstalments"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "type"
+            ],
+            "title": "StepUp"
+        },
+        "MFSipsClass": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/MFSipsProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "MFSipsClass"
+        },
+        "MFSipsProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/Data"
+                }
+            },
+            "required": [
+                "data"
+            ],
+            "title": "MFSipsProperties"
+        },
+        "Data": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "items": {
+                    "$ref": "#/definitions/Items"
+                }
+            },
+            "required": [
+                "items",
+                "type"
+            ],
+            "title": "Data"
+        },
+        "Items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "$ref": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "$ref"
+            ],
+            "title": "Items"
+        },
+        "Type": {
+            "type": "string",
+            "enum": [
+                "integer",
+                "string",
+                "number"
+            ],
+            "title": "Type"
+        }
+    }
+}

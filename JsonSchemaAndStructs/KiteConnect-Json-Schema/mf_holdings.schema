@@ -1,0 +1,226 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$ref": "#/definitions/MFHoldings",
+    "definitions": {
+        "MFHoldings": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "$schema": {
+                    "type": "string",
+                    "format": "uri",
+                    "qt-uri-protocols": [
+                        "http"
+                    ]
+                },
+                "$ref": {
+                    "type": "string"
+                },
+                "definitions": {
+                    "$ref": "#/definitions/Definitions"
+                }
+            },
+            "required": [
+                "$ref",
+                "$schema",
+                "definitions"
+            ],
+            "title": "MFHoldings"
+        },
+        "Definitions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "MFHoldings": {
+                    "$ref": "#/definitions/MFHoldingsClass"
+                },
+                "Datum": {
+                    "$ref": "#/definitions/Datum"
+                }
+            },
+            "required": [
+                "Datum",
+                "MFHoldings"
+            ],
+            "title": "Definitions"
+        },
+        "Datum": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/DatumProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "Datum"
+        },
+        "DatumProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "folio": {
+                    "$ref": "#/definitions/AveragePrice"
+                },
+                "average_price": {
+                    "$ref": "#/definitions/AveragePrice"
+                },
+                "last_price": {
+                    "$ref": "#/definitions/AveragePrice"
+                },
+                "last_price_date": {
+                    "$ref": "#/definitions/AveragePrice"
+                },
+                "pledged_quantity": {
+                    "$ref": "#/definitions/AveragePrice"
+                },
+                "fund": {
+                    "$ref": "#/definitions/AveragePrice"
+                },
+                "tradingsymbol": {
+                    "$ref": "#/definitions/AveragePrice"
+                },
+                "pnl": {
+                    "$ref": "#/definitions/AveragePrice"
+                },
+                "quantity": {
+                    "$ref": "#/definitions/AveragePrice"
+                }
+            },
+            "required": [
+                "average_price",
+                "folio",
+                "fund",
+                "last_price",
+                "last_price_date",
+                "pledged_quantity",
+                "pnl",
+                "quantity",
+                "tradingsymbol"
+            ],
+            "title": "DatumProperties"
+        },
+        "AveragePrice": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "$ref": "#/definitions/Type"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "title": "AveragePrice"
+        },
+        "MFHoldingsClass": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/MFHoldingsProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "MFHoldingsClass"
+        },
+        "MFHoldingsProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/AveragePrice"
+                },
+                "data": {
+                    "$ref": "#/definitions/Data"
+                }
+            },
+            "required": [
+                "data",
+                "status"
+            ],
+            "title": "MFHoldingsProperties"
+        },
+        "Data": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "items": {
+                    "$ref": "#/definitions/Items"
+                }
+            },
+            "required": [
+                "items",
+                "type"
+            ],
+            "title": "Data"
+        },
+        "Items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "$ref": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "$ref"
+            ],
+            "title": "Items"
+        },
+        "Type": {
+            "type": "string",
+            "enum": [
+                "number",
+                "string",
+                "integer"
+            ],
+            "title": "Type"
+        }
+    }
+}

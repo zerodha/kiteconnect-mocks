@@ -1,0 +1,229 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$ref": "#/definitions/TriggerRange",
+    "definitions": {
+        "TriggerRange": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "$schema": {
+                    "type": "string",
+                    "format": "uri",
+                    "qt-uri-protocols": [
+                        "http"
+                    ]
+                },
+                "$ref": {
+                    "type": "string"
+                },
+                "definitions": {
+                    "$ref": "#/definitions/Definitions"
+                }
+            },
+            "required": [
+                "$ref",
+                "$schema",
+                "definitions"
+            ],
+            "title": "TriggerRange"
+        },
+        "Definitions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "TriggerRange": {
+                    "$ref": "#/definitions/TriggerRangeClass"
+                },
+                "Data": {
+                    "$ref": "#/definitions/Data"
+                },
+                "Nse": {
+                    "$ref": "#/definitions/Nse"
+                }
+            },
+            "required": [
+                "Data",
+                "Nse",
+                "TriggerRange"
+            ],
+            "title": "Definitions"
+        },
+        "Data": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/DataProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "Data"
+        },
+        "DataProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "NSE:INFY": {
+                    "$ref": "#/definitions/NseInfy"
+                },
+                "NSE:RELIANCE": {
+                    "$ref": "#/definitions/NseInfy"
+                }
+            },
+            "required": [
+                "NSE:INFY",
+                "NSE:RELIANCE"
+            ],
+            "title": "DataProperties"
+        },
+        "NseInfy": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "$ref": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "$ref"
+            ],
+            "title": "NseInfy"
+        },
+        "Nse": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/NseProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "Nse"
+        },
+        "NseProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "instrument_token": {
+                    "$ref": "#/definitions/InstrumentToken"
+                },
+                "lower": {
+                    "$ref": "#/definitions/InstrumentToken"
+                },
+                "upper": {
+                    "$ref": "#/definitions/InstrumentToken"
+                }
+            },
+            "required": [
+                "instrument_token",
+                "lower",
+                "upper"
+            ],
+            "title": "NseProperties"
+        },
+        "InstrumentToken": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "title": "InstrumentToken"
+        },
+        "TriggerRangeClass": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/TriggerRangeProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "TriggerRangeClass"
+        },
+        "TriggerRangeProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/InstrumentToken"
+                },
+                "data": {
+                    "$ref": "#/definitions/NseInfy"
+                }
+            },
+            "required": [
+                "data",
+                "status"
+            ],
+            "title": "TriggerRangeProperties"
+        }
+    }
+}

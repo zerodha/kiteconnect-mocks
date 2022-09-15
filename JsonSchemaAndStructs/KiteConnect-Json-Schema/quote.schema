@@ -1,0 +1,495 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$ref": "#/definitions/Quote",
+    "definitions": {
+        "Quote": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "$schema": {
+                    "type": "string",
+                    "format": "uri",
+                    "qt-uri-protocols": [
+                        "http"
+                    ]
+                },
+                "$ref": {
+                    "type": "string"
+                },
+                "definitions": {
+                    "$ref": "#/definitions/Definitions"
+                }
+            },
+            "required": [
+                "$ref",
+                "$schema",
+                "definitions"
+            ],
+            "title": "Quote"
+        },
+        "Definitions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Quote": {
+                    "$ref": "#/definitions/QuoteClass"
+                },
+                "Data": {
+                    "$ref": "#/definitions/Data"
+                },
+                "NseInfy": {
+                    "$ref": "#/definitions/NseInfyClass"
+                },
+                "Depth": {
+                    "$ref": "#/definitions/Depth"
+                },
+                "Buy": {
+                    "$ref": "#/definitions/Buy"
+                },
+                "Ohlc": {
+                    "$ref": "#/definitions/Ohlc"
+                }
+            },
+            "required": [
+                "Buy",
+                "Data",
+                "Depth",
+                "NseInfy",
+                "Ohlc",
+                "Quote"
+            ],
+            "title": "Definitions"
+        },
+        "Buy": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/BuyProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "Buy"
+        },
+        "BuyProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "price": {
+                    "$ref": "#/definitions/Orders"
+                },
+                "quantity": {
+                    "$ref": "#/definitions/Orders"
+                },
+                "orders": {
+                    "$ref": "#/definitions/Orders"
+                }
+            },
+            "required": [
+                "orders",
+                "price",
+                "quantity"
+            ],
+            "title": "BuyProperties"
+        },
+        "Orders": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "$ref": "#/definitions/Type"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "title": "Orders"
+        },
+        "Data": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/DataProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "Data"
+        },
+        "DataProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "NSE:INFY": {
+                    "$ref": "#/definitions/NseInfy"
+                }
+            },
+            "required": [
+                "NSE:INFY"
+            ],
+            "title": "DataProperties"
+        },
+        "NseInfy": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "$ref": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "$ref"
+            ],
+            "title": "NseInfy"
+        },
+        "Depth": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/DepthProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "Depth"
+        },
+        "DepthProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "buy": {
+                    "$ref": "#/definitions/BuyClass"
+                },
+                "sell": {
+                    "$ref": "#/definitions/BuyClass"
+                }
+            },
+            "required": [
+                "buy",
+                "sell"
+            ],
+            "title": "DepthProperties"
+        },
+        "BuyClass": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "items": {
+                    "$ref": "#/definitions/NseInfy"
+                }
+            },
+            "required": [
+                "items",
+                "type"
+            ],
+            "title": "BuyClass"
+        },
+        "NseInfyClass": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/NseInfyProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "NseInfyClass"
+        },
+        "NseInfyProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "instrument_token": {
+                    "$ref": "#/definitions/Orders"
+                },
+                "timestamp": {
+                    "$ref": "#/definitions/LastTradeTime"
+                },
+                "last_trade_time": {
+                    "$ref": "#/definitions/LastTradeTime"
+                },
+                "last_price": {
+                    "$ref": "#/definitions/Orders"
+                },
+                "last_quantity": {
+                    "$ref": "#/definitions/Orders"
+                },
+                "buy_quantity": {
+                    "$ref": "#/definitions/Orders"
+                },
+                "sell_quantity": {
+                    "$ref": "#/definitions/Orders"
+                },
+                "volume": {
+                    "$ref": "#/definitions/Orders"
+                },
+                "average_price": {
+                    "$ref": "#/definitions/Orders"
+                },
+                "oi": {
+                    "$ref": "#/definitions/Orders"
+                },
+                "oi_day_high": {
+                    "$ref": "#/definitions/Orders"
+                },
+                "oi_day_low": {
+                    "$ref": "#/definitions/Orders"
+                },
+                "net_change": {
+                    "$ref": "#/definitions/Orders"
+                },
+                "lower_circuit_limit": {
+                    "$ref": "#/definitions/Orders"
+                },
+                "upper_circuit_limit": {
+                    "$ref": "#/definitions/Orders"
+                },
+                "ohlc": {
+                    "$ref": "#/definitions/NseInfy"
+                },
+                "depth": {
+                    "$ref": "#/definitions/NseInfy"
+                }
+            },
+            "required": [
+                "average_price",
+                "buy_quantity",
+                "depth",
+                "instrument_token",
+                "last_price",
+                "last_quantity",
+                "last_trade_time",
+                "lower_circuit_limit",
+                "net_change",
+                "ohlc",
+                "oi",
+                "oi_day_high",
+                "oi_day_low",
+                "sell_quantity",
+                "timestamp",
+                "upper_circuit_limit",
+                "volume"
+            ],
+            "title": "NseInfyProperties"
+        },
+        "LastTradeTime": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "$ref": "#/definitions/Type"
+                },
+                "format": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "format",
+                "type"
+            ],
+            "title": "LastTradeTime"
+        },
+        "Ohlc": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/OhlcProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "Ohlc"
+        },
+        "OhlcProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "open": {
+                    "$ref": "#/definitions/Orders"
+                },
+                "high": {
+                    "$ref": "#/definitions/Orders"
+                },
+                "low": {
+                    "$ref": "#/definitions/Orders"
+                },
+                "close": {
+                    "$ref": "#/definitions/Orders"
+                }
+            },
+            "required": [
+                "close",
+                "high",
+                "low",
+                "open"
+            ],
+            "title": "OhlcProperties"
+        },
+        "QuoteClass": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/QuoteProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "QuoteClass"
+        },
+        "QuoteProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/Orders"
+                },
+                "data": {
+                    "$ref": "#/definitions/NseInfy"
+                }
+            },
+            "required": [
+                "data",
+                "status"
+            ],
+            "title": "QuoteProperties"
+        },
+        "Type": {
+            "type": "string",
+            "enum": [
+                "integer",
+                "number",
+                "string"
+            ],
+            "title": "Type"
+        }
+    }
+}

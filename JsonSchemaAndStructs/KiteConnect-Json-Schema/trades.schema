@@ -1,0 +1,259 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$ref": "#/definitions/Trades",
+    "definitions": {
+        "Trades": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "$schema": {
+                    "type": "string",
+                    "format": "uri",
+                    "qt-uri-protocols": [
+                        "http"
+                    ]
+                },
+                "$ref": {
+                    "type": "string"
+                },
+                "definitions": {
+                    "$ref": "#/definitions/Definitions"
+                }
+            },
+            "required": [
+                "$ref",
+                "$schema",
+                "definitions"
+            ],
+            "title": "Trades"
+        },
+        "Definitions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Trades": {
+                    "$ref": "#/definitions/TradesClass"
+                },
+                "Datum": {
+                    "$ref": "#/definitions/Datum"
+                }
+            },
+            "required": [
+                "Datum",
+                "Trades"
+            ],
+            "title": "Definitions"
+        },
+        "Datum": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/DatumProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "Datum"
+        },
+        "DatumProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "trade_id": {
+                    "$ref": "#/definitions/ExchangeTimestamp"
+                },
+                "order_id": {
+                    "$ref": "#/definitions/AveragePrice"
+                },
+                "exchange": {
+                    "$ref": "#/definitions/AveragePrice"
+                },
+                "tradingsymbol": {
+                    "$ref": "#/definitions/AveragePrice"
+                },
+                "instrument_token": {
+                    "$ref": "#/definitions/AveragePrice"
+                },
+                "product": {
+                    "$ref": "#/definitions/AveragePrice"
+                },
+                "average_price": {
+                    "$ref": "#/definitions/AveragePrice"
+                },
+                "quantity": {
+                    "$ref": "#/definitions/AveragePrice"
+                },
+                "exchange_order_id": {
+                    "$ref": "#/definitions/AveragePrice"
+                },
+                "transaction_type": {
+                    "$ref": "#/definitions/AveragePrice"
+                },
+                "fill_timestamp": {
+                    "$ref": "#/definitions/ExchangeTimestamp"
+                },
+                "order_timestamp": {
+                    "$ref": "#/definitions/ExchangeTimestamp"
+                },
+                "exchange_timestamp": {
+                    "$ref": "#/definitions/ExchangeTimestamp"
+                }
+            },
+            "required": [
+                "average_price",
+                "exchange",
+                "exchange_order_id",
+                "exchange_timestamp",
+                "fill_timestamp",
+                "instrument_token",
+                "order_id",
+                "order_timestamp",
+                "product",
+                "quantity",
+                "trade_id",
+                "tradingsymbol",
+                "transaction_type"
+            ],
+            "title": "DatumProperties"
+        },
+        "AveragePrice": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "$ref": "#/definitions/Type"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "title": "AveragePrice"
+        },
+        "ExchangeTimestamp": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "$ref": "#/definitions/Type"
+                },
+                "format": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "format",
+                "type"
+            ],
+            "title": "ExchangeTimestamp"
+        },
+        "TradesClass": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/TradesProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "TradesClass"
+        },
+        "TradesProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/AveragePrice"
+                },
+                "data": {
+                    "$ref": "#/definitions/Data"
+                }
+            },
+            "required": [
+                "data",
+                "status"
+            ],
+            "title": "TradesProperties"
+        },
+        "Data": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "items": {
+                    "$ref": "#/definitions/Items"
+                }
+            },
+            "required": [
+                "items",
+                "type"
+            ],
+            "title": "Data"
+        },
+        "Items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "$ref": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "$ref"
+            ],
+            "title": "Items"
+        },
+        "Type": {
+            "type": "string",
+            "enum": [
+                "number",
+                "string",
+                "integer"
+            ],
+            "title": "Type"
+        }
+    }
+}

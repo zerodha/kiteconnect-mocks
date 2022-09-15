@@ -1,0 +1,286 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$ref": "#/definitions/Ohlc",
+    "definitions": {
+        "Ohlc": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "$schema": {
+                    "type": "string",
+                    "format": "uri",
+                    "qt-uri-protocols": [
+                        "http"
+                    ]
+                },
+                "$ref": {
+                    "type": "string"
+                },
+                "definitions": {
+                    "$ref": "#/definitions/Definitions"
+                }
+            },
+            "required": [
+                "$ref",
+                "$schema",
+                "definitions"
+            ],
+            "title": "Ohlc"
+        },
+        "Definitions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Ohlc": {
+                    "$ref": "#/definitions/OhlcClass"
+                },
+                "Data": {
+                    "$ref": "#/definitions/Data"
+                },
+                "NseInfy": {
+                    "$ref": "#/definitions/NseInfyClass"
+                },
+                "OhlcClass": {
+                    "$ref": "#/definitions/OhlcClassClass"
+                }
+            },
+            "required": [
+                "Data",
+                "NseInfy",
+                "Ohlc",
+                "OhlcClass"
+            ],
+            "title": "Definitions"
+        },
+        "Data": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/DataProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "Data"
+        },
+        "DataProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "NSE:INFY": {
+                    "$ref": "#/definitions/NseInfy"
+                }
+            },
+            "required": [
+                "NSE:INFY"
+            ],
+            "title": "DataProperties"
+        },
+        "NseInfy": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "$ref": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "$ref"
+            ],
+            "title": "NseInfy"
+        },
+        "NseInfyClass": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/NseInfyProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "NseInfyClass"
+        },
+        "NseInfyProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "instrument_token": {
+                    "$ref": "#/definitions/InstrumentToken"
+                },
+                "last_price": {
+                    "$ref": "#/definitions/InstrumentToken"
+                },
+                "ohlc": {
+                    "$ref": "#/definitions/NseInfy"
+                }
+            },
+            "required": [
+                "instrument_token",
+                "last_price",
+                "ohlc"
+            ],
+            "title": "NseInfyProperties"
+        },
+        "InstrumentToken": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "title": "InstrumentToken"
+        },
+        "OhlcClass": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/OhlcProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "OhlcClass"
+        },
+        "OhlcProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/InstrumentToken"
+                },
+                "data": {
+                    "$ref": "#/definitions/NseInfy"
+                }
+            },
+            "required": [
+                "data",
+                "status"
+            ],
+            "title": "OhlcProperties"
+        },
+        "OhlcClassClass": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/OhlcClassProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "OhlcClassClass"
+        },
+        "OhlcClassProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "open": {
+                    "$ref": "#/definitions/InstrumentToken"
+                },
+                "high": {
+                    "$ref": "#/definitions/InstrumentToken"
+                },
+                "low": {
+                    "$ref": "#/definitions/InstrumentToken"
+                },
+                "close": {
+                    "$ref": "#/definitions/InstrumentToken"
+                }
+            },
+            "required": [
+                "close",
+                "high",
+                "low",
+                "open"
+            ],
+            "title": "OhlcClassProperties"
+        }
+    }
+}

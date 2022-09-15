@@ -1,0 +1,282 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$ref": "#/definitions/Profile",
+    "definitions": {
+        "Profile": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "$schema": {
+                    "type": "string",
+                    "format": "uri",
+                    "qt-uri-protocols": [
+                        "http"
+                    ]
+                },
+                "$ref": {
+                    "type": "string"
+                },
+                "definitions": {
+                    "$ref": "#/definitions/Definitions"
+                }
+            },
+            "required": [
+                "$ref",
+                "$schema",
+                "definitions"
+            ],
+            "title": "Profile"
+        },
+        "Definitions": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "Profile": {
+                    "$ref": "#/definitions/ProfileClass"
+                },
+                "Data": {
+                    "$ref": "#/definitions/Data"
+                },
+                "Meta": {
+                    "$ref": "#/definitions/MetaClass"
+                }
+            },
+            "required": [
+                "Data",
+                "Meta",
+                "Profile"
+            ],
+            "title": "Definitions"
+        },
+        "Data": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/DataProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "Data"
+        },
+        "DataProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "user_id": {
+                    "$ref": "#/definitions/AvatarURL"
+                },
+                "user_type": {
+                    "$ref": "#/definitions/AvatarURL"
+                },
+                "email": {
+                    "$ref": "#/definitions/AvatarURL"
+                },
+                "user_name": {
+                    "$ref": "#/definitions/AvatarURL"
+                },
+                "user_shortname": {
+                    "$ref": "#/definitions/AvatarURL"
+                },
+                "broker": {
+                    "$ref": "#/definitions/AvatarURL"
+                },
+                "exchanges": {
+                    "$ref": "#/definitions/Exchanges"
+                },
+                "products": {
+                    "$ref": "#/definitions/Exchanges"
+                },
+                "order_types": {
+                    "$ref": "#/definitions/Exchanges"
+                },
+                "avatar_url": {
+                    "$ref": "#/definitions/AvatarURL"
+                },
+                "meta": {
+                    "$ref": "#/definitions/Meta"
+                }
+            },
+            "required": [
+                "avatar_url",
+                "broker",
+                "email",
+                "exchanges",
+                "meta",
+                "order_types",
+                "products",
+                "user_id",
+                "user_name",
+                "user_shortname",
+                "user_type"
+            ],
+            "title": "DataProperties"
+        },
+        "AvatarURL": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "$ref": "#/definitions/Type"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "title": "AvatarURL"
+        },
+        "Exchanges": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "items": {
+                    "$ref": "#/definitions/AvatarURL"
+                }
+            },
+            "required": [
+                "items",
+                "type"
+            ],
+            "title": "Exchanges"
+        },
+        "Meta": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "$ref": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "$ref"
+            ],
+            "title": "Meta"
+        },
+        "MetaClass": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/MetaProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "MetaClass"
+        },
+        "MetaProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "demat_consent": {
+                    "$ref": "#/definitions/AvatarURL"
+                }
+            },
+            "required": [
+                "demat_consent"
+            ],
+            "title": "MetaProperties"
+        },
+        "ProfileClass": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "additionalProperties": {
+                    "type": "boolean"
+                },
+                "properties": {
+                    "$ref": "#/definitions/ProfileProperties"
+                },
+                "required": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "additionalProperties",
+                "properties",
+                "required",
+                "title",
+                "type"
+            ],
+            "title": "ProfileClass"
+        },
+        "ProfileProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "status": {
+                    "$ref": "#/definitions/AvatarURL"
+                },
+                "data": {
+                    "$ref": "#/definitions/Meta"
+                }
+            },
+            "required": [
+                "data",
+                "status"
+            ],
+            "title": "ProfileProperties"
+        },
+        "Type": {
+            "type": "string",
+            "enum": [
+                "null",
+                "string"
+            ],
+            "title": "Type"
+        }
+    }
+}
