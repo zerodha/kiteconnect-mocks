@@ -6,196 +6,49 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "$schema": {
-                    "type": "string",
-                    "format": "uri",
-                    "qt-uri-protocols": [
-                        "http"
-                    ]
-                },
-                "$ref": {
-                    "type": "string"
-                },
-                "definitions": {
-                    "$ref": "#/definitions/Definitions"
-                }
-            },
-            "required": [
-                "$ref",
-                "$schema",
-                "definitions"
-            ],
-            "title": "BasketMargins"
-        },
-        "Definitions": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "BasketMargins": {
-                    "$ref": "#/definitions/BasketMarginsClass"
-                },
-                "Data": {
-                    "$ref": "#/definitions/DataClass"
-                },
-                "Pnl": {
-                    "$ref": "#/definitions/Pnl"
-                },
-                "Final": {
-                    "$ref": "#/definitions/Final"
-                }
-            },
-            "required": [
-                "BasketMargins",
-                "Data",
-                "Final",
-                "Pnl"
-            ],
-            "title": "Definitions"
-        },
-        "BasketMarginsClass": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/BasketMarginsProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "BasketMarginsClass"
-        },
-        "BasketMarginsProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
                 "status": {
-                    "$ref": "#/definitions/Status"
+                    "type": "string"
                 },
                 "data": {
                     "$ref": "#/definitions/Data"
                 }
             },
-            "required": [
-                "data",
-                "status"
-            ],
-            "title": "BasketMarginsProperties"
+            "required": [],
+            "title": "BasketMargins"
         },
         "Data": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "$ref": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "$ref"
-            ],
-            "title": "Data"
-        },
-        "Status": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "$ref": "#/definitions/Type"
-                }
-            },
-            "required": [
-                "type"
-            ],
-            "title": "Status"
-        },
-        "DataClass": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/DataProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "DataClass"
-        },
-        "DataProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
                 "initial": {
-                    "$ref": "#/definitions/Data"
+                    "$ref": "#/definitions/Final"
                 },
                 "final": {
-                    "$ref": "#/definitions/Data"
+                    "$ref": "#/definitions/Final"
                 },
                 "orders": {
-                    "$ref": "#/definitions/Orders"
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Final"
+                    }
                 }
             },
-            "required": [
-                "final",
-                "initial",
-                "orders"
-            ],
-            "title": "DataProperties"
+            "required": [],
+            "title": "Data"
         },
-        "Orders": {
+        "Pnl": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "type": {
-                    "type": "string"
+                "realised": {
+                    "type": "integer"
                 },
-                "items": {
-                    "$ref": "#/definitions/Data"
+                "unrealised": {
+                    "type": "integer"
                 }
             },
-            "required": [
-                "items",
-                "type"
-            ],
-            "title": "Orders"
+            "required": [],
+            "title": "Pnl"
         },
         "Final": {
             "type": "object",
@@ -204,145 +57,42 @@
                 "type": {
                     "type": "string"
                 },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/FinalProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "Final"
-        },
-        "FinalProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "$ref": "#/definitions/Status"
-                },
                 "tradingsymbol": {
-                    "$ref": "#/definitions/Status"
+                    "type": "string"
                 },
                 "exchange": {
-                    "$ref": "#/definitions/Status"
+                    "type": "string"
                 },
                 "span": {
-                    "$ref": "#/definitions/Status"
+                    "type": "number"
                 },
                 "exposure": {
-                    "$ref": "#/definitions/Status"
+                    "type": "number"
                 },
                 "option_premium": {
-                    "$ref": "#/definitions/Status"
+                    "type": "number"
                 },
                 "additional": {
-                    "$ref": "#/definitions/Status"
+                    "type": "integer"
                 },
                 "bo": {
-                    "$ref": "#/definitions/Status"
+                    "type": "integer"
                 },
                 "cash": {
-                    "$ref": "#/definitions/Status"
+                    "type": "integer"
                 },
                 "var": {
-                    "$ref": "#/definitions/Status"
+                    "type": "integer"
                 },
                 "pnl": {
-                    "$ref": "#/definitions/Data"
+                    "$ref": "#/definitions/Pnl"
                 },
                 "total": {
-                    "$ref": "#/definitions/Status"
+                    "type": "number"
                 }
             },
-            "required": [
-                "additional",
-                "bo",
-                "cash",
-                "exchange",
-                "exposure",
-                "option_premium",
-                "pnl",
-                "span",
-                "total",
-                "tradingsymbol",
-                "type",
-                "var"
-            ],
-            "title": "FinalProperties"
-        },
-        "Pnl": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/PnlProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "Pnl"
-        },
-        "PnlProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "realised": {
-                    "$ref": "#/definitions/Status"
-                },
-                "unrealised": {
-                    "$ref": "#/definitions/Status"
-                }
-            },
-            "required": [
-                "realised",
-                "unrealised"
-            ],
-            "title": "PnlProperties"
-        },
-        "Type": {
-            "type": "string",
-            "enum": [
-                "string",
-                "integer",
-                "number"
-            ],
-            "title": "Type"
+            "required": [],
+            "title": "Final"
         }
     }
 }
