@@ -1,100 +1,67 @@
 {
-	"fields": [
-		{
-			"name": "instrument_token",
-			"title": "instrument_token",
-			"constraints": {
-				"required": true,
-				"type": "http://www.w3.org/2001/XMLSchema#int"
-			}
-		},
-		{
-			"name": "exchange_token",
-			"title": "exchange_token",
-			"constraints": {
-				"required": true,
-				"type": "http://www.w3.org/2001/XMLSchema#int"
-			}
-		},
-		{
-			"name": "tradingsymbol",
-			"title": "tradingsymbol",
-			"constraints": {
-				"required": true,
-				"type": "http://www.w3.org/2001/XMLSchema#string"
-			}
-		},
-		{
-			"name": "name",
-			"title": "name",
-			"constraints": {
-				"required": true,
-				"type": "http://www.w3.org/2001/XMLSchema#string"
-			}
-		},
-		{
-			"name": "last_price",
-			"title": "last_price",
-			"constraints": {
-				"required": true,
-				"type": "http://www.w3.org/2001/XMLSchema#float"
-			}
-		},
-		{
-			"name": "expiry",
-			"title": "expiry",
-			"constraints": {
-				"required": false,
-				"type": "http://www.w3.org/2001/XMLSchema#string"
-			}
-		},
-		{
-			"name": "strike",
-			"title": "strike",
-			"constraints": {
-				"required": true,
-				"type": "http://www.w3.org/2001/XMLSchema#float"
-			}
-		},
-		{
-			"name": "tick_size",
-			"title": "tick_size",
-			"constraints": {
-				"required": true,
-				"type": "http://www.w3.org/2001/XMLSchema#float"
-			}
-		},
-		{
-			"name": "lot_size",
-			"title": "lot_size",
-			"constraints": {
-				"required": true,
-				"type": "http://www.w3.org/2001/XMLSchema#int"
-			}
-		},
-		{
-			"name": "instrument_type",
-			"title": "instrument_type",
-			"constraints": {
-				"required": true,
-				"type": "http://www.w3.org/2001/XMLSchema#string"
-			}
-		},
-		{
-			"name": "segment",
-			"title": "segment",
-			"constraints": {
-				"required": true,
-				"type": "http://www.w3.org/2001/XMLSchema#string"
-			}
-		},
-		{
-			"name": "exchange",
-			"title": "exchange",
-			"constraints": {
-				"required": true,
-				"type": "http://www.w3.org/2001/XMLSchema#string"
-			}
-		}
-	]
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/InstrumentsNseElement"
+    },
+    "definitions": {
+        "InstrumentsNseElement": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "instrument_token": {
+                    "type": "integer"
+                },
+                "exchange_token": {
+                    "type": "integer"
+                },
+                "tradingsymbol": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "last_price": {
+                    "type": "integer"
+                },
+                "expiry": {
+                    "type": "string"
+                },
+                "strike": {
+                    "type": "integer"
+                },
+                "tick_size": {
+                    "type": "number"
+                },
+                "lot_size": {
+                    "type": "integer"
+                },
+                "instrument_type": {
+                    "$ref": "#/definitions/InstrumentType"
+                },
+                "segment": {
+                    "$ref": "#/definitions/Exchange"
+                },
+                "exchange": {
+                    "$ref": "#/definitions/Exchange"
+                }
+            },
+            "required": [],
+            "title": "InstrumentsNseElement"
+        },
+        "Exchange": {
+            "type": "string",
+            "enum": [
+                "NSE"
+            ],
+            "title": "Exchange"
+        },
+        "InstrumentType": {
+            "type": "string",
+            "enum": [
+                "EQ"
+            ],
+            "title": "InstrumentType"
+        }
+    }
 }
