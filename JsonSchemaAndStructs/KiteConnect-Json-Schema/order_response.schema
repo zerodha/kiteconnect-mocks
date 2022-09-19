@@ -6,163 +6,26 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "$schema": {
-                    "type": "string",
-                    "format": "uri",
-                    "qt-uri-protocols": [
-                        "http"
-                    ]
-                },
-                "$ref": {
+                "status": {
                     "type": "string"
                 },
-                "definitions": {
-                    "$ref": "#/definitions/Definitions"
-                }
-            },
-            "required": [
-                "$ref",
-                "$schema",
-                "definitions"
-            ],
-            "title": "OrderResponse"
-        },
-        "Definitions": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "OrderResponse": {
-                    "$ref": "#/definitions/OrderResponseClass"
-                },
-                "Data": {
+                "data": {
                     "$ref": "#/definitions/Data"
                 }
             },
-            "required": [
-                "Data",
-                "OrderResponse"
-            ],
-            "title": "Definitions"
+            "required": [],
+            "title": "OrderResponse"
         },
         "Data": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/DataProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "Data"
-        },
-        "DataProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
                 "order_id": {
-                    "$ref": "#/definitions/OrderID"
-                }
-            },
-            "required": [
-                "order_id"
-            ],
-            "title": "DataProperties"
-        },
-        "OrderID": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
                     "type": "string"
                 }
             },
-            "required": [
-                "type"
-            ],
-            "title": "OrderID"
-        },
-        "OrderResponseClass": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/OrderResponseProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "OrderResponseClass"
-        },
-        "OrderResponseProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "status": {
-                    "$ref": "#/definitions/OrderID"
-                },
-                "data": {
-                    "$ref": "#/definitions/DataClass"
-                }
-            },
-            "required": [
-                "data",
-                "status"
-            ],
-            "title": "OrderResponseProperties"
-        },
-        "DataClass": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "$ref": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "$ref"
-            ],
-            "title": "DataClass"
+            "required": [],
+            "title": "Data"
         }
     }
 }

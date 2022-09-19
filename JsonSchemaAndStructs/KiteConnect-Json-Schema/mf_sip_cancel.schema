@@ -6,163 +6,26 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "$schema": {
-                    "type": "string",
-                    "format": "uri",
-                    "qt-uri-protocols": [
-                        "http"
-                    ]
-                },
-                "$ref": {
+                "status": {
                     "type": "string"
                 },
-                "definitions": {
-                    "$ref": "#/definitions/Definitions"
-                }
-            },
-            "required": [
-                "$ref",
-                "$schema",
-                "definitions"
-            ],
-            "title": "MFSIPCancel"
-        },
-        "Definitions": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "MFSIPCancel": {
-                    "$ref": "#/definitions/MFSIPCancelClass"
-                },
-                "Data": {
+                "data": {
                     "$ref": "#/definitions/Data"
                 }
             },
-            "required": [
-                "Data",
-                "MFSIPCancel"
-            ],
-            "title": "Definitions"
+            "required": [],
+            "title": "MFSIPCancel"
         },
         "Data": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/DataProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "Data"
-        },
-        "DataProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
                 "sip_id": {
-                    "$ref": "#/definitions/SIPID"
-                }
-            },
-            "required": [
-                "sip_id"
-            ],
-            "title": "DataProperties"
-        },
-        "SIPID": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
                     "type": "string"
                 }
             },
-            "required": [
-                "type"
-            ],
-            "title": "SIPID"
-        },
-        "MFSIPCancelClass": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/MFSIPCancelProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "MFSIPCancelClass"
-        },
-        "MFSIPCancelProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "status": {
-                    "$ref": "#/definitions/SIPID"
-                },
-                "data": {
-                    "$ref": "#/definitions/DataClass"
-                }
-            },
-            "required": [
-                "data",
-                "status"
-            ],
-            "title": "MFSIPCancelProperties"
-        },
-        "DataClass": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "$ref": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "$ref"
-            ],
-            "title": "DataClass"
+            "required": [],
+            "title": "Data"
         }
     }
 }

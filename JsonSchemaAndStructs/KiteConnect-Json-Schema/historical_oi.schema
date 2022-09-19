@@ -6,221 +6,43 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "$schema": {
-                    "type": "string",
-                    "format": "uri",
-                    "qt-uri-protocols": [
-                        "http"
-                    ]
-                },
-                "$ref": {
+                "status": {
                     "type": "string"
                 },
-                "definitions": {
-                    "$ref": "#/definitions/Definitions"
-                }
-            },
-            "required": [
-                "$ref",
-                "$schema",
-                "definitions"
-            ],
-            "title": "HistoricalOi"
-        },
-        "Definitions": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "HistoricalOi": {
-                    "$ref": "#/definitions/HistoricalOiClass"
-                },
-                "Data": {
+                "data": {
                     "$ref": "#/definitions/Data"
-                },
-                "Candle": {
-                    "$ref": "#/definitions/Candle"
                 }
             },
-            "required": [
-                "Candle",
-                "Data",
-                "HistoricalOi"
-            ],
-            "title": "Definitions"
-        },
-        "Candle": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "anyOf": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/AnyOf"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "anyOf",
-                "title"
-            ],
-            "title": "Candle"
-        },
-        "AnyOf": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "type"
-            ],
-            "title": "AnyOf"
+            "required": [],
+            "title": "HistoricalOi"
         },
         "Data": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/DataProperties"
-                },
-                "required": {
+                "candles": {
                     "type": "array",
                     "items": {
-                        "type": "string"
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/Candle"
+                        }
                     }
-                },
-                "title": {
-                    "type": "string"
                 }
             },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
+            "required": [],
             "title": "Data"
         },
-        "DataProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "candles": {
-                    "$ref": "#/definitions/Candles"
-                }
-            },
-            "required": [
-                "candles"
-            ],
-            "title": "DataProperties"
-        },
-        "Candles": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
+        "Candle": {
+            "anyOf": [
+                {
+                    "type": "number"
                 },
-                "items": {
-                    "$ref": "#/definitions/Items"
-                }
-            },
-            "required": [
-                "items",
-                "type"
-            ],
-            "title": "Candles"
-        },
-        "Items": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "items": {
-                    "$ref": "#/definitions/DataClass"
-                }
-            },
-            "required": [
-                "items",
-                "type"
-            ],
-            "title": "Items"
-        },
-        "DataClass": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "$ref": {
+                {
                     "type": "string"
                 }
-            },
-            "required": [
-                "$ref"
             ],
-            "title": "DataClass"
-        },
-        "HistoricalOiClass": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/HistoricalOiProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "HistoricalOiClass"
-        },
-        "HistoricalOiProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "status": {
-                    "$ref": "#/definitions/AnyOf"
-                },
-                "data": {
-                    "$ref": "#/definitions/DataClass"
-                }
-            },
-            "required": [
-                "data",
-                "status"
-            ],
-            "title": "HistoricalOiProperties"
+            "title": "Candle"
         }
     }
 }

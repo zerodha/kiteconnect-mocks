@@ -1,0 +1,125 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/TriggerRangeElement"
+    },
+    "definitions": {
+        "TriggerRangeElement": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "instrument_token": {
+                    "type": "integer"
+                },
+                "mode": {
+                    "type": "string"
+                },
+                "volume_traded": {
+                    "type": "integer"
+                },
+                "last_price": {
+                    "type": "integer"
+                },
+                "average_traded_price": {
+                    "type": "number"
+                },
+                "last_traded_quantity": {
+                    "type": "integer"
+                },
+                "total_buy_quantity": {
+                    "type": "integer"
+                },
+                "total_sell_quantity": {
+                    "type": "integer"
+                },
+                "change": {
+                    "type": "number"
+                },
+                "last_trade_time": {
+                    "type": "string"
+                },
+                "exchange_timestamp": {
+                    "type": "string"
+                },
+                "oi": {
+                    "type": "integer"
+                },
+                "oi_day_low": {
+                    "type": "integer"
+                },
+                "oi_day_high": {
+                    "type": "integer"
+                },
+                "ohlc": {
+                    "$ref": "#/definitions/Ohlc"
+                },
+                "tradable": {
+                    "type": "boolean"
+                },
+                "depth": {
+                    "$ref": "#/definitions/Depth"
+                }
+            },
+            "required": [],
+            "title": "TriggerRangeElement"
+        },
+        "Depth": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "sell": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Buy"
+                    }
+                },
+                "buy": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Buy"
+                    }
+                }
+            },
+            "required": [],
+            "title": "Depth"
+        },
+        "Buy": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "price": {
+                    "type": "integer"
+                },
+                "orders": {
+                    "type": "integer"
+                },
+                "quantity": {
+                    "type": "integer"
+                }
+            },
+            "required": [],
+            "title": "Buy"
+        },
+        "Ohlc": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "high": {
+                    "type": "integer"
+                },
+                "close": {
+                    "type": "integer"
+                },
+                "open": {
+                    "type": "integer"
+                },
+                "low": {
+                    "type": "integer"
+                }
+            },
+            "required": [],
+            "title": "Ohlc"
+        }
+    }
+}

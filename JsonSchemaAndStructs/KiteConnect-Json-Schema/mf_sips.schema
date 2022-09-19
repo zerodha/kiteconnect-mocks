@@ -6,310 +6,97 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "$schema": {
-                    "type": "string",
-                    "format": "uri",
-                    "qt-uri-protocols": [
-                        "http"
-                    ]
-                },
-                "$ref": {
-                    "type": "string"
-                },
-                "definitions": {
-                    "$ref": "#/definitions/Definitions"
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Datum"
+                    }
                 }
             },
-            "required": [
-                "$ref",
-                "$schema",
-                "definitions"
-            ],
+            "required": [],
             "title": "MFSips"
-        },
-        "Definitions": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "MFSips": {
-                    "$ref": "#/definitions/MFSipsClass"
-                },
-                "Datum": {
-                    "$ref": "#/definitions/Datum"
-                }
-            },
-            "required": [
-                "Datum",
-                "MFSips"
-            ],
-            "title": "Definitions"
         },
         "Datum": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/DatumProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "Datum"
-        },
-        "DatumProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
                 "status": {
-                    "$ref": "#/definitions/CompletedInstalments"
+                    "type": "string"
                 },
                 "sip_reg_num": {
-                    "$ref": "#/definitions/SIPRegNum"
+                    "anyOf": [
+                        {
+                            "type": "string",
+                            "format": "integer"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
                 },
                 "created": {
-                    "$ref": "#/definitions/Created"
+                    "type": "string",
+                    "format": "date-time"
                 },
                 "dividend_type": {
-                    "$ref": "#/definitions/CompletedInstalments"
+                    "type": "string"
                 },
                 "instalment_amount": {
-                    "$ref": "#/definitions/CompletedInstalments"
+                    "type": "integer"
                 },
                 "fund": {
-                    "$ref": "#/definitions/CompletedInstalments"
+                    "type": "string"
                 },
                 "instalments": {
-                    "$ref": "#/definitions/CompletedInstalments"
+                    "type": "integer"
                 },
                 "next_instalment": {
-                    "$ref": "#/definitions/Created"
+                    "type": "string",
+                    "format": "date"
                 },
                 "transaction_type": {
-                    "$ref": "#/definitions/CompletedInstalments"
+                    "type": "string"
                 },
                 "trigger_price": {
-                    "$ref": "#/definitions/CompletedInstalments"
+                    "type": "integer"
                 },
                 "step_up": {
-                    "$ref": "#/definitions/StepUp"
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "integer"
+                    }
                 },
                 "tradingsymbol": {
-                    "$ref": "#/definitions/CompletedInstalments"
+                    "type": "string"
                 },
                 "tag": {
-                    "$ref": "#/definitions/CompletedInstalments"
+                    "type": "string"
                 },
                 "frequency": {
-                    "$ref": "#/definitions/CompletedInstalments"
+                    "type": "string"
                 },
                 "last_instalment": {
-                    "$ref": "#/definitions/Created"
+                    "type": "string",
+                    "format": "date-time"
                 },
                 "pending_instalments": {
-                    "$ref": "#/definitions/CompletedInstalments"
+                    "type": "integer"
                 },
                 "instalment_day": {
-                    "$ref": "#/definitions/CompletedInstalments"
+                    "type": "integer"
                 },
                 "sip_type": {
-                    "$ref": "#/definitions/CompletedInstalments"
+                    "type": "string"
                 },
                 "completed_instalments": {
-                    "$ref": "#/definitions/CompletedInstalments"
+                    "type": "integer"
                 },
                 "sip_id": {
-                    "$ref": "#/definitions/CompletedInstalments"
-                }
-            },
-            "required": [
-                "completed_instalments",
-                "created",
-                "dividend_type",
-                "frequency",
-                "fund",
-                "instalment_amount",
-                "instalment_day",
-                "instalments",
-                "last_instalment",
-                "next_instalment",
-                "pending_instalments",
-                "sip_id",
-                "sip_reg_num",
-                "sip_type",
-                "status",
-                "step_up",
-                "tag",
-                "tradingsymbol",
-                "transaction_type",
-                "trigger_price"
-            ],
-            "title": "DatumProperties"
-        },
-        "CompletedInstalments": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "$ref": "#/definitions/Type"
-                }
-            },
-            "required": [
-                "type"
-            ],
-            "title": "CompletedInstalments"
-        },
-        "SIPRegNum": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "anyOf": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Created"
-                    }
-                }
-            },
-            "required": [
-                "anyOf"
-            ],
-            "title": "SIPRegNum"
-        },
-        "Created": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "format": {
                     "type": "string"
                 }
             },
-            "required": [
-                "type"
-            ],
-            "title": "Created"
-        },
-        "StepUp": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "$ref": "#/definitions/CompletedInstalments"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "type"
-            ],
-            "title": "StepUp"
-        },
-        "MFSipsClass": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/MFSipsProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "MFSipsClass"
-        },
-        "MFSipsProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "data": {
-                    "$ref": "#/definitions/Data"
-                }
-            },
-            "required": [
-                "data"
-            ],
-            "title": "MFSipsProperties"
-        },
-        "Data": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "items": {
-                    "$ref": "#/definitions/Items"
-                }
-            },
-            "required": [
-                "items",
-                "type"
-            ],
-            "title": "Data"
-        },
-        "Items": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "$ref": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "$ref"
-            ],
-            "title": "Items"
-        },
-        "Type": {
-            "type": "string",
-            "enum": [
-                "integer",
-                "string",
-                "number"
-            ],
-            "title": "Type"
+            "required": [],
+            "title": "Datum"
         }
     }
 }

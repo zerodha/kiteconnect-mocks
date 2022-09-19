@@ -6,313 +6,120 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "$schema": {
-                    "type": "string",
-                    "format": "uri",
-                    "qt-uri-protocols": [
-                        "http"
-                    ]
-                },
-                "$ref": {
+                "status": {
                     "type": "string"
                 },
-                "definitions": {
-                    "$ref": "#/definitions/Definitions"
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Datum"
+                    }
                 }
             },
-            "required": [
-                "$ref",
-                "$schema",
-                "definitions"
-            ],
+            "required": [],
             "title": "MFOrders"
-        },
-        "Definitions": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "MFOrders": {
-                    "$ref": "#/definitions/MFOrdersClass"
-                },
-                "Datum": {
-                    "$ref": "#/definitions/Datum"
-                }
-            },
-            "required": [
-                "Datum",
-                "MFOrders"
-            ],
-            "title": "Definitions"
         },
         "Datum": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/DatumProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "Datum"
-        },
-        "DatumProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
                 "status": {
-                    "$ref": "#/definitions/Amount"
+                    "type": "string"
                 },
                 "purchase_type": {
-                    "$ref": "#/definitions/Amount"
+                    "type": "string"
                 },
                 "folio": {
-                    "$ref": "#/definitions/Amount"
+                    "type": "null"
                 },
                 "order_timestamp": {
-                    "$ref": "#/definitions/LastPriceDate"
+                    "type": "string",
+                    "format": "date-time"
                 },
                 "average_price": {
-                    "$ref": "#/definitions/Amount"
+                    "type": "integer"
                 },
                 "exchange_order_id": {
-                    "$ref": "#/definitions/ExchangeOrderID"
+                    "anyOf": [
+                        {
+                            "type": "string",
+                            "format": "integer"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
                 },
                 "last_price": {
-                    "$ref": "#/definitions/Amount"
+                    "type": "number"
                 },
                 "tradingsymbol": {
-                    "$ref": "#/definitions/Amount"
+                    "type": "string"
                 },
                 "settlement_id": {
-                    "$ref": "#/definitions/ExchangeOrderID"
+                    "anyOf": [
+                        {
+                            "type": "string",
+                            "format": "integer"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
                 },
                 "transaction_type": {
-                    "$ref": "#/definitions/Amount"
+                    "type": "string"
                 },
                 "order_id": {
-                    "$ref": "#/definitions/LastPriceDate"
+                    "type": "string",
+                    "format": "uuid"
                 },
                 "amount": {
-                    "$ref": "#/definitions/Amount"
+                    "type": "integer"
                 },
                 "tag": {
-                    "$ref": "#/definitions/Tag"
+                    "anyOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
                 },
                 "placed_by": {
-                    "$ref": "#/definitions/Amount"
+                    "type": "string"
                 },
                 "exchange_timestamp": {
-                    "$ref": "#/definitions/ExchangeOrderID"
+                    "anyOf": [
+                        {
+                            "type": "string",
+                            "format": "date"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
                 },
                 "variety": {
-                    "$ref": "#/definitions/Amount"
+                    "type": "string"
                 },
                 "last_price_date": {
-                    "$ref": "#/definitions/LastPriceDate"
+                    "type": "string",
+                    "format": "date"
                 },
                 "status_message": {
-                    "$ref": "#/definitions/Amount"
+                    "type": "string"
                 },
                 "fund": {
-                    "$ref": "#/definitions/Amount"
+                    "type": "string"
                 },
                 "quantity": {
-                    "$ref": "#/definitions/Amount"
+                    "type": "integer"
                 }
             },
-            "required": [
-                "amount",
-                "average_price",
-                "exchange_order_id",
-                "exchange_timestamp",
-                "folio",
-                "fund",
-                "last_price",
-                "last_price_date",
-                "order_id",
-                "order_timestamp",
-                "placed_by",
-                "purchase_type",
-                "quantity",
-                "settlement_id",
-                "status",
-                "status_message",
-                "tag",
-                "tradingsymbol",
-                "transaction_type",
-                "variety"
-            ],
-            "title": "DatumProperties"
-        },
-        "ExchangeOrderID": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "anyOf": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/LastPriceDate"
-                    }
-                }
-            },
-            "required": [
-                "anyOf"
-            ],
-            "title": "ExchangeOrderID"
-        },
-        "LastPriceDate": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "$ref": "#/definitions/Type"
-                },
-                "format": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "type"
-            ],
-            "title": "LastPriceDate"
-        },
-        "Tag": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "anyOf": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Amount"
-                    }
-                }
-            },
-            "required": [
-                "anyOf"
-            ],
-            "title": "Tag"
-        },
-        "Amount": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "$ref": "#/definitions/Type"
-                }
-            },
-            "required": [
-                "type"
-            ],
-            "title": "Amount"
-        },
-        "MFOrdersClass": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/MFOrdersProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "MFOrdersClass"
-        },
-        "MFOrdersProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "status": {
-                    "$ref": "#/definitions/Amount"
-                },
-                "data": {
-                    "$ref": "#/definitions/Data"
-                }
-            },
-            "required": [
-                "data",
-                "status"
-            ],
-            "title": "MFOrdersProperties"
-        },
-        "Data": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "items": {
-                    "$ref": "#/definitions/Items"
-                }
-            },
-            "required": [
-                "items",
-                "type"
-            ],
-            "title": "Data"
-        },
-        "Items": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "$ref": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "$ref"
-            ],
-            "title": "Items"
-        },
-        "Type": {
-            "type": "string",
-            "enum": [
-                "number",
-                "null",
-                "string"
-            ],
-            "title": "Type"
+            "required": [],
+            "title": "Datum"
         }
     }
 }

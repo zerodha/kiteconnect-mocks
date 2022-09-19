@@ -6,163 +6,26 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "$schema": {
-                    "type": "string",
-                    "format": "uri",
-                    "qt-uri-protocols": [
-                        "http"
-                    ]
-                },
-                "$ref": {
+                "status": {
                     "type": "string"
                 },
-                "definitions": {
-                    "$ref": "#/definitions/Definitions"
-                }
-            },
-            "required": [
-                "$ref",
-                "$schema",
-                "definitions"
-            ],
-            "title": "GttModifyOrder"
-        },
-        "Definitions": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "GttModifyOrder": {
-                    "$ref": "#/definitions/GttModifyOrderClass"
-                },
-                "Data": {
+                "data": {
                     "$ref": "#/definitions/Data"
                 }
             },
-            "required": [
-                "Data",
-                "GttModifyOrder"
-            ],
-            "title": "Definitions"
+            "required": [],
+            "title": "GttModifyOrder"
         },
         "Data": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/DataProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "Data"
-        },
-        "DataProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
                 "trigger_id": {
-                    "$ref": "#/definitions/TriggerID"
+                    "type": "integer"
                 }
             },
-            "required": [
-                "trigger_id"
-            ],
-            "title": "DataProperties"
-        },
-        "TriggerID": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "type"
-            ],
-            "title": "TriggerID"
-        },
-        "GttModifyOrderClass": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/GttModifyOrderProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "GttModifyOrderClass"
-        },
-        "GttModifyOrderProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "status": {
-                    "$ref": "#/definitions/TriggerID"
-                },
-                "data": {
-                    "$ref": "#/definitions/DataClass"
-                }
-            },
-            "required": [
-                "data",
-                "status"
-            ],
-            "title": "GttModifyOrderProperties"
-        },
-        "DataClass": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "$ref": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "$ref"
-            ],
-            "title": "DataClass"
+            "required": [],
+            "title": "Data"
         }
     }
 }

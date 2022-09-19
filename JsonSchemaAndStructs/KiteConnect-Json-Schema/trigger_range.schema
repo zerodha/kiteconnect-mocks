@@ -6,224 +6,46 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "$schema": {
-                    "type": "string",
-                    "format": "uri",
-                    "qt-uri-protocols": [
-                        "http"
-                    ]
-                },
-                "$ref": {
+                "status": {
                     "type": "string"
                 },
-                "definitions": {
-                    "$ref": "#/definitions/Definitions"
-                }
-            },
-            "required": [
-                "$ref",
-                "$schema",
-                "definitions"
-            ],
-            "title": "TriggerRange"
-        },
-        "Definitions": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "TriggerRange": {
-                    "$ref": "#/definitions/TriggerRangeClass"
-                },
-                "Data": {
+                "data": {
                     "$ref": "#/definitions/Data"
-                },
-                "Nse": {
-                    "$ref": "#/definitions/Nse"
                 }
             },
-            "required": [
-                "Data",
-                "Nse",
-                "TriggerRange"
-            ],
-            "title": "Definitions"
+            "required": [],
+            "title": "TriggerRange"
         },
         "Data": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/DataProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "Data"
-        },
-        "DataProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
                 "NSE:INFY": {
-                    "$ref": "#/definitions/NseInfy"
+                    "$ref": "#/definitions/Nse"
                 },
                 "NSE:RELIANCE": {
-                    "$ref": "#/definitions/NseInfy"
+                    "$ref": "#/definitions/Nse"
                 }
             },
-            "required": [
-                "NSE:INFY",
-                "NSE:RELIANCE"
-            ],
-            "title": "DataProperties"
-        },
-        "NseInfy": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "$ref": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "$ref"
-            ],
-            "title": "NseInfy"
+            "required": [],
+            "title": "Data"
         },
         "Nse": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/NseProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "Nse"
-        },
-        "NseProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
                 "instrument_token": {
-                    "$ref": "#/definitions/InstrumentToken"
+                    "type": "integer"
                 },
                 "lower": {
-                    "$ref": "#/definitions/InstrumentToken"
+                    "type": "number"
                 },
                 "upper": {
-                    "$ref": "#/definitions/InstrumentToken"
+                    "type": "number"
                 }
             },
-            "required": [
-                "instrument_token",
-                "lower",
-                "upper"
-            ],
-            "title": "NseProperties"
-        },
-        "InstrumentToken": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "type"
-            ],
-            "title": "InstrumentToken"
-        },
-        "TriggerRangeClass": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/TriggerRangeProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "TriggerRangeClass"
-        },
-        "TriggerRangeProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "status": {
-                    "$ref": "#/definitions/InstrumentToken"
-                },
-                "data": {
-                    "$ref": "#/definitions/NseInfy"
-                }
-            },
-            "required": [
-                "data",
-                "status"
-            ],
-            "title": "TriggerRangeProperties"
+            "required": [],
+            "title": "Nse"
         }
     }
 }

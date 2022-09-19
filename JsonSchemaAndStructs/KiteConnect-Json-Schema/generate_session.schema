@@ -1,8 +1,8 @@
 {
     "$schema": "http://json-schema.org/draft-06/schema#",
-    "$ref": "#/definitions/Profile",
+    "$ref": "#/definitions/GenerateSession",
     "definitions": {
-        "Profile": {
+        "GenerateSession": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -14,15 +14,12 @@
                 }
             },
             "required": [],
-            "title": "Profile"
+            "title": "GenerateSession"
         },
         "Data": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "user_id": {
-                    "type": "string"
-                },
                 "user_type": {
                     "type": "string"
                 },
@@ -57,7 +54,32 @@
                     }
                 },
                 "avatar_url": {
-                    "type": "null"
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "string"
+                },
+                "api_key": {
+                    "type": "string"
+                },
+                "access_token": {
+                    "type": "string"
+                },
+                "public_token": {
+                    "type": "string"
+                },
+                "enctoken": {
+                    "type": "string"
+                },
+                "refresh_token": {
+                    "type": "string"
+                },
+                "silo": {
+                    "type": "string"
+                },
+                "login_time": {
+                    "type": "string",
+                    "format": "date-time"
                 },
                 "meta": {
                     "$ref": "#/definitions/Meta"

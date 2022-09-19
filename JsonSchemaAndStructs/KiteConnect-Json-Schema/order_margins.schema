@@ -6,47 +6,18 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "$schema": {
-                    "type": "string",
-                    "format": "uri",
-                    "qt-uri-protocols": [
-                        "http"
-                    ]
-                },
-                "$ref": {
+                "status": {
                     "type": "string"
                 },
-                "definitions": {
-                    "$ref": "#/definitions/Definitions"
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Datum"
+                    }
                 }
             },
-            "required": [
-                "$ref",
-                "$schema",
-                "definitions"
-            ],
+            "required": [],
             "title": "OrderMargins"
-        },
-        "Definitions": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "OrderMargins": {
-                    "$ref": "#/definitions/OrderMarginsClass"
-                },
-                "Datum": {
-                    "$ref": "#/definitions/Datum"
-                },
-                "Pnl": {
-                    "$ref": "#/definitions/PnlClass"
-                }
-            },
-            "required": [
-                "Datum",
-                "OrderMargins",
-                "Pnl"
-            ],
-            "title": "Definitions"
         },
         "Datum": {
             "type": "object",
@@ -55,237 +26,56 @@
                 "type": {
                     "type": "string"
                 },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/DatumProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "Datum"
-        },
-        "DatumProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "$ref": "#/definitions/Additional"
-                },
                 "tradingsymbol": {
-                    "$ref": "#/definitions/Additional"
+                    "type": "string"
                 },
                 "exchange": {
-                    "$ref": "#/definitions/Additional"
+                    "type": "string"
                 },
                 "span": {
-                    "$ref": "#/definitions/Additional"
+                    "type": "integer"
                 },
                 "exposure": {
-                    "$ref": "#/definitions/Additional"
+                    "type": "integer"
                 },
                 "option_premium": {
-                    "$ref": "#/definitions/Additional"
+                    "type": "integer"
                 },
                 "additional": {
-                    "$ref": "#/definitions/Additional"
+                    "type": "integer"
                 },
                 "bo": {
-                    "$ref": "#/definitions/Additional"
+                    "type": "integer"
                 },
                 "cash": {
-                    "$ref": "#/definitions/Additional"
+                    "type": "integer"
                 },
                 "var": {
-                    "$ref": "#/definitions/Additional"
+                    "type": "number"
                 },
                 "pnl": {
                     "$ref": "#/definitions/Pnl"
                 },
                 "total": {
-                    "$ref": "#/definitions/Additional"
+                    "type": "number"
                 }
             },
-            "required": [
-                "additional",
-                "bo",
-                "cash",
-                "exchange",
-                "exposure",
-                "option_premium",
-                "pnl",
-                "span",
-                "total",
-                "tradingsymbol",
-                "type",
-                "var"
-            ],
-            "title": "DatumProperties"
-        },
-        "Additional": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "$ref": "#/definitions/Type"
-                }
-            },
-            "required": [
-                "type"
-            ],
-            "title": "Additional"
+            "required": [],
+            "title": "Datum"
         },
         "Pnl": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "$ref": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "$ref"
-            ],
-            "title": "Pnl"
-        },
-        "OrderMarginsClass": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/OrderMarginsProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "OrderMarginsClass"
-        },
-        "OrderMarginsProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "status": {
-                    "$ref": "#/definitions/Additional"
-                },
-                "data": {
-                    "$ref": "#/definitions/Data"
-                }
-            },
-            "required": [
-                "data",
-                "status"
-            ],
-            "title": "OrderMarginsProperties"
-        },
-        "Data": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "items": {
-                    "$ref": "#/definitions/Pnl"
-                }
-            },
-            "required": [
-                "items",
-                "type"
-            ],
-            "title": "Data"
-        },
-        "PnlClass": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/PnlProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "PnlClass"
-        },
-        "PnlProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
                 "realised": {
-                    "$ref": "#/definitions/Additional"
+                    "type": "integer"
                 },
                 "unrealised": {
-                    "$ref": "#/definitions/Additional"
+                    "type": "integer"
                 }
             },
-            "required": [
-                "realised",
-                "unrealised"
-            ],
-            "title": "PnlProperties"
-        },
-        "Type": {
-            "type": "string",
-            "enum": [
-                "integer",
-                "string",
-                "number"
-            ],
-            "title": "Type"
+            "required": [],
+            "title": "Pnl"
         }
     }
 }

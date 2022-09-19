@@ -6,615 +6,207 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "$schema": {
-                    "type": "string",
-                    "format": "uri",
-                    "qt-uri-protocols": [
-                        "http"
-                    ]
-                },
-                "$ref": {
+                "status": {
                     "type": "string"
                 },
-                "definitions": {
-                    "$ref": "#/definitions/Definitions"
-                }
-            },
-            "required": [
-                "$ref",
-                "$schema",
-                "definitions"
-            ],
-            "title": "GttGetOrders"
-        },
-        "Definitions": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "GttGetOrders": {
-                    "$ref": "#/definitions/GttGetOrdersClass"
-                },
-                "Datum": {
-                    "$ref": "#/definitions/Datum"
-                },
-                "Condition": {
-                    "$ref": "#/definitions/Condition"
-                },
-                "Meta": {
-                    "$ref": "#/definitions/MetaClass"
-                },
-                "Order": {
-                    "$ref": "#/definitions/Order"
-                },
-                "Result": {
-                    "$ref": "#/definitions/Result"
-                },
-                "OrderResult": {
-                    "$ref": "#/definitions/OrderResult"
-                }
-            },
-            "required": [
-                "Condition",
-                "Datum",
-                "GttGetOrders",
-                "Meta",
-                "Order",
-                "OrderResult",
-                "Result"
-            ],
-            "title": "Definitions"
-        },
-        "Condition": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/ConditionProperties"
-                },
-                "required": {
+                "data": {
                     "type": "array",
                     "items": {
-                        "type": "string"
+                        "$ref": "#/definitions/Datum"
                     }
-                },
-                "title": {
-                    "type": "string"
                 }
             },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "Condition"
-        },
-        "ConditionProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "exchange": {
-                    "$ref": "#/definitions/Exchange"
-                },
-                "last_price": {
-                    "$ref": "#/definitions/Exchange"
-                },
-                "tradingsymbol": {
-                    "$ref": "#/definitions/Exchange"
-                },
-                "trigger_values": {
-                    "$ref": "#/definitions/TriggerValues"
-                },
-                "instrument_token": {
-                    "$ref": "#/definitions/Exchange"
-                }
-            },
-            "required": [
-                "exchange",
-                "instrument_token",
-                "last_price",
-                "tradingsymbol",
-                "trigger_values"
-            ],
-            "title": "ConditionProperties"
-        },
-        "Exchange": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "$ref": "#/definitions/Type"
-                }
-            },
-            "required": [
-                "type"
-            ],
-            "title": "Exchange"
-        },
-        "TriggerValues": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "items": {
-                    "$ref": "#/definitions/Exchange"
-                }
-            },
-            "required": [
-                "items",
-                "type"
-            ],
-            "title": "TriggerValues"
+            "required": [],
+            "title": "GttGetOrders"
         },
         "Datum": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/DatumProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "Datum"
-        },
-        "DatumProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
                 "id": {
-                    "$ref": "#/definitions/Exchange"
+                    "type": "integer"
                 },
                 "user_id": {
-                    "$ref": "#/definitions/Exchange"
+                    "type": "string"
                 },
                 "parent_trigger": {
-                    "$ref": "#/definitions/Exchange"
+                    "type": "null"
                 },
                 "type": {
-                    "$ref": "#/definitions/Exchange"
+                    "type": "string"
                 },
                 "created_at": {
-                    "$ref": "#/definitions/CreatedAt"
+                    "type": "string",
+                    "format": "date-time"
                 },
                 "updated_at": {
-                    "$ref": "#/definitions/CreatedAt"
+                    "type": "string",
+                    "format": "date-time"
                 },
                 "expires_at": {
-                    "$ref": "#/definitions/CreatedAt"
+                    "type": "string",
+                    "format": "date-time"
                 },
                 "status": {
-                    "$ref": "#/definitions/Exchange"
+                    "type": "string"
                 },
                 "condition": {
-                    "$ref": "#/definitions/ConditionClass"
+                    "$ref": "#/definitions/Condition"
                 },
                 "orders": {
-                    "$ref": "#/definitions/Orders"
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Order"
+                    }
                 },
                 "meta": {
-                    "$ref": "#/definitions/Meta"
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/Meta"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
                 }
             },
-            "required": [
-                "condition",
-                "created_at",
-                "expires_at",
-                "id",
-                "meta",
-                "orders",
-                "parent_trigger",
-                "status",
-                "type",
-                "updated_at",
-                "user_id"
-            ],
-            "title": "DatumProperties"
+            "required": [],
+            "title": "Datum"
         },
-        "ConditionClass": {
+        "Condition": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "$ref": {
+                "exchange": {
                     "type": "string"
-                }
-            },
-            "required": [
-                "$ref"
-            ],
-            "title": "ConditionClass"
-        },
-        "CreatedAt": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "$ref": "#/definitions/Type"
                 },
-                "format": {
+                "last_price": {
+                    "type": "number"
+                },
+                "tradingsymbol": {
                     "type": "string"
+                },
+                "trigger_values": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "instrument_token": {
+                    "type": "integer"
                 }
             },
-            "required": [
-                "format",
-                "type"
-            ],
-            "title": "CreatedAt"
+            "required": [],
+            "title": "Condition"
         },
         "Meta": {
             "type": "object",
             "additionalProperties": false,
-            "properties": {
-                "anyOf": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/AnyOf"
-                    }
-                }
-            },
-            "required": [
-                "anyOf"
-            ],
             "title": "Meta"
-        },
-        "AnyOf": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "$ref": {
-                    "type": "string"
-                },
-                "type": {
-                    "$ref": "#/definitions/Type"
-                }
-            },
-            "required": [],
-            "title": "AnyOf"
-        },
-        "Orders": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "items": {
-                    "$ref": "#/definitions/ConditionClass"
-                }
-            },
-            "required": [
-                "items",
-                "type"
-            ],
-            "title": "Orders"
-        },
-        "GttGetOrdersClass": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/GttGetOrdersProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "GttGetOrdersClass"
-        },
-        "GttGetOrdersProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "status": {
-                    "$ref": "#/definitions/Exchange"
-                },
-                "data": {
-                    "$ref": "#/definitions/Orders"
-                }
-            },
-            "required": [
-                "data",
-                "status"
-            ],
-            "title": "GttGetOrdersProperties"
-        },
-        "MetaClass": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "title",
-                "type"
-            ],
-            "title": "MetaClass"
         },
         "Order": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/OrderProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "Order"
-        },
-        "OrderProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
                 "exchange": {
-                    "$ref": "#/definitions/Exchange"
+                    "type": "string"
                 },
                 "tradingsymbol": {
-                    "$ref": "#/definitions/Exchange"
+                    "type": "string"
                 },
                 "product": {
-                    "$ref": "#/definitions/Exchange"
+                    "type": "string"
                 },
                 "order_type": {
-                    "$ref": "#/definitions/Exchange"
+                    "type": "string"
                 },
                 "transaction_type": {
-                    "$ref": "#/definitions/Exchange"
+                    "type": "string"
                 },
                 "quantity": {
-                    "$ref": "#/definitions/Exchange"
+                    "type": "integer"
                 },
                 "price": {
-                    "$ref": "#/definitions/Exchange"
+                    "type": "number"
                 },
                 "result": {
-                    "$ref": "#/definitions/Meta"
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/Result"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
                 }
             },
-            "required": [
-                "exchange",
-                "order_type",
-                "price",
-                "product",
-                "quantity",
-                "result",
-                "tradingsymbol",
-                "transaction_type"
-            ],
-            "title": "OrderProperties"
-        },
-        "OrderResult": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/OrderResultProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "OrderResult"
-        },
-        "OrderResultProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "status": {
-                    "$ref": "#/definitions/Exchange"
-                },
-                "order_id": {
-                    "$ref": "#/definitions/Exchange"
-                },
-                "rejection_reason": {
-                    "$ref": "#/definitions/Exchange"
-                }
-            },
-            "required": [
-                "order_id",
-                "rejection_reason",
-                "status"
-            ],
-            "title": "OrderResultProperties"
+            "required": [],
+            "title": "Order"
         },
         "Result": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "type": {
+                "account_id": {
                     "type": "string"
                 },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/ResultProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
+                "exchange": {
                     "type": "string"
+                },
+                "tradingsymbol": {
+                    "type": "string"
+                },
+                "validity": {
+                    "type": "string"
+                },
+                "product": {
+                    "type": "string"
+                },
+                "order_type": {
+                    "type": "string"
+                },
+                "transaction_type": {
+                    "type": "string"
+                },
+                "quantity": {
+                    "type": "integer"
+                },
+                "price": {
+                    "type": "integer"
+                },
+                "meta": {
+                    "type": "string"
+                },
+                "timestamp": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "triggered_at": {
+                    "type": "number"
+                },
+                "order_result": {
+                    "$ref": "#/definitions/OrderResult"
                 }
             },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
+            "required": [],
             "title": "Result"
         },
-        "ResultProperties": {
+        "OrderResult": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "account_id": {
-                    "$ref": "#/definitions/Exchange"
+                "status": {
+                    "type": "string"
                 },
-                "exchange": {
-                    "$ref": "#/definitions/Exchange"
+                "order_id": {
+                    "type": "string"
                 },
-                "tradingsymbol": {
-                    "$ref": "#/definitions/Exchange"
-                },
-                "validity": {
-                    "$ref": "#/definitions/Exchange"
-                },
-                "product": {
-                    "$ref": "#/definitions/Exchange"
-                },
-                "order_type": {
-                    "$ref": "#/definitions/Exchange"
-                },
-                "transaction_type": {
-                    "$ref": "#/definitions/Exchange"
-                },
-                "quantity": {
-                    "$ref": "#/definitions/Exchange"
-                },
-                "price": {
-                    "$ref": "#/definitions/Exchange"
-                },
-                "meta": {
-                    "$ref": "#/definitions/Exchange"
-                },
-                "timestamp": {
-                    "$ref": "#/definitions/CreatedAt"
-                },
-                "triggered_at": {
-                    "$ref": "#/definitions/Exchange"
-                },
-                "order_result": {
-                    "$ref": "#/definitions/ConditionClass"
+                "rejection_reason": {
+                    "type": "string"
                 }
             },
-            "required": [
-                "account_id",
-                "exchange",
-                "meta",
-                "order_result",
-                "order_type",
-                "price",
-                "product",
-                "quantity",
-                "timestamp",
-                "tradingsymbol",
-                "transaction_type",
-                "triggered_at",
-                "validity"
-            ],
-            "title": "ResultProperties"
-        },
-        "Type": {
-            "type": "string",
-            "enum": [
-                "string",
-                "integer",
-                "number",
-                "null"
-            ],
-            "title": "Type"
+            "required": [],
+            "title": "OrderResult"
         }
     }
 }

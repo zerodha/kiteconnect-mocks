@@ -6,254 +6,69 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "$schema": {
-                    "type": "string",
-                    "format": "uri",
-                    "qt-uri-protocols": [
-                        "http"
-                    ]
-                },
-                "$ref": {
+                "status": {
                     "type": "string"
                 },
-                "definitions": {
-                    "$ref": "#/definitions/Definitions"
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Datum"
+                    }
                 }
             },
-            "required": [
-                "$ref",
-                "$schema",
-                "definitions"
-            ],
+            "required": [],
             "title": "Trades"
-        },
-        "Definitions": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "Trades": {
-                    "$ref": "#/definitions/TradesClass"
-                },
-                "Datum": {
-                    "$ref": "#/definitions/Datum"
-                }
-            },
-            "required": [
-                "Datum",
-                "Trades"
-            ],
-            "title": "Definitions"
         },
         "Datum": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/DatumProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "Datum"
-        },
-        "DatumProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
                 "trade_id": {
-                    "$ref": "#/definitions/ExchangeTimestamp"
+                    "type": "string",
+                    "format": "integer"
                 },
                 "order_id": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "string"
                 },
                 "exchange": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "string"
                 },
                 "tradingsymbol": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "string"
                 },
                 "instrument_token": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "integer"
                 },
                 "product": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "string"
                 },
                 "average_price": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "number"
                 },
                 "quantity": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "integer"
                 },
                 "exchange_order_id": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "string"
                 },
                 "transaction_type": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "string"
                 },
                 "fill_timestamp": {
-                    "$ref": "#/definitions/ExchangeTimestamp"
+                    "type": "string",
+                    "format": "date-time"
                 },
                 "order_timestamp": {
-                    "$ref": "#/definitions/ExchangeTimestamp"
+                    "type": "string",
+                    "format": "time"
                 },
                 "exchange_timestamp": {
-                    "$ref": "#/definitions/ExchangeTimestamp"
+                    "type": "string",
+                    "format": "date-time"
                 }
             },
-            "required": [
-                "average_price",
-                "exchange",
-                "exchange_order_id",
-                "exchange_timestamp",
-                "fill_timestamp",
-                "instrument_token",
-                "order_id",
-                "order_timestamp",
-                "product",
-                "quantity",
-                "trade_id",
-                "tradingsymbol",
-                "transaction_type"
-            ],
-            "title": "DatumProperties"
-        },
-        "AveragePrice": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "$ref": "#/definitions/Type"
-                }
-            },
-            "required": [
-                "type"
-            ],
-            "title": "AveragePrice"
-        },
-        "ExchangeTimestamp": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "$ref": "#/definitions/Type"
-                },
-                "format": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "format",
-                "type"
-            ],
-            "title": "ExchangeTimestamp"
-        },
-        "TradesClass": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/TradesProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "TradesClass"
-        },
-        "TradesProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "status": {
-                    "$ref": "#/definitions/AveragePrice"
-                },
-                "data": {
-                    "$ref": "#/definitions/Data"
-                }
-            },
-            "required": [
-                "data",
-                "status"
-            ],
-            "title": "TradesProperties"
-        },
-        "Data": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "items": {
-                    "$ref": "#/definitions/Items"
-                }
-            },
-            "required": [
-                "items",
-                "type"
-            ],
-            "title": "Data"
-        },
-        "Items": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "$ref": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "$ref"
-            ],
-            "title": "Items"
-        },
-        "Type": {
-            "type": "string",
-            "enum": [
-                "number",
-                "string",
-                "integer"
-            ],
-            "title": "Type"
+            "required": [],
+            "title": "Datum"
         }
     }
 }

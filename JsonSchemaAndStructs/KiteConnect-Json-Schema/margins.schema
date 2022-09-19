@@ -6,314 +6,78 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "$schema": {
-                    "type": "string",
-                    "format": "uri",
-                    "qt-uri-protocols": [
-                        "http"
-                    ]
-                },
-                "$ref": {
+                "status": {
                     "type": "string"
                 },
-                "definitions": {
-                    "$ref": "#/definitions/Definitions"
-                }
-            },
-            "required": [
-                "$ref",
-                "$schema",
-                "definitions"
-            ],
-            "title": "Margins"
-        },
-        "Definitions": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "Margins": {
-                    "$ref": "#/definitions/MarginsClass"
-                },
-                "Data": {
+                "data": {
                     "$ref": "#/definitions/Data"
-                },
-                "Ity": {
-                    "$ref": "#/definitions/Ity"
-                },
-                "Available": {
-                    "$ref": "#/definitions/Available"
                 }
             },
-            "required": [
-                "Available",
-                "Data",
-                "Ity",
-                "Margins"
-            ],
-            "title": "Definitions"
-        },
-        "Available": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/AvailableProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "Available"
-        },
-        "AvailableProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "adhoc_margin": {
-                    "$ref": "#/definitions/AdhocMargin"
-                },
-                "cash": {
-                    "$ref": "#/definitions/AdhocMargin"
-                },
-                "opening_balance": {
-                    "$ref": "#/definitions/AdhocMargin"
-                },
-                "live_balance": {
-                    "$ref": "#/definitions/AdhocMargin"
-                },
-                "collateral": {
-                    "$ref": "#/definitions/AdhocMargin"
-                },
-                "intraday_payin": {
-                    "$ref": "#/definitions/AdhocMargin"
-                }
-            },
-            "required": [
-                "adhoc_margin",
-                "cash",
-                "collateral",
-                "intraday_payin",
-                "live_balance",
-                "opening_balance"
-            ],
-            "title": "AvailableProperties"
-        },
-        "AdhocMargin": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "type"
-            ],
-            "title": "AdhocMargin"
+            "required": [],
+            "title": "Margins"
         },
         "Data": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/DataProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "Data"
-        },
-        "DataProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
                 "equity": {
-                    "$ref": "#/definitions/Commodity"
+                    "$ref": "#/definitions/Ity"
                 },
                 "commodity": {
-                    "$ref": "#/definitions/Commodity"
+                    "$ref": "#/definitions/Ity"
                 }
             },
-            "required": [
-                "commodity",
-                "equity"
-            ],
-            "title": "DataProperties"
-        },
-        "Commodity": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "$ref": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "$ref"
-            ],
-            "title": "Commodity"
+            "required": [],
+            "title": "Data"
         },
         "Ity": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/ItyProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "Ity"
-        },
-        "ItyProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
                 "enabled": {
-                    "$ref": "#/definitions/AdhocMargin"
+                    "type": "boolean"
                 },
                 "net": {
-                    "$ref": "#/definitions/AdhocMargin"
+                    "type": "number"
                 },
                 "available": {
-                    "$ref": "#/definitions/Commodity"
+                    "$ref": "#/definitions/Available"
                 },
                 "utilised": {
-                    "$ref": "#/definitions/Utilised"
-                }
-            },
-            "required": [
-                "available",
-                "enabled",
-                "net",
-                "utilised"
-            ],
-            "title": "ItyProperties"
-        },
-        "Utilised": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "$ref": "#/definitions/AdhocMargin"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "type"
-            ],
-            "title": "Utilised"
-        },
-        "MarginsClass": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/MarginsProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "number"
                     }
-                },
-                "title": {
-                    "type": "string"
                 }
             },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "MarginsClass"
+            "required": [],
+            "title": "Ity"
         },
-        "MarginsProperties": {
+        "Available": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "status": {
-                    "$ref": "#/definitions/AdhocMargin"
+                "adhoc_margin": {
+                    "type": "integer"
                 },
-                "data": {
-                    "$ref": "#/definitions/Commodity"
+                "cash": {
+                    "type": "number"
+                },
+                "opening_balance": {
+                    "type": "number"
+                },
+                "live_balance": {
+                    "type": "number"
+                },
+                "collateral": {
+                    "type": "integer"
+                },
+                "intraday_payin": {
+                    "type": "integer"
                 }
             },
-            "required": [
-                "data",
-                "status"
-            ],
-            "title": "MarginsProperties"
+            "required": [],
+            "title": "Available"
         }
     }
 }

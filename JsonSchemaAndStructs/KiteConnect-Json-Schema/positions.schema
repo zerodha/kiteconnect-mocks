@@ -6,232 +6,130 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "$schema": {
-                    "type": "string",
-                    "format": "uri",
-                    "qt-uri-protocols": [
-                        "http"
-                    ]
-                },
-                "$ref": {
+                "status": {
                     "type": "string"
                 },
-                "definitions": {
-                    "$ref": "#/definitions/Definitions"
-                }
-            },
-            "required": [
-                "$ref",
-                "$schema",
-                "definitions"
-            ],
-            "title": "Positions"
-        },
-        "Definitions": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "Positions": {
-                    "$ref": "#/definitions/PositionsClass"
-                },
-                "Data": {
+                "data": {
                     "$ref": "#/definitions/Data"
-                },
-                "Day": {
-                    "$ref": "#/definitions/DayClass"
                 }
             },
-            "required": [
-                "Data",
-                "Day",
-                "Positions"
-            ],
-            "title": "Definitions"
+            "required": [],
+            "title": "Positions"
         },
         "Data": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/DataProperties"
-                },
-                "required": {
+                "net": {
                     "type": "array",
                     "items": {
-                        "type": "string"
+                        "$ref": "#/definitions/Day"
                     }
                 },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "Data"
-        },
-        "DataProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "net": {
-                    "$ref": "#/definitions/Day"
-                },
                 "day": {
-                    "$ref": "#/definitions/Day"
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Day"
+                    }
                 }
             },
-            "required": [
-                "day",
-                "net"
-            ],
-            "title": "DataProperties"
+            "required": [],
+            "title": "Data"
         },
         "Day": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "type": {
+                "tradingsymbol": {
                     "type": "string"
                 },
-                "items": {
-                    "$ref": "#/definitions/DataClass"
+                "exchange": {
+                    "type": "string"
+                },
+                "instrument_token": {
+                    "type": "integer"
+                },
+                "product": {
+                    "type": "string"
+                },
+                "quantity": {
+                    "type": "integer"
+                },
+                "overnight_quantity": {
+                    "type": "integer"
+                },
+                "multiplier": {
+                    "type": "integer"
+                },
+                "average_price": {
+                    "type": "number"
+                },
+                "close_price": {
+                    "type": "integer"
+                },
+                "last_price": {
+                    "type": "number"
+                },
+                "value": {
+                    "type": "integer"
+                },
+                "pnl": {
+                    "type": "integer"
+                },
+                "m2m": {
+                    "type": "integer"
+                },
+                "unrealised": {
+                    "type": "integer"
+                },
+                "realised": {
+                    "type": "integer"
+                },
+                "buy_quantity": {
+                    "type": "integer"
+                },
+                "buy_price": {
+                    "type": "number"
+                },
+                "buy_value": {
+                    "type": "integer"
+                },
+                "buy_m2m": {
+                    "type": "integer"
+                },
+                "sell_quantity": {
+                    "type": "integer"
+                },
+                "sell_price": {
+                    "type": "integer"
+                },
+                "sell_value": {
+                    "type": "integer"
+                },
+                "sell_m2m": {
+                    "type": "integer"
+                },
+                "day_buy_quantity": {
+                    "type": "integer"
+                },
+                "day_buy_price": {
+                    "type": "number"
+                },
+                "day_buy_value": {
+                    "type": "integer"
+                },
+                "day_sell_quantity": {
+                    "type": "integer"
+                },
+                "day_sell_price": {
+                    "type": "integer"
+                },
+                "day_sell_value": {
+                    "type": "integer"
                 }
             },
-            "required": [
-                "items",
-                "type"
-            ],
+            "required": [],
             "title": "Day"
-        },
-        "DataClass": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "$ref": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "$ref"
-            ],
-            "title": "DataClass"
-        },
-        "DayClass": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/definitions/Property"
-                    }
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "DayClass"
-        },
-        "Property": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "$ref": "#/definitions/Type"
-                }
-            },
-            "required": [
-                "type"
-            ],
-            "title": "Property"
-        },
-        "PositionsClass": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/PositionsProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "PositionsClass"
-        },
-        "PositionsProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "status": {
-                    "$ref": "#/definitions/Property"
-                },
-                "data": {
-                    "$ref": "#/definitions/DataClass"
-                }
-            },
-            "required": [
-                "data",
-                "status"
-            ],
-            "title": "PositionsProperties"
-        },
-        "Type": {
-            "type": "string",
-            "enum": [
-                "number",
-                "integer",
-                "string"
-            ],
-            "title": "Type"
         }
     }
 }

@@ -1,0 +1,29 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/TriggerRangeElement"
+    },
+    "definitions": {
+        "TriggerRangeElement": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "instrument_token": {
+                    "type": "integer"
+                },
+                "mode": {
+                    "type": "string"
+                },
+                "last_price": {
+                    "type": "integer"
+                },
+                "tradable": {
+                    "type": "boolean"
+                }
+            },
+            "required": [],
+            "title": "TriggerRangeElement"
+        }
+    }
+}

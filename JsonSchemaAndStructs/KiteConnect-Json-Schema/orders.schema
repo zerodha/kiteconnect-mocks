@@ -6,495 +6,207 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "$schema": {
-                    "type": "string",
-                    "format": "uri",
-                    "qt-uri-protocols": [
-                        "http"
-                    ]
-                },
-                "$ref": {
+                "status": {
                     "type": "string"
                 },
-                "definitions": {
-                    "$ref": "#/definitions/Definitions"
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Datum"
+                    }
                 }
             },
-            "required": [
-                "$ref",
-                "$schema",
-                "definitions"
-            ],
+            "required": [],
             "title": "Orders"
-        },
-        "Definitions": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "Orders": {
-                    "$ref": "#/definitions/OrdersClass"
-                },
-                "Datum": {
-                    "$ref": "#/definitions/Datum"
-                },
-                "Meta": {
-                    "$ref": "#/definitions/MetaClass"
-                },
-                "Iceberg": {
-                    "$ref": "#/definitions/Iceberg"
-                }
-            },
-            "required": [
-                "Datum",
-                "Iceberg",
-                "Meta",
-                "Orders"
-            ],
-            "title": "Definitions"
         },
         "Datum": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/DatumProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "Datum"
-        },
-        "DatumProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
                 "placed_by": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "string"
                 },
                 "order_id": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "string"
                 },
                 "exchange_order_id": {
-                    "$ref": "#/definitions/ExchangeOrderID"
+                    "anyOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
                 },
                 "parent_order_id": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "null"
                 },
                 "status": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "string"
                 },
                 "status_message": {
-                    "$ref": "#/definitions/ExchangeOrderID"
+                    "anyOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
                 },
                 "status_message_raw": {
-                    "$ref": "#/definitions/ExchangeOrderID"
+                    "anyOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
                 },
                 "order_timestamp": {
-                    "$ref": "#/definitions/OrderTimestamp"
+                    "type": "string",
+                    "format": "date-time"
                 },
                 "exchange_update_timestamp": {
-                    "$ref": "#/definitions/ExchangeETimestamp"
+                    "anyOf": [
+                        {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
                 },
                 "exchange_timestamp": {
-                    "$ref": "#/definitions/ExchangeETimestamp"
+                    "anyOf": [
+                        {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
                 },
                 "variety": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "string"
                 },
                 "exchange": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "string"
                 },
                 "tradingsymbol": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "string"
                 },
                 "instrument_token": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "integer"
                 },
                 "order_type": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "string"
                 },
                 "transaction_type": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "string"
                 },
                 "validity": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "string"
                 },
                 "product": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "string"
                 },
                 "quantity": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "integer"
                 },
                 "disclosed_quantity": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "integer"
                 },
                 "price": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "integer"
                 },
                 "trigger_price": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "integer"
                 },
                 "average_price": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "integer"
                 },
                 "filled_quantity": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "integer"
                 },
                 "pending_quantity": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "integer"
                 },
                 "cancelled_quantity": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "integer"
                 },
                 "market_protection": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "integer"
                 },
                 "meta": {
                     "$ref": "#/definitions/Meta"
                 },
                 "tag": {
-                    "$ref": "#/definitions/ExchangeOrderID"
+                    "anyOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
                 },
                 "guid": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "string"
                 },
                 "tags": {
-                    "$ref": "#/definitions/Tags"
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 },
                 "modified": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "boolean"
                 },
                 "validity_ttl": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "integer"
                 }
             },
-            "required": [
-                "average_price",
-                "cancelled_quantity",
-                "disclosed_quantity",
-                "exchange",
-                "exchange_order_id",
-                "exchange_timestamp",
-                "exchange_update_timestamp",
-                "filled_quantity",
-                "guid",
-                "instrument_token",
-                "market_protection",
-                "meta",
-                "modified",
-                "order_id",
-                "order_timestamp",
-                "order_type",
-                "parent_order_id",
-                "pending_quantity",
-                "placed_by",
-                "price",
-                "product",
-                "quantity",
-                "status",
-                "status_message",
-                "status_message_raw",
-                "tag",
-                "tags",
-                "tradingsymbol",
-                "transaction_type",
-                "trigger_price",
-                "validity",
-                "validity_ttl",
-                "variety"
-            ],
-            "title": "DatumProperties"
-        },
-        "ExchangeOrderID": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "anyOf": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/AveragePrice"
-                    }
-                }
-            },
-            "required": [
-                "anyOf"
-            ],
-            "title": "ExchangeOrderID"
-        },
-        "AveragePrice": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "$ref": "#/definitions/Type"
-                }
-            },
-            "required": [
-                "type"
-            ],
-            "title": "AveragePrice"
-        },
-        "ExchangeETimestamp": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "anyOf": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/OrderTimestamp"
-                    }
-                }
-            },
-            "required": [
-                "anyOf"
-            ],
-            "title": "ExchangeETimestamp"
-        },
-        "OrderTimestamp": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "$ref": "#/definitions/Type"
-                },
-                "format": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "type"
-            ],
-            "title": "OrderTimestamp"
+            "required": [],
+            "title": "Datum"
         },
         "Meta": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "$ref": {
-                    "type": "string"
+                "iceberg": {
+                    "$ref": "#/definitions/Iceberg"
                 }
             },
-            "required": [
-                "$ref"
-            ],
+            "required": [],
             "title": "Meta"
-        },
-        "Tags": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "items": {
-                    "$ref": "#/definitions/AveragePrice"
-                }
-            },
-            "required": [
-                "items",
-                "type"
-            ],
-            "title": "Tags"
         },
         "Iceberg": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/IcebergProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "Iceberg"
-        },
-        "IcebergProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
                 "leg": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "integer"
                 },
                 "legs": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "integer"
                 },
                 "leg_quantity": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "integer"
                 },
                 "total_quantity": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "integer"
                 },
                 "remaining_quantity": {
-                    "$ref": "#/definitions/AveragePrice"
+                    "type": "integer"
                 }
             },
-            "required": [
-                "leg",
-                "leg_quantity",
-                "legs",
-                "remaining_quantity",
-                "total_quantity"
-            ],
-            "title": "IcebergProperties"
-        },
-        "MetaClass": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/MetaProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {}
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "MetaClass"
-        },
-        "MetaProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "iceberg": {
-                    "$ref": "#/definitions/Meta"
-                }
-            },
-            "required": [
-                "iceberg"
-            ],
-            "title": "MetaProperties"
-        },
-        "OrdersClass": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "additionalProperties": {
-                    "type": "boolean"
-                },
-                "properties": {
-                    "$ref": "#/definitions/OrdersProperties"
-                },
-                "required": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "additionalProperties",
-                "properties",
-                "required",
-                "title",
-                "type"
-            ],
-            "title": "OrdersClass"
-        },
-        "OrdersProperties": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "status": {
-                    "$ref": "#/definitions/AveragePrice"
-                },
-                "data": {
-                    "$ref": "#/definitions/Data"
-                }
-            },
-            "required": [
-                "data",
-                "status"
-            ],
-            "title": "OrdersProperties"
-        },
-        "Data": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "items": {
-                    "$ref": "#/definitions/Meta"
-                }
-            },
-            "required": [
-                "items",
-                "type"
-            ],
-            "title": "Data"
-        },
-        "Type": {
-            "type": "string",
-            "enum": [
-                "integer",
-                "string",
-                "null",
-                "boolean"
-            ],
-            "title": "Type"
+            "required": [],
+            "title": "Iceberg"
         }
     }
 }
