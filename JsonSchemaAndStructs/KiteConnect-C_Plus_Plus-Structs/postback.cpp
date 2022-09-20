@@ -15,7 +15,23 @@
 #include <stdexcept>
 #include <regex>
 
-namespace quicktype {
+#ifndef NLOHMANN_OPT_HELPER
+#define NLOHMANN_OPT_HELPER
+namespace nlohmann {
+    template <typename T>
+    struct adl_serializer<std::shared_ptr<T>> {
+        static void to_json(json & j, const std::shared_ptr<T> & opt) {
+            if (!opt) j = nullptr; else j = *opt;
+        }
+
+        static std::shared_ptr<T> from_json(const json & j) {
+            if (j.is_null()) return std::unique_ptr<T>(); else return std::unique_ptr<T>(new T(j.get<T>()));
+        }
+    };
+}
+#endif
+
+namespace Postback {
     using nlohmann::json;
 
     inline json get_untyped(const json & j, const char * property) {
@@ -29,309 +45,27 @@ namespace quicktype {
         return get_untyped(j, property.data());
     }
 
+    template <typename T>
+    inline std::shared_ptr<T> get_optional(const json & j, const char * property) {
+        if (j.find(property) != j.end()) {
+            return j.at(property).get<std::shared_ptr<T>>();
+        }
+        return std::shared_ptr<T>();
+    }
+
+    template <typename T>
+    inline std::shared_ptr<T> get_optional(const json & j, std::string property) {
+        return get_optional<T>(j, property.data());
+    }
+
     class Meta {
         public:
         Meta() = default;
         virtual ~Meta() = default;
 
         private:
-        bool additional_properties;
-        std::string title;
-        std::string type;
 
         public:
-        const bool & get_additional_properties() const { return additional_properties; }
-        bool & get_mutable_additional_properties() { return additional_properties; }
-        void set_additional_properties(const bool & value) { this->additional_properties = value; }
-
-        const std::string & get_title() const { return title; }
-        std::string & get_mutable_title() { return title; }
-        void set_title(const std::string & value) { this->title = value; }
-
-        const std::string & get_type() const { return type; }
-        std::string & get_mutable_type() { return type; }
-        void set_type(const std::string & value) { this->type = value; }
-    };
-
-    enum class Type : int { INTEGER, STRING, TYPE_NULL };
-
-    class AppId {
-        public:
-        AppId() = default;
-        virtual ~AppId() = default;
-
-        private:
-        Type type;
-
-        public:
-        const Type & get_type() const { return type; }
-        Type & get_mutable_type() { return type; }
-        void set_type(const Type & value) { this->type = value; }
-    };
-
-    class Timestamp {
-        public:
-        Timestamp() = default;
-        virtual ~Timestamp() = default;
-
-        private:
-        std::string format;
-        Type type;
-
-        public:
-        const std::string & get_format() const { return format; }
-        std::string & get_mutable_format() { return format; }
-        void set_format(const std::string & value) { this->format = value; }
-
-        const Type & get_type() const { return type; }
-        Type & get_mutable_type() { return type; }
-        void set_type(const Type & value) { this->type = value; }
-    };
-
-    class MetaClass {
-        public:
-        MetaClass() = default;
-        virtual ~MetaClass() = default;
-
-        private:
-        std::string ref;
-
-        public:
-        const std::string & get_ref() const { return ref; }
-        std::string & get_mutable_ref() { return ref; }
-        void set_ref(const std::string & value) { this->ref = value; }
-    };
-
-    class Properties {
-        public:
-        Properties() = default;
-        virtual ~Properties() = default;
-
-        private:
-        AppId app_id;
-        AppId average_price;
-        AppId cancelled_quantity;
-        AppId checksum;
-        AppId disclosed_quantity;
-        AppId exchange;
-        AppId exchange_order_id;
-        Timestamp exchange_timestamp;
-        Timestamp exchange_update_timestamp;
-        AppId filled_quantity;
-        AppId guid;
-        AppId instrument_token;
-        AppId market_protection;
-        MetaClass meta;
-        AppId order_id;
-        Timestamp order_timestamp;
-        AppId order_type;
-        AppId parent_order_id;
-        AppId pending_quantity;
-        AppId placed_by;
-        AppId price;
-        AppId product;
-        AppId quantity;
-        AppId status;
-        AppId status_message;
-        AppId status_message_raw;
-        AppId tag;
-        AppId tradingsymbol;
-        AppId transaction_type;
-        AppId trigger_price;
-        AppId unfilled_quantity;
-        AppId user_id;
-        AppId validity;
-        AppId variety;
-
-        public:
-        const AppId & get_app_id() const { return app_id; }
-        AppId & get_mutable_app_id() { return app_id; }
-        void set_app_id(const AppId & value) { this->app_id = value; }
-
-        const AppId & get_average_price() const { return average_price; }
-        AppId & get_mutable_average_price() { return average_price; }
-        void set_average_price(const AppId & value) { this->average_price = value; }
-
-        const AppId & get_cancelled_quantity() const { return cancelled_quantity; }
-        AppId & get_mutable_cancelled_quantity() { return cancelled_quantity; }
-        void set_cancelled_quantity(const AppId & value) { this->cancelled_quantity = value; }
-
-        const AppId & get_checksum() const { return checksum; }
-        AppId & get_mutable_checksum() { return checksum; }
-        void set_checksum(const AppId & value) { this->checksum = value; }
-
-        const AppId & get_disclosed_quantity() const { return disclosed_quantity; }
-        AppId & get_mutable_disclosed_quantity() { return disclosed_quantity; }
-        void set_disclosed_quantity(const AppId & value) { this->disclosed_quantity = value; }
-
-        const AppId & get_exchange() const { return exchange; }
-        AppId & get_mutable_exchange() { return exchange; }
-        void set_exchange(const AppId & value) { this->exchange = value; }
-
-        const AppId & get_exchange_order_id() const { return exchange_order_id; }
-        AppId & get_mutable_exchange_order_id() { return exchange_order_id; }
-        void set_exchange_order_id(const AppId & value) { this->exchange_order_id = value; }
-
-        const Timestamp & get_exchange_timestamp() const { return exchange_timestamp; }
-        Timestamp & get_mutable_exchange_timestamp() { return exchange_timestamp; }
-        void set_exchange_timestamp(const Timestamp & value) { this->exchange_timestamp = value; }
-
-        const Timestamp & get_exchange_update_timestamp() const { return exchange_update_timestamp; }
-        Timestamp & get_mutable_exchange_update_timestamp() { return exchange_update_timestamp; }
-        void set_exchange_update_timestamp(const Timestamp & value) { this->exchange_update_timestamp = value; }
-
-        const AppId & get_filled_quantity() const { return filled_quantity; }
-        AppId & get_mutable_filled_quantity() { return filled_quantity; }
-        void set_filled_quantity(const AppId & value) { this->filled_quantity = value; }
-
-        const AppId & get_guid() const { return guid; }
-        AppId & get_mutable_guid() { return guid; }
-        void set_guid(const AppId & value) { this->guid = value; }
-
-        const AppId & get_instrument_token() const { return instrument_token; }
-        AppId & get_mutable_instrument_token() { return instrument_token; }
-        void set_instrument_token(const AppId & value) { this->instrument_token = value; }
-
-        const AppId & get_market_protection() const { return market_protection; }
-        AppId & get_mutable_market_protection() { return market_protection; }
-        void set_market_protection(const AppId & value) { this->market_protection = value; }
-
-        const MetaClass & get_meta() const { return meta; }
-        MetaClass & get_mutable_meta() { return meta; }
-        void set_meta(const MetaClass & value) { this->meta = value; }
-
-        const AppId & get_order_id() const { return order_id; }
-        AppId & get_mutable_order_id() { return order_id; }
-        void set_order_id(const AppId & value) { this->order_id = value; }
-
-        const Timestamp & get_order_timestamp() const { return order_timestamp; }
-        Timestamp & get_mutable_order_timestamp() { return order_timestamp; }
-        void set_order_timestamp(const Timestamp & value) { this->order_timestamp = value; }
-
-        const AppId & get_order_type() const { return order_type; }
-        AppId & get_mutable_order_type() { return order_type; }
-        void set_order_type(const AppId & value) { this->order_type = value; }
-
-        const AppId & get_parent_order_id() const { return parent_order_id; }
-        AppId & get_mutable_parent_order_id() { return parent_order_id; }
-        void set_parent_order_id(const AppId & value) { this->parent_order_id = value; }
-
-        const AppId & get_pending_quantity() const { return pending_quantity; }
-        AppId & get_mutable_pending_quantity() { return pending_quantity; }
-        void set_pending_quantity(const AppId & value) { this->pending_quantity = value; }
-
-        const AppId & get_placed_by() const { return placed_by; }
-        AppId & get_mutable_placed_by() { return placed_by; }
-        void set_placed_by(const AppId & value) { this->placed_by = value; }
-
-        const AppId & get_price() const { return price; }
-        AppId & get_mutable_price() { return price; }
-        void set_price(const AppId & value) { this->price = value; }
-
-        const AppId & get_product() const { return product; }
-        AppId & get_mutable_product() { return product; }
-        void set_product(const AppId & value) { this->product = value; }
-
-        const AppId & get_quantity() const { return quantity; }
-        AppId & get_mutable_quantity() { return quantity; }
-        void set_quantity(const AppId & value) { this->quantity = value; }
-
-        const AppId & get_status() const { return status; }
-        AppId & get_mutable_status() { return status; }
-        void set_status(const AppId & value) { this->status = value; }
-
-        const AppId & get_status_message() const { return status_message; }
-        AppId & get_mutable_status_message() { return status_message; }
-        void set_status_message(const AppId & value) { this->status_message = value; }
-
-        const AppId & get_status_message_raw() const { return status_message_raw; }
-        AppId & get_mutable_status_message_raw() { return status_message_raw; }
-        void set_status_message_raw(const AppId & value) { this->status_message_raw = value; }
-
-        const AppId & get_tag() const { return tag; }
-        AppId & get_mutable_tag() { return tag; }
-        void set_tag(const AppId & value) { this->tag = value; }
-
-        const AppId & get_tradingsymbol() const { return tradingsymbol; }
-        AppId & get_mutable_tradingsymbol() { return tradingsymbol; }
-        void set_tradingsymbol(const AppId & value) { this->tradingsymbol = value; }
-
-        const AppId & get_transaction_type() const { return transaction_type; }
-        AppId & get_mutable_transaction_type() { return transaction_type; }
-        void set_transaction_type(const AppId & value) { this->transaction_type = value; }
-
-        const AppId & get_trigger_price() const { return trigger_price; }
-        AppId & get_mutable_trigger_price() { return trigger_price; }
-        void set_trigger_price(const AppId & value) { this->trigger_price = value; }
-
-        const AppId & get_unfilled_quantity() const { return unfilled_quantity; }
-        AppId & get_mutable_unfilled_quantity() { return unfilled_quantity; }
-        void set_unfilled_quantity(const AppId & value) { this->unfilled_quantity = value; }
-
-        const AppId & get_user_id() const { return user_id; }
-        AppId & get_mutable_user_id() { return user_id; }
-        void set_user_id(const AppId & value) { this->user_id = value; }
-
-        const AppId & get_validity() const { return validity; }
-        AppId & get_mutable_validity() { return validity; }
-        void set_validity(const AppId & value) { this->validity = value; }
-
-        const AppId & get_variety() const { return variety; }
-        AppId & get_mutable_variety() { return variety; }
-        void set_variety(const AppId & value) { this->variety = value; }
-    };
-
-    class PostbackClass {
-        public:
-        PostbackClass() = default;
-        virtual ~PostbackClass() = default;
-
-        private:
-        bool additional_properties;
-        Properties properties;
-        std::vector<std::string> required;
-        std::string title;
-        std::string type;
-
-        public:
-        const bool & get_additional_properties() const { return additional_properties; }
-        bool & get_mutable_additional_properties() { return additional_properties; }
-        void set_additional_properties(const bool & value) { this->additional_properties = value; }
-
-        const Properties & get_properties() const { return properties; }
-        Properties & get_mutable_properties() { return properties; }
-        void set_properties(const Properties & value) { this->properties = value; }
-
-        const std::vector<std::string> & get_required() const { return required; }
-        std::vector<std::string> & get_mutable_required() { return required; }
-        void set_required(const std::vector<std::string> & value) { this->required = value; }
-
-        const std::string & get_title() const { return title; }
-        std::string & get_mutable_title() { return title; }
-        void set_title(const std::string & value) { this->title = value; }
-
-        const std::string & get_type() const { return type; }
-        std::string & get_mutable_type() { return type; }
-        void set_type(const std::string & value) { this->type = value; }
-    };
-
-    class Definitions {
-        public:
-        Definitions() = default;
-        virtual ~Definitions() = default;
-
-        private:
-        Meta meta;
-        PostbackClass postback;
-
-        public:
-        const Meta & get_meta() const { return meta; }
-        Meta & get_mutable_meta() { return meta; }
-        void set_meta(const Meta & value) { this->meta = value; }
-
-        const PostbackClass & get_postback() const { return postback; }
-        PostbackClass & get_mutable_postback() { return postback; }
-        void set_postback(const PostbackClass & value) { this->postback = value; }
     };
 
     class Postback {
@@ -340,133 +74,202 @@ namespace quicktype {
         virtual ~Postback() = default;
 
         private:
-        std::string ref;
-        std::string schema;
-        Definitions definitions;
+        std::shared_ptr<int64_t> app_id;
+        std::shared_ptr<int64_t> average_price;
+        std::shared_ptr<int64_t> cancelled_quantity;
+        std::shared_ptr<std::string> checksum;
+        std::shared_ptr<int64_t> disclosed_quantity;
+        std::shared_ptr<std::string> exchange;
+        std::shared_ptr<std::string> exchange_order_id;
+        std::shared_ptr<std::string> exchange_timestamp;
+        std::shared_ptr<std::string> exchange_update_timestamp;
+        std::shared_ptr<int64_t> filled_quantity;
+        std::shared_ptr<std::string> guid;
+        std::shared_ptr<int64_t> instrument_token;
+        std::shared_ptr<int64_t> market_protection;
+        std::shared_ptr<Meta> meta;
+        std::shared_ptr<std::string> order_id;
+        std::shared_ptr<std::string> order_timestamp;
+        std::shared_ptr<std::string> order_type;
+        nlohmann::json parent_order_id;
+        std::shared_ptr<int64_t> pending_quantity;
+        std::shared_ptr<std::string> placed_by;
+        std::shared_ptr<int64_t> price;
+        std::shared_ptr<std::string> product;
+        std::shared_ptr<int64_t> quantity;
+        std::shared_ptr<std::string> status;
+        nlohmann::json status_message;
+        nlohmann::json status_message_raw;
+        nlohmann::json tag;
+        std::shared_ptr<std::string> tradingsymbol;
+        std::shared_ptr<std::string> transaction_type;
+        std::shared_ptr<int64_t> trigger_price;
+        std::shared_ptr<int64_t> unfilled_quantity;
+        std::shared_ptr<std::string> user_id;
+        std::shared_ptr<std::string> validity;
+        std::shared_ptr<std::string> variety;
 
         public:
-        const std::string & get_ref() const { return ref; }
-        std::string & get_mutable_ref() { return ref; }
-        void set_ref(const std::string & value) { this->ref = value; }
+        std::shared_ptr<int64_t> get_app_id() const { return app_id; }
+        void set_app_id(std::shared_ptr<int64_t> value) { this->app_id = value; }
 
-        const std::string & get_schema() const { return schema; }
-        std::string & get_mutable_schema() { return schema; }
-        void set_schema(const std::string & value) { this->schema = value; }
+        std::shared_ptr<int64_t> get_average_price() const { return average_price; }
+        void set_average_price(std::shared_ptr<int64_t> value) { this->average_price = value; }
 
-        const Definitions & get_definitions() const { return definitions; }
-        Definitions & get_mutable_definitions() { return definitions; }
-        void set_definitions(const Definitions & value) { this->definitions = value; }
+        std::shared_ptr<int64_t> get_cancelled_quantity() const { return cancelled_quantity; }
+        void set_cancelled_quantity(std::shared_ptr<int64_t> value) { this->cancelled_quantity = value; }
+
+        std::shared_ptr<std::string> get_checksum() const { return checksum; }
+        void set_checksum(std::shared_ptr<std::string> value) { this->checksum = value; }
+
+        std::shared_ptr<int64_t> get_disclosed_quantity() const { return disclosed_quantity; }
+        void set_disclosed_quantity(std::shared_ptr<int64_t> value) { this->disclosed_quantity = value; }
+
+        std::shared_ptr<std::string> get_exchange() const { return exchange; }
+        void set_exchange(std::shared_ptr<std::string> value) { this->exchange = value; }
+
+        std::shared_ptr<std::string> get_exchange_order_id() const { return exchange_order_id; }
+        void set_exchange_order_id(std::shared_ptr<std::string> value) { this->exchange_order_id = value; }
+
+        std::shared_ptr<std::string> get_exchange_timestamp() const { return exchange_timestamp; }
+        void set_exchange_timestamp(std::shared_ptr<std::string> value) { this->exchange_timestamp = value; }
+
+        std::shared_ptr<std::string> get_exchange_update_timestamp() const { return exchange_update_timestamp; }
+        void set_exchange_update_timestamp(std::shared_ptr<std::string> value) { this->exchange_update_timestamp = value; }
+
+        std::shared_ptr<int64_t> get_filled_quantity() const { return filled_quantity; }
+        void set_filled_quantity(std::shared_ptr<int64_t> value) { this->filled_quantity = value; }
+
+        std::shared_ptr<std::string> get_guid() const { return guid; }
+        void set_guid(std::shared_ptr<std::string> value) { this->guid = value; }
+
+        std::shared_ptr<int64_t> get_instrument_token() const { return instrument_token; }
+        void set_instrument_token(std::shared_ptr<int64_t> value) { this->instrument_token = value; }
+
+        std::shared_ptr<int64_t> get_market_protection() const { return market_protection; }
+        void set_market_protection(std::shared_ptr<int64_t> value) { this->market_protection = value; }
+
+        std::shared_ptr<Meta> get_meta() const { return meta; }
+        void set_meta(std::shared_ptr<Meta> value) { this->meta = value; }
+
+        std::shared_ptr<std::string> get_order_id() const { return order_id; }
+        void set_order_id(std::shared_ptr<std::string> value) { this->order_id = value; }
+
+        std::shared_ptr<std::string> get_order_timestamp() const { return order_timestamp; }
+        void set_order_timestamp(std::shared_ptr<std::string> value) { this->order_timestamp = value; }
+
+        std::shared_ptr<std::string> get_order_type() const { return order_type; }
+        void set_order_type(std::shared_ptr<std::string> value) { this->order_type = value; }
+
+        const nlohmann::json & get_parent_order_id() const { return parent_order_id; }
+        nlohmann::json & get_mutable_parent_order_id() { return parent_order_id; }
+        void set_parent_order_id(const nlohmann::json & value) { this->parent_order_id = value; }
+
+        std::shared_ptr<int64_t> get_pending_quantity() const { return pending_quantity; }
+        void set_pending_quantity(std::shared_ptr<int64_t> value) { this->pending_quantity = value; }
+
+        std::shared_ptr<std::string> get_placed_by() const { return placed_by; }
+        void set_placed_by(std::shared_ptr<std::string> value) { this->placed_by = value; }
+
+        std::shared_ptr<int64_t> get_price() const { return price; }
+        void set_price(std::shared_ptr<int64_t> value) { this->price = value; }
+
+        std::shared_ptr<std::string> get_product() const { return product; }
+        void set_product(std::shared_ptr<std::string> value) { this->product = value; }
+
+        std::shared_ptr<int64_t> get_quantity() const { return quantity; }
+        void set_quantity(std::shared_ptr<int64_t> value) { this->quantity = value; }
+
+        std::shared_ptr<std::string> get_status() const { return status; }
+        void set_status(std::shared_ptr<std::string> value) { this->status = value; }
+
+        const nlohmann::json & get_status_message() const { return status_message; }
+        nlohmann::json & get_mutable_status_message() { return status_message; }
+        void set_status_message(const nlohmann::json & value) { this->status_message = value; }
+
+        const nlohmann::json & get_status_message_raw() const { return status_message_raw; }
+        nlohmann::json & get_mutable_status_message_raw() { return status_message_raw; }
+        void set_status_message_raw(const nlohmann::json & value) { this->status_message_raw = value; }
+
+        const nlohmann::json & get_tag() const { return tag; }
+        nlohmann::json & get_mutable_tag() { return tag; }
+        void set_tag(const nlohmann::json & value) { this->tag = value; }
+
+        std::shared_ptr<std::string> get_tradingsymbol() const { return tradingsymbol; }
+        void set_tradingsymbol(std::shared_ptr<std::string> value) { this->tradingsymbol = value; }
+
+        std::shared_ptr<std::string> get_transaction_type() const { return transaction_type; }
+        void set_transaction_type(std::shared_ptr<std::string> value) { this->transaction_type = value; }
+
+        std::shared_ptr<int64_t> get_trigger_price() const { return trigger_price; }
+        void set_trigger_price(std::shared_ptr<int64_t> value) { this->trigger_price = value; }
+
+        std::shared_ptr<int64_t> get_unfilled_quantity() const { return unfilled_quantity; }
+        void set_unfilled_quantity(std::shared_ptr<int64_t> value) { this->unfilled_quantity = value; }
+
+        std::shared_ptr<std::string> get_user_id() const { return user_id; }
+        void set_user_id(std::shared_ptr<std::string> value) { this->user_id = value; }
+
+        std::shared_ptr<std::string> get_validity() const { return validity; }
+        void set_validity(std::shared_ptr<std::string> value) { this->validity = value; }
+
+        std::shared_ptr<std::string> get_variety() const { return variety; }
+        void set_variety(std::shared_ptr<std::string> value) { this->variety = value; }
     };
 }
 
 namespace nlohmann {
-    void from_json(const json & j, quicktype::Meta & x);
-    void to_json(json & j, const quicktype::Meta & x);
+    void from_json(const json & j, Postback::Meta & x);
+    void to_json(json & j, const Postback::Meta & x);
 
-    void from_json(const json & j, quicktype::AppId & x);
-    void to_json(json & j, const quicktype::AppId & x);
+    void from_json(const json & j, Postback::Postback & x);
+    void to_json(json & j, const Postback::Postback & x);
 
-    void from_json(const json & j, quicktype::Timestamp & x);
-    void to_json(json & j, const quicktype::Timestamp & x);
-
-    void from_json(const json & j, quicktype::MetaClass & x);
-    void to_json(json & j, const quicktype::MetaClass & x);
-
-    void from_json(const json & j, quicktype::Properties & x);
-    void to_json(json & j, const quicktype::Properties & x);
-
-    void from_json(const json & j, quicktype::PostbackClass & x);
-    void to_json(json & j, const quicktype::PostbackClass & x);
-
-    void from_json(const json & j, quicktype::Definitions & x);
-    void to_json(json & j, const quicktype::Definitions & x);
-
-    void from_json(const json & j, quicktype::Postback & x);
-    void to_json(json & j, const quicktype::Postback & x);
-
-    void from_json(const json & j, quicktype::Type & x);
-    void to_json(json & j, const quicktype::Type & x);
-
-    inline void from_json(const json & j, quicktype::Meta& x) {
-        x.set_additional_properties(j.at("additionalProperties").get<bool>());
-        x.set_title(j.at("title").get<std::string>());
-        x.set_type(j.at("type").get<std::string>());
+    inline void from_json(const json & j, Postback::Meta& x) {
     }
 
-    inline void to_json(json & j, const quicktype::Meta & x) {
+    inline void to_json(json & j, const Postback::Meta & x) {
         j = json::object();
-        j["additionalProperties"] = x.get_additional_properties();
-        j["title"] = x.get_title();
-        j["type"] = x.get_type();
     }
 
-    inline void from_json(const json & j, quicktype::AppId& x) {
-        x.set_type(j.at("type").get<quicktype::Type>());
+    inline void from_json(const json & j, Postback::Postback& x) {
+        x.set_app_id(Postback::get_optional<int64_t>(j, "app_id"));
+        x.set_average_price(Postback::get_optional<int64_t>(j, "average_price"));
+        x.set_cancelled_quantity(Postback::get_optional<int64_t>(j, "cancelled_quantity"));
+        x.set_checksum(Postback::get_optional<std::string>(j, "checksum"));
+        x.set_disclosed_quantity(Postback::get_optional<int64_t>(j, "disclosed_quantity"));
+        x.set_exchange(Postback::get_optional<std::string>(j, "exchange"));
+        x.set_exchange_order_id(Postback::get_optional<std::string>(j, "exchange_order_id"));
+        x.set_exchange_timestamp(Postback::get_optional<std::string>(j, "exchange_timestamp"));
+        x.set_exchange_update_timestamp(Postback::get_optional<std::string>(j, "exchange_update_timestamp"));
+        x.set_filled_quantity(Postback::get_optional<int64_t>(j, "filled_quantity"));
+        x.set_guid(Postback::get_optional<std::string>(j, "guid"));
+        x.set_instrument_token(Postback::get_optional<int64_t>(j, "instrument_token"));
+        x.set_market_protection(Postback::get_optional<int64_t>(j, "market_protection"));
+        x.set_meta(Postback::get_optional<Postback::Meta>(j, "meta"));
+        x.set_order_id(Postback::get_optional<std::string>(j, "order_id"));
+        x.set_order_timestamp(Postback::get_optional<std::string>(j, "order_timestamp"));
+        x.set_order_type(Postback::get_optional<std::string>(j, "order_type"));
+        x.set_parent_order_id(Postback::get_untyped(j, "parent_order_id"));
+        x.set_pending_quantity(Postback::get_optional<int64_t>(j, "pending_quantity"));
+        x.set_placed_by(Postback::get_optional<std::string>(j, "placed_by"));
+        x.set_price(Postback::get_optional<int64_t>(j, "price"));
+        x.set_product(Postback::get_optional<std::string>(j, "product"));
+        x.set_quantity(Postback::get_optional<int64_t>(j, "quantity"));
+        x.set_status(Postback::get_optional<std::string>(j, "status"));
+        x.set_status_message(Postback::get_untyped(j, "status_message"));
+        x.set_status_message_raw(Postback::get_untyped(j, "status_message_raw"));
+        x.set_tag(Postback::get_untyped(j, "tag"));
+        x.set_tradingsymbol(Postback::get_optional<std::string>(j, "tradingsymbol"));
+        x.set_transaction_type(Postback::get_optional<std::string>(j, "transaction_type"));
+        x.set_trigger_price(Postback::get_optional<int64_t>(j, "trigger_price"));
+        x.set_unfilled_quantity(Postback::get_optional<int64_t>(j, "unfilled_quantity"));
+        x.set_user_id(Postback::get_optional<std::string>(j, "user_id"));
+        x.set_validity(Postback::get_optional<std::string>(j, "validity"));
+        x.set_variety(Postback::get_optional<std::string>(j, "variety"));
     }
 
-    inline void to_json(json & j, const quicktype::AppId & x) {
-        j = json::object();
-        j["type"] = x.get_type();
-    }
-
-    inline void from_json(const json & j, quicktype::Timestamp& x) {
-        x.set_format(j.at("format").get<std::string>());
-        x.set_type(j.at("type").get<quicktype::Type>());
-    }
-
-    inline void to_json(json & j, const quicktype::Timestamp & x) {
-        j = json::object();
-        j["format"] = x.get_format();
-        j["type"] = x.get_type();
-    }
-
-    inline void from_json(const json & j, quicktype::MetaClass& x) {
-        x.set_ref(j.at("$ref").get<std::string>());
-    }
-
-    inline void to_json(json & j, const quicktype::MetaClass & x) {
-        j = json::object();
-        j["$ref"] = x.get_ref();
-    }
-
-    inline void from_json(const json & j, quicktype::Properties& x) {
-        x.set_app_id(j.at("app_id").get<quicktype::AppId>());
-        x.set_average_price(j.at("average_price").get<quicktype::AppId>());
-        x.set_cancelled_quantity(j.at("cancelled_quantity").get<quicktype::AppId>());
-        x.set_checksum(j.at("checksum").get<quicktype::AppId>());
-        x.set_disclosed_quantity(j.at("disclosed_quantity").get<quicktype::AppId>());
-        x.set_exchange(j.at("exchange").get<quicktype::AppId>());
-        x.set_exchange_order_id(j.at("exchange_order_id").get<quicktype::AppId>());
-        x.set_exchange_timestamp(j.at("exchange_timestamp").get<quicktype::Timestamp>());
-        x.set_exchange_update_timestamp(j.at("exchange_update_timestamp").get<quicktype::Timestamp>());
-        x.set_filled_quantity(j.at("filled_quantity").get<quicktype::AppId>());
-        x.set_guid(j.at("guid").get<quicktype::AppId>());
-        x.set_instrument_token(j.at("instrument_token").get<quicktype::AppId>());
-        x.set_market_protection(j.at("market_protection").get<quicktype::AppId>());
-        x.set_meta(j.at("meta").get<quicktype::MetaClass>());
-        x.set_order_id(j.at("order_id").get<quicktype::AppId>());
-        x.set_order_timestamp(j.at("order_timestamp").get<quicktype::Timestamp>());
-        x.set_order_type(j.at("order_type").get<quicktype::AppId>());
-        x.set_parent_order_id(j.at("parent_order_id").get<quicktype::AppId>());
-        x.set_pending_quantity(j.at("pending_quantity").get<quicktype::AppId>());
-        x.set_placed_by(j.at("placed_by").get<quicktype::AppId>());
-        x.set_price(j.at("price").get<quicktype::AppId>());
-        x.set_product(j.at("product").get<quicktype::AppId>());
-        x.set_quantity(j.at("quantity").get<quicktype::AppId>());
-        x.set_status(j.at("status").get<quicktype::AppId>());
-        x.set_status_message(j.at("status_message").get<quicktype::AppId>());
-        x.set_status_message_raw(j.at("status_message_raw").get<quicktype::AppId>());
-        x.set_tag(j.at("tag").get<quicktype::AppId>());
-        x.set_tradingsymbol(j.at("tradingsymbol").get<quicktype::AppId>());
-        x.set_transaction_type(j.at("transaction_type").get<quicktype::AppId>());
-        x.set_trigger_price(j.at("trigger_price").get<quicktype::AppId>());
-        x.set_unfilled_quantity(j.at("unfilled_quantity").get<quicktype::AppId>());
-        x.set_user_id(j.at("user_id").get<quicktype::AppId>());
-        x.set_validity(j.at("validity").get<quicktype::AppId>());
-        x.set_variety(j.at("variety").get<quicktype::AppId>());
-    }
-
-    inline void to_json(json & j, const quicktype::Properties & x) {
+    inline void to_json(json & j, const Postback::Postback & x) {
         j = json::object();
         j["app_id"] = x.get_app_id();
         j["average_price"] = x.get_average_price();
@@ -502,62 +305,5 @@ namespace nlohmann {
         j["user_id"] = x.get_user_id();
         j["validity"] = x.get_validity();
         j["variety"] = x.get_variety();
-    }
-
-    inline void from_json(const json & j, quicktype::PostbackClass& x) {
-        x.set_additional_properties(j.at("additionalProperties").get<bool>());
-        x.set_properties(j.at("properties").get<quicktype::Properties>());
-        x.set_required(j.at("required").get<std::vector<std::string>>());
-        x.set_title(j.at("title").get<std::string>());
-        x.set_type(j.at("type").get<std::string>());
-    }
-
-    inline void to_json(json & j, const quicktype::PostbackClass & x) {
-        j = json::object();
-        j["additionalProperties"] = x.get_additional_properties();
-        j["properties"] = x.get_properties();
-        j["required"] = x.get_required();
-        j["title"] = x.get_title();
-        j["type"] = x.get_type();
-    }
-
-    inline void from_json(const json & j, quicktype::Definitions& x) {
-        x.set_meta(j.at("Meta").get<quicktype::Meta>());
-        x.set_postback(j.at("Postback").get<quicktype::PostbackClass>());
-    }
-
-    inline void to_json(json & j, const quicktype::Definitions & x) {
-        j = json::object();
-        j["Meta"] = x.get_meta();
-        j["Postback"] = x.get_postback();
-    }
-
-    inline void from_json(const json & j, quicktype::Postback& x) {
-        x.set_ref(j.at("$ref").get<std::string>());
-        x.set_schema(j.at("$schema").get<std::string>());
-        x.set_definitions(j.at("definitions").get<quicktype::Definitions>());
-    }
-
-    inline void to_json(json & j, const quicktype::Postback & x) {
-        j = json::object();
-        j["$ref"] = x.get_ref();
-        j["$schema"] = x.get_schema();
-        j["definitions"] = x.get_definitions();
-    }
-
-    inline void from_json(const json & j, quicktype::Type & x) {
-        if (j == "integer") x = quicktype::Type::INTEGER;
-        else if (j == "string") x = quicktype::Type::STRING;
-        else if (j == "null") x = quicktype::Type::TYPE_NULL;
-        else throw "Input JSON does not conform to schema";
-    }
-
-    inline void to_json(json & j, const quicktype::Type & x) {
-        switch (x) {
-            case quicktype::Type::INTEGER: j = "integer"; break;
-            case quicktype::Type::STRING: j = "string"; break;
-            case quicktype::Type::TYPE_NULL: j = "null"; break;
-            default: throw "This should not happen";
-        }
     }
 }

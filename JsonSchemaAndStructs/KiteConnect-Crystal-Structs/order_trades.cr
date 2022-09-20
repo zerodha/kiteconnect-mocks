@@ -28,123 +28,37 @@ require "json"
 class OrderTrades
   include JSON::Serializable
 
-  @[JSON::Field(key: "$ref")]
-  property ref : String
+  property data : Array(Datum)?
 
-  @[JSON::Field(key: "$schema")]
-  property schema : String
-
-  property definitions : Definitions
-end
-
-class Definitions
-  include JSON::Serializable
-
-  @[JSON::Field(key: "Datum")]
-  property datum : Datum
-
-  @[JSON::Field(key: "OrderTrades")]
-  property order_trades : OrderTradesClass
+  property status : String?
 end
 
 class Datum
   include JSON::Serializable
 
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
+  property average_price : Int32?
 
-  property properties : DatumProperties
+  property exchange : String?
 
-  property required : Array(String)
+  property exchange_order_id : String?
 
-  property title : String
+  property exchange_timestamp : String?
 
-  @[JSON::Field(key: "type")]
-  property datum_type : String
-end
+  property fill_timestamp : String?
 
-class DatumProperties
-  include JSON::Serializable
+  property instrument_token : Int32?
 
-  property average_price : AveragePrice
+  property order_id : String?
 
-  property exchange : AveragePrice
+  property order_timestamp : String?
 
-  property exchange_order_id : AveragePrice
+  property product : String?
 
-  property exchange_timestamp : ExchangeTimestamp
+  property quantity : Int32?
 
-  property fill_timestamp : ExchangeTimestamp
+  property trade_id : String?
 
-  property instrument_token : AveragePrice
+  property tradingsymbol : String?
 
-  property order_id : AveragePrice
-
-  property order_timestamp : ExchangeTimestamp
-
-  property product : AveragePrice
-
-  property quantity : AveragePrice
-
-  property trade_id : ExchangeTimestamp
-
-  property tradingsymbol : AveragePrice
-
-  property transaction_type : AveragePrice
-end
-
-class AveragePrice
-  include JSON::Serializable
-
-  @[JSON::Field(key: "type")]
-  property average_price_type : String
-end
-
-class ExchangeTimestamp
-  include JSON::Serializable
-
-  property format : String
-
-  @[JSON::Field(key: "type")]
-  property exchange_timestamp_type : String
-end
-
-class OrderTradesClass
-  include JSON::Serializable
-
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property properties : OrderTradesProperties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property order_trades_class_type : String
-end
-
-class OrderTradesProperties
-  include JSON::Serializable
-
-  property data : Data
-
-  property status : AveragePrice
-end
-
-class Data
-  include JSON::Serializable
-
-  property items : Items
-
-  @[JSON::Field(key: "type")]
-  property data_type : String
-end
-
-class Items
-  include JSON::Serializable
-
-  @[JSON::Field(key: "$ref")]
-  property ref : String
+  property transaction_type : String?
 end

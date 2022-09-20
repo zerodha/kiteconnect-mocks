@@ -28,81 +28,13 @@ require "json"
 class OrderModify
   include JSON::Serializable
 
-  @[JSON::Field(key: "$ref")]
-  property ref : String
+  property data : Data?
 
-  @[JSON::Field(key: "$schema")]
-  property schema : String
-
-  property definitions : Definitions
-end
-
-class Definitions
-  include JSON::Serializable
-
-  @[JSON::Field(key: "Data")]
-  property data : Data
-
-  @[JSON::Field(key: "OrderModify")]
-  property order_modify : OrderModifyClass
+  property status : String?
 end
 
 class Data
   include JSON::Serializable
 
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property properties : DataProperties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property data_type : String
-end
-
-class DataProperties
-  include JSON::Serializable
-
-  property order_id : OrderId
-end
-
-class OrderId
-  include JSON::Serializable
-
-  @[JSON::Field(key: "type")]
-  property order_id_type : String
-end
-
-class OrderModifyClass
-  include JSON::Serializable
-
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property properties : OrderModifyProperties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property order_modify_class_type : String
-end
-
-class OrderModifyProperties
-  include JSON::Serializable
-
-  property data : DataClass
-
-  property status : OrderId
-end
-
-class DataClass
-  include JSON::Serializable
-
-  @[JSON::Field(key: "$ref")]
-  property ref : String
+  property order_id : String?
 end

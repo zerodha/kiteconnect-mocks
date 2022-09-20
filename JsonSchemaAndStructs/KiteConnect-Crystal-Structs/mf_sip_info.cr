@@ -28,156 +28,60 @@ require "json"
 class MfSipInfo
   include JSON::Serializable
 
-  @[JSON::Field(key: "$ref")]
-  property ref : String
+  property data : Data?
 
-  @[JSON::Field(key: "$schema")]
-  property schema : String
-
-  property definitions : Definitions
-end
-
-class Definitions
-  include JSON::Serializable
-
-  @[JSON::Field(key: "Data")]
-  property data : Data
-
-  @[JSON::Field(key: "MFSIPInfo")]
-  property mfsip_info : MfsipInfoClass
-
-  @[JSON::Field(key: "StepUp")]
-  property step_up : StepUpClass
+  property status : String?
 end
 
 class Data
   include JSON::Serializable
 
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
+  property completed_instalments : Int32?
 
-  property properties : DataProperties
+  property created : String?
 
-  property required : Array(String)
+  property dividend_type : String?
 
-  property title : String
+  property frequency : String?
 
-  @[JSON::Field(key: "type")]
-  property data_type : String
-end
+  property fund : String?
 
-class DataProperties
-  include JSON::Serializable
+  property fund_source : String?
 
-  property completed_instalments : CompletedInstalments
+  property instalment_amount : Int32?
 
-  property created : Created
+  property instalment_day : Int32?
 
-  property dividend_type : CompletedInstalments
+  property instalments : Int32?
 
-  property frequency : CompletedInstalments
+  property last_instalment : String?
 
-  property fund : CompletedInstalments
+  property next_instalment : String?
 
-  property fund_source : CompletedInstalments
+  property pending_instalments : Int32?
 
-  property instalment_amount : CompletedInstalments
+  property sip_id : String?
 
-  property instalment_day : CompletedInstalments
+  property sip_reg_num : Nil
 
-  property instalments : CompletedInstalments
+  property sip_type : String?
 
-  property last_instalment : Created
+  property status : String?
 
-  property next_instalment : Created
+  property step_up : StepUp?
 
-  property pending_instalments : CompletedInstalments
+  property tag : String?
 
-  property sip_id : CompletedInstalments
+  property tradingsymbol : String?
 
-  property sip_reg_num : CompletedInstalments
+  property transaction_type : String?
 
-  property sip_type : CompletedInstalments
-
-  property status : CompletedInstalments
-
-  property step_up : StepUp
-
-  property tag : CompletedInstalments
-
-  property tradingsymbol : CompletedInstalments
-
-  property transaction_type : CompletedInstalments
-
-  property trigger_price : CompletedInstalments
-end
-
-class CompletedInstalments
-  include JSON::Serializable
-
-  @[JSON::Field(key: "type")]
-  property completed_instalments_type : String
-end
-
-class Created
-  include JSON::Serializable
-
-  property format : String
-
-  @[JSON::Field(key: "type")]
-  property created_type : String
+  property trigger_price : Int32?
 end
 
 class StepUp
   include JSON::Serializable
 
-  @[JSON::Field(key: "$ref")]
-  property ref : String
-end
-
-class MfsipInfoClass
-  include JSON::Serializable
-
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property properties : MfsipInfoProperties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property mfsip_info_class_type : String
-end
-
-class MfsipInfoProperties
-  include JSON::Serializable
-
-  property data : StepUp
-
-  property status : CompletedInstalments
-end
-
-class StepUpClass
-  include JSON::Serializable
-
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property properties : StepUpProperties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property step_up_class_type : String
-end
-
-class StepUpProperties
-  include JSON::Serializable
-
   @[JSON::Field(key: "15-02")]
-  property the_1502 : CompletedInstalments
+  property the_1502 : Int32?
 end

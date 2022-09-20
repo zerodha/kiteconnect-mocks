@@ -28,144 +28,76 @@ require "json"
 class Postback
   include JSON::Serializable
 
-  @[JSON::Field(key: "$ref")]
-  property ref : String
+  property app_id : Int32?
 
-  @[JSON::Field(key: "$schema")]
-  property schema : String
+  property average_price : Int32?
 
-  property definitions : Definitions
-end
+  property cancelled_quantity : Int32?
 
-class Definitions
-  include JSON::Serializable
+  property checksum : String?
 
-  @[JSON::Field(key: "Meta")]
-  property meta : Meta
+  property disclosed_quantity : Int32?
 
-  @[JSON::Field(key: "Postback")]
-  property postback : PostbackClass
+  property exchange : String?
+
+  property exchange_order_id : String?
+
+  property exchange_timestamp : String?
+
+  property exchange_update_timestamp : String?
+
+  property filled_quantity : Int32?
+
+  property guid : String?
+
+  property instrument_token : Int32?
+
+  property market_protection : Int32?
+
+  property meta : Meta?
+
+  property order_id : String?
+
+  property order_timestamp : String?
+
+  property order_type : String?
+
+  property parent_order_id : Nil
+
+  property pending_quantity : Int32?
+
+  property placed_by : String?
+
+  property price : Int32?
+
+  property product : String?
+
+  property quantity : Int32?
+
+  property status : String?
+
+  property status_message : Nil
+
+  property status_message_raw : Nil
+
+  property tag : Nil
+
+  property tradingsymbol : String?
+
+  property transaction_type : String?
+
+  property trigger_price : Int32?
+
+  property unfilled_quantity : Int32?
+
+  property user_id : String?
+
+  property validity : String?
+
+  property variety : String?
 end
 
 class Meta
   include JSON::Serializable
 
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property meta_type : String
-end
-
-class PostbackClass
-  include JSON::Serializable
-
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property properties : Properties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property postback_class_type : String
-end
-
-class Properties
-  include JSON::Serializable
-
-  property app_id : AppId
-
-  property average_price : AppId
-
-  property cancelled_quantity : AppId
-
-  property checksum : AppId
-
-  property disclosed_quantity : AppId
-
-  property exchange : AppId
-
-  property exchange_order_id : AppId
-
-  property exchange_timestamp : Timestamp
-
-  property exchange_update_timestamp : Timestamp
-
-  property filled_quantity : AppId
-
-  property guid : AppId
-
-  property instrument_token : AppId
-
-  property market_protection : AppId
-
-  property meta : MetaClass
-
-  property order_id : AppId
-
-  property order_timestamp : Timestamp
-
-  property order_type : AppId
-
-  property parent_order_id : AppId
-
-  property pending_quantity : AppId
-
-  property placed_by : AppId
-
-  property price : AppId
-
-  property product : AppId
-
-  property quantity : AppId
-
-  property status : AppId
-
-  property status_message : AppId
-
-  property status_message_raw : AppId
-
-  property tag : AppId
-
-  property tradingsymbol : AppId
-
-  property transaction_type : AppId
-
-  property trigger_price : AppId
-
-  property unfilled_quantity : AppId
-
-  property user_id : AppId
-
-  property validity : AppId
-
-  property variety : AppId
-end
-
-class AppId
-  include JSON::Serializable
-
-  @[JSON::Field(key: "type")]
-  property app_id_type : String
-end
-
-class Timestamp
-  include JSON::Serializable
-
-  property format : String
-
-  @[JSON::Field(key: "type")]
-  property timestamp_type : String
-end
-
-class MetaClass
-  include JSON::Serializable
-
-  @[JSON::Field(key: "$ref")]
-  property ref : String
 end

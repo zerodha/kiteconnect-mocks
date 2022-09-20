@@ -28,244 +28,75 @@ require "json"
 class Quote
   include JSON::Serializable
 
-  @[JSON::Field(key: "$ref")]
-  property ref : String
+  property data : Hash(String, Datum)?
 
-  @[JSON::Field(key: "$schema")]
-  property schema : String
-
-  property definitions : Definitions
+  property status : String?
 end
 
-class Definitions
+class Datum
   include JSON::Serializable
 
-  @[JSON::Field(key: "Buy")]
-  property buy : Buy
+  property average_price : Float64?
 
-  @[JSON::Field(key: "Data")]
-  property data : Data
+  property buy_quantity : Int32?
 
-  @[JSON::Field(key: "Depth")]
-  property depth : Depth
+  property depth : Depth?
 
-  @[JSON::Field(key: "NseInfy")]
-  property nse_infy : NseInfyClass
+  property instrument_token : Int32?
 
-  @[JSON::Field(key: "Ohlc")]
-  property ohlc : Ohlc
+  property last_price : Float64?
 
-  @[JSON::Field(key: "Quote")]
-  property quote : QuoteClass
-end
+  property last_quantity : Int32?
 
-class Buy
-  include JSON::Serializable
+  property last_trade_time : String?
 
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
+  property lower_circuit_limit : Float64?
 
-  property properties : BuyProperties
+  property net_change : Int32?
 
-  property required : Array(String)
+  property ohlc : Ohlc?
 
-  property title : String
+  property oi : Int32?
 
-  @[JSON::Field(key: "type")]
-  property buy_type : String
-end
+  property oi_day_high : Int32?
 
-class BuyProperties
-  include JSON::Serializable
+  property oi_day_low : Int32?
 
-  property orders : Orders
+  property sell_quantity : Int32?
 
-  property price : Orders
+  property timestamp : String?
 
-  property quantity : Orders
-end
+  property upper_circuit_limit : Float64?
 
-class Orders
-  include JSON::Serializable
-
-  @[JSON::Field(key: "type")]
-  property orders_type : String
-end
-
-class Data
-  include JSON::Serializable
-
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property properties : DataProperties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property data_type : String
-end
-
-class DataProperties
-  include JSON::Serializable
-
-  @[JSON::Field(key: "NSE:INFY")]
-  property nse_infy : NseInfy
-end
-
-class NseInfy
-  include JSON::Serializable
-
-  @[JSON::Field(key: "$ref")]
-  property ref : String
+  property volume : Int32?
 end
 
 class Depth
   include JSON::Serializable
 
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
+  property buy : Array(Buy)?
 
-  property properties : DepthProperties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property depth_type : String
+  property sell : Array(Buy)?
 end
 
-class DepthProperties
+class Buy
   include JSON::Serializable
 
-  property buy : BuyClass
+  property orders : Int32?
 
-  property sell : BuyClass
-end
+  property price : Float64?
 
-class BuyClass
-  include JSON::Serializable
-
-  property items : NseInfy
-
-  @[JSON::Field(key: "type")]
-  property buy_class_type : String
-end
-
-class NseInfyClass
-  include JSON::Serializable
-
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property properties : NseInfyProperties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property nse_infy_class_type : String
-end
-
-class NseInfyProperties
-  include JSON::Serializable
-
-  property average_price : Orders
-
-  property buy_quantity : Orders
-
-  property depth : NseInfy
-
-  property instrument_token : Orders
-
-  property last_price : Orders
-
-  property last_quantity : Orders
-
-  property last_trade_time : LastTradeTime
-
-  property lower_circuit_limit : Orders
-
-  property net_change : Orders
-
-  property ohlc : NseInfy
-
-  property oi : Orders
-
-  property oi_day_high : Orders
-
-  property oi_day_low : Orders
-
-  property sell_quantity : Orders
-
-  property timestamp : LastTradeTime
-
-  property upper_circuit_limit : Orders
-
-  property volume : Orders
-end
-
-class LastTradeTime
-  include JSON::Serializable
-
-  property format : String
-
-  @[JSON::Field(key: "type")]
-  property last_trade_time_type : String
+  property quantity : Int32?
 end
 
 class Ohlc
   include JSON::Serializable
 
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
+  property close : Float64?
 
-  property properties : OhlcProperties
+  property high : Float64?
 
-  property required : Array(String)
+  property low : Float64?
 
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property ohlc_type : String
-end
-
-class OhlcProperties
-  include JSON::Serializable
-
-  property close : Orders
-
-  property high : Orders
-
-  property low : Orders
-
-  property open : Orders
-end
-
-class QuoteClass
-  include JSON::Serializable
-
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property properties : QuoteProperties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property quote_class_type : String
-end
-
-class QuoteProperties
-  include JSON::Serializable
-
-  property data : NseInfy
-
-  property status : Orders
+  property open : Int32?
 end

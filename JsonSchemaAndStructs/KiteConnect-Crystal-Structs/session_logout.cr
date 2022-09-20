@@ -28,49 +28,7 @@ require "json"
 class SessionLogout
   include JSON::Serializable
 
-  @[JSON::Field(key: "$ref")]
-  property ref : String
+  property data : Bool?
 
-  @[JSON::Field(key: "$schema")]
-  property schema : String
-
-  property definitions : Definitions
-end
-
-class Definitions
-  include JSON::Serializable
-
-  @[JSON::Field(key: "SessionLogout")]
-  property session_logout : SessionLogoutClass
-end
-
-class SessionLogoutClass
-  include JSON::Serializable
-
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property properties : Properties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property session_logout_class_type : String
-end
-
-class Properties
-  include JSON::Serializable
-
-  property data : Data
-
-  property status : Data
-end
-
-class Data
-  include JSON::Serializable
-
-  @[JSON::Field(key: "type")]
-  property data_type : String
+  property status : String?
 end

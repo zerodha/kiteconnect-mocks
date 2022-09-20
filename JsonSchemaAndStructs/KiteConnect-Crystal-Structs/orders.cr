@@ -28,244 +28,97 @@ require "json"
 class Orders
   include JSON::Serializable
 
-  @[JSON::Field(key: "$ref")]
-  property ref : String
+  property data : Array(Datum)?
 
-  @[JSON::Field(key: "$schema")]
-  property schema : String
-
-  property definitions : Definitions
-end
-
-class Definitions
-  include JSON::Serializable
-
-  @[JSON::Field(key: "Datum")]
-  property datum : Datum
-
-  @[JSON::Field(key: "Iceberg")]
-  property iceberg : Iceberg
-
-  @[JSON::Field(key: "Meta")]
-  property meta : MetaClass
-
-  @[JSON::Field(key: "Orders")]
-  property orders : OrdersClass
+  property status : String?
 end
 
 class Datum
   include JSON::Serializable
 
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
+  property average_price : Int32?
 
-  property properties : DatumProperties
+  property cancelled_quantity : Int32?
 
-  property required : Array(String)
+  property disclosed_quantity : Int32?
 
-  property title : String
+  property exchange : String?
 
-  @[JSON::Field(key: "type")]
-  property datum_type : String
-end
+  property exchange_order_id : String?
 
-class DatumProperties
-  include JSON::Serializable
+  property exchange_timestamp : String?
 
-  property average_price : AveragePrice
+  property exchange_update_timestamp : String?
 
-  property cancelled_quantity : AveragePrice
+  property filled_quantity : Int32?
 
-  property disclosed_quantity : AveragePrice
+  property guid : String?
 
-  property exchange : AveragePrice
+  property instrument_token : Int32?
 
-  property exchange_order_id : ExchangeOrderId
+  property market_protection : Int32?
 
-  property exchange_timestamp : ExchangeETimestamp
+  property meta : Meta?
 
-  property exchange_update_timestamp : ExchangeETimestamp
+  property modified : Bool?
 
-  property filled_quantity : AveragePrice
+  property order_id : String?
 
-  property guid : AveragePrice
+  property order_timestamp : String?
 
-  property instrument_token : AveragePrice
+  property order_type : String?
 
-  property market_protection : AveragePrice
+  property parent_order_id : Nil
 
-  property meta : Meta
+  property pending_quantity : Int32?
 
-  property modified : AveragePrice
+  property placed_by : String?
 
-  property order_id : AveragePrice
+  property price : Int32?
 
-  property order_timestamp : OrderTimestamp
+  property product : String?
 
-  property order_type : AveragePrice
+  property quantity : Int32?
 
-  property parent_order_id : AveragePrice
+  property status : String?
 
-  property pending_quantity : AveragePrice
+  property status_message : String?
 
-  property placed_by : AveragePrice
+  property status_message_raw : String?
 
-  property price : AveragePrice
+  property tag : String?
 
-  property product : AveragePrice
+  property tags : Array(String)?
 
-  property quantity : AveragePrice
+  property tradingsymbol : String?
 
-  property status : AveragePrice
+  property transaction_type : String?
 
-  property status_message : ExchangeOrderId
+  property trigger_price : Int32?
 
-  property status_message_raw : ExchangeOrderId
+  property validity : String?
 
-  property tag : ExchangeOrderId
+  property validity_ttl : Int32?
 
-  property tags : Tags
-
-  property tradingsymbol : AveragePrice
-
-  property transaction_type : AveragePrice
-
-  property trigger_price : AveragePrice
-
-  property validity : AveragePrice
-
-  property validity_ttl : AveragePrice
-
-  property variety : AveragePrice
-end
-
-class AveragePrice
-  include JSON::Serializable
-
-  @[JSON::Field(key: "type")]
-  property average_price_type : String
-end
-
-class ExchangeOrderId
-  include JSON::Serializable
-
-  @[JSON::Field(key: "anyOf")]
-  property any_of : Array(AveragePrice)
-end
-
-class ExchangeETimestamp
-  include JSON::Serializable
-
-  @[JSON::Field(key: "anyOf")]
-  property any_of : Array(OrderTimestamp)
-end
-
-class OrderTimestamp
-  include JSON::Serializable
-
-  property format : String?
-
-  @[JSON::Field(key: "type")]
-  property order_timestamp_type : String
+  property variety : String?
 end
 
 class Meta
   include JSON::Serializable
 
-  @[JSON::Field(key: "$ref")]
-  property ref : String
-end
-
-class Tags
-  include JSON::Serializable
-
-  property items : AveragePrice
-
-  @[JSON::Field(key: "type")]
-  property tags_type : String
+  property iceberg : Iceberg?
 end
 
 class Iceberg
   include JSON::Serializable
 
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
+  property leg : Int32?
 
-  property properties : IcebergProperties
+  property leg_quantity : Int32?
 
-  property required : Array(String)
+  property legs : Int32?
 
-  property title : String
+  property remaining_quantity : Int32?
 
-  @[JSON::Field(key: "type")]
-  property iceberg_type : String
-end
-
-class IcebergProperties
-  include JSON::Serializable
-
-  property leg : AveragePrice
-
-  property leg_quantity : AveragePrice
-
-  property legs : AveragePrice
-
-  property remaining_quantity : AveragePrice
-
-  property total_quantity : AveragePrice
-end
-
-class MetaClass
-  include JSON::Serializable
-
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property properties : MetaProperties
-
-  property required : Array(JSON::Any?)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property meta_class_type : String
-end
-
-class MetaProperties
-  include JSON::Serializable
-
-  property iceberg : Meta
-end
-
-class OrdersClass
-  include JSON::Serializable
-
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property properties : OrdersProperties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property orders_class_type : String
-end
-
-class OrdersProperties
-  include JSON::Serializable
-
-  property data : Data
-
-  property status : AveragePrice
-end
-
-class Data
-  include JSON::Serializable
-
-  property items : Meta
-
-  @[JSON::Field(key: "type")]
-  property data_type : String
+  property total_quantity : Int32?
 end

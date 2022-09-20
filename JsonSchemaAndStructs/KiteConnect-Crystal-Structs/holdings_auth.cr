@@ -28,81 +28,13 @@ require "json"
 class HoldingsAuth
   include JSON::Serializable
 
-  @[JSON::Field(key: "$ref")]
-  property ref : String
+  property data : Data?
 
-  @[JSON::Field(key: "$schema")]
-  property schema : String
-
-  property definitions : Definitions
-end
-
-class Definitions
-  include JSON::Serializable
-
-  @[JSON::Field(key: "Data")]
-  property data : Data
-
-  @[JSON::Field(key: "HoldingsAuth")]
-  property holdings_auth : HoldingsAuthClass
+  property status : String?
 end
 
 class Data
   include JSON::Serializable
 
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property properties : DataProperties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property data_type : String
-end
-
-class DataProperties
-  include JSON::Serializable
-
-  property request_id : RequestId
-end
-
-class RequestId
-  include JSON::Serializable
-
-  @[JSON::Field(key: "type")]
-  property request_id_type : String
-end
-
-class HoldingsAuthClass
-  include JSON::Serializable
-
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property properties : HoldingsAuthProperties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property holdings_auth_class_type : String
-end
-
-class HoldingsAuthProperties
-  include JSON::Serializable
-
-  property data : DataClass
-
-  property status : RequestId
-end
-
-class DataClass
-  include JSON::Serializable
-
-  @[JSON::Field(key: "$ref")]
-  property ref : String
+  property request_id : String?
 end

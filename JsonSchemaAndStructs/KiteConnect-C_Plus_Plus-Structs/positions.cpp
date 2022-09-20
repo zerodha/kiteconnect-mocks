@@ -15,7 +15,23 @@
 #include <stdexcept>
 #include <regex>
 
-namespace quicktype {
+#ifndef NLOHMANN_OPT_HELPER
+#define NLOHMANN_OPT_HELPER
+namespace nlohmann {
+    template <typename T>
+    struct adl_serializer<std::shared_ptr<T>> {
+        static void to_json(json & j, const std::shared_ptr<T> & opt) {
+            if (!opt) j = nullptr; else j = *opt;
+        }
+
+        static std::shared_ptr<T> from_json(const json & j) {
+            if (j.is_null()) return std::unique_ptr<T>(); else return std::unique_ptr<T>(new T(j.get<T>()));
+        }
+    };
+}
+#endif
+
+namespace Positions {
     using nlohmann::json;
 
     inline json get_untyped(const json & j, const char * property) {
@@ -29,19 +45,18 @@ namespace quicktype {
         return get_untyped(j, property.data());
     }
 
-    class DataClass {
-        public:
-        DataClass() = default;
-        virtual ~DataClass() = default;
+    template <typename T>
+    inline std::shared_ptr<T> get_optional(const json & j, const char * property) {
+        if (j.find(property) != j.end()) {
+            return j.at(property).get<std::shared_ptr<T>>();
+        }
+        return std::shared_ptr<T>();
+    }
 
-        private:
-        std::string ref;
-
-        public:
-        const std::string & get_ref() const { return ref; }
-        std::string & get_mutable_ref() { return ref; }
-        void set_ref(const std::string & value) { this->ref = value; }
-    };
+    template <typename T>
+    inline std::shared_ptr<T> get_optional(const json & j, std::string property) {
+        return get_optional<T>(j, property.data());
+    }
 
     class Day {
         public:
@@ -49,36 +64,123 @@ namespace quicktype {
         virtual ~Day() = default;
 
         private:
-        DataClass items;
-        std::string type;
+        std::shared_ptr<double> average_price;
+        std::shared_ptr<int64_t> buy_m2_m;
+        std::shared_ptr<double> buy_price;
+        std::shared_ptr<int64_t> buy_quantity;
+        std::shared_ptr<int64_t> buy_value;
+        std::shared_ptr<int64_t> close_price;
+        std::shared_ptr<double> day_buy_price;
+        std::shared_ptr<int64_t> day_buy_quantity;
+        std::shared_ptr<int64_t> day_buy_value;
+        std::shared_ptr<int64_t> day_sell_price;
+        std::shared_ptr<int64_t> day_sell_quantity;
+        std::shared_ptr<int64_t> day_sell_value;
+        std::shared_ptr<std::string> exchange;
+        std::shared_ptr<int64_t> instrument_token;
+        std::shared_ptr<double> last_price;
+        std::shared_ptr<int64_t> m2_m;
+        std::shared_ptr<int64_t> multiplier;
+        std::shared_ptr<int64_t> overnight_quantity;
+        std::shared_ptr<int64_t> pnl;
+        std::shared_ptr<std::string> product;
+        std::shared_ptr<int64_t> quantity;
+        std::shared_ptr<int64_t> realised;
+        std::shared_ptr<int64_t> sell_m2_m;
+        std::shared_ptr<int64_t> sell_price;
+        std::shared_ptr<int64_t> sell_quantity;
+        std::shared_ptr<int64_t> sell_value;
+        std::shared_ptr<std::string> tradingsymbol;
+        std::shared_ptr<int64_t> unrealised;
+        std::shared_ptr<int64_t> value;
 
         public:
-        const DataClass & get_items() const { return items; }
-        DataClass & get_mutable_items() { return items; }
-        void set_items(const DataClass & value) { this->items = value; }
+        std::shared_ptr<double> get_average_price() const { return average_price; }
+        void set_average_price(std::shared_ptr<double> value) { this->average_price = value; }
 
-        const std::string & get_type() const { return type; }
-        std::string & get_mutable_type() { return type; }
-        void set_type(const std::string & value) { this->type = value; }
-    };
+        std::shared_ptr<int64_t> get_buy_m2_m() const { return buy_m2_m; }
+        void set_buy_m2_m(std::shared_ptr<int64_t> value) { this->buy_m2_m = value; }
 
-    class DataProperties {
-        public:
-        DataProperties() = default;
-        virtual ~DataProperties() = default;
+        std::shared_ptr<double> get_buy_price() const { return buy_price; }
+        void set_buy_price(std::shared_ptr<double> value) { this->buy_price = value; }
 
-        private:
-        Day day;
-        Day net;
+        std::shared_ptr<int64_t> get_buy_quantity() const { return buy_quantity; }
+        void set_buy_quantity(std::shared_ptr<int64_t> value) { this->buy_quantity = value; }
 
-        public:
-        const Day & get_day() const { return day; }
-        Day & get_mutable_day() { return day; }
-        void set_day(const Day & value) { this->day = value; }
+        std::shared_ptr<int64_t> get_buy_value() const { return buy_value; }
+        void set_buy_value(std::shared_ptr<int64_t> value) { this->buy_value = value; }
 
-        const Day & get_net() const { return net; }
-        Day & get_mutable_net() { return net; }
-        void set_net(const Day & value) { this->net = value; }
+        std::shared_ptr<int64_t> get_close_price() const { return close_price; }
+        void set_close_price(std::shared_ptr<int64_t> value) { this->close_price = value; }
+
+        std::shared_ptr<double> get_day_buy_price() const { return day_buy_price; }
+        void set_day_buy_price(std::shared_ptr<double> value) { this->day_buy_price = value; }
+
+        std::shared_ptr<int64_t> get_day_buy_quantity() const { return day_buy_quantity; }
+        void set_day_buy_quantity(std::shared_ptr<int64_t> value) { this->day_buy_quantity = value; }
+
+        std::shared_ptr<int64_t> get_day_buy_value() const { return day_buy_value; }
+        void set_day_buy_value(std::shared_ptr<int64_t> value) { this->day_buy_value = value; }
+
+        std::shared_ptr<int64_t> get_day_sell_price() const { return day_sell_price; }
+        void set_day_sell_price(std::shared_ptr<int64_t> value) { this->day_sell_price = value; }
+
+        std::shared_ptr<int64_t> get_day_sell_quantity() const { return day_sell_quantity; }
+        void set_day_sell_quantity(std::shared_ptr<int64_t> value) { this->day_sell_quantity = value; }
+
+        std::shared_ptr<int64_t> get_day_sell_value() const { return day_sell_value; }
+        void set_day_sell_value(std::shared_ptr<int64_t> value) { this->day_sell_value = value; }
+
+        std::shared_ptr<std::string> get_exchange() const { return exchange; }
+        void set_exchange(std::shared_ptr<std::string> value) { this->exchange = value; }
+
+        std::shared_ptr<int64_t> get_instrument_token() const { return instrument_token; }
+        void set_instrument_token(std::shared_ptr<int64_t> value) { this->instrument_token = value; }
+
+        std::shared_ptr<double> get_last_price() const { return last_price; }
+        void set_last_price(std::shared_ptr<double> value) { this->last_price = value; }
+
+        std::shared_ptr<int64_t> get_m2_m() const { return m2_m; }
+        void set_m2_m(std::shared_ptr<int64_t> value) { this->m2_m = value; }
+
+        std::shared_ptr<int64_t> get_multiplier() const { return multiplier; }
+        void set_multiplier(std::shared_ptr<int64_t> value) { this->multiplier = value; }
+
+        std::shared_ptr<int64_t> get_overnight_quantity() const { return overnight_quantity; }
+        void set_overnight_quantity(std::shared_ptr<int64_t> value) { this->overnight_quantity = value; }
+
+        std::shared_ptr<int64_t> get_pnl() const { return pnl; }
+        void set_pnl(std::shared_ptr<int64_t> value) { this->pnl = value; }
+
+        std::shared_ptr<std::string> get_product() const { return product; }
+        void set_product(std::shared_ptr<std::string> value) { this->product = value; }
+
+        std::shared_ptr<int64_t> get_quantity() const { return quantity; }
+        void set_quantity(std::shared_ptr<int64_t> value) { this->quantity = value; }
+
+        std::shared_ptr<int64_t> get_realised() const { return realised; }
+        void set_realised(std::shared_ptr<int64_t> value) { this->realised = value; }
+
+        std::shared_ptr<int64_t> get_sell_m2_m() const { return sell_m2_m; }
+        void set_sell_m2_m(std::shared_ptr<int64_t> value) { this->sell_m2_m = value; }
+
+        std::shared_ptr<int64_t> get_sell_price() const { return sell_price; }
+        void set_sell_price(std::shared_ptr<int64_t> value) { this->sell_price = value; }
+
+        std::shared_ptr<int64_t> get_sell_quantity() const { return sell_quantity; }
+        void set_sell_quantity(std::shared_ptr<int64_t> value) { this->sell_quantity = value; }
+
+        std::shared_ptr<int64_t> get_sell_value() const { return sell_value; }
+        void set_sell_value(std::shared_ptr<int64_t> value) { this->sell_value = value; }
+
+        std::shared_ptr<std::string> get_tradingsymbol() const { return tradingsymbol; }
+        void set_tradingsymbol(std::shared_ptr<std::string> value) { this->tradingsymbol = value; }
+
+        std::shared_ptr<int64_t> get_unrealised() const { return unrealised; }
+        void set_unrealised(std::shared_ptr<int64_t> value) { this->unrealised = value; }
+
+        std::shared_ptr<int64_t> get_value() const { return value; }
+        void set_value(std::shared_ptr<int64_t> value) { this->value = value; }
     };
 
     class Data {
@@ -87,159 +189,15 @@ namespace quicktype {
         virtual ~Data() = default;
 
         private:
-        bool additional_properties;
-        DataProperties properties;
-        std::vector<std::string> required;
-        std::string title;
-        std::string type;
+        std::shared_ptr<std::vector<Day>> day;
+        std::shared_ptr<std::vector<Day>> net;
 
         public:
-        const bool & get_additional_properties() const { return additional_properties; }
-        bool & get_mutable_additional_properties() { return additional_properties; }
-        void set_additional_properties(const bool & value) { this->additional_properties = value; }
+        std::shared_ptr<std::vector<Day>> get_day() const { return day; }
+        void set_day(std::shared_ptr<std::vector<Day>> value) { this->day = value; }
 
-        const DataProperties & get_properties() const { return properties; }
-        DataProperties & get_mutable_properties() { return properties; }
-        void set_properties(const DataProperties & value) { this->properties = value; }
-
-        const std::vector<std::string> & get_required() const { return required; }
-        std::vector<std::string> & get_mutable_required() { return required; }
-        void set_required(const std::vector<std::string> & value) { this->required = value; }
-
-        const std::string & get_title() const { return title; }
-        std::string & get_mutable_title() { return title; }
-        void set_title(const std::string & value) { this->title = value; }
-
-        const std::string & get_type() const { return type; }
-        std::string & get_mutable_type() { return type; }
-        void set_type(const std::string & value) { this->type = value; }
-    };
-
-    enum class Type : int { INTEGER, NUMBER, STRING };
-
-    class Property {
-        public:
-        Property() = default;
-        virtual ~Property() = default;
-
-        private:
-        Type type;
-
-        public:
-        const Type & get_type() const { return type; }
-        Type & get_mutable_type() { return type; }
-        void set_type(const Type & value) { this->type = value; }
-    };
-
-    class DayClass {
-        public:
-        DayClass() = default;
-        virtual ~DayClass() = default;
-
-        private:
-        bool additional_properties;
-        std::map<std::string, Property> properties;
-        std::vector<std::string> required;
-        std::string title;
-        std::string type;
-
-        public:
-        const bool & get_additional_properties() const { return additional_properties; }
-        bool & get_mutable_additional_properties() { return additional_properties; }
-        void set_additional_properties(const bool & value) { this->additional_properties = value; }
-
-        const std::map<std::string, Property> & get_properties() const { return properties; }
-        std::map<std::string, Property> & get_mutable_properties() { return properties; }
-        void set_properties(const std::map<std::string, Property> & value) { this->properties = value; }
-
-        const std::vector<std::string> & get_required() const { return required; }
-        std::vector<std::string> & get_mutable_required() { return required; }
-        void set_required(const std::vector<std::string> & value) { this->required = value; }
-
-        const std::string & get_title() const { return title; }
-        std::string & get_mutable_title() { return title; }
-        void set_title(const std::string & value) { this->title = value; }
-
-        const std::string & get_type() const { return type; }
-        std::string & get_mutable_type() { return type; }
-        void set_type(const std::string & value) { this->type = value; }
-    };
-
-    class PositionsProperties {
-        public:
-        PositionsProperties() = default;
-        virtual ~PositionsProperties() = default;
-
-        private:
-        DataClass data;
-        Property status;
-
-        public:
-        const DataClass & get_data() const { return data; }
-        DataClass & get_mutable_data() { return data; }
-        void set_data(const DataClass & value) { this->data = value; }
-
-        const Property & get_status() const { return status; }
-        Property & get_mutable_status() { return status; }
-        void set_status(const Property & value) { this->status = value; }
-    };
-
-    class PositionsClass {
-        public:
-        PositionsClass() = default;
-        virtual ~PositionsClass() = default;
-
-        private:
-        bool additional_properties;
-        PositionsProperties properties;
-        std::vector<std::string> required;
-        std::string title;
-        std::string type;
-
-        public:
-        const bool & get_additional_properties() const { return additional_properties; }
-        bool & get_mutable_additional_properties() { return additional_properties; }
-        void set_additional_properties(const bool & value) { this->additional_properties = value; }
-
-        const PositionsProperties & get_properties() const { return properties; }
-        PositionsProperties & get_mutable_properties() { return properties; }
-        void set_properties(const PositionsProperties & value) { this->properties = value; }
-
-        const std::vector<std::string> & get_required() const { return required; }
-        std::vector<std::string> & get_mutable_required() { return required; }
-        void set_required(const std::vector<std::string> & value) { this->required = value; }
-
-        const std::string & get_title() const { return title; }
-        std::string & get_mutable_title() { return title; }
-        void set_title(const std::string & value) { this->title = value; }
-
-        const std::string & get_type() const { return type; }
-        std::string & get_mutable_type() { return type; }
-        void set_type(const std::string & value) { this->type = value; }
-    };
-
-    class Definitions {
-        public:
-        Definitions() = default;
-        virtual ~Definitions() = default;
-
-        private:
-        Data data;
-        DayClass day;
-        PositionsClass positions;
-
-        public:
-        const Data & get_data() const { return data; }
-        Data & get_mutable_data() { return data; }
-        void set_data(const Data & value) { this->data = value; }
-
-        const DayClass & get_day() const { return day; }
-        DayClass & get_mutable_day() { return day; }
-        void set_day(const DayClass & value) { this->day = value; }
-
-        const PositionsClass & get_positions() const { return positions; }
-        PositionsClass & get_mutable_positions() { return positions; }
-        void set_positions(const PositionsClass & value) { this->positions = value; }
+        std::shared_ptr<std::vector<Day>> get_net() const { return net; }
+        void set_net(std::shared_ptr<std::vector<Day>> value) { this->net = value; }
     };
 
     class Positions {
@@ -248,200 +206,112 @@ namespace quicktype {
         virtual ~Positions() = default;
 
         private:
-        std::string ref;
-        std::string schema;
-        Definitions definitions;
+        std::shared_ptr<Data> data;
+        std::shared_ptr<std::string> status;
 
         public:
-        const std::string & get_ref() const { return ref; }
-        std::string & get_mutable_ref() { return ref; }
-        void set_ref(const std::string & value) { this->ref = value; }
+        std::shared_ptr<Data> get_data() const { return data; }
+        void set_data(std::shared_ptr<Data> value) { this->data = value; }
 
-        const std::string & get_schema() const { return schema; }
-        std::string & get_mutable_schema() { return schema; }
-        void set_schema(const std::string & value) { this->schema = value; }
-
-        const Definitions & get_definitions() const { return definitions; }
-        Definitions & get_mutable_definitions() { return definitions; }
-        void set_definitions(const Definitions & value) { this->definitions = value; }
+        std::shared_ptr<std::string> get_status() const { return status; }
+        void set_status(std::shared_ptr<std::string> value) { this->status = value; }
     };
 }
 
 namespace nlohmann {
-    void from_json(const json & j, quicktype::DataClass & x);
-    void to_json(json & j, const quicktype::DataClass & x);
+    void from_json(const json & j, Positions::Day & x);
+    void to_json(json & j, const Positions::Day & x);
 
-    void from_json(const json & j, quicktype::Day & x);
-    void to_json(json & j, const quicktype::Day & x);
+    void from_json(const json & j, Positions::Data & x);
+    void to_json(json & j, const Positions::Data & x);
 
-    void from_json(const json & j, quicktype::DataProperties & x);
-    void to_json(json & j, const quicktype::DataProperties & x);
+    void from_json(const json & j, Positions::Positions & x);
+    void to_json(json & j, const Positions::Positions & x);
 
-    void from_json(const json & j, quicktype::Data & x);
-    void to_json(json & j, const quicktype::Data & x);
-
-    void from_json(const json & j, quicktype::Property & x);
-    void to_json(json & j, const quicktype::Property & x);
-
-    void from_json(const json & j, quicktype::DayClass & x);
-    void to_json(json & j, const quicktype::DayClass & x);
-
-    void from_json(const json & j, quicktype::PositionsProperties & x);
-    void to_json(json & j, const quicktype::PositionsProperties & x);
-
-    void from_json(const json & j, quicktype::PositionsClass & x);
-    void to_json(json & j, const quicktype::PositionsClass & x);
-
-    void from_json(const json & j, quicktype::Definitions & x);
-    void to_json(json & j, const quicktype::Definitions & x);
-
-    void from_json(const json & j, quicktype::Positions & x);
-    void to_json(json & j, const quicktype::Positions & x);
-
-    void from_json(const json & j, quicktype::Type & x);
-    void to_json(json & j, const quicktype::Type & x);
-
-    inline void from_json(const json & j, quicktype::DataClass& x) {
-        x.set_ref(j.at("$ref").get<std::string>());
+    inline void from_json(const json & j, Positions::Day& x) {
+        x.set_average_price(Positions::get_optional<double>(j, "average_price"));
+        x.set_buy_m2_m(Positions::get_optional<int64_t>(j, "buy_m2m"));
+        x.set_buy_price(Positions::get_optional<double>(j, "buy_price"));
+        x.set_buy_quantity(Positions::get_optional<int64_t>(j, "buy_quantity"));
+        x.set_buy_value(Positions::get_optional<int64_t>(j, "buy_value"));
+        x.set_close_price(Positions::get_optional<int64_t>(j, "close_price"));
+        x.set_day_buy_price(Positions::get_optional<double>(j, "day_buy_price"));
+        x.set_day_buy_quantity(Positions::get_optional<int64_t>(j, "day_buy_quantity"));
+        x.set_day_buy_value(Positions::get_optional<int64_t>(j, "day_buy_value"));
+        x.set_day_sell_price(Positions::get_optional<int64_t>(j, "day_sell_price"));
+        x.set_day_sell_quantity(Positions::get_optional<int64_t>(j, "day_sell_quantity"));
+        x.set_day_sell_value(Positions::get_optional<int64_t>(j, "day_sell_value"));
+        x.set_exchange(Positions::get_optional<std::string>(j, "exchange"));
+        x.set_instrument_token(Positions::get_optional<int64_t>(j, "instrument_token"));
+        x.set_last_price(Positions::get_optional<double>(j, "last_price"));
+        x.set_m2_m(Positions::get_optional<int64_t>(j, "m2m"));
+        x.set_multiplier(Positions::get_optional<int64_t>(j, "multiplier"));
+        x.set_overnight_quantity(Positions::get_optional<int64_t>(j, "overnight_quantity"));
+        x.set_pnl(Positions::get_optional<int64_t>(j, "pnl"));
+        x.set_product(Positions::get_optional<std::string>(j, "product"));
+        x.set_quantity(Positions::get_optional<int64_t>(j, "quantity"));
+        x.set_realised(Positions::get_optional<int64_t>(j, "realised"));
+        x.set_sell_m2_m(Positions::get_optional<int64_t>(j, "sell_m2m"));
+        x.set_sell_price(Positions::get_optional<int64_t>(j, "sell_price"));
+        x.set_sell_quantity(Positions::get_optional<int64_t>(j, "sell_quantity"));
+        x.set_sell_value(Positions::get_optional<int64_t>(j, "sell_value"));
+        x.set_tradingsymbol(Positions::get_optional<std::string>(j, "tradingsymbol"));
+        x.set_unrealised(Positions::get_optional<int64_t>(j, "unrealised"));
+        x.set_value(Positions::get_optional<int64_t>(j, "value"));
     }
 
-    inline void to_json(json & j, const quicktype::DataClass & x) {
+    inline void to_json(json & j, const Positions::Day & x) {
         j = json::object();
-        j["$ref"] = x.get_ref();
+        j["average_price"] = x.get_average_price();
+        j["buy_m2m"] = x.get_buy_m2_m();
+        j["buy_price"] = x.get_buy_price();
+        j["buy_quantity"] = x.get_buy_quantity();
+        j["buy_value"] = x.get_buy_value();
+        j["close_price"] = x.get_close_price();
+        j["day_buy_price"] = x.get_day_buy_price();
+        j["day_buy_quantity"] = x.get_day_buy_quantity();
+        j["day_buy_value"] = x.get_day_buy_value();
+        j["day_sell_price"] = x.get_day_sell_price();
+        j["day_sell_quantity"] = x.get_day_sell_quantity();
+        j["day_sell_value"] = x.get_day_sell_value();
+        j["exchange"] = x.get_exchange();
+        j["instrument_token"] = x.get_instrument_token();
+        j["last_price"] = x.get_last_price();
+        j["m2m"] = x.get_m2_m();
+        j["multiplier"] = x.get_multiplier();
+        j["overnight_quantity"] = x.get_overnight_quantity();
+        j["pnl"] = x.get_pnl();
+        j["product"] = x.get_product();
+        j["quantity"] = x.get_quantity();
+        j["realised"] = x.get_realised();
+        j["sell_m2m"] = x.get_sell_m2_m();
+        j["sell_price"] = x.get_sell_price();
+        j["sell_quantity"] = x.get_sell_quantity();
+        j["sell_value"] = x.get_sell_value();
+        j["tradingsymbol"] = x.get_tradingsymbol();
+        j["unrealised"] = x.get_unrealised();
+        j["value"] = x.get_value();
     }
 
-    inline void from_json(const json & j, quicktype::Day& x) {
-        x.set_items(j.at("items").get<quicktype::DataClass>());
-        x.set_type(j.at("type").get<std::string>());
+    inline void from_json(const json & j, Positions::Data& x) {
+        x.set_day(Positions::get_optional<std::vector<Positions::Day>>(j, "day"));
+        x.set_net(Positions::get_optional<std::vector<Positions::Day>>(j, "net"));
     }
 
-    inline void to_json(json & j, const quicktype::Day & x) {
-        j = json::object();
-        j["items"] = x.get_items();
-        j["type"] = x.get_type();
-    }
-
-    inline void from_json(const json & j, quicktype::DataProperties& x) {
-        x.set_day(j.at("day").get<quicktype::Day>());
-        x.set_net(j.at("net").get<quicktype::Day>());
-    }
-
-    inline void to_json(json & j, const quicktype::DataProperties & x) {
+    inline void to_json(json & j, const Positions::Data & x) {
         j = json::object();
         j["day"] = x.get_day();
         j["net"] = x.get_net();
     }
 
-    inline void from_json(const json & j, quicktype::Data& x) {
-        x.set_additional_properties(j.at("additionalProperties").get<bool>());
-        x.set_properties(j.at("properties").get<quicktype::DataProperties>());
-        x.set_required(j.at("required").get<std::vector<std::string>>());
-        x.set_title(j.at("title").get<std::string>());
-        x.set_type(j.at("type").get<std::string>());
+    inline void from_json(const json & j, Positions::Positions& x) {
+        x.set_data(Positions::get_optional<Positions::Data>(j, "data"));
+        x.set_status(Positions::get_optional<std::string>(j, "status"));
     }
 
-    inline void to_json(json & j, const quicktype::Data & x) {
-        j = json::object();
-        j["additionalProperties"] = x.get_additional_properties();
-        j["properties"] = x.get_properties();
-        j["required"] = x.get_required();
-        j["title"] = x.get_title();
-        j["type"] = x.get_type();
-    }
-
-    inline void from_json(const json & j, quicktype::Property& x) {
-        x.set_type(j.at("type").get<quicktype::Type>());
-    }
-
-    inline void to_json(json & j, const quicktype::Property & x) {
-        j = json::object();
-        j["type"] = x.get_type();
-    }
-
-    inline void from_json(const json & j, quicktype::DayClass& x) {
-        x.set_additional_properties(j.at("additionalProperties").get<bool>());
-        x.set_properties(j.at("properties").get<std::map<std::string, quicktype::Property>>());
-        x.set_required(j.at("required").get<std::vector<std::string>>());
-        x.set_title(j.at("title").get<std::string>());
-        x.set_type(j.at("type").get<std::string>());
-    }
-
-    inline void to_json(json & j, const quicktype::DayClass & x) {
-        j = json::object();
-        j["additionalProperties"] = x.get_additional_properties();
-        j["properties"] = x.get_properties();
-        j["required"] = x.get_required();
-        j["title"] = x.get_title();
-        j["type"] = x.get_type();
-    }
-
-    inline void from_json(const json & j, quicktype::PositionsProperties& x) {
-        x.set_data(j.at("data").get<quicktype::DataClass>());
-        x.set_status(j.at("status").get<quicktype::Property>());
-    }
-
-    inline void to_json(json & j, const quicktype::PositionsProperties & x) {
+    inline void to_json(json & j, const Positions::Positions & x) {
         j = json::object();
         j["data"] = x.get_data();
         j["status"] = x.get_status();
-    }
-
-    inline void from_json(const json & j, quicktype::PositionsClass& x) {
-        x.set_additional_properties(j.at("additionalProperties").get<bool>());
-        x.set_properties(j.at("properties").get<quicktype::PositionsProperties>());
-        x.set_required(j.at("required").get<std::vector<std::string>>());
-        x.set_title(j.at("title").get<std::string>());
-        x.set_type(j.at("type").get<std::string>());
-    }
-
-    inline void to_json(json & j, const quicktype::PositionsClass & x) {
-        j = json::object();
-        j["additionalProperties"] = x.get_additional_properties();
-        j["properties"] = x.get_properties();
-        j["required"] = x.get_required();
-        j["title"] = x.get_title();
-        j["type"] = x.get_type();
-    }
-
-    inline void from_json(const json & j, quicktype::Definitions& x) {
-        x.set_data(j.at("Data").get<quicktype::Data>());
-        x.set_day(j.at("Day").get<quicktype::DayClass>());
-        x.set_positions(j.at("Positions").get<quicktype::PositionsClass>());
-    }
-
-    inline void to_json(json & j, const quicktype::Definitions & x) {
-        j = json::object();
-        j["Data"] = x.get_data();
-        j["Day"] = x.get_day();
-        j["Positions"] = x.get_positions();
-    }
-
-    inline void from_json(const json & j, quicktype::Positions& x) {
-        x.set_ref(j.at("$ref").get<std::string>());
-        x.set_schema(j.at("$schema").get<std::string>());
-        x.set_definitions(j.at("definitions").get<quicktype::Definitions>());
-    }
-
-    inline void to_json(json & j, const quicktype::Positions & x) {
-        j = json::object();
-        j["$ref"] = x.get_ref();
-        j["$schema"] = x.get_schema();
-        j["definitions"] = x.get_definitions();
-    }
-
-    inline void from_json(const json & j, quicktype::Type & x) {
-        if (j == "integer") x = quicktype::Type::INTEGER;
-        else if (j == "number") x = quicktype::Type::NUMBER;
-        else if (j == "string") x = quicktype::Type::STRING;
-        else throw "Input JSON does not conform to schema";
-    }
-
-    inline void to_json(json & j, const quicktype::Type & x) {
-        switch (x) {
-            case quicktype::Type::INTEGER: j = "integer"; break;
-            case quicktype::Type::NUMBER: j = "number"; break;
-            case quicktype::Type::STRING: j = "string"; break;
-            default: throw "This should not happen";
-        }
     }
 }

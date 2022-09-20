@@ -28,296 +28,108 @@ require "json"
 class GttGetOrder
   include JSON::Serializable
 
-  @[JSON::Field(key: "$ref")]
-  property ref : String
+  property data : Data?
 
-  @[JSON::Field(key: "$schema")]
-  property schema : String
-
-  property definitions : Definitions
-end
-
-class Definitions
-  include JSON::Serializable
-
-  @[JSON::Field(key: "Condition")]
-  property condition : Condition
-
-  @[JSON::Field(key: "Data")]
-  property data : Data
-
-  @[JSON::Field(key: "GttGetOrder")]
-  property gtt_get_order : GttGetOrderClass
-
-  @[JSON::Field(key: "Order")]
-  property order : Order
-
-  @[JSON::Field(key: "OrderResult")]
-  property order_result : OrderResult
-
-  @[JSON::Field(key: "Result")]
-  property result : ResultClass
-end
-
-class Condition
-  include JSON::Serializable
-
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property properties : ConditionProperties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property condition_type : String
-end
-
-class ConditionProperties
-  include JSON::Serializable
-
-  property exchange : Exchange
-
-  property instrument_token : Exchange
-
-  property last_price : Exchange
-
-  property tradingsymbol : Exchange
-
-  property trigger_values : TriggerValues
-end
-
-class Exchange
-  include JSON::Serializable
-
-  @[JSON::Field(key: "type")]
-  property exchange_type : String
-end
-
-class TriggerValues
-  include JSON::Serializable
-
-  property items : Exchange
-
-  @[JSON::Field(key: "type")]
-  property trigger_values_type : String
+  property status : String?
 end
 
 class Data
   include JSON::Serializable
 
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
+  property condition : Condition?
 
-  property properties : DataProperties
+  property created_at : String?
 
-  property required : Array(String)
+  property expires_at : String?
 
-  property title : String
+  property id : Int32?
 
-  @[JSON::Field(key: "type")]
-  property data_type : String
-end
+  property meta : Nil
 
-class DataProperties
-  include JSON::Serializable
+  property orders : Array(Order)?
 
-  property condition : ConditionClass
+  property parent_trigger : Nil
 
-  property created_at : CreatedAt
-
-  property expires_at : CreatedAt
-
-  property id : Exchange
-
-  property meta : Exchange
-
-  property orders : Orders
-
-  property parent_trigger : Exchange
-
-  property status : Exchange
+  property status : String?
 
   @[JSON::Field(key: "type")]
-  property data_properties_type : Exchange
+  property data_type : String?
 
-  property updated_at : CreatedAt
+  property updated_at : String?
 
-  property user_id : Exchange
+  property user_id : String?
 end
 
-class ConditionClass
+class Condition
   include JSON::Serializable
 
-  @[JSON::Field(key: "$ref")]
-  property ref : String
-end
+  property exchange : String?
 
-class CreatedAt
-  include JSON::Serializable
+  property instrument_token : Int32?
 
-  property format : String
+  property last_price : Float64?
 
-  @[JSON::Field(key: "type")]
-  property created_at_type : String
-end
+  property tradingsymbol : String?
 
-class Orders
-  include JSON::Serializable
-
-  property items : ConditionClass
-
-  @[JSON::Field(key: "type")]
-  property orders_type : String
-end
-
-class GttGetOrderClass
-  include JSON::Serializable
-
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property properties : GttGetOrderProperties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property gtt_get_order_class_type : String
-end
-
-class GttGetOrderProperties
-  include JSON::Serializable
-
-  property data : ConditionClass
-
-  property status : Exchange
+  property trigger_values : Array(Float64)?
 end
 
 class Order
   include JSON::Serializable
 
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
+  property exchange : String?
 
-  property properties : OrderProperties
+  property order_type : String?
 
-  property required : Array(String)
+  property price : Int32?
 
-  property title : String
+  property product : String?
 
-  @[JSON::Field(key: "type")]
-  property order_type : String
-end
+  property quantity : Int32?
 
-class OrderProperties
-  include JSON::Serializable
+  property result : Result?
 
-  property exchange : Exchange
+  property tradingsymbol : String?
 
-  property order_type : Exchange
-
-  property price : Exchange
-
-  property product : Exchange
-
-  property quantity : Exchange
-
-  property result : Result
-
-  property tradingsymbol : Exchange
-
-  property transaction_type : Exchange
+  property transaction_type : String?
 end
 
 class Result
   include JSON::Serializable
 
-  @[JSON::Field(key: "anyOf")]
-  property any_of : Array(AnyOf)
-end
+  property account_id : String?
 
-class AnyOf
-  include JSON::Serializable
+  property exchange : String?
 
-  @[JSON::Field(key: "$ref")]
-  property ref : String?
+  property meta : String?
 
-  @[JSON::Field(key: "type")]
-  property any_of_type : String?
+  property order_result : OrderResult?
+
+  property order_type : String?
+
+  property price : Int32?
+
+  property product : String?
+
+  property quantity : Int32?
+
+  property timestamp : String?
+
+  property tradingsymbol : String?
+
+  property transaction_type : String?
+
+  property triggered_at : Float64?
+
+  property validity : String?
 end
 
 class OrderResult
   include JSON::Serializable
 
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
+  property order_id : String?
 
-  property properties : OrderResultProperties
+  property rejection_reason : String?
 
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property order_result_type : String
-end
-
-class OrderResultProperties
-  include JSON::Serializable
-
-  property order_id : Exchange
-
-  property rejection_reason : Exchange
-
-  property status : Exchange
-end
-
-class ResultClass
-  include JSON::Serializable
-
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property properties : ResultProperties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property result_class_type : String
-end
-
-class ResultProperties
-  include JSON::Serializable
-
-  property account_id : Exchange
-
-  property exchange : Exchange
-
-  property meta : Exchange
-
-  property order_result : ConditionClass
-
-  property order_type : Exchange
-
-  property price : Exchange
-
-  property product : Exchange
-
-  property quantity : Exchange
-
-  property timestamp : CreatedAt
-
-  property tradingsymbol : Exchange
-
-  property transaction_type : Exchange
-
-  property triggered_at : Exchange
-
-  property validity : Exchange
+  property status : String?
 end

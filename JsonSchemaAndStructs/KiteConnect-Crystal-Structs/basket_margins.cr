@@ -28,169 +28,54 @@ require "json"
 class BasketMargins
   include JSON::Serializable
 
-  @[JSON::Field(key: "$ref")]
-  property ref : String
+  property data : Data?
 
-  @[JSON::Field(key: "$schema")]
-  property schema : String
-
-  property definitions : Definitions
-end
-
-class Definitions
-  include JSON::Serializable
-
-  @[JSON::Field(key: "BasketMargins")]
-  property basket_margins : BasketMarginsClass
-
-  @[JSON::Field(key: "Data")]
-  property data : DataClass
-
-  @[JSON::Field(key: "Final")]
-  property final : Final
-
-  @[JSON::Field(key: "Pnl")]
-  property pnl : Pnl
-end
-
-class BasketMarginsClass
-  include JSON::Serializable
-
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property properties : BasketMarginsProperties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property basket_margins_class_type : String
-end
-
-class BasketMarginsProperties
-  include JSON::Serializable
-
-  property data : Data
-
-  property status : Status
+  property status : String?
 end
 
 class Data
   include JSON::Serializable
 
-  @[JSON::Field(key: "$ref")]
-  property ref : String
-end
+  property final : Final?
 
-class Status
-  include JSON::Serializable
+  property initial : Final?
 
-  @[JSON::Field(key: "type")]
-  property status_type : String
-end
-
-class DataClass
-  include JSON::Serializable
-
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property properties : DataProperties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property data_class_type : String
-end
-
-class DataProperties
-  include JSON::Serializable
-
-  property final : Data
-
-  property initial : Data
-
-  property orders : Orders
-end
-
-class Orders
-  include JSON::Serializable
-
-  property items : Data
-
-  @[JSON::Field(key: "type")]
-  property orders_type : String
+  property orders : Array(Final)?
 end
 
 class Final
   include JSON::Serializable
 
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
+  property additional : Int32?
 
-  property properties : FinalProperties
+  property bo : Int32?
 
-  property required : Array(String)
+  property cash : Int32?
 
-  property title : String
+  property exchange : String?
 
-  @[JSON::Field(key: "type")]
-  property final_type : String
-end
+  property exposure : Float64?
 
-class FinalProperties
-  include JSON::Serializable
+  property option_premium : Float64?
 
-  property additional : Status
+  property pnl : Pnl?
 
-  property bo : Status
+  property span : Float64?
 
-  property cash : Status
+  property total : Float64?
 
-  property exchange : Status
-
-  property exposure : Status
-
-  property option_premium : Status
-
-  property pnl : Data
-
-  property span : Status
-
-  property total : Status
-
-  property tradingsymbol : Status
+  property tradingsymbol : String?
 
   @[JSON::Field(key: "type")]
-  property final_properties_type : Status
+  property final_type : String?
 
-  property var : Status
+  property var : Int32?
 end
 
 class Pnl
   include JSON::Serializable
 
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
+  property realised : Int32?
 
-  property properties : PnlProperties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property pnl_type : String
-end
-
-class PnlProperties
-  include JSON::Serializable
-
-  property realised : Status
-
-  property unrealised : Status
+  property unrealised : Int32?
 end

@@ -28,128 +28,51 @@ require "json"
 class MfOrdersInfo
   include JSON::Serializable
 
-  @[JSON::Field(key: "$ref")]
-  property ref : String
+  property data : Data?
 
-  @[JSON::Field(key: "$schema")]
-  property schema : String
-
-  property definitions : Definitions
-end
-
-class Definitions
-  include JSON::Serializable
-
-  @[JSON::Field(key: "Data")]
-  property data : Data
-
-  @[JSON::Field(key: "MFOrdersInfo")]
-  property mf_orders_info : MfOrdersInfoClass
+  property status : String?
 end
 
 class Data
   include JSON::Serializable
 
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
+  property amount : Int32?
 
-  property properties : DataProperties
+  property average_price : Int32?
 
-  property required : Array(String)
+  property exchange_order_id : Nil
 
-  property title : String
+  property exchange_timestamp : Nil
 
-  @[JSON::Field(key: "type")]
-  property data_type : String
-end
+  property folio : Nil
 
-class DataProperties
-  include JSON::Serializable
+  property fund : String?
 
-  property amount : Amount
+  property last_price : Float64?
 
-  property average_price : Amount
+  property last_price_date : String?
 
-  property exchange_order_id : Amount
+  property order_id : String?
 
-  property exchange_timestamp : Amount
+  property order_timestamp : String?
 
-  property folio : Amount
+  property placed_by : String?
 
-  property fund : Amount
+  property purchase_type : String?
 
-  property last_price : Amount
+  property quantity : Int32?
 
-  property last_price_date : LastPriceDate
+  property settlement_id : Nil
 
-  property order_id : LastPriceDate
+  property status : String?
 
-  property order_timestamp : LastPriceDate
+  property status_message : String?
 
-  property placed_by : Amount
+  property tag : Nil
 
-  property purchase_type : Amount
+  property tradingsymbol : String?
 
-  property quantity : Amount
+  property transaction_type : String?
 
-  property settlement_id : Amount
-
-  property status : Amount
-
-  property status_message : Amount
-
-  property tag : Amount
-
-  property tradingsymbol : Amount
-
-  property transaction_type : Amount
-
-  property variety : Amount
-end
-
-class Amount
-  include JSON::Serializable
-
-  @[JSON::Field(key: "type")]
-  property amount_type : String
-end
-
-class LastPriceDate
-  include JSON::Serializable
-
-  property format : String
-
-  @[JSON::Field(key: "type")]
-  property last_price_date_type : String
-end
-
-class MfOrdersInfoClass
-  include JSON::Serializable
-
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property properties : MfOrdersInfoProperties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property mf_orders_info_class_type : String
-end
-
-class MfOrdersInfoProperties
-  include JSON::Serializable
-
-  property data : DataClass
-
-  property status : Amount
-end
-
-class DataClass
-  include JSON::Serializable
-
-  @[JSON::Field(key: "$ref")]
-  property ref : String
+  property variety : String?
 end

@@ -28,49 +28,7 @@ require "json"
 class ConvertPosition
   include JSON::Serializable
 
-  @[JSON::Field(key: "$ref")]
-  property ref : String
+  property data : Bool?
 
-  @[JSON::Field(key: "$schema")]
-  property schema : String
-
-  property definitions : Definitions
-end
-
-class Definitions
-  include JSON::Serializable
-
-  @[JSON::Field(key: "ConvertPosition")]
-  property convert_position : ConvertPositionClass
-end
-
-class ConvertPositionClass
-  include JSON::Serializable
-
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property properties : Properties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property convert_position_class_type : String
-end
-
-class Properties
-  include JSON::Serializable
-
-  property data : Data
-
-  property status : Data
-end
-
-class Data
-  include JSON::Serializable
-
-  @[JSON::Field(key: "type")]
-  property data_type : String
+  property status : String?
 end

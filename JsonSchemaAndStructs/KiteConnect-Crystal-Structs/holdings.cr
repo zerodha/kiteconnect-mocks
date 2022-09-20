@@ -28,141 +28,55 @@ require "json"
 class Holdings
   include JSON::Serializable
 
-  @[JSON::Field(key: "$ref")]
-  property ref : String
+  property data : Array(Datum)?
 
-  @[JSON::Field(key: "$schema")]
-  property schema : String
-
-  property definitions : Definitions
-end
-
-class Definitions
-  include JSON::Serializable
-
-  @[JSON::Field(key: "Datum")]
-  property datum : Datum
-
-  @[JSON::Field(key: "Holdings")]
-  property holdings : HoldingsClass
+  property status : String?
 end
 
 class Datum
   include JSON::Serializable
 
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
+  property authorised_date : String?
 
-  property properties : DatumProperties
+  property authorised_quantity : Int32?
 
-  property required : Array(String)
+  property average_price : Float64?
 
-  property title : String
+  property close_price : Float64?
 
-  @[JSON::Field(key: "type")]
-  property datum_type : String
-end
+  property collateral_quantity : Int32?
 
-class DatumProperties
-  include JSON::Serializable
+  property collateral_type : String?
 
-  property authorised_date : AuthorisedDate
+  property day_change : Float64?
 
-  property authorised_quantity : AuthorisedQuantity
+  property day_change_percentage : Float64?
 
-  property average_price : AuthorisedQuantity
+  property discrepancy : Bool?
 
-  property close_price : AuthorisedQuantity
+  property exchange : String?
 
-  property collateral_quantity : AuthorisedQuantity
+  property instrument_token : Int32?
 
-  property collateral_type : AuthorisedQuantity
+  property isin : String?
 
-  property day_change : AuthorisedQuantity
+  property last_price : Float64?
 
-  property day_change_percentage : AuthorisedQuantity
+  property opening_quantity : Int32?
 
-  property discrepancy : AuthorisedQuantity
+  property pnl : Float64?
 
-  property exchange : AuthorisedQuantity
+  property price : Int32?
 
-  property instrument_token : AuthorisedQuantity
+  property product : String?
 
-  property isin : AuthorisedQuantity
+  property quantity : Int32?
 
-  property last_price : AuthorisedQuantity
+  property realised_quantity : Int32?
 
-  property opening_quantity : AuthorisedQuantity
+  property t1_quantity : Int32?
 
-  property pnl : AuthorisedQuantity
+  property tradingsymbol : String?
 
-  property price : AuthorisedQuantity
-
-  property product : AuthorisedQuantity
-
-  property quantity : AuthorisedQuantity
-
-  property realised_quantity : AuthorisedQuantity
-
-  property t1_quantity : AuthorisedQuantity
-
-  property tradingsymbol : AuthorisedQuantity
-
-  property used_quantity : AuthorisedQuantity
-end
-
-class AuthorisedDate
-  include JSON::Serializable
-
-  property format : String
-
-  @[JSON::Field(key: "type")]
-  property authorised_date_type : String
-end
-
-class AuthorisedQuantity
-  include JSON::Serializable
-
-  @[JSON::Field(key: "type")]
-  property authorised_quantity_type : String
-end
-
-class HoldingsClass
-  include JSON::Serializable
-
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property properties : HoldingsProperties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property holdings_class_type : String
-end
-
-class HoldingsProperties
-  include JSON::Serializable
-
-  property data : Data
-
-  property status : AuthorisedQuantity
-end
-
-class Data
-  include JSON::Serializable
-
-  property items : Items
-
-  @[JSON::Field(key: "type")]
-  property data_type : String
-end
-
-class Items
-  include JSON::Serializable
-
-  @[JSON::Field(key: "$ref")]
-  property ref : String
+  property used_quantity : Int32?
 end

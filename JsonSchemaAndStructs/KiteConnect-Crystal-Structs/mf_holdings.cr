@@ -28,106 +28,29 @@ require "json"
 class MfHoldings
   include JSON::Serializable
 
-  @[JSON::Field(key: "$ref")]
-  property ref : String
+  property data : Array(Datum)?
 
-  @[JSON::Field(key: "$schema")]
-  property schema : String
-
-  property definitions : Definitions
-end
-
-class Definitions
-  include JSON::Serializable
-
-  @[JSON::Field(key: "Datum")]
-  property datum : Datum
-
-  @[JSON::Field(key: "MFHoldings")]
-  property mf_holdings : MfHoldingsClass
+  property status : String?
 end
 
 class Datum
   include JSON::Serializable
 
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
+  property average_price : Float64?
 
-  property properties : DatumProperties
+  property folio : String?
 
-  property required : Array(String)
+  property fund : String?
 
-  property title : String
+  property last_price : Float64?
 
-  @[JSON::Field(key: "type")]
-  property datum_type : String
-end
+  property last_price_date : String?
 
-class DatumProperties
-  include JSON::Serializable
+  property pledged_quantity : Int32?
 
-  property average_price : AveragePrice
+  property pnl : Int32?
 
-  property folio : AveragePrice
+  property quantity : Float64?
 
-  property fund : AveragePrice
-
-  property last_price : AveragePrice
-
-  property last_price_date : AveragePrice
-
-  property pledged_quantity : AveragePrice
-
-  property pnl : AveragePrice
-
-  property quantity : AveragePrice
-
-  property tradingsymbol : AveragePrice
-end
-
-class AveragePrice
-  include JSON::Serializable
-
-  @[JSON::Field(key: "type")]
-  property average_price_type : String
-end
-
-class MfHoldingsClass
-  include JSON::Serializable
-
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property properties : MfHoldingsProperties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property mf_holdings_class_type : String
-end
-
-class MfHoldingsProperties
-  include JSON::Serializable
-
-  property data : Data
-
-  property status : AveragePrice
-end
-
-class Data
-  include JSON::Serializable
-
-  property items : Items
-
-  @[JSON::Field(key: "type")]
-  property data_type : String
-end
-
-class Items
-  include JSON::Serializable
-
-  @[JSON::Field(key: "$ref")]
-  property ref : String
+  property tradingsymbol : String?
 end

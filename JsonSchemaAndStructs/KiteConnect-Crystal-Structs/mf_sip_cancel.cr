@@ -28,81 +28,13 @@ require "json"
 class MfSipCancel
   include JSON::Serializable
 
-  @[JSON::Field(key: "$ref")]
-  property ref : String
+  property data : Data?
 
-  @[JSON::Field(key: "$schema")]
-  property schema : String
-
-  property definitions : Definitions
-end
-
-class Definitions
-  include JSON::Serializable
-
-  @[JSON::Field(key: "Data")]
-  property data : Data
-
-  @[JSON::Field(key: "MFSIPCancel")]
-  property mfsip_cancel : MfsipCancelClass
+  property status : String?
 end
 
 class Data
   include JSON::Serializable
 
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property properties : DataProperties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property data_type : String
-end
-
-class DataProperties
-  include JSON::Serializable
-
-  property sip_id : Sipid
-end
-
-class Sipid
-  include JSON::Serializable
-
-  @[JSON::Field(key: "type")]
-  property sipid_type : String
-end
-
-class MfsipCancelClass
-  include JSON::Serializable
-
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property properties : MfsipCancelProperties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property mfsip_cancel_class_type : String
-end
-
-class MfsipCancelProperties
-  include JSON::Serializable
-
-  property data : DataClass
-
-  property status : Sipid
-end
-
-class DataClass
-  include JSON::Serializable
-
-  @[JSON::Field(key: "$ref")]
-  property ref : String
+  property sip_id : String?
 end

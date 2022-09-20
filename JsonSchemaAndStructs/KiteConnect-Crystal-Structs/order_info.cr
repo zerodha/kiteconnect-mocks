@@ -28,161 +28,61 @@ require "json"
 class OrderInfo
   include JSON::Serializable
 
-  @[JSON::Field(key: "$ref")]
-  property ref : String
+  property data : Array(Datum)?
 
-  @[JSON::Field(key: "$schema")]
-  property schema : String
-
-  property definitions : Definitions
-end
-
-class Definitions
-  include JSON::Serializable
-
-  @[JSON::Field(key: "Datum")]
-  property datum : Datum
-
-  @[JSON::Field(key: "OrderInfo")]
-  property order_info : OrderInfoClass
+  property status : String?
 end
 
 class Datum
   include JSON::Serializable
 
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
+  property average_price : Int32?
 
-  property properties : DatumProperties
+  property cancelled_quantity : Int32?
 
-  property required : Array(String)
+  property disclosed_quantity : Int32?
 
-  property title : String
+  property exchange : String?
 
-  @[JSON::Field(key: "type")]
-  property datum_type : String
-end
+  property exchange_order_id : String?
 
-class DatumProperties
-  include JSON::Serializable
+  property exchange_timestamp : String?
 
-  property average_price : AveragePrice
+  property filled_quantity : Int32?
 
-  property cancelled_quantity : AveragePrice
+  property instrument_token : Int32?
 
-  property disclosed_quantity : AveragePrice
+  property order_id : String?
 
-  property exchange : AveragePrice
+  property order_timestamp : String?
 
-  property exchange_order_id : ExchangeOrderId
+  property order_type : String?
 
-  property exchange_timestamp : ExchangeTimestamp
+  property parent_order_id : Nil
 
-  property filled_quantity : AveragePrice
+  property pending_quantity : Int32?
 
-  property instrument_token : AveragePrice
+  property placed_by : String?
 
-  property order_id : AveragePrice
+  property price : Float64?
 
-  property order_timestamp : OrderTimestamp
+  property product : String?
 
-  property order_type : AveragePrice
+  property quantity : Int32?
 
-  property parent_order_id : AveragePrice
+  property status : String?
 
-  property pending_quantity : AveragePrice
+  property status_message : Nil
 
-  property placed_by : AveragePrice
+  property tag : Nil
 
-  property price : AveragePrice
+  property tradingsymbol : String?
 
-  property product : AveragePrice
+  property transaction_type : String?
 
-  property quantity : AveragePrice
+  property trigger_price : Int32?
 
-  property status : AveragePrice
+  property validity : String?
 
-  property status_message : AveragePrice
-
-  property tag : AveragePrice
-
-  property tradingsymbol : AveragePrice
-
-  property transaction_type : AveragePrice
-
-  property trigger_price : AveragePrice
-
-  property validity : AveragePrice
-
-  property variety : AveragePrice
-end
-
-class AveragePrice
-  include JSON::Serializable
-
-  @[JSON::Field(key: "type")]
-  property average_price_type : String
-end
-
-class ExchangeOrderId
-  include JSON::Serializable
-
-  @[JSON::Field(key: "anyOf")]
-  property any_of : Array(AveragePrice)
-end
-
-class ExchangeTimestamp
-  include JSON::Serializable
-
-  @[JSON::Field(key: "anyOf")]
-  property any_of : Array(OrderTimestamp)
-end
-
-class OrderTimestamp
-  include JSON::Serializable
-
-  property format : String?
-
-  @[JSON::Field(key: "type")]
-  property order_timestamp_type : String
-end
-
-class OrderInfoClass
-  include JSON::Serializable
-
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property properties : OrderInfoProperties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property order_info_class_type : String
-end
-
-class OrderInfoProperties
-  include JSON::Serializable
-
-  property data : Data
-
-  property status : AveragePrice
-end
-
-class Data
-  include JSON::Serializable
-
-  property items : Items
-
-  @[JSON::Field(key: "type")]
-  property data_type : String
-end
-
-class Items
-  include JSON::Serializable
-
-  @[JSON::Field(key: "$ref")]
-  property ref : String
+  property variety : String?
 end

@@ -28,111 +28,80 @@ require "json"
 class Positions
   include JSON::Serializable
 
-  @[JSON::Field(key: "$ref")]
-  property ref : String
+  property data : Data?
 
-  @[JSON::Field(key: "$schema")]
-  property schema : String
-
-  property definitions : Definitions
-end
-
-class Definitions
-  include JSON::Serializable
-
-  @[JSON::Field(key: "Data")]
-  property data : Data
-
-  @[JSON::Field(key: "Day")]
-  property day : DayClass
-
-  @[JSON::Field(key: "Positions")]
-  property positions : PositionsClass
+  property status : String?
 end
 
 class Data
   include JSON::Serializable
 
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
+  property day : Array(Day)?
 
-  property properties : DataProperties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property data_type : String
-end
-
-class DataProperties
-  include JSON::Serializable
-
-  property day : Day
-
-  property net : Day
+  property net : Array(Day)?
 end
 
 class Day
   include JSON::Serializable
 
-  property items : DataClass
+  property average_price : Float64?
 
-  @[JSON::Field(key: "type")]
-  property day_type : String
-end
+  @[JSON::Field(key: "buy_m2m")]
+  property buy_m2_m : Int32?
 
-class DataClass
-  include JSON::Serializable
+  property buy_price : Float64?
 
-  @[JSON::Field(key: "$ref")]
-  property ref : String
-end
+  property buy_quantity : Int32?
 
-class DayClass
-  include JSON::Serializable
+  property buy_value : Int32?
 
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
+  property close_price : Int32?
 
-  property properties : Hash(String, Property)
+  property day_buy_price : Float64?
 
-  property required : Array(String)
+  property day_buy_quantity : Int32?
 
-  property title : String
+  property day_buy_value : Int32?
 
-  @[JSON::Field(key: "type")]
-  property day_class_type : String
-end
+  property day_sell_price : Int32?
 
-class Property
-  include JSON::Serializable
+  property day_sell_quantity : Int32?
 
-  @[JSON::Field(key: "type")]
-  property property_type : String
-end
+  property day_sell_value : Int32?
 
-class PositionsClass
-  include JSON::Serializable
+  property exchange : String?
 
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
+  property instrument_token : Int32?
 
-  property properties : PositionsProperties
+  property last_price : Float64?
 
-  property required : Array(String)
+  @[JSON::Field(key: "m2m")]
+  property m2_m : Int32?
 
-  property title : String
+  property multiplier : Int32?
 
-  @[JSON::Field(key: "type")]
-  property positions_class_type : String
-end
+  property overnight_quantity : Int32?
 
-class PositionsProperties
-  include JSON::Serializable
+  property pnl : Int32?
 
-  property data : DataClass
+  property product : String?
 
-  property status : Property
+  property quantity : Int32?
+
+  property realised : Int32?
+
+  @[JSON::Field(key: "sell_m2m")]
+  property sell_m2_m : Int32?
+
+  property sell_price : Int32?
+
+  property sell_quantity : Int32?
+
+  property sell_value : Int32?
+
+  property tradingsymbol : String?
+
+  property unrealised : Int32?
+
+  property value : Int32?
 end

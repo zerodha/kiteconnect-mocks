@@ -28,111 +28,15 @@ require "json"
 class HistoricalOi
   include JSON::Serializable
 
-  @[JSON::Field(key: "$ref")]
-  property ref : String
+  property data : Data?
 
-  @[JSON::Field(key: "$schema")]
-  property schema : String
-
-  property definitions : Definitions
-end
-
-class Definitions
-  include JSON::Serializable
-
-  @[JSON::Field(key: "Candle")]
-  property candle : Candle
-
-  @[JSON::Field(key: "Data")]
-  property data : Data
-
-  @[JSON::Field(key: "HistoricalOi")]
-  property historical_oi : HistoricalOiClass
-end
-
-class Candle
-  include JSON::Serializable
-
-  @[JSON::Field(key: "anyOf")]
-  property any_of : Array(AnyOf)
-
-  property title : String
-end
-
-class AnyOf
-  include JSON::Serializable
-
-  @[JSON::Field(key: "type")]
-  property any_of_type : String
+  property status : String?
 end
 
 class Data
   include JSON::Serializable
 
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property properties : DataProperties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property data_type : String
+  property candles : Array(Array(Candle))?
 end
 
-class DataProperties
-  include JSON::Serializable
-
-  property candles : Candles
-end
-
-class Candles
-  include JSON::Serializable
-
-  property items : Items
-
-  @[JSON::Field(key: "type")]
-  property candles_type : String
-end
-
-class Items
-  include JSON::Serializable
-
-  property items : DataClass
-
-  @[JSON::Field(key: "type")]
-  property items_type : String
-end
-
-class DataClass
-  include JSON::Serializable
-
-  @[JSON::Field(key: "$ref")]
-  property ref : String
-end
-
-class HistoricalOiClass
-  include JSON::Serializable
-
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property properties : HistoricalOiProperties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property historical_oi_class_type : String
-end
-
-class HistoricalOiProperties
-  include JSON::Serializable
-
-  property data : DataClass
-
-  property status : AnyOf
-end
+alias Candle = Float64 | String

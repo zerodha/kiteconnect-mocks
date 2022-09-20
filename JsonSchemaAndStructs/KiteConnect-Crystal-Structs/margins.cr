@@ -28,159 +28,43 @@ require "json"
 class Margins
   include JSON::Serializable
 
-  @[JSON::Field(key: "$ref")]
-  property ref : String
+  property data : Data?
 
-  @[JSON::Field(key: "$schema")]
-  property schema : String
-
-  property definitions : Definitions
-end
-
-class Definitions
-  include JSON::Serializable
-
-  @[JSON::Field(key: "Available")]
-  property available : Available
-
-  @[JSON::Field(key: "Data")]
-  property data : Data
-
-  @[JSON::Field(key: "Ity")]
-  property ity : Ity
-
-  @[JSON::Field(key: "Margins")]
-  property margins : MarginsClass
-end
-
-class Available
-  include JSON::Serializable
-
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property properties : AvailableProperties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property available_type : String
-end
-
-class AvailableProperties
-  include JSON::Serializable
-
-  property adhoc_margin : AdhocMargin
-
-  property cash : AdhocMargin
-
-  property collateral : AdhocMargin
-
-  property intraday_payin : AdhocMargin
-
-  property live_balance : AdhocMargin
-
-  property opening_balance : AdhocMargin
-end
-
-class AdhocMargin
-  include JSON::Serializable
-
-  @[JSON::Field(key: "type")]
-  property adhoc_margin_type : String
+  property status : String?
 end
 
 class Data
   include JSON::Serializable
 
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
+  property commodity : Ity?
 
-  property properties : DataProperties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property data_type : String
-end
-
-class DataProperties
-  include JSON::Serializable
-
-  property commodity : Commodity
-
-  property equity : Commodity
-end
-
-class Commodity
-  include JSON::Serializable
-
-  @[JSON::Field(key: "$ref")]
-  property ref : String
+  property equity : Ity?
 end
 
 class Ity
   include JSON::Serializable
 
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
+  property available : Available?
 
-  property properties : ItyProperties
+  property enabled : Bool?
 
-  property required : Array(String)
+  property net : Float64?
 
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property ity_type : String
+  property utilised : Hash(String, Float64)?
 end
 
-class ItyProperties
+class Available
   include JSON::Serializable
 
-  property available : Commodity
+  property adhoc_margin : Int32?
 
-  property enabled : AdhocMargin
+  property cash : Float64?
 
-  property net : AdhocMargin
+  property collateral : Int32?
 
-  property utilised : Utilised
-end
+  property intraday_payin : Int32?
 
-class Utilised
-  include JSON::Serializable
+  property live_balance : Float64?
 
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : AdhocMargin
-
-  @[JSON::Field(key: "type")]
-  property utilised_type : String
-end
-
-class MarginsClass
-  include JSON::Serializable
-
-  @[JSON::Field(key: "additionalProperties")]
-  property additional_properties : Bool
-
-  property properties : MarginsProperties
-
-  property required : Array(String)
-
-  property title : String
-
-  @[JSON::Field(key: "type")]
-  property margins_class_type : String
-end
-
-class MarginsProperties
-  include JSON::Serializable
-
-  property data : Commodity
-
-  property status : AdhocMargin
+  property opening_balance : Float64?
 end
