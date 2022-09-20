@@ -10,89 +10,31 @@
 // match the expected interface, even if the JSON is valid.
 
 export type MFOrders = {
-    $ref:        string;
-    $schema:     string;
-    definitions: Definitions;
-};
-
-export type Definitions = {
-    Datum:    Datum;
-    MFOrders: MFOrdersClass;
+    data?:   Datum[];
+    status?: string;
 };
 
 export type Datum = {
-    additionalProperties: boolean;
-    properties:           DatumProperties;
-    required:             string[];
-    title:                string;
-    type:                 string;
-};
-
-export type DatumProperties = {
-    amount:             Amount;
-    average_price:      Amount;
-    exchange_order_id:  ExchangeOrderID;
-    exchange_timestamp: ExchangeOrderID;
-    folio:              Amount;
-    fund:               Amount;
-    last_price:         Amount;
-    last_price_date:    LastPriceDate;
-    order_id:           LastPriceDate;
-    order_timestamp:    LastPriceDate;
-    placed_by:          Amount;
-    purchase_type:      Amount;
-    quantity:           Amount;
-    settlement_id:      ExchangeOrderID;
-    status:             Amount;
-    status_message:     Amount;
-    tag:                Tag;
-    tradingsymbol:      Amount;
-    transaction_type:   Amount;
-    variety:            Amount;
-};
-
-export type Amount = {
-    type: Type;
-};
-
-export type Type =
-      "null"
-    | "number"
-    | "string";
-
-export type ExchangeOrderID = {
-    anyOf: LastPriceDate[];
-};
-
-export type LastPriceDate = {
-    format?: string;
-    type:    Type;
-};
-
-export type Tag = {
-    anyOf: Amount[];
-};
-
-export type MFOrdersClass = {
-    additionalProperties: boolean;
-    properties:           MFOrdersProperties;
-    required:             string[];
-    title:                string;
-    type:                 string;
-};
-
-export type MFOrdersProperties = {
-    data:   Data;
-    status: Amount;
-};
-
-export type Data = {
-    items: Items;
-    type:  string;
-};
-
-export type Items = {
-    $ref: string;
+    amount?:            number;
+    averagePrice?:      number;
+    exchangeOrderID?:   null | string;
+    exchangeTimestamp?: Date | null;
+    folio?:             null;
+    fund?:              string;
+    lastPrice?:         number;
+    lastPriceDate?:     Date;
+    orderID?:           string;
+    orderTimestamp?:    Date;
+    placedBy?:          string;
+    purchaseType?:      string;
+    quantity?:          number;
+    settlementID?:      null | string;
+    status?:            string;
+    statusMessage?:     string;
+    tag?:               null | string;
+    tradingsymbol?:     string;
+    transactionType?:   string;
+    variety?:           string;
 };
 
 // Converts JSON strings to/from your types
@@ -239,79 +181,31 @@ function r(name: string) {
 
 const typeMap: any = {
     "MFOrders": o([
-        { json: "$ref", js: "$ref", typ: "" },
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "Datum", js: "Datum", typ: r("Datum") },
-        { json: "MFOrders", js: "MFOrders", typ: r("MFOrdersClass") },
+        { json: "data", js: "data", typ: u(undefined, a(r("Datum"))) },
+        { json: "status", js: "status", typ: u(undefined, "") },
     ], false),
     "Datum": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DatumProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
+        { json: "amount", js: "amount", typ: u(undefined, 0) },
+        { json: "average_price", js: "averagePrice", typ: u(undefined, 0) },
+        { json: "exchange_order_id", js: "exchangeOrderID", typ: u(undefined, u(null, "")) },
+        { json: "exchange_timestamp", js: "exchangeTimestamp", typ: u(undefined, u(Date, null)) },
+        { json: "folio", js: "folio", typ: u(undefined, null) },
+        { json: "fund", js: "fund", typ: u(undefined, "") },
+        { json: "last_price", js: "lastPrice", typ: u(undefined, 3.14) },
+        { json: "last_price_date", js: "lastPriceDate", typ: u(undefined, Date) },
+        { json: "order_id", js: "orderID", typ: u(undefined, "") },
+        { json: "order_timestamp", js: "orderTimestamp", typ: u(undefined, Date) },
+        { json: "placed_by", js: "placedBy", typ: u(undefined, "") },
+        { json: "purchase_type", js: "purchaseType", typ: u(undefined, "") },
+        { json: "quantity", js: "quantity", typ: u(undefined, 0) },
+        { json: "settlement_id", js: "settlementID", typ: u(undefined, u(null, "")) },
+        { json: "status", js: "status", typ: u(undefined, "") },
+        { json: "status_message", js: "statusMessage", typ: u(undefined, "") },
+        { json: "tag", js: "tag", typ: u(undefined, u(null, "")) },
+        { json: "tradingsymbol", js: "tradingsymbol", typ: u(undefined, "") },
+        { json: "transaction_type", js: "transactionType", typ: u(undefined, "") },
+        { json: "variety", js: "variety", typ: u(undefined, "") },
     ], false),
-    "DatumProperties": o([
-        { json: "amount", js: "amount", typ: r("Amount") },
-        { json: "average_price", js: "average_price", typ: r("Amount") },
-        { json: "exchange_order_id", js: "exchange_order_id", typ: r("ExchangeOrderID") },
-        { json: "exchange_timestamp", js: "exchange_timestamp", typ: r("ExchangeOrderID") },
-        { json: "folio", js: "folio", typ: r("Amount") },
-        { json: "fund", js: "fund", typ: r("Amount") },
-        { json: "last_price", js: "last_price", typ: r("Amount") },
-        { json: "last_price_date", js: "last_price_date", typ: r("LastPriceDate") },
-        { json: "order_id", js: "order_id", typ: r("LastPriceDate") },
-        { json: "order_timestamp", js: "order_timestamp", typ: r("LastPriceDate") },
-        { json: "placed_by", js: "placed_by", typ: r("Amount") },
-        { json: "purchase_type", js: "purchase_type", typ: r("Amount") },
-        { json: "quantity", js: "quantity", typ: r("Amount") },
-        { json: "settlement_id", js: "settlement_id", typ: r("ExchangeOrderID") },
-        { json: "status", js: "status", typ: r("Amount") },
-        { json: "status_message", js: "status_message", typ: r("Amount") },
-        { json: "tag", js: "tag", typ: r("Tag") },
-        { json: "tradingsymbol", js: "tradingsymbol", typ: r("Amount") },
-        { json: "transaction_type", js: "transaction_type", typ: r("Amount") },
-        { json: "variety", js: "variety", typ: r("Amount") },
-    ], false),
-    "Amount": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "ExchangeOrderID": o([
-        { json: "anyOf", js: "anyOf", typ: a(r("LastPriceDate")) },
-    ], false),
-    "LastPriceDate": o([
-        { json: "format", js: "format", typ: u(undefined, "") },
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Tag": o([
-        { json: "anyOf", js: "anyOf", typ: a(r("Amount")) },
-    ], false),
-    "MFOrdersClass": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("MFOrdersProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "MFOrdersProperties": o([
-        { json: "data", js: "data", typ: r("Data") },
-        { json: "status", js: "status", typ: r("Amount") },
-    ], false),
-    "Data": o([
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "Type": [
-        "null",
-        "number",
-        "string",
-    ],
 };
 
 module.exports = {

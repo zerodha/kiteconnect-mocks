@@ -10,95 +10,36 @@
 // match the expected interface, even if the JSON is valid.
 
 export type OrderInfo = {
-    $ref:        string;
-    $schema:     string;
-    definitions: Definitions;
-};
-
-export type Definitions = {
-    Datum:     Datum;
-    OrderInfo: OrderInfoClass;
+    data?:   Datum[];
+    status?: string;
 };
 
 export type Datum = {
-    additionalProperties: boolean;
-    properties:           DatumProperties;
-    required:             string[];
-    title:                string;
-    type:                 string;
-};
-
-export type DatumProperties = {
-    average_price:      AveragePrice;
-    cancelled_quantity: AveragePrice;
-    disclosed_quantity: AveragePrice;
-    exchange:           AveragePrice;
-    exchange_order_id:  ExchangeOrderID;
-    exchange_timestamp: ExchangeTimestamp;
-    filled_quantity:    AveragePrice;
-    instrument_token:   AveragePrice;
-    order_id:           AveragePrice;
-    order_timestamp:    OrderTimestamp;
-    order_type:         AveragePrice;
-    parent_order_id:    AveragePrice;
-    pending_quantity:   AveragePrice;
-    placed_by:          AveragePrice;
-    price:              AveragePrice;
-    product:            AveragePrice;
-    quantity:           AveragePrice;
-    status:             AveragePrice;
-    status_message:     AveragePrice;
-    tag:                AveragePrice;
-    tradingsymbol:      AveragePrice;
-    transaction_type:   AveragePrice;
-    trigger_price:      AveragePrice;
-    validity:           AveragePrice;
-    variety:            AveragePrice;
-};
-
-export type AveragePrice = {
-    type: Type;
-};
-
-export type Type =
-      "integer"
-    | "null"
-    | "number"
-    | "string";
-
-export type ExchangeOrderID = {
-    anyOf: AveragePrice[];
-};
-
-export type ExchangeTimestamp = {
-    anyOf: OrderTimestamp[];
-};
-
-export type OrderTimestamp = {
-    format?: string;
-    type:    Type;
-};
-
-export type OrderInfoClass = {
-    additionalProperties: boolean;
-    properties:           OrderInfoProperties;
-    required:             string[];
-    title:                string;
-    type:                 string;
-};
-
-export type OrderInfoProperties = {
-    data:   Data;
-    status: AveragePrice;
-};
-
-export type Data = {
-    items: Items;
-    type:  string;
-};
-
-export type Items = {
-    $ref: string;
+    averagePrice?:      number;
+    cancelledQuantity?: number;
+    disclosedQuantity?: number;
+    exchange?:          string;
+    exchangeOrderID?:   null | string;
+    exchangeTimestamp?: Date | null;
+    filledQuantity?:    number;
+    instrumentToken?:   number;
+    orderID?:           string;
+    orderTimestamp?:    Date;
+    orderType?:         string;
+    parentOrderID?:     null;
+    pendingQuantity?:   number;
+    placedBy?:          string;
+    price?:             number;
+    product?:           string;
+    quantity?:          number;
+    status?:            string;
+    statusMessage?:     null;
+    tag?:               null;
+    tradingsymbol?:     string;
+    transactionType?:   string;
+    triggerPrice?:      number;
+    validity?:          string;
+    variety?:           string;
 };
 
 // Converts JSON strings to/from your types
@@ -245,85 +186,36 @@ function r(name: string) {
 
 const typeMap: any = {
     "OrderInfo": o([
-        { json: "$ref", js: "$ref", typ: "" },
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "Datum", js: "Datum", typ: r("Datum") },
-        { json: "OrderInfo", js: "OrderInfo", typ: r("OrderInfoClass") },
+        { json: "data", js: "data", typ: u(undefined, a(r("Datum"))) },
+        { json: "status", js: "status", typ: u(undefined, "") },
     ], false),
     "Datum": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DatumProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
+        { json: "average_price", js: "averagePrice", typ: u(undefined, 0) },
+        { json: "cancelled_quantity", js: "cancelledQuantity", typ: u(undefined, 0) },
+        { json: "disclosed_quantity", js: "disclosedQuantity", typ: u(undefined, 0) },
+        { json: "exchange", js: "exchange", typ: u(undefined, "") },
+        { json: "exchange_order_id", js: "exchangeOrderID", typ: u(undefined, u(null, "")) },
+        { json: "exchange_timestamp", js: "exchangeTimestamp", typ: u(undefined, u(Date, null)) },
+        { json: "filled_quantity", js: "filledQuantity", typ: u(undefined, 0) },
+        { json: "instrument_token", js: "instrumentToken", typ: u(undefined, 0) },
+        { json: "order_id", js: "orderID", typ: u(undefined, "") },
+        { json: "order_timestamp", js: "orderTimestamp", typ: u(undefined, Date) },
+        { json: "order_type", js: "orderType", typ: u(undefined, "") },
+        { json: "parent_order_id", js: "parentOrderID", typ: u(undefined, null) },
+        { json: "pending_quantity", js: "pendingQuantity", typ: u(undefined, 0) },
+        { json: "placed_by", js: "placedBy", typ: u(undefined, "") },
+        { json: "price", js: "price", typ: u(undefined, 3.14) },
+        { json: "product", js: "product", typ: u(undefined, "") },
+        { json: "quantity", js: "quantity", typ: u(undefined, 0) },
+        { json: "status", js: "status", typ: u(undefined, "") },
+        { json: "status_message", js: "statusMessage", typ: u(undefined, null) },
+        { json: "tag", js: "tag", typ: u(undefined, null) },
+        { json: "tradingsymbol", js: "tradingsymbol", typ: u(undefined, "") },
+        { json: "transaction_type", js: "transactionType", typ: u(undefined, "") },
+        { json: "trigger_price", js: "triggerPrice", typ: u(undefined, 0) },
+        { json: "validity", js: "validity", typ: u(undefined, "") },
+        { json: "variety", js: "variety", typ: u(undefined, "") },
     ], false),
-    "DatumProperties": o([
-        { json: "average_price", js: "average_price", typ: r("AveragePrice") },
-        { json: "cancelled_quantity", js: "cancelled_quantity", typ: r("AveragePrice") },
-        { json: "disclosed_quantity", js: "disclosed_quantity", typ: r("AveragePrice") },
-        { json: "exchange", js: "exchange", typ: r("AveragePrice") },
-        { json: "exchange_order_id", js: "exchange_order_id", typ: r("ExchangeOrderID") },
-        { json: "exchange_timestamp", js: "exchange_timestamp", typ: r("ExchangeTimestamp") },
-        { json: "filled_quantity", js: "filled_quantity", typ: r("AveragePrice") },
-        { json: "instrument_token", js: "instrument_token", typ: r("AveragePrice") },
-        { json: "order_id", js: "order_id", typ: r("AveragePrice") },
-        { json: "order_timestamp", js: "order_timestamp", typ: r("OrderTimestamp") },
-        { json: "order_type", js: "order_type", typ: r("AveragePrice") },
-        { json: "parent_order_id", js: "parent_order_id", typ: r("AveragePrice") },
-        { json: "pending_quantity", js: "pending_quantity", typ: r("AveragePrice") },
-        { json: "placed_by", js: "placed_by", typ: r("AveragePrice") },
-        { json: "price", js: "price", typ: r("AveragePrice") },
-        { json: "product", js: "product", typ: r("AveragePrice") },
-        { json: "quantity", js: "quantity", typ: r("AveragePrice") },
-        { json: "status", js: "status", typ: r("AveragePrice") },
-        { json: "status_message", js: "status_message", typ: r("AveragePrice") },
-        { json: "tag", js: "tag", typ: r("AveragePrice") },
-        { json: "tradingsymbol", js: "tradingsymbol", typ: r("AveragePrice") },
-        { json: "transaction_type", js: "transaction_type", typ: r("AveragePrice") },
-        { json: "trigger_price", js: "trigger_price", typ: r("AveragePrice") },
-        { json: "validity", js: "validity", typ: r("AveragePrice") },
-        { json: "variety", js: "variety", typ: r("AveragePrice") },
-    ], false),
-    "AveragePrice": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "ExchangeOrderID": o([
-        { json: "anyOf", js: "anyOf", typ: a(r("AveragePrice")) },
-    ], false),
-    "ExchangeTimestamp": o([
-        { json: "anyOf", js: "anyOf", typ: a(r("OrderTimestamp")) },
-    ], false),
-    "OrderTimestamp": o([
-        { json: "format", js: "format", typ: u(undefined, "") },
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "OrderInfoClass": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("OrderInfoProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "OrderInfoProperties": o([
-        { json: "data", js: "data", typ: r("Data") },
-        { json: "status", js: "status", typ: r("AveragePrice") },
-    ], false),
-    "Data": o([
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "Type": [
-        "integer",
-        "null",
-        "number",
-        "string",
-    ],
 };
 
 module.exports = {

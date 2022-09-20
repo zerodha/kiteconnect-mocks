@@ -10,164 +10,63 @@
 // match the expected interface, even if the JSON is valid.
 
 export type GttGetOrder = {
-    $ref:        string;
-    $schema:     string;
-    definitions: Definitions;
-};
-
-export type Definitions = {
-    Condition:   Condition;
-    Data:        Data;
-    GttGetOrder: GttGetOrderClass;
-    Order:       Order;
-    OrderResult: OrderResult;
-    Result:      ResultClass;
-};
-
-export type Condition = {
-    additionalProperties: boolean;
-    properties:           ConditionProperties;
-    required:             string[];
-    title:                string;
-    type:                 string;
-};
-
-export type ConditionProperties = {
-    exchange:         Exchange;
-    instrument_token: Exchange;
-    last_price:       Exchange;
-    tradingsymbol:    Exchange;
-    trigger_values:   TriggerValues;
-};
-
-export type Exchange = {
-    type: Type;
-};
-
-export type Type =
-      "integer"
-    | "null"
-    | "number"
-    | "string";
-
-export type TriggerValues = {
-    items: Exchange;
-    type:  string;
+    data?:   Data;
+    status?: string;
 };
 
 export type Data = {
-    additionalProperties: boolean;
-    properties:           DataProperties;
-    required:             string[];
-    title:                string;
-    type:                 string;
+    condition?:     Condition;
+    createdAt?:     Date;
+    expiresAt?:     Date;
+    id?:            number;
+    meta?:          null;
+    orders?:        Order[];
+    parentTrigger?: null;
+    status?:        string;
+    type?:          string;
+    updatedAt?:     Date;
+    userID?:        string;
 };
 
-export type DataProperties = {
-    condition:      ConditionClass;
-    created_at:     CreatedAt;
-    expires_at:     CreatedAt;
-    id:             Exchange;
-    meta:           Exchange;
-    orders:         Orders;
-    parent_trigger: Exchange;
-    status:         Exchange;
-    type:           Exchange;
-    updated_at:     CreatedAt;
-    user_id:        Exchange;
-};
-
-export type ConditionClass = {
-    $ref: string;
-};
-
-export type CreatedAt = {
-    format: string;
-    type:   Type;
-};
-
-export type Orders = {
-    items: ConditionClass;
-    type:  string;
-};
-
-export type GttGetOrderClass = {
-    additionalProperties: boolean;
-    properties:           GttGetOrderProperties;
-    required:             string[];
-    title:                string;
-    type:                 string;
-};
-
-export type GttGetOrderProperties = {
-    data:   ConditionClass;
-    status: Exchange;
+export type Condition = {
+    exchange?:        string;
+    instrumentToken?: number;
+    lastPrice?:       number;
+    tradingsymbol?:   string;
+    triggerValues?:   number[];
 };
 
 export type Order = {
-    additionalProperties: boolean;
-    properties:           OrderProperties;
-    required:             string[];
-    title:                string;
-    type:                 string;
-};
-
-export type OrderProperties = {
-    exchange:         Exchange;
-    order_type:       Exchange;
-    price:            Exchange;
-    product:          Exchange;
-    quantity:         Exchange;
-    result:           Result;
-    tradingsymbol:    Exchange;
-    transaction_type: Exchange;
+    exchange?:        string;
+    orderType?:       string;
+    price?:           number;
+    product?:         string;
+    quantity?:        number;
+    result?:          Result | null;
+    tradingsymbol?:   string;
+    transactionType?: string;
 };
 
 export type Result = {
-    anyOf: AnyOf[];
-};
-
-export type AnyOf = {
-    $ref?: string;
-    type?: Type;
+    accountID?:       string;
+    exchange?:        string;
+    meta?:            string;
+    orderResult?:     OrderResult;
+    orderType?:       string;
+    price?:           number;
+    product?:         string;
+    quantity?:        number;
+    timestamp?:       Date;
+    tradingsymbol?:   string;
+    transactionType?: string;
+    triggeredAt?:     number;
+    validity?:        string;
 };
 
 export type OrderResult = {
-    additionalProperties: boolean;
-    properties:           OrderResultProperties;
-    required:             string[];
-    title:                string;
-    type:                 string;
-};
-
-export type OrderResultProperties = {
-    order_id:         Exchange;
-    rejection_reason: Exchange;
-    status:           Exchange;
-};
-
-export type ResultClass = {
-    additionalProperties: boolean;
-    properties:           ResultProperties;
-    required:             string[];
-    title:                string;
-    type:                 string;
-};
-
-export type ResultProperties = {
-    account_id:       Exchange;
-    exchange:         Exchange;
-    meta:             Exchange;
-    order_result:     ConditionClass;
-    order_type:       Exchange;
-    price:            Exchange;
-    product:          Exchange;
-    quantity:         Exchange;
-    timestamp:        CreatedAt;
-    tradingsymbol:    Exchange;
-    transaction_type: Exchange;
-    triggered_at:     Exchange;
-    validity:         Exchange;
+    orderID?:         string;
+    rejectionReason?: string;
+    status?:          string;
 };
 
 // Converts JSON strings to/from your types
@@ -314,145 +213,59 @@ function r(name: string) {
 
 const typeMap: any = {
     "GttGetOrder": o([
-        { json: "$ref", js: "$ref", typ: "" },
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "Condition", js: "Condition", typ: r("Condition") },
-        { json: "Data", js: "Data", typ: r("Data") },
-        { json: "GttGetOrder", js: "GttGetOrder", typ: r("GttGetOrderClass") },
-        { json: "Order", js: "Order", typ: r("Order") },
-        { json: "OrderResult", js: "OrderResult", typ: r("OrderResult") },
-        { json: "Result", js: "Result", typ: r("ResultClass") },
-    ], false),
-    "Condition": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ConditionProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "ConditionProperties": o([
-        { json: "exchange", js: "exchange", typ: r("Exchange") },
-        { json: "instrument_token", js: "instrument_token", typ: r("Exchange") },
-        { json: "last_price", js: "last_price", typ: r("Exchange") },
-        { json: "tradingsymbol", js: "tradingsymbol", typ: r("Exchange") },
-        { json: "trigger_values", js: "trigger_values", typ: r("TriggerValues") },
-    ], false),
-    "Exchange": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "TriggerValues": o([
-        { json: "items", js: "items", typ: r("Exchange") },
-        { json: "type", js: "type", typ: "" },
+        { json: "data", js: "data", typ: u(undefined, r("Data")) },
+        { json: "status", js: "status", typ: u(undefined, "") },
     ], false),
     "Data": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DataProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
+        { json: "condition", js: "condition", typ: u(undefined, r("Condition")) },
+        { json: "created_at", js: "createdAt", typ: u(undefined, Date) },
+        { json: "expires_at", js: "expiresAt", typ: u(undefined, Date) },
+        { json: "id", js: "id", typ: u(undefined, 0) },
+        { json: "meta", js: "meta", typ: u(undefined, null) },
+        { json: "orders", js: "orders", typ: u(undefined, a(r("Order"))) },
+        { json: "parent_trigger", js: "parentTrigger", typ: u(undefined, null) },
+        { json: "status", js: "status", typ: u(undefined, "") },
+        { json: "type", js: "type", typ: u(undefined, "") },
+        { json: "updated_at", js: "updatedAt", typ: u(undefined, Date) },
+        { json: "user_id", js: "userID", typ: u(undefined, "") },
     ], false),
-    "DataProperties": o([
-        { json: "condition", js: "condition", typ: r("ConditionClass") },
-        { json: "created_at", js: "created_at", typ: r("CreatedAt") },
-        { json: "expires_at", js: "expires_at", typ: r("CreatedAt") },
-        { json: "id", js: "id", typ: r("Exchange") },
-        { json: "meta", js: "meta", typ: r("Exchange") },
-        { json: "orders", js: "orders", typ: r("Orders") },
-        { json: "parent_trigger", js: "parent_trigger", typ: r("Exchange") },
-        { json: "status", js: "status", typ: r("Exchange") },
-        { json: "type", js: "type", typ: r("Exchange") },
-        { json: "updated_at", js: "updated_at", typ: r("CreatedAt") },
-        { json: "user_id", js: "user_id", typ: r("Exchange") },
-    ], false),
-    "ConditionClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "CreatedAt": o([
-        { json: "format", js: "format", typ: "" },
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Orders": o([
-        { json: "items", js: "items", typ: r("ConditionClass") },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "GttGetOrderClass": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("GttGetOrderProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "GttGetOrderProperties": o([
-        { json: "data", js: "data", typ: r("ConditionClass") },
-        { json: "status", js: "status", typ: r("Exchange") },
+    "Condition": o([
+        { json: "exchange", js: "exchange", typ: u(undefined, "") },
+        { json: "instrument_token", js: "instrumentToken", typ: u(undefined, 0) },
+        { json: "last_price", js: "lastPrice", typ: u(undefined, 3.14) },
+        { json: "tradingsymbol", js: "tradingsymbol", typ: u(undefined, "") },
+        { json: "trigger_values", js: "triggerValues", typ: u(undefined, a(3.14)) },
     ], false),
     "Order": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("OrderProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "OrderProperties": o([
-        { json: "exchange", js: "exchange", typ: r("Exchange") },
-        { json: "order_type", js: "order_type", typ: r("Exchange") },
-        { json: "price", js: "price", typ: r("Exchange") },
-        { json: "product", js: "product", typ: r("Exchange") },
-        { json: "quantity", js: "quantity", typ: r("Exchange") },
-        { json: "result", js: "result", typ: r("Result") },
-        { json: "tradingsymbol", js: "tradingsymbol", typ: r("Exchange") },
-        { json: "transaction_type", js: "transaction_type", typ: r("Exchange") },
+        { json: "exchange", js: "exchange", typ: u(undefined, "") },
+        { json: "order_type", js: "orderType", typ: u(undefined, "") },
+        { json: "price", js: "price", typ: u(undefined, 0) },
+        { json: "product", js: "product", typ: u(undefined, "") },
+        { json: "quantity", js: "quantity", typ: u(undefined, 0) },
+        { json: "result", js: "result", typ: u(undefined, u(r("Result"), null)) },
+        { json: "tradingsymbol", js: "tradingsymbol", typ: u(undefined, "") },
+        { json: "transaction_type", js: "transactionType", typ: u(undefined, "") },
     ], false),
     "Result": o([
-        { json: "anyOf", js: "anyOf", typ: a(r("AnyOf")) },
-    ], false),
-    "AnyOf": o([
-        { json: "$ref", js: "$ref", typ: u(undefined, "") },
-        { json: "type", js: "type", typ: u(undefined, r("Type")) },
+        { json: "account_id", js: "accountID", typ: u(undefined, "") },
+        { json: "exchange", js: "exchange", typ: u(undefined, "") },
+        { json: "meta", js: "meta", typ: u(undefined, "") },
+        { json: "order_result", js: "orderResult", typ: u(undefined, r("OrderResult")) },
+        { json: "order_type", js: "orderType", typ: u(undefined, "") },
+        { json: "price", js: "price", typ: u(undefined, 0) },
+        { json: "product", js: "product", typ: u(undefined, "") },
+        { json: "quantity", js: "quantity", typ: u(undefined, 0) },
+        { json: "timestamp", js: "timestamp", typ: u(undefined, Date) },
+        { json: "tradingsymbol", js: "tradingsymbol", typ: u(undefined, "") },
+        { json: "transaction_type", js: "transactionType", typ: u(undefined, "") },
+        { json: "triggered_at", js: "triggeredAt", typ: u(undefined, 3.14) },
+        { json: "validity", js: "validity", typ: u(undefined, "") },
     ], false),
     "OrderResult": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("OrderResultProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
+        { json: "order_id", js: "orderID", typ: u(undefined, "") },
+        { json: "rejection_reason", js: "rejectionReason", typ: u(undefined, "") },
+        { json: "status", js: "status", typ: u(undefined, "") },
     ], false),
-    "OrderResultProperties": o([
-        { json: "order_id", js: "order_id", typ: r("Exchange") },
-        { json: "rejection_reason", js: "rejection_reason", typ: r("Exchange") },
-        { json: "status", js: "status", typ: r("Exchange") },
-    ], false),
-    "ResultClass": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ResultProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "ResultProperties": o([
-        { json: "account_id", js: "account_id", typ: r("Exchange") },
-        { json: "exchange", js: "exchange", typ: r("Exchange") },
-        { json: "meta", js: "meta", typ: r("Exchange") },
-        { json: "order_result", js: "order_result", typ: r("ConditionClass") },
-        { json: "order_type", js: "order_type", typ: r("Exchange") },
-        { json: "price", js: "price", typ: r("Exchange") },
-        { json: "product", js: "product", typ: r("Exchange") },
-        { json: "quantity", js: "quantity", typ: r("Exchange") },
-        { json: "timestamp", js: "timestamp", typ: r("CreatedAt") },
-        { json: "tradingsymbol", js: "tradingsymbol", typ: r("Exchange") },
-        { json: "transaction_type", js: "transaction_type", typ: r("Exchange") },
-        { json: "triggered_at", js: "triggered_at", typ: r("Exchange") },
-        { json: "validity", js: "validity", typ: r("Exchange") },
-    ], false),
-    "Type": [
-        "integer",
-        "null",
-        "number",
-        "string",
-    ],
 };
 
 module.exports = {

@@ -10,91 +10,36 @@
 // match the expected interface, even if the JSON is valid.
 
 export type MFSIPInfo = {
-    $ref:        string;
-    $schema:     string;
-    definitions: Definitions;
-};
-
-export type Definitions = {
-    Data:      Data;
-    MFSIPInfo: MFSIPInfoClass;
-    StepUp:    StepUpClass;
+    data?:   Data;
+    status?: string;
 };
 
 export type Data = {
-    additionalProperties: boolean;
-    properties:           DataProperties;
-    required:             string[];
-    title:                string;
-    type:                 string;
-};
-
-export type DataProperties = {
-    completed_instalments: CompletedInstalments;
-    created:               Created;
-    dividend_type:         CompletedInstalments;
-    frequency:             CompletedInstalments;
-    fund:                  CompletedInstalments;
-    fund_source:           CompletedInstalments;
-    instalment_amount:     CompletedInstalments;
-    instalment_day:        CompletedInstalments;
-    instalments:           CompletedInstalments;
-    last_instalment:       Created;
-    next_instalment:       Created;
-    pending_instalments:   CompletedInstalments;
-    sip_id:                CompletedInstalments;
-    sip_reg_num:           CompletedInstalments;
-    sip_type:              CompletedInstalments;
-    status:                CompletedInstalments;
-    step_up:               StepUp;
-    tag:                   CompletedInstalments;
-    tradingsymbol:         CompletedInstalments;
-    transaction_type:      CompletedInstalments;
-    trigger_price:         CompletedInstalments;
-};
-
-export type CompletedInstalments = {
-    type: Type;
-};
-
-export type Type =
-      "integer"
-    | "null"
-    | "number"
-    | "string";
-
-export type Created = {
-    format: string;
-    type:   Type;
+    completedInstalments?: number;
+    created?:              Date;
+    dividendType?:         string;
+    frequency?:            string;
+    fund?:                 string;
+    fundSource?:           string;
+    instalmentAmount?:     number;
+    instalmentDay?:        number;
+    instalments?:          number;
+    lastInstalment?:       Date;
+    nextInstalment?:       Date;
+    pendingInstalments?:   number;
+    sipID?:                string;
+    sipRegNum?:            null;
+    sipType?:              string;
+    status?:               string;
+    stepUp?:               StepUp;
+    tag?:                  string;
+    tradingsymbol?:        string;
+    transactionType?:      string;
+    triggerPrice?:         number;
 };
 
 export type StepUp = {
-    $ref: string;
-};
-
-export type MFSIPInfoClass = {
-    additionalProperties: boolean;
-    properties:           MFSIPInfoProperties;
-    required:             string[];
-    title:                string;
-    type:                 string;
-};
-
-export type MFSIPInfoProperties = {
-    data:   StepUp;
-    status: CompletedInstalments;
-};
-
-export type StepUpClass = {
-    additionalProperties: boolean;
-    properties:           StepUpProperties;
-    required:             string[];
-    title:                string;
-    type:                 string;
-};
-
-export type StepUpProperties = {
-    "15-02": CompletedInstalments;
+    the1502?: number;
 };
 
 // Converts JSON strings to/from your types
@@ -241,82 +186,35 @@ function r(name: string) {
 
 const typeMap: any = {
     "MFSIPInfo": o([
-        { json: "$ref", js: "$ref", typ: "" },
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "Data", js: "Data", typ: r("Data") },
-        { json: "MFSIPInfo", js: "MFSIPInfo", typ: r("MFSIPInfoClass") },
-        { json: "StepUp", js: "StepUp", typ: r("StepUpClass") },
+        { json: "data", js: "data", typ: u(undefined, r("Data")) },
+        { json: "status", js: "status", typ: u(undefined, "") },
     ], false),
     "Data": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DataProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "DataProperties": o([
-        { json: "completed_instalments", js: "completed_instalments", typ: r("CompletedInstalments") },
-        { json: "created", js: "created", typ: r("Created") },
-        { json: "dividend_type", js: "dividend_type", typ: r("CompletedInstalments") },
-        { json: "frequency", js: "frequency", typ: r("CompletedInstalments") },
-        { json: "fund", js: "fund", typ: r("CompletedInstalments") },
-        { json: "fund_source", js: "fund_source", typ: r("CompletedInstalments") },
-        { json: "instalment_amount", js: "instalment_amount", typ: r("CompletedInstalments") },
-        { json: "instalment_day", js: "instalment_day", typ: r("CompletedInstalments") },
-        { json: "instalments", js: "instalments", typ: r("CompletedInstalments") },
-        { json: "last_instalment", js: "last_instalment", typ: r("Created") },
-        { json: "next_instalment", js: "next_instalment", typ: r("Created") },
-        { json: "pending_instalments", js: "pending_instalments", typ: r("CompletedInstalments") },
-        { json: "sip_id", js: "sip_id", typ: r("CompletedInstalments") },
-        { json: "sip_reg_num", js: "sip_reg_num", typ: r("CompletedInstalments") },
-        { json: "sip_type", js: "sip_type", typ: r("CompletedInstalments") },
-        { json: "status", js: "status", typ: r("CompletedInstalments") },
-        { json: "step_up", js: "step_up", typ: r("StepUp") },
-        { json: "tag", js: "tag", typ: r("CompletedInstalments") },
-        { json: "tradingsymbol", js: "tradingsymbol", typ: r("CompletedInstalments") },
-        { json: "transaction_type", js: "transaction_type", typ: r("CompletedInstalments") },
-        { json: "trigger_price", js: "trigger_price", typ: r("CompletedInstalments") },
-    ], false),
-    "CompletedInstalments": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Created": o([
-        { json: "format", js: "format", typ: "" },
-        { json: "type", js: "type", typ: r("Type") },
+        { json: "completed_instalments", js: "completedInstalments", typ: u(undefined, 0) },
+        { json: "created", js: "created", typ: u(undefined, Date) },
+        { json: "dividend_type", js: "dividendType", typ: u(undefined, "") },
+        { json: "frequency", js: "frequency", typ: u(undefined, "") },
+        { json: "fund", js: "fund", typ: u(undefined, "") },
+        { json: "fund_source", js: "fundSource", typ: u(undefined, "") },
+        { json: "instalment_amount", js: "instalmentAmount", typ: u(undefined, 0) },
+        { json: "instalment_day", js: "instalmentDay", typ: u(undefined, 0) },
+        { json: "instalments", js: "instalments", typ: u(undefined, 0) },
+        { json: "last_instalment", js: "lastInstalment", typ: u(undefined, Date) },
+        { json: "next_instalment", js: "nextInstalment", typ: u(undefined, Date) },
+        { json: "pending_instalments", js: "pendingInstalments", typ: u(undefined, 0) },
+        { json: "sip_id", js: "sipID", typ: u(undefined, "") },
+        { json: "sip_reg_num", js: "sipRegNum", typ: u(undefined, null) },
+        { json: "sip_type", js: "sipType", typ: u(undefined, "") },
+        { json: "status", js: "status", typ: u(undefined, "") },
+        { json: "step_up", js: "stepUp", typ: u(undefined, r("StepUp")) },
+        { json: "tag", js: "tag", typ: u(undefined, "") },
+        { json: "tradingsymbol", js: "tradingsymbol", typ: u(undefined, "") },
+        { json: "transaction_type", js: "transactionType", typ: u(undefined, "") },
+        { json: "trigger_price", js: "triggerPrice", typ: u(undefined, 0) },
     ], false),
     "StepUp": o([
-        { json: "$ref", js: "$ref", typ: "" },
+        { json: "15-02", js: "the1502", typ: u(undefined, 0) },
     ], false),
-    "MFSIPInfoClass": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("MFSIPInfoProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "MFSIPInfoProperties": o([
-        { json: "data", js: "data", typ: r("StepUp") },
-        { json: "status", js: "status", typ: r("CompletedInstalments") },
-    ], false),
-    "StepUpClass": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("StepUpProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "StepUpProperties": o([
-        { json: "15-02", js: "15-02", typ: r("CompletedInstalments") },
-    ], false),
-    "Type": [
-        "integer",
-        "null",
-        "number",
-        "string",
-    ],
 };
 
 module.exports = {

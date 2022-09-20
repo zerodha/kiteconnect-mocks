@@ -10,97 +10,34 @@
 // match the expected interface, even if the JSON is valid.
 
 export type BasketMargins = {
-    $ref:        string;
-    $schema:     string;
-    definitions: Definitions;
-};
-
-export type Definitions = {
-    BasketMargins: BasketMarginsClass;
-    Data:          DataClass;
-    Final:         Final;
-    Pnl:           Pnl;
-};
-
-export type BasketMarginsClass = {
-    additionalProperties: boolean;
-    properties:           BasketMarginsProperties;
-    required:             string[];
-    title:                string;
-    type:                 string;
-};
-
-export type BasketMarginsProperties = {
-    data:   Data;
-    status: Status;
+    data?:   Data;
+    status?: string;
 };
 
 export type Data = {
-    $ref: string;
-};
-
-export type Status = {
-    type: Type;
-};
-
-export type Type =
-      "integer"
-    | "number"
-    | "string";
-
-export type DataClass = {
-    additionalProperties: boolean;
-    properties:           DataProperties;
-    required:             string[];
-    title:                string;
-    type:                 string;
-};
-
-export type DataProperties = {
-    final:   Data;
-    initial: Data;
-    orders:  Orders;
-};
-
-export type Orders = {
-    items: Data;
-    type:  string;
+    final?:   Final;
+    initial?: Final;
+    orders?:  Final[];
 };
 
 export type Final = {
-    additionalProperties: boolean;
-    properties:           FinalProperties;
-    required:             string[];
-    title:                string;
-    type:                 string;
-};
-
-export type FinalProperties = {
-    additional:     Status;
-    bo:             Status;
-    cash:           Status;
-    exchange:       Status;
-    exposure:       Status;
-    option_premium: Status;
-    pnl:            Data;
-    span:           Status;
-    total:          Status;
-    tradingsymbol:  Status;
-    type:           Status;
-    var:            Status;
+    additional?:    number;
+    bo?:            number;
+    cash?:          number;
+    exchange?:      string;
+    exposure?:      number;
+    optionPremium?: number;
+    pnl?:           Pnl;
+    span?:          number;
+    total?:         number;
+    tradingsymbol?: string;
+    type?:          string;
+    var?:           number;
 };
 
 export type Pnl = {
-    additionalProperties: boolean;
-    properties:           PnlProperties;
-    required:             string[];
-    title:                string;
-    type:                 string;
-};
-
-export type PnlProperties = {
-    realised:   Status;
-    unrealised: Status;
+    realised?:   number;
+    unrealised?: number;
 };
 
 // Converts JSON strings to/from your types
@@ -247,86 +184,32 @@ function r(name: string) {
 
 const typeMap: any = {
     "BasketMargins": o([
-        { json: "$ref", js: "$ref", typ: "" },
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "BasketMargins", js: "BasketMargins", typ: r("BasketMarginsClass") },
-        { json: "Data", js: "Data", typ: r("DataClass") },
-        { json: "Final", js: "Final", typ: r("Final") },
-        { json: "Pnl", js: "Pnl", typ: r("Pnl") },
-    ], false),
-    "BasketMarginsClass": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("BasketMarginsProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "BasketMarginsProperties": o([
-        { json: "data", js: "data", typ: r("Data") },
-        { json: "status", js: "status", typ: r("Status") },
+        { json: "data", js: "data", typ: u(undefined, r("Data")) },
+        { json: "status", js: "status", typ: u(undefined, "") },
     ], false),
     "Data": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "Status": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "DataClass": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DataProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "DataProperties": o([
-        { json: "final", js: "final", typ: r("Data") },
-        { json: "initial", js: "initial", typ: r("Data") },
-        { json: "orders", js: "orders", typ: r("Orders") },
-    ], false),
-    "Orders": o([
-        { json: "items", js: "items", typ: r("Data") },
-        { json: "type", js: "type", typ: "" },
+        { json: "final", js: "final", typ: u(undefined, r("Final")) },
+        { json: "initial", js: "initial", typ: u(undefined, r("Final")) },
+        { json: "orders", js: "orders", typ: u(undefined, a(r("Final"))) },
     ], false),
     "Final": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("FinalProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "FinalProperties": o([
-        { json: "additional", js: "additional", typ: r("Status") },
-        { json: "bo", js: "bo", typ: r("Status") },
-        { json: "cash", js: "cash", typ: r("Status") },
-        { json: "exchange", js: "exchange", typ: r("Status") },
-        { json: "exposure", js: "exposure", typ: r("Status") },
-        { json: "option_premium", js: "option_premium", typ: r("Status") },
-        { json: "pnl", js: "pnl", typ: r("Data") },
-        { json: "span", js: "span", typ: r("Status") },
-        { json: "total", js: "total", typ: r("Status") },
-        { json: "tradingsymbol", js: "tradingsymbol", typ: r("Status") },
-        { json: "type", js: "type", typ: r("Status") },
-        { json: "var", js: "var", typ: r("Status") },
+        { json: "additional", js: "additional", typ: u(undefined, 0) },
+        { json: "bo", js: "bo", typ: u(undefined, 0) },
+        { json: "cash", js: "cash", typ: u(undefined, 0) },
+        { json: "exchange", js: "exchange", typ: u(undefined, "") },
+        { json: "exposure", js: "exposure", typ: u(undefined, 3.14) },
+        { json: "option_premium", js: "optionPremium", typ: u(undefined, 3.14) },
+        { json: "pnl", js: "pnl", typ: u(undefined, r("Pnl")) },
+        { json: "span", js: "span", typ: u(undefined, 3.14) },
+        { json: "total", js: "total", typ: u(undefined, 3.14) },
+        { json: "tradingsymbol", js: "tradingsymbol", typ: u(undefined, "") },
+        { json: "type", js: "type", typ: u(undefined, "") },
+        { json: "var", js: "var", typ: u(undefined, 0) },
     ], false),
     "Pnl": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("PnlProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
+        { json: "realised", js: "realised", typ: u(undefined, 0) },
+        { json: "unrealised", js: "unrealised", typ: u(undefined, 0) },
     ], false),
-    "PnlProperties": o([
-        { json: "realised", js: "realised", typ: r("Status") },
-        { json: "unrealised", js: "unrealised", typ: r("Status") },
-    ], false),
-    "Type": [
-        "integer",
-        "number",
-        "string",
-    ],
 };
 
 module.exports = {

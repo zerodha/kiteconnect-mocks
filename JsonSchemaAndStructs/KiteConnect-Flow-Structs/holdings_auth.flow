@@ -10,47 +10,12 @@
 // match the expected interface, even if the JSON is valid.
 
 export type HoldingsAuth = {
-    $ref:        string;
-    $schema:     string;
-    definitions: Definitions;
-};
-
-export type Definitions = {
-    Data:         Data;
-    HoldingsAuth: HoldingsAuthClass;
+    data?:   Data;
+    status?: string;
 };
 
 export type Data = {
-    additionalProperties: boolean;
-    properties:           DataProperties;
-    required:             string[];
-    title:                string;
-    type:                 string;
-};
-
-export type DataProperties = {
-    request_id: RequestID;
-};
-
-export type RequestID = {
-    type: string;
-};
-
-export type HoldingsAuthClass = {
-    additionalProperties: boolean;
-    properties:           HoldingsAuthProperties;
-    required:             string[];
-    title:                string;
-    type:                 string;
-};
-
-export type HoldingsAuthProperties = {
-    data:   DataClass;
-    status: RequestID;
-};
-
-export type DataClass = {
-    $ref: string;
+    requestID?: string;
 };
 
 // Converts JSON strings to/from your types
@@ -197,40 +162,11 @@ function r(name: string) {
 
 const typeMap: any = {
     "HoldingsAuth": o([
-        { json: "$ref", js: "$ref", typ: "" },
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "Data", js: "Data", typ: r("Data") },
-        { json: "HoldingsAuth", js: "HoldingsAuth", typ: r("HoldingsAuthClass") },
+        { json: "data", js: "data", typ: u(undefined, r("Data")) },
+        { json: "status", js: "status", typ: u(undefined, "") },
     ], false),
     "Data": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DataProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "DataProperties": o([
-        { json: "request_id", js: "request_id", typ: r("RequestID") },
-    ], false),
-    "RequestID": o([
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "HoldingsAuthClass": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("HoldingsAuthProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "HoldingsAuthProperties": o([
-        { json: "data", js: "data", typ: r("DataClass") },
-        { json: "status", js: "status", typ: r("RequestID") },
-    ], false),
-    "DataClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
+        { json: "request_id", js: "requestID", typ: u(undefined, "") },
     ], false),
 };
 

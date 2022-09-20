@@ -10,47 +10,12 @@
 // match the expected interface, even if the JSON is valid.
 
 export type OrderModify = {
-    $ref:        string;
-    $schema:     string;
-    definitions: Definitions;
-};
-
-export type Definitions = {
-    Data:        Data;
-    OrderModify: OrderModifyClass;
+    data?:   Data;
+    status?: string;
 };
 
 export type Data = {
-    additionalProperties: boolean;
-    properties:           DataProperties;
-    required:             string[];
-    title:                string;
-    type:                 string;
-};
-
-export type DataProperties = {
-    order_id: OrderID;
-};
-
-export type OrderID = {
-    type: string;
-};
-
-export type OrderModifyClass = {
-    additionalProperties: boolean;
-    properties:           OrderModifyProperties;
-    required:             string[];
-    title:                string;
-    type:                 string;
-};
-
-export type OrderModifyProperties = {
-    data:   DataClass;
-    status: OrderID;
-};
-
-export type DataClass = {
-    $ref: string;
+    orderID?: string;
 };
 
 // Converts JSON strings to/from your types
@@ -197,40 +162,11 @@ function r(name: string) {
 
 const typeMap: any = {
     "OrderModify": o([
-        { json: "$ref", js: "$ref", typ: "" },
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "Data", js: "Data", typ: r("Data") },
-        { json: "OrderModify", js: "OrderModify", typ: r("OrderModifyClass") },
+        { json: "data", js: "data", typ: u(undefined, r("Data")) },
+        { json: "status", js: "status", typ: u(undefined, "") },
     ], false),
     "Data": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DataProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "DataProperties": o([
-        { json: "order_id", js: "order_id", typ: r("OrderID") },
-    ], false),
-    "OrderID": o([
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "OrderModifyClass": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("OrderModifyProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "OrderModifyProperties": o([
-        { json: "data", js: "data", typ: r("DataClass") },
-        { json: "status", js: "status", typ: r("OrderID") },
-    ], false),
-    "DataClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
+        { json: "order_id", js: "orderID", typ: u(undefined, "") },
     ], false),
 };
 

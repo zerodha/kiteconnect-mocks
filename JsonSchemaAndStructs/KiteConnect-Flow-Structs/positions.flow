@@ -10,67 +10,45 @@
 // match the expected interface, even if the JSON is valid.
 
 export type Positions = {
-    $ref:        string;
-    $schema:     string;
-    definitions: Definitions;
-};
-
-export type Definitions = {
-    Data:      Data;
-    Day:       DayClass;
-    Positions: PositionsClass;
+    data?:   Data;
+    status?: string;
 };
 
 export type Data = {
-    additionalProperties: boolean;
-    properties:           DataProperties;
-    required:             string[];
-    title:                string;
-    type:                 string;
-};
-
-export type DataProperties = {
-    day: Day;
-    net: Day;
+    day?: Day[];
+    net?: Day[];
 };
 
 export type Day = {
-    items: DataClass;
-    type:  string;
-};
-
-export type DataClass = {
-    $ref: string;
-};
-
-export type DayClass = {
-    additionalProperties: boolean;
-    properties:           { [key: string]: Property };
-    required:             string[];
-    title:                string;
-    type:                 string;
-};
-
-export type Property = {
-    type: Type;
-};
-
-export type Type =
-      "integer"
-    | "number"
-    | "string";
-
-export type PositionsClass = {
-    additionalProperties: boolean;
-    properties:           PositionsProperties;
-    required:             string[];
-    title:                string;
-    type:                 string;
-};
-
-export type PositionsProperties = {
-    data:   DataClass;
-    status: Property;
+    averagePrice?:      number;
+    buyM2M?:            number;
+    buyPrice?:          number;
+    buyQuantity?:       number;
+    buyValue?:          number;
+    closePrice?:        number;
+    dayBuyPrice?:       number;
+    dayBuyQuantity?:    number;
+    dayBuyValue?:       number;
+    daySellPrice?:      number;
+    daySellQuantity?:   number;
+    daySellValue?:      number;
+    exchange?:          string;
+    instrumentToken?:   number;
+    lastPrice?:         number;
+    m2M?:               number;
+    multiplier?:        number;
+    overnightQuantity?: number;
+    pnl?:               number;
+    product?:           string;
+    quantity?:          number;
+    realised?:          number;
+    sellM2M?:           number;
+    sellPrice?:         number;
+    sellQuantity?:      number;
+    sellValue?:         number;
+    tradingsymbol?:     string;
+    unrealised?:        number;
+    value?:             number;
 };
 
 // Converts JSON strings to/from your types
@@ -217,59 +195,44 @@ function r(name: string) {
 
 const typeMap: any = {
     "Positions": o([
-        { json: "$ref", js: "$ref", typ: "" },
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "Data", js: "Data", typ: r("Data") },
-        { json: "Day", js: "Day", typ: r("DayClass") },
-        { json: "Positions", js: "Positions", typ: r("PositionsClass") },
+        { json: "data", js: "data", typ: u(undefined, r("Data")) },
+        { json: "status", js: "status", typ: u(undefined, "") },
     ], false),
     "Data": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DataProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "DataProperties": o([
-        { json: "day", js: "day", typ: r("Day") },
-        { json: "net", js: "net", typ: r("Day") },
+        { json: "day", js: "day", typ: u(undefined, a(r("Day"))) },
+        { json: "net", js: "net", typ: u(undefined, a(r("Day"))) },
     ], false),
     "Day": o([
-        { json: "items", js: "items", typ: r("DataClass") },
-        { json: "type", js: "type", typ: "" },
+        { json: "average_price", js: "averagePrice", typ: u(undefined, 3.14) },
+        { json: "buy_m2m", js: "buyM2M", typ: u(undefined, 0) },
+        { json: "buy_price", js: "buyPrice", typ: u(undefined, 3.14) },
+        { json: "buy_quantity", js: "buyQuantity", typ: u(undefined, 0) },
+        { json: "buy_value", js: "buyValue", typ: u(undefined, 0) },
+        { json: "close_price", js: "closePrice", typ: u(undefined, 0) },
+        { json: "day_buy_price", js: "dayBuyPrice", typ: u(undefined, 3.14) },
+        { json: "day_buy_quantity", js: "dayBuyQuantity", typ: u(undefined, 0) },
+        { json: "day_buy_value", js: "dayBuyValue", typ: u(undefined, 0) },
+        { json: "day_sell_price", js: "daySellPrice", typ: u(undefined, 0) },
+        { json: "day_sell_quantity", js: "daySellQuantity", typ: u(undefined, 0) },
+        { json: "day_sell_value", js: "daySellValue", typ: u(undefined, 0) },
+        { json: "exchange", js: "exchange", typ: u(undefined, "") },
+        { json: "instrument_token", js: "instrumentToken", typ: u(undefined, 0) },
+        { json: "last_price", js: "lastPrice", typ: u(undefined, 3.14) },
+        { json: "m2m", js: "m2M", typ: u(undefined, 0) },
+        { json: "multiplier", js: "multiplier", typ: u(undefined, 0) },
+        { json: "overnight_quantity", js: "overnightQuantity", typ: u(undefined, 0) },
+        { json: "pnl", js: "pnl", typ: u(undefined, 0) },
+        { json: "product", js: "product", typ: u(undefined, "") },
+        { json: "quantity", js: "quantity", typ: u(undefined, 0) },
+        { json: "realised", js: "realised", typ: u(undefined, 0) },
+        { json: "sell_m2m", js: "sellM2M", typ: u(undefined, 0) },
+        { json: "sell_price", js: "sellPrice", typ: u(undefined, 0) },
+        { json: "sell_quantity", js: "sellQuantity", typ: u(undefined, 0) },
+        { json: "sell_value", js: "sellValue", typ: u(undefined, 0) },
+        { json: "tradingsymbol", js: "tradingsymbol", typ: u(undefined, "") },
+        { json: "unrealised", js: "unrealised", typ: u(undefined, 0) },
+        { json: "value", js: "value", typ: u(undefined, 0) },
     ], false),
-    "DataClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "DayClass": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: m(r("Property")) },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "Property": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "PositionsClass": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("PositionsProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "PositionsProperties": o([
-        { json: "data", js: "data", typ: r("DataClass") },
-        { json: "status", js: "status", typ: r("Property") },
-    ], false),
-    "Type": [
-        "integer",
-        "number",
-        "string",
-    ],
 };
 
 module.exports = {
