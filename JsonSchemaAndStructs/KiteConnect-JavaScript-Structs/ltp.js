@@ -151,52 +151,12 @@ function r(name) {
 
 const typeMap = {
     "Ltp": o([
-        { json: "$ref", js: "$ref", typ: "" },
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
+        { json: "data", js: "data", typ: u(undefined, m(r("Datum"))) },
+        { json: "status", js: "status", typ: u(undefined, "") },
     ], false),
-    "Definitions": o([
-        { json: "Data", js: "Data", typ: r("Data") },
-        { json: "Ltp", js: "Ltp", typ: r("LtpClass") },
-        { json: "NseInfy", js: "NseInfy", typ: r("NseInfyClass") },
-    ], false),
-    "Data": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DataProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "DataProperties": o([
-        { json: "NSE:INFY", js: "NSE:INFY", typ: r("NseInfy") },
-    ], false),
-    "NseInfy": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "LtpClass": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("LtpProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "LtpProperties": o([
-        { json: "data", js: "data", typ: r("NseInfy") },
-        { json: "status", js: "status", typ: r("Status") },
-    ], false),
-    "Status": o([
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "NseInfyClass": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("NseInfyProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "NseInfyProperties": o([
-        { json: "instrument_token", js: "instrument_token", typ: r("Status") },
-        { json: "last_price", js: "last_price", typ: r("Status") },
+    "Datum": o([
+        { json: "instrument_token", js: "instrument_token", typ: u(undefined, 0) },
+        { json: "last_price", js: "last_price", typ: u(undefined, 3.14) },
     ], false),
 };
 

@@ -151,58 +151,20 @@ function r(name) {
 
 const typeMap = {
     "MFHoldings": o([
-        { json: "$ref", js: "$ref", typ: "" },
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "Datum", js: "Datum", typ: r("Datum") },
-        { json: "MFHoldings", js: "MFHoldings", typ: r("MFHoldingsClass") },
+        { json: "data", js: "data", typ: u(undefined, a(r("Datum"))) },
+        { json: "status", js: "status", typ: u(undefined, "") },
     ], false),
     "Datum": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DatumProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
+        { json: "average_price", js: "average_price", typ: u(undefined, 3.14) },
+        { json: "folio", js: "folio", typ: u(undefined, "") },
+        { json: "fund", js: "fund", typ: u(undefined, "") },
+        { json: "last_price", js: "last_price", typ: u(undefined, 3.14) },
+        { json: "last_price_date", js: "last_price_date", typ: u(undefined, "") },
+        { json: "pledged_quantity", js: "pledged_quantity", typ: u(undefined, 0) },
+        { json: "pnl", js: "pnl", typ: u(undefined, 0) },
+        { json: "quantity", js: "quantity", typ: u(undefined, 3.14) },
+        { json: "tradingsymbol", js: "tradingsymbol", typ: u(undefined, "") },
     ], false),
-    "DatumProperties": o([
-        { json: "average_price", js: "average_price", typ: r("AveragePrice") },
-        { json: "folio", js: "folio", typ: r("AveragePrice") },
-        { json: "fund", js: "fund", typ: r("AveragePrice") },
-        { json: "last_price", js: "last_price", typ: r("AveragePrice") },
-        { json: "last_price_date", js: "last_price_date", typ: r("AveragePrice") },
-        { json: "pledged_quantity", js: "pledged_quantity", typ: r("AveragePrice") },
-        { json: "pnl", js: "pnl", typ: r("AveragePrice") },
-        { json: "quantity", js: "quantity", typ: r("AveragePrice") },
-        { json: "tradingsymbol", js: "tradingsymbol", typ: r("AveragePrice") },
-    ], false),
-    "AveragePrice": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "MFHoldingsClass": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("MFHoldingsProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "MFHoldingsProperties": o([
-        { json: "data", js: "data", typ: r("Data") },
-        { json: "status", js: "status", typ: r("AveragePrice") },
-    ], false),
-    "Data": o([
-        { json: "items", js: "items", typ: r("Items") },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "Items": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "Type": [
-        "integer",
-        "number",
-        "string",
-    ],
 };
 
 module.exports = {

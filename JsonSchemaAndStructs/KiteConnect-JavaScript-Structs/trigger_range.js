@@ -151,54 +151,13 @@ function r(name) {
 
 const typeMap = {
     "TriggerRange": o([
-        { json: "$ref", js: "$ref", typ: "" },
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
+        { json: "data", js: "data", typ: u(undefined, m(r("Datum"))) },
+        { json: "status", js: "status", typ: u(undefined, "") },
     ], false),
-    "Definitions": o([
-        { json: "Data", js: "Data", typ: r("Data") },
-        { json: "Nse", js: "Nse", typ: r("Nse") },
-        { json: "TriggerRange", js: "TriggerRange", typ: r("TriggerRangeClass") },
-    ], false),
-    "Data": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DataProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "DataProperties": o([
-        { json: "NSE:INFY", js: "NSE:INFY", typ: r("NseInfy") },
-        { json: "NSE:RELIANCE", js: "NSE:RELIANCE", typ: r("NseInfy") },
-    ], false),
-    "NseInfy": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "Nse": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("NseProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "NseProperties": o([
-        { json: "instrument_token", js: "instrument_token", typ: r("InstrumentToken") },
-        { json: "lower", js: "lower", typ: r("InstrumentToken") },
-        { json: "upper", js: "upper", typ: r("InstrumentToken") },
-    ], false),
-    "InstrumentToken": o([
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "TriggerRangeClass": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("TriggerRangeProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "TriggerRangeProperties": o([
-        { json: "data", js: "data", typ: r("NseInfy") },
-        { json: "status", js: "status", typ: r("InstrumentToken") },
+    "Datum": o([
+        { json: "instrument_token", js: "instrument_token", typ: u(undefined, 0) },
+        { json: "lower", js: "lower", typ: u(undefined, 3.14) },
+        { json: "upper", js: "upper", typ: u(undefined, 3.14) },
     ], false),
 };
 

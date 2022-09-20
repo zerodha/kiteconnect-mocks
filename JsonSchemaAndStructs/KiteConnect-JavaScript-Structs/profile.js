@@ -151,70 +151,25 @@ function r(name) {
 
 const typeMap = {
     "Profile": o([
-        { json: "$ref", js: "$ref", typ: "" },
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "Data", js: "Data", typ: r("Data") },
-        { json: "Meta", js: "Meta", typ: r("MetaClass") },
-        { json: "Profile", js: "Profile", typ: r("ProfileClass") },
+        { json: "data", js: "data", typ: u(undefined, r("Data")) },
+        { json: "status", js: "status", typ: u(undefined, "") },
     ], false),
     "Data": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DataProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "DataProperties": o([
-        { json: "avatar_url", js: "avatar_url", typ: r("AvatarURL") },
-        { json: "broker", js: "broker", typ: r("AvatarURL") },
-        { json: "email", js: "email", typ: r("AvatarURL") },
-        { json: "exchanges", js: "exchanges", typ: r("Exchanges") },
-        { json: "meta", js: "meta", typ: r("Meta") },
-        { json: "order_types", js: "order_types", typ: r("Exchanges") },
-        { json: "products", js: "products", typ: r("Exchanges") },
-        { json: "user_id", js: "user_id", typ: r("AvatarURL") },
-        { json: "user_name", js: "user_name", typ: r("AvatarURL") },
-        { json: "user_shortname", js: "user_shortname", typ: r("AvatarURL") },
-        { json: "user_type", js: "user_type", typ: r("AvatarURL") },
-    ], false),
-    "AvatarURL": o([
-        { json: "type", js: "type", typ: r("Type") },
-    ], false),
-    "Exchanges": o([
-        { json: "items", js: "items", typ: r("AvatarURL") },
-        { json: "type", js: "type", typ: "" },
+        { json: "avatar_url", js: "avatar_url", typ: u(undefined, null) },
+        { json: "broker", js: "broker", typ: u(undefined, "") },
+        { json: "email", js: "email", typ: u(undefined, "") },
+        { json: "exchanges", js: "exchanges", typ: u(undefined, a("")) },
+        { json: "meta", js: "meta", typ: u(undefined, r("Meta")) },
+        { json: "order_types", js: "order_types", typ: u(undefined, a("")) },
+        { json: "products", js: "products", typ: u(undefined, a("")) },
+        { json: "user_id", js: "user_id", typ: u(undefined, "") },
+        { json: "user_name", js: "user_name", typ: u(undefined, "") },
+        { json: "user_shortname", js: "user_shortname", typ: u(undefined, "") },
+        { json: "user_type", js: "user_type", typ: u(undefined, "") },
     ], false),
     "Meta": o([
-        { json: "$ref", js: "$ref", typ: "" },
+        { json: "demat_consent", js: "demat_consent", typ: u(undefined, "") },
     ], false),
-    "MetaClass": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("MetaProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "MetaProperties": o([
-        { json: "demat_consent", js: "demat_consent", typ: r("AvatarURL") },
-    ], false),
-    "ProfileClass": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ProfileProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "ProfileProperties": o([
-        { json: "data", js: "data", typ: r("Meta") },
-        { json: "status", js: "status", typ: r("AvatarURL") },
-    ], false),
-    "Type": [
-        "null",
-        "string",
-    ],
 };
 
 module.exports = {

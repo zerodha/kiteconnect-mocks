@@ -151,75 +151,26 @@ function r(name) {
 
 const typeMap = {
     "Margins": o([
-        { json: "$ref", js: "$ref", typ: "" },
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "Available", js: "Available", typ: r("Available") },
-        { json: "Data", js: "Data", typ: r("Data") },
-        { json: "Ity", js: "Ity", typ: r("Ity") },
-        { json: "Margins", js: "Margins", typ: r("MarginsClass") },
-    ], false),
-    "Available": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("AvailableProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "AvailableProperties": o([
-        { json: "adhoc_margin", js: "adhoc_margin", typ: r("AdhocMargin") },
-        { json: "cash", js: "cash", typ: r("AdhocMargin") },
-        { json: "collateral", js: "collateral", typ: r("AdhocMargin") },
-        { json: "intraday_payin", js: "intraday_payin", typ: r("AdhocMargin") },
-        { json: "live_balance", js: "live_balance", typ: r("AdhocMargin") },
-        { json: "opening_balance", js: "opening_balance", typ: r("AdhocMargin") },
-    ], false),
-    "AdhocMargin": o([
-        { json: "type", js: "type", typ: "" },
+        { json: "data", js: "data", typ: u(undefined, r("Data")) },
+        { json: "status", js: "status", typ: u(undefined, "") },
     ], false),
     "Data": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DataProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "DataProperties": o([
-        { json: "commodity", js: "commodity", typ: r("Commodity") },
-        { json: "equity", js: "equity", typ: r("Commodity") },
-    ], false),
-    "Commodity": o([
-        { json: "$ref", js: "$ref", typ: "" },
+        { json: "commodity", js: "commodity", typ: u(undefined, r("Ity")) },
+        { json: "equity", js: "equity", typ: u(undefined, r("Ity")) },
     ], false),
     "Ity": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("ItyProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
+        { json: "available", js: "available", typ: u(undefined, r("Available")) },
+        { json: "enabled", js: "enabled", typ: u(undefined, true) },
+        { json: "net", js: "net", typ: u(undefined, 3.14) },
+        { json: "utilised", js: "utilised", typ: u(undefined, m(3.14)) },
     ], false),
-    "ItyProperties": o([
-        { json: "available", js: "available", typ: r("Commodity") },
-        { json: "enabled", js: "enabled", typ: r("AdhocMargin") },
-        { json: "net", js: "net", typ: r("AdhocMargin") },
-        { json: "utilised", js: "utilised", typ: r("Utilised") },
-    ], false),
-    "Utilised": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: r("AdhocMargin") },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "MarginsClass": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("MarginsProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "MarginsProperties": o([
-        { json: "data", js: "data", typ: r("Commodity") },
-        { json: "status", js: "status", typ: r("AdhocMargin") },
+    "Available": o([
+        { json: "adhoc_margin", js: "adhoc_margin", typ: u(undefined, 0) },
+        { json: "cash", js: "cash", typ: u(undefined, 3.14) },
+        { json: "collateral", js: "collateral", typ: u(undefined, 0) },
+        { json: "intraday_payin", js: "intraday_payin", typ: u(undefined, 0) },
+        { json: "live_balance", js: "live_balance", typ: u(undefined, 3.14) },
+        { json: "opening_balance", js: "opening_balance", typ: u(undefined, 3.14) },
     ], false),
 };
 

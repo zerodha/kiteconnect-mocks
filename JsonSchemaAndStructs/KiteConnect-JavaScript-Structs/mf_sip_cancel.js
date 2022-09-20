@@ -151,40 +151,11 @@ function r(name) {
 
 const typeMap = {
     "MFSIPCancel": o([
-        { json: "$ref", js: "$ref", typ: "" },
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "Data", js: "Data", typ: r("Data") },
-        { json: "MFSIPCancel", js: "MFSIPCancel", typ: r("MFSIPCancelClass") },
+        { json: "data", js: "data", typ: u(undefined, r("Data")) },
+        { json: "status", js: "status", typ: u(undefined, "") },
     ], false),
     "Data": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DataProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "DataProperties": o([
-        { json: "sip_id", js: "sip_id", typ: r("Sipid") },
-    ], false),
-    "Sipid": o([
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "MFSIPCancelClass": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("MFSIPCancelProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "MFSIPCancelProperties": o([
-        { json: "data", js: "data", typ: r("DataClass") },
-        { json: "status", js: "status", typ: r("Sipid") },
-    ], false),
-    "DataClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
+        { json: "sip_id", js: "sip_id", typ: u(undefined, "") },
     ], false),
 };
 

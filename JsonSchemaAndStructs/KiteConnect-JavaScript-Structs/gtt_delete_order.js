@@ -151,40 +151,11 @@ function r(name) {
 
 const typeMap = {
     "GttDeleteOrder": o([
-        { json: "$ref", js: "$ref", typ: "" },
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "Data", js: "Data", typ: r("Data") },
-        { json: "GttDeleteOrder", js: "GttDeleteOrder", typ: r("GttDeleteOrderClass") },
+        { json: "data", js: "data", typ: u(undefined, r("Data")) },
+        { json: "status", js: "status", typ: u(undefined, "") },
     ], false),
     "Data": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DataProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "DataProperties": o([
-        { json: "trigger_id", js: "trigger_id", typ: r("TriggerID") },
-    ], false),
-    "TriggerID": o([
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "GttDeleteOrderClass": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("GttDeleteOrderProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "GttDeleteOrderProperties": o([
-        { json: "data", js: "data", typ: r("DataClass") },
-        { json: "status", js: "status", typ: r("TriggerID") },
-    ], false),
-    "DataClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
+        { json: "trigger_id", js: "trigger_id", typ: u(undefined, 0) },
     ], false),
 };
 

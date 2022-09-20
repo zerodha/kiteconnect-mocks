@@ -151,40 +151,11 @@ function r(name) {
 
 const typeMap = {
     "MFSIPModify": o([
-        { json: "$ref", js: "$ref", typ: "" },
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "Data", js: "Data", typ: r("Data") },
-        { json: "MFSIPModify", js: "MFSIPModify", typ: r("MFSIPModifyClass") },
+        { json: "data", js: "data", typ: u(undefined, r("Data")) },
+        { json: "status", js: "status", typ: u(undefined, "") },
     ], false),
     "Data": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DataProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "DataProperties": o([
-        { json: "sip_id", js: "sip_id", typ: r("Sipid") },
-    ], false),
-    "Sipid": o([
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "MFSIPModifyClass": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("MFSIPModifyProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "MFSIPModifyProperties": o([
-        { json: "data", js: "data", typ: r("DataClass") },
-        { json: "status", js: "status", typ: r("Sipid") },
-    ], false),
-    "DataClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
+        { json: "sip_id", js: "sip_id", typ: u(undefined, "") },
     ], false),
 };
 

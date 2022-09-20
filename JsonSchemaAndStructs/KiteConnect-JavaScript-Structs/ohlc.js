@@ -151,67 +151,19 @@ function r(name) {
 
 const typeMap = {
     "Ohlc": o([
-        { json: "$ref", js: "$ref", typ: "" },
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
+        { json: "data", js: "data", typ: u(undefined, m(r("Datum"))) },
+        { json: "status", js: "status", typ: u(undefined, "") },
     ], false),
-    "Definitions": o([
-        { json: "Data", js: "Data", typ: r("Data") },
-        { json: "NseInfy", js: "NseInfy", typ: r("NseInfyClass") },
-        { json: "Ohlc", js: "Ohlc", typ: r("OhlcClass") },
-        { json: "OhlcClass", js: "OhlcClass", typ: r("OhlcClassClass") },
-    ], false),
-    "Data": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DataProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "DataProperties": o([
-        { json: "NSE:INFY", js: "NSE:INFY", typ: r("NseInfy") },
-    ], false),
-    "NseInfy": o([
-        { json: "$ref", js: "$ref", typ: "" },
-    ], false),
-    "NseInfyClass": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("NseInfyProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "NseInfyProperties": o([
-        { json: "instrument_token", js: "instrument_token", typ: r("InstrumentToken") },
-        { json: "last_price", js: "last_price", typ: r("InstrumentToken") },
-        { json: "ohlc", js: "ohlc", typ: r("NseInfy") },
-    ], false),
-    "InstrumentToken": o([
-        { json: "type", js: "type", typ: "" },
+    "Datum": o([
+        { json: "instrument_token", js: "instrument_token", typ: u(undefined, 0) },
+        { json: "last_price", js: "last_price", typ: u(undefined, 0) },
+        { json: "ohlc", js: "ohlc", typ: u(undefined, r("OhlcClass")) },
     ], false),
     "OhlcClass": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("OhlcProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "OhlcProperties": o([
-        { json: "data", js: "data", typ: r("NseInfy") },
-        { json: "status", js: "status", typ: r("InstrumentToken") },
-    ], false),
-    "OhlcClassClass": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("OhlcClassProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "OhlcClassProperties": o([
-        { json: "close", js: "close", typ: r("InstrumentToken") },
-        { json: "high", js: "high", typ: r("InstrumentToken") },
-        { json: "low", js: "low", typ: r("InstrumentToken") },
-        { json: "open", js: "open", typ: r("InstrumentToken") },
+        { json: "close", js: "close", typ: u(undefined, 3.14) },
+        { json: "high", js: "high", typ: u(undefined, 3.14) },
+        { json: "low", js: "low", typ: u(undefined, 3.14) },
+        { json: "open", js: "open", typ: u(undefined, 3.14) },
     ], false),
 };
 

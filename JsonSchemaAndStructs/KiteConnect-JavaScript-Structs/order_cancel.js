@@ -151,40 +151,11 @@ function r(name) {
 
 const typeMap = {
     "OrderCancel": o([
-        { json: "$ref", js: "$ref", typ: "" },
-        { json: "$schema", js: "$schema", typ: "" },
-        { json: "definitions", js: "definitions", typ: r("Definitions") },
-    ], false),
-    "Definitions": o([
-        { json: "Data", js: "Data", typ: r("Data") },
-        { json: "OrderCancel", js: "OrderCancel", typ: r("OrderCancelClass") },
+        { json: "data", js: "data", typ: u(undefined, r("Data")) },
+        { json: "status", js: "status", typ: u(undefined, "") },
     ], false),
     "Data": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("DataProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "DataProperties": o([
-        { json: "order_id", js: "order_id", typ: r("OrderID") },
-    ], false),
-    "OrderID": o([
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "OrderCancelClass": o([
-        { json: "additionalProperties", js: "additionalProperties", typ: true },
-        { json: "properties", js: "properties", typ: r("OrderCancelProperties") },
-        { json: "required", js: "required", typ: a("") },
-        { json: "title", js: "title", typ: "" },
-        { json: "type", js: "type", typ: "" },
-    ], false),
-    "OrderCancelProperties": o([
-        { json: "data", js: "data", typ: r("DataClass") },
-        { json: "status", js: "status", typ: r("OrderID") },
-    ], false),
-    "DataClass": o([
-        { json: "$ref", js: "$ref", typ: "" },
+        { json: "order_id", js: "order_id", typ: u(undefined, "") },
     ], false),
 };
 
