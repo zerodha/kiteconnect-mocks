@@ -4,7 +4,7 @@
 //    orderInfo, err := UnmarshalOrderInfo(bytes)
 //    bytes, err = orderInfo.Marshal()
 
-package main
+package OrderInfo
 
 import "encoding/json"
 
@@ -19,95 +19,34 @@ func (r *OrderInfo) Marshal() ([]byte, error) {
 }
 
 type OrderInfo struct {
-	Ref         string      `json:"$ref"`       
-	Schema      string      `json:"$schema"`    
-	Definitions Definitions `json:"definitions"`
-}
-
-type Definitions struct {
-	Datum     Datum          `json:"Datum"`    
-	OrderInfo OrderInfoClass `json:"OrderInfo"`
+	Data   []Datum `json:"data,omitempty"`  
+	Status *string `json:"status,omitempty"`
 }
 
 type Datum struct {
-	AdditionalProperties bool            `json:"additionalProperties"`
-	Properties           DatumProperties `json:"properties"`          
-	Required             []string        `json:"required"`            
-	Title                string          `json:"title"`               
-	Type                 string          `json:"type"`                
+	AveragePrice      *int64      `json:"average_price,omitempty"`     
+	CancelledQuantity *int64      `json:"cancelled_quantity,omitempty"`
+	DisclosedQuantity *int64      `json:"disclosed_quantity,omitempty"`
+	Exchange          *string     `json:"exchange,omitempty"`          
+	ExchangeOrderID   *string     `json:"exchange_order_id"`           
+	ExchangeTimestamp *string     `json:"exchange_timestamp"`          
+	FilledQuantity    *int64      `json:"filled_quantity,omitempty"`   
+	InstrumentToken   *int64      `json:"instrument_token,omitempty"`  
+	OrderID           *string     `json:"order_id,omitempty"`          
+	OrderTimestamp    *string     `json:"order_timestamp,omitempty"`   
+	OrderType         *string     `json:"order_type,omitempty"`        
+	ParentOrderID     interface{} `json:"parent_order_id"`             
+	PendingQuantity   *int64      `json:"pending_quantity,omitempty"`  
+	PlacedBy          *string     `json:"placed_by,omitempty"`         
+	Price             *float64    `json:"price,omitempty"`             
+	Product           *string     `json:"product,omitempty"`           
+	Quantity          *int64      `json:"quantity,omitempty"`          
+	Status            *string     `json:"status,omitempty"`            
+	StatusMessage     interface{} `json:"status_message"`              
+	Tag               interface{} `json:"tag"`                         
+	Tradingsymbol     *string     `json:"tradingsymbol,omitempty"`     
+	TransactionType   *string     `json:"transaction_type,omitempty"`  
+	TriggerPrice      *int64      `json:"trigger_price,omitempty"`     
+	Validity          *string     `json:"validity,omitempty"`          
+	Variety           *string     `json:"variety,omitempty"`           
 }
-
-type DatumProperties struct {
-	AveragePrice      AveragePrice      `json:"average_price"`     
-	CancelledQuantity AveragePrice      `json:"cancelled_quantity"`
-	DisclosedQuantity AveragePrice      `json:"disclosed_quantity"`
-	Exchange          AveragePrice      `json:"exchange"`          
-	ExchangeOrderID   ExchangeOrderID   `json:"exchange_order_id"` 
-	ExchangeTimestamp ExchangeTimestamp `json:"exchange_timestamp"`
-	FilledQuantity    AveragePrice      `json:"filled_quantity"`   
-	InstrumentToken   AveragePrice      `json:"instrument_token"`  
-	OrderID           AveragePrice      `json:"order_id"`          
-	OrderTimestamp    OrderTimestamp    `json:"order_timestamp"`   
-	OrderType         AveragePrice      `json:"order_type"`        
-	ParentOrderID     AveragePrice      `json:"parent_order_id"`   
-	PendingQuantity   AveragePrice      `json:"pending_quantity"`  
-	PlacedBy          AveragePrice      `json:"placed_by"`         
-	Price             AveragePrice      `json:"price"`             
-	Product           AveragePrice      `json:"product"`           
-	Quantity          AveragePrice      `json:"quantity"`          
-	Status            AveragePrice      `json:"status"`            
-	StatusMessage     AveragePrice      `json:"status_message"`    
-	Tag               AveragePrice      `json:"tag"`               
-	Tradingsymbol     AveragePrice      `json:"tradingsymbol"`     
-	TransactionType   AveragePrice      `json:"transaction_type"`  
-	TriggerPrice      AveragePrice      `json:"trigger_price"`     
-	Validity          AveragePrice      `json:"validity"`          
-	Variety           AveragePrice      `json:"variety"`           
-}
-
-type AveragePrice struct {
-	Type Type `json:"type"`
-}
-
-type ExchangeOrderID struct {
-	AnyOf []AveragePrice `json:"anyOf"`
-}
-
-type ExchangeTimestamp struct {
-	AnyOf []OrderTimestamp `json:"anyOf"`
-}
-
-type OrderTimestamp struct {
-	Format *string `json:"format,omitempty"`
-	Type   Type    `json:"type"`            
-}
-
-type OrderInfoClass struct {
-	AdditionalProperties bool                `json:"additionalProperties"`
-	Properties           OrderInfoProperties `json:"properties"`          
-	Required             []string            `json:"required"`            
-	Title                string              `json:"title"`               
-	Type                 string              `json:"type"`                
-}
-
-type OrderInfoProperties struct {
-	Data   Data         `json:"data"`  
-	Status AveragePrice `json:"status"`
-}
-
-type Data struct {
-	Items Items  `json:"items"`
-	Type  string `json:"type"` 
-}
-
-type Items struct {
-	Ref string `json:"$ref"`
-}
-
-type Type string
-const (
-	Integer Type = "integer"
-	Null Type = "null"
-	Number Type = "number"
-	String Type = "string"
-)

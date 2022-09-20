@@ -4,7 +4,7 @@
 //    quote, err := UnmarshalQuote(bytes)
 //    bytes, err = quote.Marshal()
 
-package main
+package Quote
 
 import "encoding/json"
 
@@ -19,136 +19,44 @@ func (r *Quote) Marshal() ([]byte, error) {
 }
 
 type Quote struct {
-	Ref         string      `json:"$ref"`       
-	Schema      string      `json:"$schema"`    
-	Definitions Definitions `json:"definitions"`
+	Data   map[string]Datum `json:"data,omitempty"`  
+	Status *string          `json:"status,omitempty"`
 }
 
-type Definitions struct {
-	Buy     Buy          `json:"Buy"`    
-	Data    Data         `json:"Data"`   
-	Depth   Depth        `json:"Depth"`  
-	NseInfy NseInfyClass `json:"NseInfy"`
-	Ohlc    Ohlc         `json:"Ohlc"`   
-	Quote   QuoteClass   `json:"Quote"`  
-}
-
-type Buy struct {
-	AdditionalProperties bool          `json:"additionalProperties"`
-	Properties           BuyProperties `json:"properties"`          
-	Required             []string      `json:"required"`            
-	Title                string        `json:"title"`               
-	Type                 string        `json:"type"`                
-}
-
-type BuyProperties struct {
-	Orders   Orders `json:"orders"`  
-	Price    Orders `json:"price"`   
-	Quantity Orders `json:"quantity"`
-}
-
-type Orders struct {
-	Type Type `json:"type"`
-}
-
-type Data struct {
-	AdditionalProperties bool           `json:"additionalProperties"`
-	Properties           DataProperties `json:"properties"`          
-	Required             []string       `json:"required"`            
-	Title                string         `json:"title"`               
-	Type                 string         `json:"type"`                
-}
-
-type DataProperties struct {
-	NseInfy NseInfy `json:"NSE:INFY"`
-}
-
-type NseInfy struct {
-	Ref string `json:"$ref"`
+type Datum struct {
+	AveragePrice      *float64 `json:"average_price,omitempty"`      
+	BuyQuantity       *int64   `json:"buy_quantity,omitempty"`       
+	Depth             *Depth   `json:"depth,omitempty"`              
+	InstrumentToken   *int64   `json:"instrument_token,omitempty"`   
+	LastPrice         *float64 `json:"last_price,omitempty"`         
+	LastQuantity      *int64   `json:"last_quantity,omitempty"`      
+	LastTradeTime     *string  `json:"last_trade_time,omitempty"`    
+	LowerCircuitLimit *float64 `json:"lower_circuit_limit,omitempty"`
+	NetChange         *int64   `json:"net_change,omitempty"`         
+	Ohlc              *Ohlc    `json:"ohlc,omitempty"`               
+	Oi                *int64   `json:"oi,omitempty"`                 
+	OiDayHigh         *int64   `json:"oi_day_high,omitempty"`        
+	OiDayLow          *int64   `json:"oi_day_low,omitempty"`         
+	SellQuantity      *int64   `json:"sell_quantity,omitempty"`      
+	Timestamp         *string  `json:"timestamp,omitempty"`          
+	UpperCircuitLimit *float64 `json:"upper_circuit_limit,omitempty"`
+	Volume            *int64   `json:"volume,omitempty"`             
 }
 
 type Depth struct {
-	AdditionalProperties bool            `json:"additionalProperties"`
-	Properties           DepthProperties `json:"properties"`          
-	Required             []string        `json:"required"`            
-	Title                string          `json:"title"`               
-	Type                 string          `json:"type"`                
+	Buy  []Buy `json:"buy,omitempty"` 
+	Sell []Buy `json:"sell,omitempty"`
 }
 
-type DepthProperties struct {
-	Buy  BuyClass `json:"buy"` 
-	Sell BuyClass `json:"sell"`
-}
-
-type BuyClass struct {
-	Items NseInfy `json:"items"`
-	Type  string  `json:"type"` 
-}
-
-type NseInfyClass struct {
-	AdditionalProperties bool              `json:"additionalProperties"`
-	Properties           NseInfyProperties `json:"properties"`          
-	Required             []string          `json:"required"`            
-	Title                string            `json:"title"`               
-	Type                 string            `json:"type"`                
-}
-
-type NseInfyProperties struct {
-	AveragePrice      Orders        `json:"average_price"`      
-	BuyQuantity       Orders        `json:"buy_quantity"`       
-	Depth             NseInfy       `json:"depth"`              
-	InstrumentToken   Orders        `json:"instrument_token"`   
-	LastPrice         Orders        `json:"last_price"`         
-	LastQuantity      Orders        `json:"last_quantity"`      
-	LastTradeTime     LastTradeTime `json:"last_trade_time"`    
-	LowerCircuitLimit Orders        `json:"lower_circuit_limit"`
-	NetChange         Orders        `json:"net_change"`         
-	Ohlc              NseInfy       `json:"ohlc"`               
-	Oi                Orders        `json:"oi"`                 
-	OiDayHigh         Orders        `json:"oi_day_high"`        
-	OiDayLow          Orders        `json:"oi_day_low"`         
-	SellQuantity      Orders        `json:"sell_quantity"`      
-	Timestamp         LastTradeTime `json:"timestamp"`          
-	UpperCircuitLimit Orders        `json:"upper_circuit_limit"`
-	Volume            Orders        `json:"volume"`             
-}
-
-type LastTradeTime struct {
-	Format string `json:"format"`
-	Type   Type   `json:"type"`  
+type Buy struct {
+	Orders   *int64   `json:"orders,omitempty"`  
+	Price    *float64 `json:"price,omitempty"`   
+	Quantity *int64   `json:"quantity,omitempty"`
 }
 
 type Ohlc struct {
-	AdditionalProperties bool           `json:"additionalProperties"`
-	Properties           OhlcProperties `json:"properties"`          
-	Required             []string       `json:"required"`            
-	Title                string         `json:"title"`               
-	Type                 string         `json:"type"`                
+	Close *float64 `json:"close,omitempty"`
+	High  *float64 `json:"high,omitempty"` 
+	Low   *float64 `json:"low,omitempty"`  
+	Open  *int64   `json:"open,omitempty"` 
 }
-
-type OhlcProperties struct {
-	Close Orders `json:"close"`
-	High  Orders `json:"high"` 
-	Low   Orders `json:"low"`  
-	Open  Orders `json:"open"` 
-}
-
-type QuoteClass struct {
-	AdditionalProperties bool            `json:"additionalProperties"`
-	Properties           QuoteProperties `json:"properties"`          
-	Required             []string        `json:"required"`            
-	Title                string          `json:"title"`               
-	Type                 string          `json:"type"`                
-}
-
-type QuoteProperties struct {
-	Data   NseInfy `json:"data"`  
-	Status Orders  `json:"status"`
-}
-
-type Type string
-const (
-	Integer Type = "integer"
-	Number Type = "number"
-	String Type = "string"
-)

@@ -1,18 +1,10 @@
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE OverloadedStrings #-}
 
-module QuickType
+module Positions
     ( Positions (..)
-    , Definitions (..)
-    , DayClass (..)
-    , Property (..)
     , Data (..)
-    , DataProperties (..)
     , Day (..)
-    , DataClass (..)
-    , PositionsClass (..)
-    , PositionsProperties (..)
-    , Type (..)
     , decodeTopLevel
     ) where
 
@@ -24,219 +16,136 @@ import Data.Text (Text)
 import Data.Vector (Vector)
 
 data Positions = Positions
-    { refPositions :: Text
-    , schemaPositions :: Text
-    , definitionsPositions :: Definitions
+    { positionsDataPositions :: Maybe Data
+    , statusPositions :: Maybe Text
     } deriving (Show)
-
-data Definitions = Definitions
-    { definitionsDataDefinitions :: Data
-    , dayDefinitions :: DayClass
-    , positionsDefinitions :: PositionsClass
-    } deriving (Show)
-
-data DayClass = DayClass
-    { additionalPropertiesDayClass :: Bool
-    , propertiesDayClass :: HashMap Text Property
-    , requiredDayClass :: Vector Text
-    , titleDayClass :: Text
-    , dayClassTypeDayClass :: Text
-    } deriving (Show)
-
-data Property = Property
-    { propertyTypeProperty :: Type
-    } deriving (Show)
-
-data Type
-    = IntegerType
-    | NumberType
-    | StringType
-    deriving (Show)
 
 data Data = Data
-    { additionalPropertiesData :: Bool
-    , propertiesData :: DataProperties
-    , requiredData :: Vector Text
-    , titleData :: Text
-    , dataTypeData :: Text
-    } deriving (Show)
-
-data DataProperties = DataProperties
-    { dayDataProperties :: Day
-    , netDataProperties :: Day
+    { dayData :: Maybe (Vector Day)
+    , netData :: Maybe (Vector Day)
     } deriving (Show)
 
 data Day = Day
-    { itemsDay :: DataClass
-    , dayTypeDay :: Text
-    } deriving (Show)
-
-data DataClass = DataClass
-    { refDataClass :: Text
-    } deriving (Show)
-
-data PositionsClass = PositionsClass
-    { additionalPropertiesPositionsClass :: Bool
-    , propertiesPositionsClass :: PositionsProperties
-    , requiredPositionsClass :: Vector Text
-    , titlePositionsClass :: Text
-    , positionsClassTypePositionsClass :: Text
-    } deriving (Show)
-
-data PositionsProperties = PositionsProperties
-    { positionsPropertiesDataPositionsProperties :: DataClass
-    , statusPositionsProperties :: Property
+    { averagePriceDay :: Maybe Float
+    , buyM2MDay :: Maybe Int
+    , buyPriceDay :: Maybe Float
+    , buyQuantityDay :: Maybe Int
+    , buyValueDay :: Maybe Int
+    , closePriceDay :: Maybe Int
+    , dayBuyPriceDay :: Maybe Float
+    , dayBuyQuantityDay :: Maybe Int
+    , dayBuyValueDay :: Maybe Int
+    , daySellPriceDay :: Maybe Int
+    , daySellQuantityDay :: Maybe Int
+    , daySellValueDay :: Maybe Int
+    , exchangeDay :: Maybe Text
+    , instrumentTokenDay :: Maybe Int
+    , lastPriceDay :: Maybe Float
+    , m2MDay :: Maybe Int
+    , multiplierDay :: Maybe Int
+    , overnightQuantityDay :: Maybe Int
+    , pnlDay :: Maybe Int
+    , productDay :: Maybe Text
+    , quantityDay :: Maybe Int
+    , realisedDay :: Maybe Int
+    , sellM2MDay :: Maybe Int
+    , sellPriceDay :: Maybe Int
+    , sellQuantityDay :: Maybe Int
+    , sellValueDay :: Maybe Int
+    , tradingsymbolDay :: Maybe Text
+    , unrealisedDay :: Maybe Int
+    , valueDay :: Maybe Int
     } deriving (Show)
 
 decodeTopLevel :: ByteString -> Maybe Positions
 decodeTopLevel = decode
 
 instance ToJSON Positions where
-    toJSON (Positions refPositions schemaPositions definitionsPositions) =
+    toJSON (Positions positionsDataPositions statusPositions) =
         object
-        [ "$ref" .= refPositions
-        , "$schema" .= schemaPositions
-        , "definitions" .= definitionsPositions
+        [ "data" .= positionsDataPositions
+        , "status" .= statusPositions
         ]
 
 instance FromJSON Positions where
     parseJSON (Object v) = Positions
-        <$> v .: "$ref"
-        <*> v .: "$schema"
-        <*> v .: "definitions"
-
-instance ToJSON Definitions where
-    toJSON (Definitions definitionsDataDefinitions dayDefinitions positionsDefinitions) =
-        object
-        [ "Data" .= definitionsDataDefinitions
-        , "Day" .= dayDefinitions
-        , "Positions" .= positionsDefinitions
-        ]
-
-instance FromJSON Definitions where
-    parseJSON (Object v) = Definitions
-        <$> v .: "Data"
-        <*> v .: "Day"
-        <*> v .: "Positions"
-
-instance ToJSON DayClass where
-    toJSON (DayClass additionalPropertiesDayClass propertiesDayClass requiredDayClass titleDayClass dayClassTypeDayClass) =
-        object
-        [ "additionalProperties" .= additionalPropertiesDayClass
-        , "properties" .= propertiesDayClass
-        , "required" .= requiredDayClass
-        , "title" .= titleDayClass
-        , "type" .= dayClassTypeDayClass
-        ]
-
-instance FromJSON DayClass where
-    parseJSON (Object v) = DayClass
-        <$> v .: "additionalProperties"
-        <*> v .: "properties"
-        <*> v .: "required"
-        <*> v .: "title"
-        <*> v .: "type"
-
-instance ToJSON Property where
-    toJSON (Property propertyTypeProperty) =
-        object
-        [ "type" .= propertyTypeProperty
-        ]
-
-instance FromJSON Property where
-    parseJSON (Object v) = Property
-        <$> v .: "type"
-
-instance ToJSON Type where
-    toJSON IntegerType = "integer"
-    toJSON NumberType = "number"
-    toJSON StringType = "string"
-
-instance FromJSON Type where
-    parseJSON = withText "Type" parseText
-        where
-            parseText "integer" = return IntegerType
-            parseText "number" = return NumberType
-            parseText "string" = return StringType
+        <$> v .:? "data"
+        <*> v .:? "status"
 
 instance ToJSON Data where
-    toJSON (Data additionalPropertiesData propertiesData requiredData titleData dataTypeData) =
+    toJSON (Data dayData netData) =
         object
-        [ "additionalProperties" .= additionalPropertiesData
-        , "properties" .= propertiesData
-        , "required" .= requiredData
-        , "title" .= titleData
-        , "type" .= dataTypeData
+        [ "day" .= dayData
+        , "net" .= netData
         ]
 
 instance FromJSON Data where
     parseJSON (Object v) = Data
-        <$> v .: "additionalProperties"
-        <*> v .: "properties"
-        <*> v .: "required"
-        <*> v .: "title"
-        <*> v .: "type"
-
-instance ToJSON DataProperties where
-    toJSON (DataProperties dayDataProperties netDataProperties) =
-        object
-        [ "day" .= dayDataProperties
-        , "net" .= netDataProperties
-        ]
-
-instance FromJSON DataProperties where
-    parseJSON (Object v) = DataProperties
-        <$> v .: "day"
-        <*> v .: "net"
+        <$> v .:? "day"
+        <*> v .:? "net"
 
 instance ToJSON Day where
-    toJSON (Day itemsDay dayTypeDay) =
+    toJSON (Day averagePriceDay buyM2MDay buyPriceDay buyQuantityDay buyValueDay closePriceDay dayBuyPriceDay dayBuyQuantityDay dayBuyValueDay daySellPriceDay daySellQuantityDay daySellValueDay exchangeDay instrumentTokenDay lastPriceDay m2MDay multiplierDay overnightQuantityDay pnlDay productDay quantityDay realisedDay sellM2MDay sellPriceDay sellQuantityDay sellValueDay tradingsymbolDay unrealisedDay valueDay) =
         object
-        [ "items" .= itemsDay
-        , "type" .= dayTypeDay
+        [ "average_price" .= averagePriceDay
+        , "buy_m2m" .= buyM2MDay
+        , "buy_price" .= buyPriceDay
+        , "buy_quantity" .= buyQuantityDay
+        , "buy_value" .= buyValueDay
+        , "close_price" .= closePriceDay
+        , "day_buy_price" .= dayBuyPriceDay
+        , "day_buy_quantity" .= dayBuyQuantityDay
+        , "day_buy_value" .= dayBuyValueDay
+        , "day_sell_price" .= daySellPriceDay
+        , "day_sell_quantity" .= daySellQuantityDay
+        , "day_sell_value" .= daySellValueDay
+        , "exchange" .= exchangeDay
+        , "instrument_token" .= instrumentTokenDay
+        , "last_price" .= lastPriceDay
+        , "m2m" .= m2MDay
+        , "multiplier" .= multiplierDay
+        , "overnight_quantity" .= overnightQuantityDay
+        , "pnl" .= pnlDay
+        , "product" .= productDay
+        , "quantity" .= quantityDay
+        , "realised" .= realisedDay
+        , "sell_m2m" .= sellM2MDay
+        , "sell_price" .= sellPriceDay
+        , "sell_quantity" .= sellQuantityDay
+        , "sell_value" .= sellValueDay
+        , "tradingsymbol" .= tradingsymbolDay
+        , "unrealised" .= unrealisedDay
+        , "value" .= valueDay
         ]
 
 instance FromJSON Day where
     parseJSON (Object v) = Day
-        <$> v .: "items"
-        <*> v .: "type"
-
-instance ToJSON DataClass where
-    toJSON (DataClass refDataClass) =
-        object
-        [ "$ref" .= refDataClass
-        ]
-
-instance FromJSON DataClass where
-    parseJSON (Object v) = DataClass
-        <$> v .: "$ref"
-
-instance ToJSON PositionsClass where
-    toJSON (PositionsClass additionalPropertiesPositionsClass propertiesPositionsClass requiredPositionsClass titlePositionsClass positionsClassTypePositionsClass) =
-        object
-        [ "additionalProperties" .= additionalPropertiesPositionsClass
-        , "properties" .= propertiesPositionsClass
-        , "required" .= requiredPositionsClass
-        , "title" .= titlePositionsClass
-        , "type" .= positionsClassTypePositionsClass
-        ]
-
-instance FromJSON PositionsClass where
-    parseJSON (Object v) = PositionsClass
-        <$> v .: "additionalProperties"
-        <*> v .: "properties"
-        <*> v .: "required"
-        <*> v .: "title"
-        <*> v .: "type"
-
-instance ToJSON PositionsProperties where
-    toJSON (PositionsProperties positionsPropertiesDataPositionsProperties statusPositionsProperties) =
-        object
-        [ "data" .= positionsPropertiesDataPositionsProperties
-        , "status" .= statusPositionsProperties
-        ]
-
-instance FromJSON PositionsProperties where
-    parseJSON (Object v) = PositionsProperties
-        <$> v .: "data"
-        <*> v .: "status"
+        <$> v .:? "average_price"
+        <*> v .:? "buy_m2m"
+        <*> v .:? "buy_price"
+        <*> v .:? "buy_quantity"
+        <*> v .:? "buy_value"
+        <*> v .:? "close_price"
+        <*> v .:? "day_buy_price"
+        <*> v .:? "day_buy_quantity"
+        <*> v .:? "day_buy_value"
+        <*> v .:? "day_sell_price"
+        <*> v .:? "day_sell_quantity"
+        <*> v .:? "day_sell_value"
+        <*> v .:? "exchange"
+        <*> v .:? "instrument_token"
+        <*> v .:? "last_price"
+        <*> v .:? "m2m"
+        <*> v .:? "multiplier"
+        <*> v .:? "overnight_quantity"
+        <*> v .:? "pnl"
+        <*> v .:? "product"
+        <*> v .:? "quantity"
+        <*> v .:? "realised"
+        <*> v .:? "sell_m2m"
+        <*> v .:? "sell_price"
+        <*> v .:? "sell_quantity"
+        <*> v .:? "sell_value"
+        <*> v .:? "tradingsymbol"
+        <*> v .:? "unrealised"
+        <*> v .:? "value"

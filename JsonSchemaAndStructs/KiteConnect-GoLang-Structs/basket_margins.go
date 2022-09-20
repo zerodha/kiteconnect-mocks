@@ -4,7 +4,7 @@
 //    basketMargins, err := UnmarshalBasketMargins(bytes)
 //    bytes, err = basketMargins.Marshal()
 
-package main
+package BasketMargins
 
 import "encoding/json"
 
@@ -19,97 +19,32 @@ func (r *BasketMargins) Marshal() ([]byte, error) {
 }
 
 type BasketMargins struct {
-	Ref         string      `json:"$ref"`       
-	Schema      string      `json:"$schema"`    
-	Definitions Definitions `json:"definitions"`
-}
-
-type Definitions struct {
-	BasketMargins BasketMarginsClass `json:"BasketMargins"`
-	Data          DataClass          `json:"Data"`         
-	Final         Final              `json:"Final"`        
-	Pnl           Pnl                `json:"Pnl"`          
-}
-
-type BasketMarginsClass struct {
-	AdditionalProperties bool                    `json:"additionalProperties"`
-	Properties           BasketMarginsProperties `json:"properties"`          
-	Required             []string                `json:"required"`            
-	Title                string                  `json:"title"`               
-	Type                 string                  `json:"type"`                
-}
-
-type BasketMarginsProperties struct {
-	Data   Data   `json:"data"`  
-	Status Status `json:"status"`
+	Data   *Data   `json:"data,omitempty"`  
+	Status *string `json:"status,omitempty"`
 }
 
 type Data struct {
-	Ref string `json:"$ref"`
-}
-
-type Status struct {
-	Type Type `json:"type"`
-}
-
-type DataClass struct {
-	AdditionalProperties bool           `json:"additionalProperties"`
-	Properties           DataProperties `json:"properties"`          
-	Required             []string       `json:"required"`            
-	Title                string         `json:"title"`               
-	Type                 string         `json:"type"`                
-}
-
-type DataProperties struct {
-	Final   Data   `json:"final"`  
-	Initial Data   `json:"initial"`
-	Orders  Orders `json:"orders"` 
-}
-
-type Orders struct {
-	Items Data   `json:"items"`
-	Type  string `json:"type"` 
+	Final   *Final  `json:"final,omitempty"`  
+	Initial *Final  `json:"initial,omitempty"`
+	Orders  []Final `json:"orders,omitempty"` 
 }
 
 type Final struct {
-	AdditionalProperties bool            `json:"additionalProperties"`
-	Properties           FinalProperties `json:"properties"`          
-	Required             []string        `json:"required"`            
-	Title                string          `json:"title"`               
-	Type                 string          `json:"type"`                
-}
-
-type FinalProperties struct {
-	Additional    Status `json:"additional"`    
-	Bo            Status `json:"bo"`            
-	Cash          Status `json:"cash"`          
-	Exchange      Status `json:"exchange"`      
-	Exposure      Status `json:"exposure"`      
-	OptionPremium Status `json:"option_premium"`
-	Pnl           Data   `json:"pnl"`           
-	Span          Status `json:"span"`          
-	Total         Status `json:"total"`         
-	Tradingsymbol Status `json:"tradingsymbol"` 
-	Type          Status `json:"type"`          
-	Var           Status `json:"var"`           
+	Additional    *int64   `json:"additional,omitempty"`    
+	Bo            *int64   `json:"bo,omitempty"`            
+	Cash          *int64   `json:"cash,omitempty"`          
+	Exchange      *string  `json:"exchange,omitempty"`      
+	Exposure      *float64 `json:"exposure,omitempty"`      
+	OptionPremium *float64 `json:"option_premium,omitempty"`
+	Pnl           *Pnl     `json:"pnl,omitempty"`           
+	Span          *float64 `json:"span,omitempty"`          
+	Total         *float64 `json:"total,omitempty"`         
+	Tradingsymbol *string  `json:"tradingsymbol,omitempty"` 
+	Type          *string  `json:"type,omitempty"`          
+	Var           *int64   `json:"var,omitempty"`           
 }
 
 type Pnl struct {
-	AdditionalProperties bool          `json:"additionalProperties"`
-	Properties           PnlProperties `json:"properties"`          
-	Required             []string      `json:"required"`            
-	Title                string        `json:"title"`               
-	Type                 string        `json:"type"`                
+	Realised   *int64 `json:"realised,omitempty"`  
+	Unrealised *int64 `json:"unrealised,omitempty"`
 }
-
-type PnlProperties struct {
-	Realised   Status `json:"realised"`  
-	Unrealised Status `json:"unrealised"`
-}
-
-type Type string
-const (
-	Integer Type = "integer"
-	Number Type = "number"
-	String Type = "string"
-)

@@ -4,7 +4,7 @@
 //    mFSIPCancel, err := UnmarshalMFSIPCancel(bytes)
 //    bytes, err = mFSIPCancel.Marshal()
 
-package main
+package MfSipCancel
 
 import "encoding/json"
 
@@ -19,45 +19,10 @@ func (r *MFSIPCancel) Marshal() ([]byte, error) {
 }
 
 type MFSIPCancel struct {
-	Ref         string      `json:"$ref"`       
-	Schema      string      `json:"$schema"`    
-	Definitions Definitions `json:"definitions"`
-}
-
-type Definitions struct {
-	Data        Data             `json:"Data"`       
-	MFSIPCancel MFSIPCancelClass `json:"MFSIPCancel"`
+	Data   *Data   `json:"data,omitempty"`  
+	Status *string `json:"status,omitempty"`
 }
 
 type Data struct {
-	AdditionalProperties bool           `json:"additionalProperties"`
-	Properties           DataProperties `json:"properties"`          
-	Required             []string       `json:"required"`            
-	Title                string         `json:"title"`               
-	Type                 string         `json:"type"`                
-}
-
-type DataProperties struct {
-	SIPID Sipid `json:"sip_id"`
-}
-
-type Sipid struct {
-	Type string `json:"type"`
-}
-
-type MFSIPCancelClass struct {
-	AdditionalProperties bool                  `json:"additionalProperties"`
-	Properties           MFSIPCancelProperties `json:"properties"`          
-	Required             []string              `json:"required"`            
-	Title                string                `json:"title"`               
-	Type                 string                `json:"type"`                
-}
-
-type MFSIPCancelProperties struct {
-	Data   DataClass `json:"data"`  
-	Status Sipid     `json:"status"`
-}
-
-type DataClass struct {
-	Ref string `json:"$ref"`
+	SIPID *string `json:"sip_id,omitempty"`
 }

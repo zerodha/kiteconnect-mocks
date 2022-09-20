@@ -4,7 +4,7 @@
 //    marginCommodity, err := UnmarshalMarginCommodity(bytes)
 //    bytes, err = marginCommodity.Marshal()
 
-package main
+package MarginCommodity
 
 import "encoding/json"
 
@@ -19,71 +19,22 @@ func (r *MarginCommodity) Marshal() ([]byte, error) {
 }
 
 type MarginCommodity struct {
-	Ref         string      `json:"$ref"`       
-	Schema      string      `json:"$schema"`    
-	Definitions Definitions `json:"definitions"`
-}
-
-type Definitions struct {
-	Available       Available            `json:"Available"`      
-	Data            Data                 `json:"Data"`           
-	MarginCommodity MarginCommodityClass `json:"MarginCommodity"`
-}
-
-type Available struct {
-	AdditionalProperties bool                `json:"additionalProperties"`
-	Properties           AvailableProperties `json:"properties"`          
-	Required             []string            `json:"required"`            
-	Title                string              `json:"title"`               
-	Type                 string              `json:"type"`                
-}
-
-type AvailableProperties struct {
-	AdhocMargin    AdhocMargin `json:"adhoc_margin"`   
-	Cash           AdhocMargin `json:"cash"`           
-	Collateral     AdhocMargin `json:"collateral"`     
-	IntradayPayin  AdhocMargin `json:"intraday_payin"` 
-	LiveBalance    AdhocMargin `json:"live_balance"`   
-	OpeningBalance AdhocMargin `json:"opening_balance"`
-}
-
-type AdhocMargin struct {
-	Type string `json:"type"`
+	Data   *Data   `json:"data,omitempty"`  
+	Status *string `json:"status,omitempty"`
 }
 
 type Data struct {
-	AdditionalProperties bool           `json:"additionalProperties"`
-	Properties           DataProperties `json:"properties"`          
-	Required             []string       `json:"required"`            
-	Title                string         `json:"title"`               
-	Type                 string         `json:"type"`                
+	Available *Available         `json:"available,omitempty"`
+	Enabled   *bool              `json:"enabled,omitempty"`  
+	Net       *float64           `json:"net,omitempty"`      
+	Utilised  map[string]float64 `json:"utilised,omitempty"` 
 }
 
-type DataProperties struct {
-	Available AvailableClass `json:"available"`
-	Enabled   AdhocMargin    `json:"enabled"`  
-	Net       AdhocMargin    `json:"net"`      
-	Utilised  Utilised       `json:"utilised"` 
-}
-
-type AvailableClass struct {
-	Ref string `json:"$ref"`
-}
-
-type Utilised struct {
-	AdditionalProperties AdhocMargin `json:"additionalProperties"`
-	Type                 string      `json:"type"`                
-}
-
-type MarginCommodityClass struct {
-	AdditionalProperties bool                      `json:"additionalProperties"`
-	Properties           MarginCommodityProperties `json:"properties"`          
-	Required             []string                  `json:"required"`            
-	Title                string                    `json:"title"`               
-	Type                 string                    `json:"type"`                
-}
-
-type MarginCommodityProperties struct {
-	Data   AvailableClass `json:"data"`  
-	Status AdhocMargin    `json:"status"`
+type Available struct {
+	AdhocMargin    *int64   `json:"adhoc_margin,omitempty"`   
+	Cash           *float64 `json:"cash,omitempty"`           
+	Collateral     *int64   `json:"collateral,omitempty"`     
+	IntradayPayin  *int64   `json:"intraday_payin,omitempty"` 
+	LiveBalance    *float64 `json:"live_balance,omitempty"`   
+	OpeningBalance *float64 `json:"opening_balance,omitempty"`
 }

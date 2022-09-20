@@ -4,7 +4,7 @@
 //    gttGetOrders, err := UnmarshalGttGetOrders(bytes)
 //    bytes, err = gttGetOrders.Marshal()
 
-package main
+package GttGetOrders
 
 import "encoding/json"
 
@@ -19,171 +19,64 @@ func (r *GttGetOrders) Marshal() ([]byte, error) {
 }
 
 type GttGetOrders struct {
-	Ref         string      `json:"$ref"`       
-	Schema      string      `json:"$schema"`    
-	Definitions Definitions `json:"definitions"`
-}
-
-type Definitions struct {
-	Condition    Condition         `json:"Condition"`   
-	Datum        Datum             `json:"Datum"`       
-	GttGetOrders GttGetOrdersClass `json:"GttGetOrders"`
-	Meta         MetaClass         `json:"Meta"`        
-	Order        Order             `json:"Order"`       
-	OrderResult  OrderResult       `json:"OrderResult"` 
-	Result       Result            `json:"Result"`      
-}
-
-type Condition struct {
-	AdditionalProperties bool                `json:"additionalProperties"`
-	Properties           ConditionProperties `json:"properties"`          
-	Required             []string            `json:"required"`            
-	Title                string              `json:"title"`               
-	Type                 string              `json:"type"`                
-}
-
-type ConditionProperties struct {
-	Exchange        Exchange      `json:"exchange"`        
-	InstrumentToken Exchange      `json:"instrument_token"`
-	LastPrice       Exchange      `json:"last_price"`      
-	Tradingsymbol   Exchange      `json:"tradingsymbol"`   
-	TriggerValues   TriggerValues `json:"trigger_values"`  
-}
-
-type Exchange struct {
-	Type Type `json:"type"`
-}
-
-type TriggerValues struct {
-	Items Exchange `json:"items"`
-	Type  string   `json:"type"` 
+	Data   []Datum `json:"data,omitempty"`  
+	Status *string `json:"status,omitempty"`
 }
 
 type Datum struct {
-	AdditionalProperties bool            `json:"additionalProperties"`
-	Properties           DatumProperties `json:"properties"`          
-	Required             []string        `json:"required"`            
-	Title                string          `json:"title"`               
-	Type                 string          `json:"type"`                
+	Condition     *Condition  `json:"condition,omitempty"` 
+	CreatedAt     *string     `json:"created_at,omitempty"`
+	ExpiresAt     *string     `json:"expires_at,omitempty"`
+	ID            *int64      `json:"id,omitempty"`        
+	Meta          *Meta       `json:"meta"`                
+	Orders        []Order     `json:"orders,omitempty"`    
+	ParentTrigger interface{} `json:"parent_trigger"`      
+	Status        *string     `json:"status,omitempty"`    
+	Type          *string     `json:"type,omitempty"`      
+	UpdatedAt     *string     `json:"updated_at,omitempty"`
+	UserID        *string     `json:"user_id,omitempty"`   
 }
 
-type DatumProperties struct {
-	Condition     ConditionClass `json:"condition"`     
-	CreatedAt     CreatedAt      `json:"created_at"`    
-	ExpiresAt     CreatedAt      `json:"expires_at"`    
-	ID            Exchange       `json:"id"`            
-	Meta          Meta           `json:"meta"`          
-	Orders        Orders         `json:"orders"`        
-	ParentTrigger Exchange       `json:"parent_trigger"`
-	Status        Exchange       `json:"status"`        
-	Type          Exchange       `json:"type"`          
-	UpdatedAt     CreatedAt      `json:"updated_at"`    
-	UserID        Exchange       `json:"user_id"`       
-}
-
-type ConditionClass struct {
-	Ref string `json:"$ref"`
-}
-
-type CreatedAt struct {
-	Format string `json:"format"`
-	Type   Type   `json:"type"`  
+type Condition struct {
+	Exchange        *string   `json:"exchange,omitempty"`        
+	InstrumentToken *int64    `json:"instrument_token,omitempty"`
+	LastPrice       *float64  `json:"last_price,omitempty"`      
+	Tradingsymbol   *string   `json:"tradingsymbol,omitempty"`   
+	TriggerValues   []float64 `json:"trigger_values,omitempty"`  
 }
 
 type Meta struct {
-	AnyOf []AnyOf `json:"anyOf"`
-}
-
-type AnyOf struct {
-	Ref  *string `json:"$ref,omitempty"`
-	Type *Type   `json:"type,omitempty"`
-}
-
-type Orders struct {
-	Items ConditionClass `json:"items"`
-	Type  string         `json:"type"` 
-}
-
-type GttGetOrdersClass struct {
-	AdditionalProperties bool                   `json:"additionalProperties"`
-	Properties           GttGetOrdersProperties `json:"properties"`          
-	Required             []string               `json:"required"`            
-	Title                string                 `json:"title"`               
-	Type                 string                 `json:"type"`                
-}
-
-type GttGetOrdersProperties struct {
-	Data   Orders   `json:"data"`  
-	Status Exchange `json:"status"`
-}
-
-type MetaClass struct {
-	AdditionalProperties bool   `json:"additionalProperties"`
-	Title                string `json:"title"`               
-	Type                 string `json:"type"`                
 }
 
 type Order struct {
-	AdditionalProperties bool            `json:"additionalProperties"`
-	Properties           OrderProperties `json:"properties"`          
-	Required             []string        `json:"required"`            
-	Title                string          `json:"title"`               
-	Type                 string          `json:"type"`                
-}
-
-type OrderProperties struct {
-	Exchange        Exchange `json:"exchange"`        
-	OrderType       Exchange `json:"order_type"`      
-	Price           Exchange `json:"price"`           
-	Product         Exchange `json:"product"`         
-	Quantity        Exchange `json:"quantity"`        
-	Result          Meta     `json:"result"`          
-	Tradingsymbol   Exchange `json:"tradingsymbol"`   
-	TransactionType Exchange `json:"transaction_type"`
-}
-
-type OrderResult struct {
-	AdditionalProperties bool                  `json:"additionalProperties"`
-	Properties           OrderResultProperties `json:"properties"`          
-	Required             []string              `json:"required"`            
-	Title                string                `json:"title"`               
-	Type                 string                `json:"type"`                
-}
-
-type OrderResultProperties struct {
-	OrderID         Exchange `json:"order_id"`        
-	RejectionReason Exchange `json:"rejection_reason"`
-	Status          Exchange `json:"status"`          
+	Exchange        *string  `json:"exchange,omitempty"`        
+	OrderType       *string  `json:"order_type,omitempty"`      
+	Price           *float64 `json:"price,omitempty"`           
+	Product         *string  `json:"product,omitempty"`         
+	Quantity        *int64   `json:"quantity,omitempty"`        
+	Result          *Result  `json:"result"`                    
+	Tradingsymbol   *string  `json:"tradingsymbol,omitempty"`   
+	TransactionType *string  `json:"transaction_type,omitempty"`
 }
 
 type Result struct {
-	AdditionalProperties bool             `json:"additionalProperties"`
-	Properties           ResultProperties `json:"properties"`          
-	Required             []string         `json:"required"`            
-	Title                string           `json:"title"`               
-	Type                 string           `json:"type"`                
+	AccountID       *string      `json:"account_id,omitempty"`      
+	Exchange        *string      `json:"exchange,omitempty"`        
+	Meta            *string      `json:"meta,omitempty"`            
+	OrderResult     *OrderResult `json:"order_result,omitempty"`    
+	OrderType       *string      `json:"order_type,omitempty"`      
+	Price           *int64       `json:"price,omitempty"`           
+	Product         *string      `json:"product,omitempty"`         
+	Quantity        *int64       `json:"quantity,omitempty"`        
+	Timestamp       *string      `json:"timestamp,omitempty"`       
+	Tradingsymbol   *string      `json:"tradingsymbol,omitempty"`   
+	TransactionType *string      `json:"transaction_type,omitempty"`
+	TriggeredAt     *float64     `json:"triggered_at,omitempty"`    
+	Validity        *string      `json:"validity,omitempty"`        
 }
 
-type ResultProperties struct {
-	AccountID       Exchange       `json:"account_id"`      
-	Exchange        Exchange       `json:"exchange"`        
-	Meta            Exchange       `json:"meta"`            
-	OrderResult     ConditionClass `json:"order_result"`    
-	OrderType       Exchange       `json:"order_type"`      
-	Price           Exchange       `json:"price"`           
-	Product         Exchange       `json:"product"`         
-	Quantity        Exchange       `json:"quantity"`        
-	Timestamp       CreatedAt      `json:"timestamp"`       
-	Tradingsymbol   Exchange       `json:"tradingsymbol"`   
-	TransactionType Exchange       `json:"transaction_type"`
-	TriggeredAt     Exchange       `json:"triggered_at"`    
-	Validity        Exchange       `json:"validity"`        
+type OrderResult struct {
+	OrderID         *string `json:"order_id,omitempty"`        
+	RejectionReason *string `json:"rejection_reason,omitempty"`
+	Status          *string `json:"status,omitempty"`          
 }
-
-type Type string
-const (
-	Integer Type = "integer"
-	Null Type = "null"
-	Number Type = "number"
-	String Type = "string"
-)

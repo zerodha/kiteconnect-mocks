@@ -4,7 +4,7 @@
 //    holdingsAuth, err := UnmarshalHoldingsAuth(bytes)
 //    bytes, err = holdingsAuth.Marshal()
 
-package main
+package HoldingsAuth
 
 import "encoding/json"
 
@@ -19,45 +19,10 @@ func (r *HoldingsAuth) Marshal() ([]byte, error) {
 }
 
 type HoldingsAuth struct {
-	Ref         string      `json:"$ref"`       
-	Schema      string      `json:"$schema"`    
-	Definitions Definitions `json:"definitions"`
-}
-
-type Definitions struct {
-	Data         Data              `json:"Data"`        
-	HoldingsAuth HoldingsAuthClass `json:"HoldingsAuth"`
+	Data   *Data   `json:"data,omitempty"`  
+	Status *string `json:"status,omitempty"`
 }
 
 type Data struct {
-	AdditionalProperties bool           `json:"additionalProperties"`
-	Properties           DataProperties `json:"properties"`          
-	Required             []string       `json:"required"`            
-	Title                string         `json:"title"`               
-	Type                 string         `json:"type"`                
-}
-
-type DataProperties struct {
-	RequestID RequestID `json:"request_id"`
-}
-
-type RequestID struct {
-	Type string `json:"type"`
-}
-
-type HoldingsAuthClass struct {
-	AdditionalProperties bool                   `json:"additionalProperties"`
-	Properties           HoldingsAuthProperties `json:"properties"`          
-	Required             []string               `json:"required"`            
-	Title                string                 `json:"title"`               
-	Type                 string                 `json:"type"`                
-}
-
-type HoldingsAuthProperties struct {
-	Data   DataClass `json:"data"`  
-	Status RequestID `json:"status"`
-}
-
-type DataClass struct {
-	Ref string `json:"$ref"`
+	RequestID *string `json:"request_id,omitempty"`
 }

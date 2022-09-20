@@ -4,7 +4,7 @@
 //    holdings, err := UnmarshalHoldings(bytes)
 //    bytes, err = holdings.Marshal()
 
-package main
+package Holdings
 
 import "encoding/json"
 
@@ -19,84 +19,31 @@ func (r *Holdings) Marshal() ([]byte, error) {
 }
 
 type Holdings struct {
-	Ref         string      `json:"$ref"`       
-	Schema      string      `json:"$schema"`    
-	Definitions Definitions `json:"definitions"`
-}
-
-type Definitions struct {
-	Datum    Datum         `json:"Datum"`   
-	Holdings HoldingsClass `json:"Holdings"`
+	Data   []Datum `json:"data,omitempty"`  
+	Status *string `json:"status,omitempty"`
 }
 
 type Datum struct {
-	AdditionalProperties bool            `json:"additionalProperties"`
-	Properties           DatumProperties `json:"properties"`          
-	Required             []string        `json:"required"`            
-	Title                string          `json:"title"`               
-	Type                 string          `json:"type"`                
+	AuthorisedDate      *string  `json:"authorised_date,omitempty"`      
+	AuthorisedQuantity  *int64   `json:"authorised_quantity,omitempty"`  
+	AveragePrice        *float64 `json:"average_price,omitempty"`        
+	ClosePrice          *float64 `json:"close_price,omitempty"`          
+	CollateralQuantity  *int64   `json:"collateral_quantity,omitempty"`  
+	CollateralType      *string  `json:"collateral_type,omitempty"`      
+	DayChange           *float64 `json:"day_change,omitempty"`           
+	DayChangePercentage *float64 `json:"day_change_percentage,omitempty"`
+	Discrepancy         *bool    `json:"discrepancy,omitempty"`          
+	Exchange            *string  `json:"exchange,omitempty"`             
+	InstrumentToken     *int64   `json:"instrument_token,omitempty"`     
+	Isin                *string  `json:"isin,omitempty"`                 
+	LastPrice           *float64 `json:"last_price,omitempty"`           
+	OpeningQuantity     *int64   `json:"opening_quantity,omitempty"`     
+	Pnl                 *float64 `json:"pnl,omitempty"`                  
+	Price               *int64   `json:"price,omitempty"`                
+	Product             *string  `json:"product,omitempty"`              
+	Quantity            *int64   `json:"quantity,omitempty"`             
+	RealisedQuantity    *int64   `json:"realised_quantity,omitempty"`    
+	T1Quantity          *int64   `json:"t1_quantity,omitempty"`          
+	Tradingsymbol       *string  `json:"tradingsymbol,omitempty"`        
+	UsedQuantity        *int64   `json:"used_quantity,omitempty"`        
 }
-
-type DatumProperties struct {
-	AuthorisedDate      AuthorisedDate     `json:"authorised_date"`      
-	AuthorisedQuantity  AuthorisedQuantity `json:"authorised_quantity"`  
-	AveragePrice        AuthorisedQuantity `json:"average_price"`        
-	ClosePrice          AuthorisedQuantity `json:"close_price"`          
-	CollateralQuantity  AuthorisedQuantity `json:"collateral_quantity"`  
-	CollateralType      AuthorisedQuantity `json:"collateral_type"`      
-	DayChange           AuthorisedQuantity `json:"day_change"`           
-	DayChangePercentage AuthorisedQuantity `json:"day_change_percentage"`
-	Discrepancy         AuthorisedQuantity `json:"discrepancy"`          
-	Exchange            AuthorisedQuantity `json:"exchange"`             
-	InstrumentToken     AuthorisedQuantity `json:"instrument_token"`     
-	Isin                AuthorisedQuantity `json:"isin"`                 
-	LastPrice           AuthorisedQuantity `json:"last_price"`           
-	OpeningQuantity     AuthorisedQuantity `json:"opening_quantity"`     
-	Pnl                 AuthorisedQuantity `json:"pnl"`                  
-	Price               AuthorisedQuantity `json:"price"`                
-	Product             AuthorisedQuantity `json:"product"`              
-	Quantity            AuthorisedQuantity `json:"quantity"`             
-	RealisedQuantity    AuthorisedQuantity `json:"realised_quantity"`    
-	T1Quantity          AuthorisedQuantity `json:"t1_quantity"`          
-	Tradingsymbol       AuthorisedQuantity `json:"tradingsymbol"`        
-	UsedQuantity        AuthorisedQuantity `json:"used_quantity"`        
-}
-
-type AuthorisedDate struct {
-	Format string `json:"format"`
-	Type   Type   `json:"type"`  
-}
-
-type AuthorisedQuantity struct {
-	Type Type `json:"type"`
-}
-
-type HoldingsClass struct {
-	AdditionalProperties bool               `json:"additionalProperties"`
-	Properties           HoldingsProperties `json:"properties"`          
-	Required             []string           `json:"required"`            
-	Title                string             `json:"title"`               
-	Type                 string             `json:"type"`                
-}
-
-type HoldingsProperties struct {
-	Data   Data               `json:"data"`  
-	Status AuthorisedQuantity `json:"status"`
-}
-
-type Data struct {
-	Items Items  `json:"items"`
-	Type  string `json:"type"` 
-}
-
-type Items struct {
-	Ref string `json:"$ref"`
-}
-
-type Type string
-const (
-	Boolean Type = "boolean"
-	Integer Type = "integer"
-	Number Type = "number"
-	String Type = "string"
-)

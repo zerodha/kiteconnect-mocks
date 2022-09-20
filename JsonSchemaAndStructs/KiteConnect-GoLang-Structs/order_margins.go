@@ -4,7 +4,7 @@
 //    orderMargins, err := UnmarshalOrderMargins(bytes)
 //    bytes, err = orderMargins.Marshal()
 
-package main
+package OrderMargins
 
 import "encoding/json"
 
@@ -19,82 +19,26 @@ func (r *OrderMargins) Marshal() ([]byte, error) {
 }
 
 type OrderMargins struct {
-	Ref         string      `json:"$ref"`       
-	Schema      string      `json:"$schema"`    
-	Definitions Definitions `json:"definitions"`
-}
-
-type Definitions struct {
-	Datum        Datum             `json:"Datum"`       
-	OrderMargins OrderMarginsClass `json:"OrderMargins"`
-	Pnl          PnlClass          `json:"Pnl"`         
+	Data   []Datum `json:"data,omitempty"`  
+	Status *string `json:"status,omitempty"`
 }
 
 type Datum struct {
-	AdditionalProperties bool            `json:"additionalProperties"`
-	Properties           DatumProperties `json:"properties"`          
-	Required             []string        `json:"required"`            
-	Title                string          `json:"title"`               
-	Type                 string          `json:"type"`                
-}
-
-type DatumProperties struct {
-	Additional    Additional `json:"additional"`    
-	Bo            Additional `json:"bo"`            
-	Cash          Additional `json:"cash"`          
-	Exchange      Additional `json:"exchange"`      
-	Exposure      Additional `json:"exposure"`      
-	OptionPremium Additional `json:"option_premium"`
-	Pnl           Pnl        `json:"pnl"`           
-	Span          Additional `json:"span"`          
-	Total         Additional `json:"total"`         
-	Tradingsymbol Additional `json:"tradingsymbol"` 
-	Type          Additional `json:"type"`          
-	Var           Additional `json:"var"`           
-}
-
-type Additional struct {
-	Type Type `json:"type"`
+	Additional    *int64   `json:"additional,omitempty"`    
+	Bo            *int64   `json:"bo,omitempty"`            
+	Cash          *int64   `json:"cash,omitempty"`          
+	Exchange      *string  `json:"exchange,omitempty"`      
+	Exposure      *int64   `json:"exposure,omitempty"`      
+	OptionPremium *int64   `json:"option_premium,omitempty"`
+	Pnl           *Pnl     `json:"pnl,omitempty"`           
+	Span          *int64   `json:"span,omitempty"`          
+	Total         *float64 `json:"total,omitempty"`         
+	Tradingsymbol *string  `json:"tradingsymbol,omitempty"` 
+	Type          *string  `json:"type,omitempty"`          
+	Var           *float64 `json:"var,omitempty"`           
 }
 
 type Pnl struct {
-	Ref string `json:"$ref"`
+	Realised   *int64 `json:"realised,omitempty"`  
+	Unrealised *int64 `json:"unrealised,omitempty"`
 }
-
-type OrderMarginsClass struct {
-	AdditionalProperties bool                   `json:"additionalProperties"`
-	Properties           OrderMarginsProperties `json:"properties"`          
-	Required             []string               `json:"required"`            
-	Title                string                 `json:"title"`               
-	Type                 string                 `json:"type"`                
-}
-
-type OrderMarginsProperties struct {
-	Data   Data       `json:"data"`  
-	Status Additional `json:"status"`
-}
-
-type Data struct {
-	Items Pnl    `json:"items"`
-	Type  string `json:"type"` 
-}
-
-type PnlClass struct {
-	AdditionalProperties bool          `json:"additionalProperties"`
-	Properties           PnlProperties `json:"properties"`          
-	Required             []string      `json:"required"`            
-	Title                string        `json:"title"`               
-	Type                 string        `json:"type"`                
-}
-
-type PnlProperties struct {
-	Realised   Additional `json:"realised"`  
-	Unrealised Additional `json:"unrealised"`
-}
-
-type Type string
-const (
-	Integer Type = "integer"
-	Number Type = "number"
-	String Type = "string"
-)

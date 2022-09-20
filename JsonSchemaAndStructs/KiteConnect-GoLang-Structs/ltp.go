@@ -4,7 +4,7 @@
 //    ltp, err := UnmarshalLtp(bytes)
 //    bytes, err = ltp.Marshal()
 
-package main
+package Ltp
 
 import "encoding/json"
 
@@ -19,59 +19,11 @@ func (r *Ltp) Marshal() ([]byte, error) {
 }
 
 type Ltp struct {
-	Ref         string      `json:"$ref"`       
-	Schema      string      `json:"$schema"`    
-	Definitions Definitions `json:"definitions"`
+	Data   map[string]Datum `json:"data,omitempty"`  
+	Status *string          `json:"status,omitempty"`
 }
 
-type Definitions struct {
-	Data    Data         `json:"Data"`   
-	Ltp     LtpClass     `json:"Ltp"`    
-	NseInfy NseInfyClass `json:"NseInfy"`
-}
-
-type Data struct {
-	AdditionalProperties bool           `json:"additionalProperties"`
-	Properties           DataProperties `json:"properties"`          
-	Required             []string       `json:"required"`            
-	Title                string         `json:"title"`               
-	Type                 string         `json:"type"`                
-}
-
-type DataProperties struct {
-	NseInfy NseInfy `json:"NSE:INFY"`
-}
-
-type NseInfy struct {
-	Ref string `json:"$ref"`
-}
-
-type LtpClass struct {
-	AdditionalProperties bool          `json:"additionalProperties"`
-	Properties           LtpProperties `json:"properties"`          
-	Required             []string      `json:"required"`            
-	Title                string        `json:"title"`               
-	Type                 string        `json:"type"`                
-}
-
-type LtpProperties struct {
-	Data   NseInfy `json:"data"`  
-	Status Status  `json:"status"`
-}
-
-type Status struct {
-	Type string `json:"type"`
-}
-
-type NseInfyClass struct {
-	AdditionalProperties bool              `json:"additionalProperties"`
-	Properties           NseInfyProperties `json:"properties"`          
-	Required             []string          `json:"required"`            
-	Title                string            `json:"title"`               
-	Type                 string            `json:"type"`                
-}
-
-type NseInfyProperties struct {
-	InstrumentToken Status `json:"instrument_token"`
-	LastPrice       Status `json:"last_price"`      
+type Datum struct {
+	InstrumentToken *int64   `json:"instrument_token,omitempty"`
+	LastPrice       *float64 `json:"last_price,omitempty"`      
 }

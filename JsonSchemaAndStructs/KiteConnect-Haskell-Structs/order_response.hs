@@ -1,15 +1,9 @@
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE OverloadedStrings #-}
 
-module QuickType
+module OrderResponse
     ( OrderResponse (..)
-    , Definitions (..)
     , Data (..)
-    , DataProperties (..)
-    , OrderID (..)
-    , OrderResponseClass (..)
-    , OrderResponseProperties (..)
-    , DataClass (..)
     , decodeTopLevel
     ) where
 
@@ -21,152 +15,35 @@ import Data.Text (Text)
 import Data.Vector (Vector)
 
 data OrderResponse = OrderResponse
-    { refOrderResponse :: Text
-    , schemaOrderResponse :: Text
-    , definitionsOrderResponse :: Definitions
-    } deriving (Show)
-
-data Definitions = Definitions
-    { definitionsDataDefinitions :: Data
-    , orderResponseDefinitions :: OrderResponseClass
+    { orderResponseDataOrderResponse :: Maybe Data
+    , statusOrderResponse :: Maybe Text
     } deriving (Show)
 
 data Data = Data
-    { additionalPropertiesData :: Bool
-    , propertiesData :: DataProperties
-    , requiredData :: Vector Text
-    , titleData :: Text
-    , dataTypeData :: Text
-    } deriving (Show)
-
-data DataProperties = DataProperties
-    { orderIDDataProperties :: OrderID
-    } deriving (Show)
-
-data OrderID = OrderID
-    { orderIDTypeOrderID :: Text
-    } deriving (Show)
-
-data OrderResponseClass = OrderResponseClass
-    { additionalPropertiesOrderResponseClass :: Bool
-    , propertiesOrderResponseClass :: OrderResponseProperties
-    , requiredOrderResponseClass :: Vector Text
-    , titleOrderResponseClass :: Text
-    , orderResponseClassTypeOrderResponseClass :: Text
-    } deriving (Show)
-
-data OrderResponseProperties = OrderResponseProperties
-    { orderResponsePropertiesDataOrderResponseProperties :: DataClass
-    , statusOrderResponseProperties :: OrderID
-    } deriving (Show)
-
-data DataClass = DataClass
-    { refDataClass :: Text
+    { orderIDData :: Maybe Text
     } deriving (Show)
 
 decodeTopLevel :: ByteString -> Maybe OrderResponse
 decodeTopLevel = decode
 
 instance ToJSON OrderResponse where
-    toJSON (OrderResponse refOrderResponse schemaOrderResponse definitionsOrderResponse) =
+    toJSON (OrderResponse orderResponseDataOrderResponse statusOrderResponse) =
         object
-        [ "$ref" .= refOrderResponse
-        , "$schema" .= schemaOrderResponse
-        , "definitions" .= definitionsOrderResponse
+        [ "data" .= orderResponseDataOrderResponse
+        , "status" .= statusOrderResponse
         ]
 
 instance FromJSON OrderResponse where
     parseJSON (Object v) = OrderResponse
-        <$> v .: "$ref"
-        <*> v .: "$schema"
-        <*> v .: "definitions"
-
-instance ToJSON Definitions where
-    toJSON (Definitions definitionsDataDefinitions orderResponseDefinitions) =
-        object
-        [ "Data" .= definitionsDataDefinitions
-        , "OrderResponse" .= orderResponseDefinitions
-        ]
-
-instance FromJSON Definitions where
-    parseJSON (Object v) = Definitions
-        <$> v .: "Data"
-        <*> v .: "OrderResponse"
+        <$> v .:? "data"
+        <*> v .:? "status"
 
 instance ToJSON Data where
-    toJSON (Data additionalPropertiesData propertiesData requiredData titleData dataTypeData) =
+    toJSON (Data orderIDData) =
         object
-        [ "additionalProperties" .= additionalPropertiesData
-        , "properties" .= propertiesData
-        , "required" .= requiredData
-        , "title" .= titleData
-        , "type" .= dataTypeData
+        [ "order_id" .= orderIDData
         ]
 
 instance FromJSON Data where
     parseJSON (Object v) = Data
-        <$> v .: "additionalProperties"
-        <*> v .: "properties"
-        <*> v .: "required"
-        <*> v .: "title"
-        <*> v .: "type"
-
-instance ToJSON DataProperties where
-    toJSON (DataProperties orderIDDataProperties) =
-        object
-        [ "order_id" .= orderIDDataProperties
-        ]
-
-instance FromJSON DataProperties where
-    parseJSON (Object v) = DataProperties
-        <$> v .: "order_id"
-
-instance ToJSON OrderID where
-    toJSON (OrderID orderIDTypeOrderID) =
-        object
-        [ "type" .= orderIDTypeOrderID
-        ]
-
-instance FromJSON OrderID where
-    parseJSON (Object v) = OrderID
-        <$> v .: "type"
-
-instance ToJSON OrderResponseClass where
-    toJSON (OrderResponseClass additionalPropertiesOrderResponseClass propertiesOrderResponseClass requiredOrderResponseClass titleOrderResponseClass orderResponseClassTypeOrderResponseClass) =
-        object
-        [ "additionalProperties" .= additionalPropertiesOrderResponseClass
-        , "properties" .= propertiesOrderResponseClass
-        , "required" .= requiredOrderResponseClass
-        , "title" .= titleOrderResponseClass
-        , "type" .= orderResponseClassTypeOrderResponseClass
-        ]
-
-instance FromJSON OrderResponseClass where
-    parseJSON (Object v) = OrderResponseClass
-        <$> v .: "additionalProperties"
-        <*> v .: "properties"
-        <*> v .: "required"
-        <*> v .: "title"
-        <*> v .: "type"
-
-instance ToJSON OrderResponseProperties where
-    toJSON (OrderResponseProperties orderResponsePropertiesDataOrderResponseProperties statusOrderResponseProperties) =
-        object
-        [ "data" .= orderResponsePropertiesDataOrderResponseProperties
-        , "status" .= statusOrderResponseProperties
-        ]
-
-instance FromJSON OrderResponseProperties where
-    parseJSON (Object v) = OrderResponseProperties
-        <$> v .: "data"
-        <*> v .: "status"
-
-instance ToJSON DataClass where
-    toJSON (DataClass refDataClass) =
-        object
-        [ "$ref" .= refDataClass
-        ]
-
-instance FromJSON DataClass where
-    parseJSON (Object v) = DataClass
-        <$> v .: "$ref"
+        <$> v .:? "order_id"

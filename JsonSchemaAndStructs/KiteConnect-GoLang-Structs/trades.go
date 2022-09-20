@@ -4,7 +4,7 @@
 //    trades, err := UnmarshalTrades(bytes)
 //    bytes, err = trades.Marshal()
 
-package main
+package Trades
 
 import "encoding/json"
 
@@ -19,74 +19,22 @@ func (r *Trades) Marshal() ([]byte, error) {
 }
 
 type Trades struct {
-	Ref         string      `json:"$ref"`       
-	Schema      string      `json:"$schema"`    
-	Definitions Definitions `json:"definitions"`
-}
-
-type Definitions struct {
-	Datum  Datum       `json:"Datum"` 
-	Trades TradesClass `json:"Trades"`
+	Data   []Datum `json:"data,omitempty"`  
+	Status *string `json:"status,omitempty"`
 }
 
 type Datum struct {
-	AdditionalProperties bool            `json:"additionalProperties"`
-	Properties           DatumProperties `json:"properties"`          
-	Required             []string        `json:"required"`            
-	Title                string          `json:"title"`               
-	Type                 string          `json:"type"`                
+	AveragePrice      *float64 `json:"average_price,omitempty"`     
+	Exchange          *string  `json:"exchange,omitempty"`          
+	ExchangeOrderID   *string  `json:"exchange_order_id,omitempty"` 
+	ExchangeTimestamp *string  `json:"exchange_timestamp,omitempty"`
+	FillTimestamp     *string  `json:"fill_timestamp,omitempty"`    
+	InstrumentToken   *int64   `json:"instrument_token,omitempty"`  
+	OrderID           *string  `json:"order_id,omitempty"`          
+	OrderTimestamp    *string  `json:"order_timestamp,omitempty"`   
+	Product           *string  `json:"product,omitempty"`           
+	Quantity          *int64   `json:"quantity,omitempty"`          
+	TradeID           *string  `json:"trade_id,omitempty"`          
+	Tradingsymbol     *string  `json:"tradingsymbol,omitempty"`     
+	TransactionType   *string  `json:"transaction_type,omitempty"`  
 }
-
-type DatumProperties struct {
-	AveragePrice      AveragePrice      `json:"average_price"`     
-	Exchange          AveragePrice      `json:"exchange"`          
-	ExchangeOrderID   AveragePrice      `json:"exchange_order_id"` 
-	ExchangeTimestamp ExchangeTimestamp `json:"exchange_timestamp"`
-	FillTimestamp     ExchangeTimestamp `json:"fill_timestamp"`    
-	InstrumentToken   AveragePrice      `json:"instrument_token"`  
-	OrderID           AveragePrice      `json:"order_id"`          
-	OrderTimestamp    ExchangeTimestamp `json:"order_timestamp"`   
-	Product           AveragePrice      `json:"product"`           
-	Quantity          AveragePrice      `json:"quantity"`          
-	TradeID           ExchangeTimestamp `json:"trade_id"`          
-	Tradingsymbol     AveragePrice      `json:"tradingsymbol"`     
-	TransactionType   AveragePrice      `json:"transaction_type"`  
-}
-
-type AveragePrice struct {
-	Type Type `json:"type"`
-}
-
-type ExchangeTimestamp struct {
-	Format string `json:"format"`
-	Type   Type   `json:"type"`  
-}
-
-type TradesClass struct {
-	AdditionalProperties bool             `json:"additionalProperties"`
-	Properties           TradesProperties `json:"properties"`          
-	Required             []string         `json:"required"`            
-	Title                string           `json:"title"`               
-	Type                 string           `json:"type"`                
-}
-
-type TradesProperties struct {
-	Data   Data         `json:"data"`  
-	Status AveragePrice `json:"status"`
-}
-
-type Data struct {
-	Items Items  `json:"items"`
-	Type  string `json:"type"` 
-}
-
-type Items struct {
-	Ref string `json:"$ref"`
-}
-
-type Type string
-const (
-	Integer Type = "integer"
-	Number Type = "number"
-	String Type = "string"
-)

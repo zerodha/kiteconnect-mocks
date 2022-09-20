@@ -4,7 +4,7 @@
 //    mFSIPPlace, err := UnmarshalMFSIPPlace(bytes)
 //    bytes, err = mFSIPPlace.Marshal()
 
-package main
+package MfSipPlace
 
 import "encoding/json"
 
@@ -19,45 +19,10 @@ func (r *MFSIPPlace) Marshal() ([]byte, error) {
 }
 
 type MFSIPPlace struct {
-	Ref         string      `json:"$ref"`       
-	Schema      string      `json:"$schema"`    
-	Definitions Definitions `json:"definitions"`
-}
-
-type Definitions struct {
-	Data       Data            `json:"Data"`      
-	MFSIPPlace MFSIPPlaceClass `json:"MFSIPPlace"`
+	Data   *Data   `json:"data,omitempty"`  
+	Status *string `json:"status,omitempty"`
 }
 
 type Data struct {
-	AdditionalProperties bool           `json:"additionalProperties"`
-	Properties           DataProperties `json:"properties"`          
-	Required             []string       `json:"required"`            
-	Title                string         `json:"title"`               
-	Type                 string         `json:"type"`                
-}
-
-type DataProperties struct {
-	SIPID Sipid `json:"sip_id"`
-}
-
-type Sipid struct {
-	Type string `json:"type"`
-}
-
-type MFSIPPlaceClass struct {
-	AdditionalProperties bool                 `json:"additionalProperties"`
-	Properties           MFSIPPlaceProperties `json:"properties"`          
-	Required             []string             `json:"required"`            
-	Title                string               `json:"title"`               
-	Type                 string               `json:"type"`                
-}
-
-type MFSIPPlaceProperties struct {
-	Data   DataClass `json:"data"`  
-	Status Sipid     `json:"status"`
-}
-
-type DataClass struct {
-	Ref string `json:"$ref"`
+	SIPID *string `json:"sip_id,omitempty"`
 }

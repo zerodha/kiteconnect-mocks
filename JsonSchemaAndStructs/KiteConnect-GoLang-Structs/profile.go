@@ -4,7 +4,7 @@
 //    profile, err := UnmarshalProfile(bytes)
 //    bytes, err = profile.Marshal()
 
-package main
+package Profile
 
 import "encoding/json"
 
@@ -19,79 +19,24 @@ func (r *Profile) Marshal() ([]byte, error) {
 }
 
 type Profile struct {
-	Ref         string      `json:"$ref"`       
-	Schema      string      `json:"$schema"`    
-	Definitions Definitions `json:"definitions"`
-}
-
-type Definitions struct {
-	Data    Data         `json:"Data"`   
-	Meta    MetaClass    `json:"Meta"`   
-	Profile ProfileClass `json:"Profile"`
+	Data   *Data   `json:"data,omitempty"`  
+	Status *string `json:"status,omitempty"`
 }
 
 type Data struct {
-	AdditionalProperties bool           `json:"additionalProperties"`
-	Properties           DataProperties `json:"properties"`          
-	Required             []string       `json:"required"`            
-	Title                string         `json:"title"`               
-	Type                 string         `json:"type"`                
-}
-
-type DataProperties struct {
-	AvatarURL     AvatarURL `json:"avatar_url"`    
-	Broker        AvatarURL `json:"broker"`        
-	Email         AvatarURL `json:"email"`         
-	Exchanges     Exchanges `json:"exchanges"`     
-	Meta          Meta      `json:"meta"`          
-	OrderTypes    Exchanges `json:"order_types"`   
-	Products      Exchanges `json:"products"`      
-	UserID        AvatarURL `json:"user_id"`       
-	UserName      AvatarURL `json:"user_name"`     
-	UserShortname AvatarURL `json:"user_shortname"`
-	UserType      AvatarURL `json:"user_type"`     
-}
-
-type AvatarURL struct {
-	Type Type `json:"type"`
-}
-
-type Exchanges struct {
-	Items AvatarURL `json:"items"`
-	Type  string    `json:"type"` 
+	AvatarURL     interface{} `json:"avatar_url"`              
+	Broker        *string     `json:"broker,omitempty"`        
+	Email         *string     `json:"email,omitempty"`         
+	Exchanges     []string    `json:"exchanges,omitempty"`     
+	Meta          *Meta       `json:"meta,omitempty"`          
+	OrderTypes    []string    `json:"order_types,omitempty"`   
+	Products      []string    `json:"products,omitempty"`      
+	UserID        *string     `json:"user_id,omitempty"`       
+	UserName      *string     `json:"user_name,omitempty"`     
+	UserShortname *string     `json:"user_shortname,omitempty"`
+	UserType      *string     `json:"user_type,omitempty"`     
 }
 
 type Meta struct {
-	Ref string `json:"$ref"`
+	DematConsent *string `json:"demat_consent,omitempty"`
 }
-
-type MetaClass struct {
-	AdditionalProperties bool           `json:"additionalProperties"`
-	Properties           MetaProperties `json:"properties"`          
-	Required             []string       `json:"required"`            
-	Title                string         `json:"title"`               
-	Type                 string         `json:"type"`                
-}
-
-type MetaProperties struct {
-	DematConsent AvatarURL `json:"demat_consent"`
-}
-
-type ProfileClass struct {
-	AdditionalProperties bool              `json:"additionalProperties"`
-	Properties           ProfileProperties `json:"properties"`          
-	Required             []string          `json:"required"`            
-	Title                string            `json:"title"`               
-	Type                 string            `json:"type"`                
-}
-
-type ProfileProperties struct {
-	Data   Meta      `json:"data"`  
-	Status AvatarURL `json:"status"`
-}
-
-type Type string
-const (
-	Null Type = "null"
-	String Type = "string"
-)

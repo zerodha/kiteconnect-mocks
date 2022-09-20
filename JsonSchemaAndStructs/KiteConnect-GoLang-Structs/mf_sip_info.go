@@ -4,7 +4,7 @@
 //    mFSIPInfo, err := UnmarshalMFSIPInfo(bytes)
 //    bytes, err = mFSIPInfo.Marshal()
 
-package main
+package MfSipInfo
 
 import "encoding/json"
 
@@ -19,91 +19,34 @@ func (r *MFSIPInfo) Marshal() ([]byte, error) {
 }
 
 type MFSIPInfo struct {
-	Ref         string      `json:"$ref"`       
-	Schema      string      `json:"$schema"`    
-	Definitions Definitions `json:"definitions"`
-}
-
-type Definitions struct {
-	Data      Data           `json:"Data"`     
-	MFSIPInfo MFSIPInfoClass `json:"MFSIPInfo"`
-	StepUp    StepUpClass    `json:"StepUp"`   
+	Data   *Data   `json:"data,omitempty"`  
+	Status *string `json:"status,omitempty"`
 }
 
 type Data struct {
-	AdditionalProperties bool           `json:"additionalProperties"`
-	Properties           DataProperties `json:"properties"`          
-	Required             []string       `json:"required"`            
-	Title                string         `json:"title"`               
-	Type                 string         `json:"type"`                
-}
-
-type DataProperties struct {
-	CompletedInstalments CompletedInstalments `json:"completed_instalments"`
-	Created              Created              `json:"created"`              
-	DividendType         CompletedInstalments `json:"dividend_type"`        
-	Frequency            CompletedInstalments `json:"frequency"`            
-	Fund                 CompletedInstalments `json:"fund"`                 
-	FundSource           CompletedInstalments `json:"fund_source"`          
-	InstalmentAmount     CompletedInstalments `json:"instalment_amount"`    
-	InstalmentDay        CompletedInstalments `json:"instalment_day"`       
-	Instalments          CompletedInstalments `json:"instalments"`          
-	LastInstalment       Created              `json:"last_instalment"`      
-	NextInstalment       Created              `json:"next_instalment"`      
-	PendingInstalments   CompletedInstalments `json:"pending_instalments"`  
-	SIPID                CompletedInstalments `json:"sip_id"`               
-	SIPRegNum            CompletedInstalments `json:"sip_reg_num"`          
-	SIPType              CompletedInstalments `json:"sip_type"`             
-	Status               CompletedInstalments `json:"status"`               
-	StepUp               StepUp               `json:"step_up"`              
-	Tag                  CompletedInstalments `json:"tag"`                  
-	Tradingsymbol        CompletedInstalments `json:"tradingsymbol"`        
-	TransactionType      CompletedInstalments `json:"transaction_type"`     
-	TriggerPrice         CompletedInstalments `json:"trigger_price"`        
-}
-
-type CompletedInstalments struct {
-	Type Type `json:"type"`
-}
-
-type Created struct {
-	Format string `json:"format"`
-	Type   Type   `json:"type"`  
+	CompletedInstalments *int64      `json:"completed_instalments,omitempty"`
+	Created              *string     `json:"created,omitempty"`              
+	DividendType         *string     `json:"dividend_type,omitempty"`        
+	Frequency            *string     `json:"frequency,omitempty"`            
+	Fund                 *string     `json:"fund,omitempty"`                 
+	FundSource           *string     `json:"fund_source,omitempty"`          
+	InstalmentAmount     *int64      `json:"instalment_amount,omitempty"`    
+	InstalmentDay        *int64      `json:"instalment_day,omitempty"`       
+	Instalments          *int64      `json:"instalments,omitempty"`          
+	LastInstalment       *string     `json:"last_instalment,omitempty"`      
+	NextInstalment       *string     `json:"next_instalment,omitempty"`      
+	PendingInstalments   *int64      `json:"pending_instalments,omitempty"`  
+	SIPID                *string     `json:"sip_id,omitempty"`               
+	SIPRegNum            interface{} `json:"sip_reg_num"`                    
+	SIPType              *string     `json:"sip_type,omitempty"`             
+	Status               *string     `json:"status,omitempty"`               
+	StepUp               *StepUp     `json:"step_up,omitempty"`              
+	Tag                  *string     `json:"tag,omitempty"`                  
+	Tradingsymbol        *string     `json:"tradingsymbol,omitempty"`        
+	TransactionType      *string     `json:"transaction_type,omitempty"`     
+	TriggerPrice         *int64      `json:"trigger_price,omitempty"`        
 }
 
 type StepUp struct {
-	Ref string `json:"$ref"`
+	The1502 *int64 `json:"15-02,omitempty"`
 }
-
-type MFSIPInfoClass struct {
-	AdditionalProperties bool                `json:"additionalProperties"`
-	Properties           MFSIPInfoProperties `json:"properties"`          
-	Required             []string            `json:"required"`            
-	Title                string              `json:"title"`               
-	Type                 string              `json:"type"`                
-}
-
-type MFSIPInfoProperties struct {
-	Data   StepUp               `json:"data"`  
-	Status CompletedInstalments `json:"status"`
-}
-
-type StepUpClass struct {
-	AdditionalProperties bool             `json:"additionalProperties"`
-	Properties           StepUpProperties `json:"properties"`          
-	Required             []string         `json:"required"`            
-	Title                string           `json:"title"`               
-	Type                 string           `json:"type"`                
-}
-
-type StepUpProperties struct {
-	The1502 CompletedInstalments `json:"15-02"`
-}
-
-type Type string
-const (
-	Integer Type = "integer"
-	Null Type = "null"
-	Number Type = "number"
-	String Type = "string"
-)

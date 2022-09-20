@@ -4,7 +4,7 @@
 //    mFOrderCancel, err := UnmarshalMFOrderCancel(bytes)
 //    bytes, err = mFOrderCancel.Marshal()
 
-package main
+package MfOrderCancel
 
 import "encoding/json"
 
@@ -19,50 +19,10 @@ func (r *MFOrderCancel) Marshal() ([]byte, error) {
 }
 
 type MFOrderCancel struct {
-	Ref         string      `json:"$ref"`       
-	Schema      string      `json:"$schema"`    
-	Definitions Definitions `json:"definitions"`
-}
-
-type Definitions struct {
-	Data          Data               `json:"Data"`         
-	MFOrderCancel MFOrderCancelClass `json:"MFOrderCancel"`
+	Data   *Data   `json:"data,omitempty"`  
+	Status *string `json:"status,omitempty"`
 }
 
 type Data struct {
-	AdditionalProperties bool           `json:"additionalProperties"`
-	Properties           DataProperties `json:"properties"`          
-	Required             []string       `json:"required"`            
-	Title                string         `json:"title"`               
-	Type                 string         `json:"type"`                
-}
-
-type DataProperties struct {
-	OrderID OrderID `json:"order_id"`
-}
-
-type OrderID struct {
-	Format string `json:"format"`
-	Type   string `json:"type"`  
-}
-
-type MFOrderCancelClass struct {
-	AdditionalProperties bool                    `json:"additionalProperties"`
-	Properties           MFOrderCancelProperties `json:"properties"`          
-	Required             []string                `json:"required"`            
-	Title                string                  `json:"title"`               
-	Type                 string                  `json:"type"`                
-}
-
-type MFOrderCancelProperties struct {
-	Data   DataClass `json:"data"`  
-	Status Status    `json:"status"`
-}
-
-type DataClass struct {
-	Ref string `json:"$ref"`
-}
-
-type Status struct {
-	Type string `json:"type"`
+	OrderID *string `json:"order_id,omitempty"`
 }

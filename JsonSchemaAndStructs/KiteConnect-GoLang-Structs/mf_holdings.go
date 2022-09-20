@@ -4,7 +4,7 @@
 //    mFHoldings, err := UnmarshalMFHoldings(bytes)
 //    bytes, err = mFHoldings.Marshal()
 
-package main
+package MfHoldings
 
 import "encoding/json"
 
@@ -19,65 +19,18 @@ func (r *MFHoldings) Marshal() ([]byte, error) {
 }
 
 type MFHoldings struct {
-	Ref         string      `json:"$ref"`       
-	Schema      string      `json:"$schema"`    
-	Definitions Definitions `json:"definitions"`
-}
-
-type Definitions struct {
-	Datum      Datum           `json:"Datum"`     
-	MFHoldings MFHoldingsClass `json:"MFHoldings"`
+	Data   []Datum `json:"data,omitempty"`  
+	Status *string `json:"status,omitempty"`
 }
 
 type Datum struct {
-	AdditionalProperties bool            `json:"additionalProperties"`
-	Properties           DatumProperties `json:"properties"`          
-	Required             []string        `json:"required"`            
-	Title                string          `json:"title"`               
-	Type                 string          `json:"type"`                
+	AveragePrice    *float64 `json:"average_price,omitempty"`   
+	Folio           *string  `json:"folio,omitempty"`           
+	Fund            *string  `json:"fund,omitempty"`            
+	LastPrice       *float64 `json:"last_price,omitempty"`      
+	LastPriceDate   *string  `json:"last_price_date,omitempty"` 
+	PledgedQuantity *int64   `json:"pledged_quantity,omitempty"`
+	Pnl             *int64   `json:"pnl,omitempty"`             
+	Quantity        *float64 `json:"quantity,omitempty"`        
+	Tradingsymbol   *string  `json:"tradingsymbol,omitempty"`   
 }
-
-type DatumProperties struct {
-	AveragePrice    AveragePrice `json:"average_price"`   
-	Folio           AveragePrice `json:"folio"`           
-	Fund            AveragePrice `json:"fund"`            
-	LastPrice       AveragePrice `json:"last_price"`      
-	LastPriceDate   AveragePrice `json:"last_price_date"` 
-	PledgedQuantity AveragePrice `json:"pledged_quantity"`
-	Pnl             AveragePrice `json:"pnl"`             
-	Quantity        AveragePrice `json:"quantity"`        
-	Tradingsymbol   AveragePrice `json:"tradingsymbol"`   
-}
-
-type AveragePrice struct {
-	Type Type `json:"type"`
-}
-
-type MFHoldingsClass struct {
-	AdditionalProperties bool                 `json:"additionalProperties"`
-	Properties           MFHoldingsProperties `json:"properties"`          
-	Required             []string             `json:"required"`            
-	Title                string               `json:"title"`               
-	Type                 string               `json:"type"`                
-}
-
-type MFHoldingsProperties struct {
-	Data   Data         `json:"data"`  
-	Status AveragePrice `json:"status"`
-}
-
-type Data struct {
-	Items Items  `json:"items"`
-	Type  string `json:"type"` 
-}
-
-type Items struct {
-	Ref string `json:"$ref"`
-}
-
-type Type string
-const (
-	Integer Type = "integer"
-	Number Type = "number"
-	String Type = "string"
-)

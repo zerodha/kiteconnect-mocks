@@ -4,7 +4,7 @@
 //    ohlc, err := UnmarshalOhlc(bytes)
 //    bytes, err = ohlc.Marshal()
 
-package main
+package Ohlc
 
 import "encoding/json"
 
@@ -19,76 +19,19 @@ func (r *Ohlc) Marshal() ([]byte, error) {
 }
 
 type Ohlc struct {
-	Ref         string      `json:"$ref"`       
-	Schema      string      `json:"$schema"`    
-	Definitions Definitions `json:"definitions"`
+	Data   map[string]Datum `json:"data,omitempty"`  
+	Status *string          `json:"status,omitempty"`
 }
 
-type Definitions struct {
-	Data      Data           `json:"Data"`     
-	NseInfy   NseInfyClass   `json:"NseInfy"`  
-	Ohlc      OhlcClass      `json:"Ohlc"`     
-	OhlcClass OhlcClassClass `json:"OhlcClass"`
-}
-
-type Data struct {
-	AdditionalProperties bool           `json:"additionalProperties"`
-	Properties           DataProperties `json:"properties"`          
-	Required             []string       `json:"required"`            
-	Title                string         `json:"title"`               
-	Type                 string         `json:"type"`                
-}
-
-type DataProperties struct {
-	NseInfy NseInfy `json:"NSE:INFY"`
-}
-
-type NseInfy struct {
-	Ref string `json:"$ref"`
-}
-
-type NseInfyClass struct {
-	AdditionalProperties bool              `json:"additionalProperties"`
-	Properties           NseInfyProperties `json:"properties"`          
-	Required             []string          `json:"required"`            
-	Title                string            `json:"title"`               
-	Type                 string            `json:"type"`                
-}
-
-type NseInfyProperties struct {
-	InstrumentToken InstrumentToken `json:"instrument_token"`
-	LastPrice       InstrumentToken `json:"last_price"`      
-	Ohlc            NseInfy         `json:"ohlc"`            
-}
-
-type InstrumentToken struct {
-	Type string `json:"type"`
+type Datum struct {
+	InstrumentToken *int64     `json:"instrument_token,omitempty"`
+	LastPrice       *int64     `json:"last_price,omitempty"`      
+	Ohlc            *OhlcClass `json:"ohlc,omitempty"`            
 }
 
 type OhlcClass struct {
-	AdditionalProperties bool           `json:"additionalProperties"`
-	Properties           OhlcProperties `json:"properties"`          
-	Required             []string       `json:"required"`            
-	Title                string         `json:"title"`               
-	Type                 string         `json:"type"`                
-}
-
-type OhlcProperties struct {
-	Data   NseInfy         `json:"data"`  
-	Status InstrumentToken `json:"status"`
-}
-
-type OhlcClassClass struct {
-	AdditionalProperties bool                `json:"additionalProperties"`
-	Properties           OhlcClassProperties `json:"properties"`          
-	Required             []string            `json:"required"`            
-	Title                string              `json:"title"`               
-	Type                 string              `json:"type"`                
-}
-
-type OhlcClassProperties struct {
-	Close InstrumentToken `json:"close"`
-	High  InstrumentToken `json:"high"` 
-	Low   InstrumentToken `json:"low"`  
-	Open  InstrumentToken `json:"open"` 
+	Close *float64 `json:"close,omitempty"`
+	High  *float64 `json:"high,omitempty"` 
+	Low   *float64 `json:"low,omitempty"`  
+	Open  *float64 `json:"open,omitempty"` 
 }

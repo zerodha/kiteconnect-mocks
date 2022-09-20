@@ -4,7 +4,7 @@
 //    gttPlaceOrder, err := UnmarshalGttPlaceOrder(bytes)
 //    bytes, err = gttPlaceOrder.Marshal()
 
-package main
+package GttPlaceOrder
 
 import "encoding/json"
 
@@ -19,45 +19,10 @@ func (r *GttPlaceOrder) Marshal() ([]byte, error) {
 }
 
 type GttPlaceOrder struct {
-	Ref         string      `json:"$ref"`       
-	Schema      string      `json:"$schema"`    
-	Definitions Definitions `json:"definitions"`
-}
-
-type Definitions struct {
-	Data          Data               `json:"Data"`         
-	GttPlaceOrder GttPlaceOrderClass `json:"GttPlaceOrder"`
+	Data   *Data   `json:"data,omitempty"`  
+	Status *string `json:"status,omitempty"`
 }
 
 type Data struct {
-	AdditionalProperties bool           `json:"additionalProperties"`
-	Properties           DataProperties `json:"properties"`          
-	Required             []string       `json:"required"`            
-	Title                string         `json:"title"`               
-	Type                 string         `json:"type"`                
-}
-
-type DataProperties struct {
-	TriggerID TriggerID `json:"trigger_id"`
-}
-
-type TriggerID struct {
-	Type string `json:"type"`
-}
-
-type GttPlaceOrderClass struct {
-	AdditionalProperties bool                    `json:"additionalProperties"`
-	Properties           GttPlaceOrderProperties `json:"properties"`          
-	Required             []string                `json:"required"`            
-	Title                string                  `json:"title"`               
-	Type                 string                  `json:"type"`                
-}
-
-type GttPlaceOrderProperties struct {
-	Data   DataClass `json:"data"`  
-	Status TriggerID `json:"status"`
-}
-
-type DataClass struct {
-	Ref string `json:"$ref"`
+	TriggerID *int64 `json:"trigger_id,omitempty"`
 }

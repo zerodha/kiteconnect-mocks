@@ -4,7 +4,7 @@
 //    gttModifyOrder, err := UnmarshalGttModifyOrder(bytes)
 //    bytes, err = gttModifyOrder.Marshal()
 
-package main
+package GttModifyOrder
 
 import "encoding/json"
 
@@ -19,45 +19,10 @@ func (r *GttModifyOrder) Marshal() ([]byte, error) {
 }
 
 type GttModifyOrder struct {
-	Ref         string      `json:"$ref"`       
-	Schema      string      `json:"$schema"`    
-	Definitions Definitions `json:"definitions"`
-}
-
-type Definitions struct {
-	Data           Data                `json:"Data"`          
-	GttModifyOrder GttModifyOrderClass `json:"GttModifyOrder"`
+	Data   *Data   `json:"data,omitempty"`  
+	Status *string `json:"status,omitempty"`
 }
 
 type Data struct {
-	AdditionalProperties bool           `json:"additionalProperties"`
-	Properties           DataProperties `json:"properties"`          
-	Required             []string       `json:"required"`            
-	Title                string         `json:"title"`               
-	Type                 string         `json:"type"`                
-}
-
-type DataProperties struct {
-	TriggerID TriggerID `json:"trigger_id"`
-}
-
-type TriggerID struct {
-	Type string `json:"type"`
-}
-
-type GttModifyOrderClass struct {
-	AdditionalProperties bool                     `json:"additionalProperties"`
-	Properties           GttModifyOrderProperties `json:"properties"`          
-	Required             []string                 `json:"required"`            
-	Title                string                   `json:"title"`               
-	Type                 string                   `json:"type"`                
-}
-
-type GttModifyOrderProperties struct {
-	Data   DataClass `json:"data"`  
-	Status TriggerID `json:"status"`
-}
-
-type DataClass struct {
-	Ref string `json:"$ref"`
+	TriggerID *int64 `json:"trigger_id,omitempty"`
 }

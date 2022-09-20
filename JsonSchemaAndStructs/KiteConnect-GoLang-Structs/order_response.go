@@ -4,7 +4,7 @@
 //    orderResponse, err := UnmarshalOrderResponse(bytes)
 //    bytes, err = orderResponse.Marshal()
 
-package main
+package OrderResponse
 
 import "encoding/json"
 
@@ -19,45 +19,10 @@ func (r *OrderResponse) Marshal() ([]byte, error) {
 }
 
 type OrderResponse struct {
-	Ref         string      `json:"$ref"`       
-	Schema      string      `json:"$schema"`    
-	Definitions Definitions `json:"definitions"`
-}
-
-type Definitions struct {
-	Data          Data               `json:"Data"`         
-	OrderResponse OrderResponseClass `json:"OrderResponse"`
+	Data   *Data   `json:"data,omitempty"`  
+	Status *string `json:"status,omitempty"`
 }
 
 type Data struct {
-	AdditionalProperties bool           `json:"additionalProperties"`
-	Properties           DataProperties `json:"properties"`          
-	Required             []string       `json:"required"`            
-	Title                string         `json:"title"`               
-	Type                 string         `json:"type"`                
-}
-
-type DataProperties struct {
-	OrderID OrderID `json:"order_id"`
-}
-
-type OrderID struct {
-	Type string `json:"type"`
-}
-
-type OrderResponseClass struct {
-	AdditionalProperties bool                    `json:"additionalProperties"`
-	Properties           OrderResponseProperties `json:"properties"`          
-	Required             []string                `json:"required"`            
-	Title                string                  `json:"title"`               
-	Type                 string                  `json:"type"`                
-}
-
-type OrderResponseProperties struct {
-	Data   DataClass `json:"data"`  
-	Status OrderID   `json:"status"`
-}
-
-type DataClass struct {
-	Ref string `json:"$ref"`
+	OrderID *string `json:"order_id,omitempty"`
 }

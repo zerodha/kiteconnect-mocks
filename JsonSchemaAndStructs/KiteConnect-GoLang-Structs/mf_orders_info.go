@@ -4,7 +4,7 @@
 //    mFOrdersInfo, err := UnmarshalMFOrdersInfo(bytes)
 //    bytes, err = mFOrdersInfo.Marshal()
 
-package main
+package MfOrdersInfo
 
 import "encoding/json"
 
@@ -19,77 +19,29 @@ func (r *MFOrdersInfo) Marshal() ([]byte, error) {
 }
 
 type MFOrdersInfo struct {
-	Ref         string      `json:"$ref"`       
-	Schema      string      `json:"$schema"`    
-	Definitions Definitions `json:"definitions"`
-}
-
-type Definitions struct {
-	Data         Data              `json:"Data"`        
-	MFOrdersInfo MFOrdersInfoClass `json:"MFOrdersInfo"`
+	Data   *Data   `json:"data,omitempty"`  
+	Status *string `json:"status,omitempty"`
 }
 
 type Data struct {
-	AdditionalProperties bool           `json:"additionalProperties"`
-	Properties           DataProperties `json:"properties"`          
-	Required             []string       `json:"required"`            
-	Title                string         `json:"title"`               
-	Type                 string         `json:"type"`                
+	Amount            *int64      `json:"amount,omitempty"`          
+	AveragePrice      *int64      `json:"average_price,omitempty"`   
+	ExchangeOrderID   interface{} `json:"exchange_order_id"`         
+	ExchangeTimestamp interface{} `json:"exchange_timestamp"`        
+	Folio             interface{} `json:"folio"`                     
+	Fund              *string     `json:"fund,omitempty"`            
+	LastPrice         *float64    `json:"last_price,omitempty"`      
+	LastPriceDate     *string     `json:"last_price_date,omitempty"` 
+	OrderID           *string     `json:"order_id,omitempty"`        
+	OrderTimestamp    *string     `json:"order_timestamp,omitempty"` 
+	PlacedBy          *string     `json:"placed_by,omitempty"`       
+	PurchaseType      *string     `json:"purchase_type,omitempty"`   
+	Quantity          *int64      `json:"quantity,omitempty"`        
+	SettlementID      interface{} `json:"settlement_id"`             
+	Status            *string     `json:"status,omitempty"`          
+	StatusMessage     *string     `json:"status_message,omitempty"`  
+	Tag               interface{} `json:"tag"`                       
+	Tradingsymbol     *string     `json:"tradingsymbol,omitempty"`   
+	TransactionType   *string     `json:"transaction_type,omitempty"`
+	Variety           *string     `json:"variety,omitempty"`         
 }
-
-type DataProperties struct {
-	Amount            Amount        `json:"amount"`            
-	AveragePrice      Amount        `json:"average_price"`     
-	ExchangeOrderID   Amount        `json:"exchange_order_id"` 
-	ExchangeTimestamp Amount        `json:"exchange_timestamp"`
-	Folio             Amount        `json:"folio"`             
-	Fund              Amount        `json:"fund"`              
-	LastPrice         Amount        `json:"last_price"`        
-	LastPriceDate     LastPriceDate `json:"last_price_date"`   
-	OrderID           LastPriceDate `json:"order_id"`          
-	OrderTimestamp    LastPriceDate `json:"order_timestamp"`   
-	PlacedBy          Amount        `json:"placed_by"`         
-	PurchaseType      Amount        `json:"purchase_type"`     
-	Quantity          Amount        `json:"quantity"`          
-	SettlementID      Amount        `json:"settlement_id"`     
-	Status            Amount        `json:"status"`            
-	StatusMessage     Amount        `json:"status_message"`    
-	Tag               Amount        `json:"tag"`               
-	Tradingsymbol     Amount        `json:"tradingsymbol"`     
-	TransactionType   Amount        `json:"transaction_type"`  
-	Variety           Amount        `json:"variety"`           
-}
-
-type Amount struct {
-	Type Type `json:"type"`
-}
-
-type LastPriceDate struct {
-	Format string `json:"format"`
-	Type   Type   `json:"type"`  
-}
-
-type MFOrdersInfoClass struct {
-	AdditionalProperties bool                   `json:"additionalProperties"`
-	Properties           MFOrdersInfoProperties `json:"properties"`          
-	Required             []string               `json:"required"`            
-	Title                string                 `json:"title"`               
-	Type                 string                 `json:"type"`                
-}
-
-type MFOrdersInfoProperties struct {
-	Data   DataClass `json:"data"`  
-	Status Amount    `json:"status"`
-}
-
-type DataClass struct {
-	Ref string `json:"$ref"`
-}
-
-type Type string
-const (
-	Integer Type = "integer"
-	Null Type = "null"
-	Number Type = "number"
-	String Type = "string"
-)

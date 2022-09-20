@@ -4,7 +4,7 @@
 //    gttDeleteOrder, err := UnmarshalGttDeleteOrder(bytes)
 //    bytes, err = gttDeleteOrder.Marshal()
 
-package main
+package GttDeleteOrder
 
 import "encoding/json"
 
@@ -19,45 +19,10 @@ func (r *GttDeleteOrder) Marshal() ([]byte, error) {
 }
 
 type GttDeleteOrder struct {
-	Ref         string      `json:"$ref"`       
-	Schema      string      `json:"$schema"`    
-	Definitions Definitions `json:"definitions"`
-}
-
-type Definitions struct {
-	Data           Data                `json:"Data"`          
-	GttDeleteOrder GttDeleteOrderClass `json:"GttDeleteOrder"`
+	Data   *Data   `json:"data,omitempty"`  
+	Status *string `json:"status,omitempty"`
 }
 
 type Data struct {
-	AdditionalProperties bool           `json:"additionalProperties"`
-	Properties           DataProperties `json:"properties"`          
-	Required             []string       `json:"required"`            
-	Title                string         `json:"title"`               
-	Type                 string         `json:"type"`                
-}
-
-type DataProperties struct {
-	TriggerID TriggerID `json:"trigger_id"`
-}
-
-type TriggerID struct {
-	Type string `json:"type"`
-}
-
-type GttDeleteOrderClass struct {
-	AdditionalProperties bool                     `json:"additionalProperties"`
-	Properties           GttDeleteOrderProperties `json:"properties"`          
-	Required             []string                 `json:"required"`            
-	Title                string                   `json:"title"`               
-	Type                 string                   `json:"type"`                
-}
-
-type GttDeleteOrderProperties struct {
-	Data   DataClass `json:"data"`  
-	Status TriggerID `json:"status"`
-}
-
-type DataClass struct {
-	Ref string `json:"$ref"`
+	TriggerID *int64 `json:"trigger_id,omitempty"`
 }

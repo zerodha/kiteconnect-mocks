@@ -4,7 +4,7 @@
 //    triggerRange, err := UnmarshalTriggerRange(bytes)
 //    bytes, err = triggerRange.Marshal()
 
-package main
+package TriggerRange
 
 import "encoding/json"
 
@@ -19,61 +19,12 @@ func (r *TriggerRange) Marshal() ([]byte, error) {
 }
 
 type TriggerRange struct {
-	Ref         string      `json:"$ref"`       
-	Schema      string      `json:"$schema"`    
-	Definitions Definitions `json:"definitions"`
+	Data   map[string]Datum `json:"data,omitempty"`  
+	Status *string          `json:"status,omitempty"`
 }
 
-type Definitions struct {
-	Data         Data              `json:"Data"`        
-	Nse          Nse               `json:"Nse"`         
-	TriggerRange TriggerRangeClass `json:"TriggerRange"`
-}
-
-type Data struct {
-	AdditionalProperties bool           `json:"additionalProperties"`
-	Properties           DataProperties `json:"properties"`          
-	Required             []string       `json:"required"`            
-	Title                string         `json:"title"`               
-	Type                 string         `json:"type"`                
-}
-
-type DataProperties struct {
-	NseInfy     NseInfy `json:"NSE:INFY"`    
-	NseReliance NseInfy `json:"NSE:RELIANCE"`
-}
-
-type NseInfy struct {
-	Ref string `json:"$ref"`
-}
-
-type Nse struct {
-	AdditionalProperties bool          `json:"additionalProperties"`
-	Properties           NseProperties `json:"properties"`          
-	Required             []string      `json:"required"`            
-	Title                string        `json:"title"`               
-	Type                 string        `json:"type"`                
-}
-
-type NseProperties struct {
-	InstrumentToken InstrumentToken `json:"instrument_token"`
-	Lower           InstrumentToken `json:"lower"`           
-	Upper           InstrumentToken `json:"upper"`           
-}
-
-type InstrumentToken struct {
-	Type string `json:"type"`
-}
-
-type TriggerRangeClass struct {
-	AdditionalProperties bool                   `json:"additionalProperties"`
-	Properties           TriggerRangeProperties `json:"properties"`          
-	Required             []string               `json:"required"`            
-	Title                string                 `json:"title"`               
-	Type                 string                 `json:"type"`                
-}
-
-type TriggerRangeProperties struct {
-	Data   NseInfy         `json:"data"`  
-	Status InstrumentToken `json:"status"`
+type Datum struct {
+	InstrumentToken *int64   `json:"instrument_token,omitempty"`
+	Lower           *float64 `json:"lower,omitempty"`           
+	Upper           *float64 `json:"upper,omitempty"`           
 }

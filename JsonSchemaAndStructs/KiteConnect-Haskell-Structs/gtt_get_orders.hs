@@ -1,30 +1,14 @@
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE OverloadedStrings #-}
 
-module QuickType
+module GttGetOrders
     ( GttGetOrders (..)
-    , Definitions (..)
-    , Condition (..)
-    , ConditionProperties (..)
-    , Exchange (..)
-    , TriggerValues (..)
     , Datum (..)
-    , DatumProperties (..)
-    , ConditionClass (..)
-    , CreatedAt (..)
+    , Condition (..)
     , Meta (..)
-    , AnyOf (..)
-    , Orders (..)
-    , GttGetOrdersClass (..)
-    , GttGetOrdersProperties (..)
-    , MetaClass (..)
     , Order (..)
-    , OrderProperties (..)
-    , OrderResult (..)
-    , OrderResultProperties (..)
     , ResultClass (..)
-    , ResultProperties (..)
-    , Type (..)
+    , OrderResult (..)
     , decodeTopLevel
     ) where
 
@@ -36,555 +20,206 @@ import Data.Text (Text)
 import Data.Vector (Vector)
 
 data GttGetOrders = GttGetOrders
-    { refGttGetOrders :: Text
-    , schemaGttGetOrders :: Text
-    , definitionsGttGetOrders :: Definitions
-    } deriving (Show)
-
-data Definitions = Definitions
-    { conditionDefinitions :: Condition
-    , datumDefinitions :: Datum
-    , gttGetOrdersDefinitions :: GttGetOrdersClass
-    , metaDefinitions :: MetaClass
-    , orderDefinitions :: Order
-    , orderResultDefinitions :: OrderResult
-    , resultDefinitions :: ResultClass
-    } deriving (Show)
-
-data Condition = Condition
-    { additionalPropertiesCondition :: Bool
-    , propertiesCondition :: ConditionProperties
-    , requiredCondition :: Vector Text
-    , titleCondition :: Text
-    , conditionTypeCondition :: Text
-    } deriving (Show)
-
-data ConditionProperties = ConditionProperties
-    { exchangeConditionProperties :: Exchange
-    , instrumentTokenConditionProperties :: Exchange
-    , lastPriceConditionProperties :: Exchange
-    , tradingsymbolConditionProperties :: Exchange
-    , triggerValuesConditionProperties :: TriggerValues
-    } deriving (Show)
-
-data Exchange = Exchange
-    { exchangeTypeExchange :: Type
-    } deriving (Show)
-
-data Type
-    = IntegerType
-    | NullType
-    | NumberType
-    | StringType
-    deriving (Show)
-
-data TriggerValues = TriggerValues
-    { itemsTriggerValues :: Exchange
-    , triggerValuesTypeTriggerValues :: Text
+    { gttGetOrdersDataGttGetOrders :: Maybe (Vector Datum)
+    , statusGttGetOrders :: Maybe Text
     } deriving (Show)
 
 data Datum = Datum
-    { additionalPropertiesDatum :: Bool
-    , propertiesDatum :: DatumProperties
-    , requiredDatum :: Vector Text
-    , titleDatum :: Text
-    , datumTypeDatum :: Text
+    { conditionDatum :: Maybe Condition
+    , createdAtDatum :: Maybe Text
+    , expiresAtDatum :: Maybe Text
+    , datumIDDatum :: Maybe Int
+    , metaDatum :: Maybe Meta
+    , ordersDatum :: Maybe (Vector Order)
+    , parentTriggerDatum :: Maybe (Maybe Text)
+    , statusDatum :: Maybe Text
+    , datumTypeDatum :: Maybe Text
+    , updatedAtDatum :: Maybe Text
+    , userIDDatum :: Maybe Text
     } deriving (Show)
 
-data DatumProperties = DatumProperties
-    { conditionDatumProperties :: ConditionClass
-    , createdAtDatumProperties :: CreatedAt
-    , expiresAtDatumProperties :: CreatedAt
-    , datumPropertiesIDDatumProperties :: Exchange
-    , metaDatumProperties :: Meta
-    , ordersDatumProperties :: Orders
-    , parentTriggerDatumProperties :: Exchange
-    , statusDatumProperties :: Exchange
-    , datumPropertiesTypeDatumProperties :: Exchange
-    , updatedAtDatumProperties :: CreatedAt
-    , userIDDatumProperties :: Exchange
-    } deriving (Show)
-
-data ConditionClass = ConditionClass
-    { refConditionClass :: Text
-    } deriving (Show)
-
-data CreatedAt = CreatedAt
-    { formatCreatedAt :: Text
-    , createdAtTypeCreatedAt :: Type
+data Condition = Condition
+    { exchangeCondition :: Maybe Text
+    , instrumentTokenCondition :: Maybe Int
+    , lastPriceCondition :: Maybe Float
+    , tradingsymbolCondition :: Maybe Text
+    , triggerValuesCondition :: Maybe (Vector Float)
     } deriving (Show)
 
 data Meta = Meta
-    { anyOfMeta :: Vector AnyOf
-    } deriving (Show)
-
-data AnyOf = AnyOf
-    { refAnyOf :: Maybe Text
-    , anyOfTypeAnyOf :: Maybe Type
-    } deriving (Show)
-
-data Orders = Orders
-    { itemsOrders :: ConditionClass
-    , ordersTypeOrders :: Text
-    } deriving (Show)
-
-data GttGetOrdersClass = GttGetOrdersClass
-    { additionalPropertiesGttGetOrdersClass :: Bool
-    , propertiesGttGetOrdersClass :: GttGetOrdersProperties
-    , requiredGttGetOrdersClass :: Vector Text
-    , titleGttGetOrdersClass :: Text
-    , gttGetOrdersClassTypeGttGetOrdersClass :: Text
-    } deriving (Show)
-
-data GttGetOrdersProperties = GttGetOrdersProperties
-    { gttGetOrdersPropertiesDataGttGetOrdersProperties :: Orders
-    , statusGttGetOrdersProperties :: Exchange
-    } deriving (Show)
-
-data MetaClass = MetaClass
-    { additionalPropertiesMetaClass :: Bool
-    , titleMetaClass :: Text
-    , metaClassTypeMetaClass :: Text
+    {
     } deriving (Show)
 
 data Order = Order
-    { additionalPropertiesOrder :: Bool
-    , propertiesOrder :: OrderProperties
-    , requiredOrder :: Vector Text
-    , titleOrder :: Text
-    , orderTypeOrder :: Text
-    } deriving (Show)
-
-data OrderProperties = OrderProperties
-    { exchangeOrderProperties :: Exchange
-    , orderTypeOrderProperties :: Exchange
-    , priceOrderProperties :: Exchange
-    , productOrderProperties :: Exchange
-    , quantityOrderProperties :: Exchange
-    , resultOrderProperties :: Meta
-    , tradingsymbolOrderProperties :: Exchange
-    , transactionTypeOrderProperties :: Exchange
-    } deriving (Show)
-
-data OrderResult = OrderResult
-    { additionalPropertiesOrderResult :: Bool
-    , propertiesOrderResult :: OrderResultProperties
-    , requiredOrderResult :: Vector Text
-    , titleOrderResult :: Text
-    , orderResultTypeOrderResult :: Text
-    } deriving (Show)
-
-data OrderResultProperties = OrderResultProperties
-    { orderIDOrderResultProperties :: Exchange
-    , rejectionReasonOrderResultProperties :: Exchange
-    , statusOrderResultProperties :: Exchange
+    { exchangeOrder :: Maybe Text
+    , orderTypeOrder :: Maybe Text
+    , priceOrder :: Maybe Float
+    , productOrder :: Maybe Text
+    , quantityOrder :: Maybe Int
+    , resultOrder :: Maybe ResultClass
+    , tradingsymbolOrder :: Maybe Text
+    , transactionTypeOrder :: Maybe Text
     } deriving (Show)
 
 data ResultClass = ResultClass
-    { additionalPropertiesResultClass :: Bool
-    , propertiesResultClass :: ResultProperties
-    , requiredResultClass :: Vector Text
-    , titleResultClass :: Text
-    , resultTypeResultClass :: Text
+    { accountIDResultClass :: Maybe Text
+    , exchangeResultClass :: Maybe Text
+    , metaResultClass :: Maybe Text
+    , orderResultResultClass :: Maybe OrderResult
+    , orderTypeResultClass :: Maybe Text
+    , priceResultClass :: Maybe Int
+    , productResultClass :: Maybe Text
+    , quantityResultClass :: Maybe Int
+    , timestampResultClass :: Maybe Text
+    , tradingsymbolResultClass :: Maybe Text
+    , transactionTypeResultClass :: Maybe Text
+    , triggeredAtResultClass :: Maybe Float
+    , validityResultClass :: Maybe Text
     } deriving (Show)
 
-data ResultProperties = ResultProperties
-    { accountIDResultProperties :: Exchange
-    , exchangeResultProperties :: Exchange
-    , metaResultProperties :: Exchange
-    , orderResultResultProperties :: ConditionClass
-    , orderTypeResultProperties :: Exchange
-    , priceResultProperties :: Exchange
-    , productResultProperties :: Exchange
-    , quantityResultProperties :: Exchange
-    , timestampResultProperties :: CreatedAt
-    , tradingsymbolResultProperties :: Exchange
-    , transactionTypeResultProperties :: Exchange
-    , triggeredAtResultProperties :: Exchange
-    , validityResultProperties :: Exchange
+data OrderResult = OrderResult
+    { orderIDOrderResult :: Maybe Text
+    , rejectionReasonOrderResult :: Maybe Text
+    , statusOrderResult :: Maybe Text
     } deriving (Show)
 
 decodeTopLevel :: ByteString -> Maybe GttGetOrders
 decodeTopLevel = decode
 
 instance ToJSON GttGetOrders where
-    toJSON (GttGetOrders refGttGetOrders schemaGttGetOrders definitionsGttGetOrders) =
+    toJSON (GttGetOrders gttGetOrdersDataGttGetOrders statusGttGetOrders) =
         object
-        [ "$ref" .= refGttGetOrders
-        , "$schema" .= schemaGttGetOrders
-        , "definitions" .= definitionsGttGetOrders
+        [ "data" .= gttGetOrdersDataGttGetOrders
+        , "status" .= statusGttGetOrders
         ]
 
 instance FromJSON GttGetOrders where
     parseJSON (Object v) = GttGetOrders
-        <$> v .: "$ref"
-        <*> v .: "$schema"
-        <*> v .: "definitions"
-
-instance ToJSON Definitions where
-    toJSON (Definitions conditionDefinitions datumDefinitions gttGetOrdersDefinitions metaDefinitions orderDefinitions orderResultDefinitions resultDefinitions) =
-        object
-        [ "Condition" .= conditionDefinitions
-        , "Datum" .= datumDefinitions
-        , "GttGetOrders" .= gttGetOrdersDefinitions
-        , "Meta" .= metaDefinitions
-        , "Order" .= orderDefinitions
-        , "OrderResult" .= orderResultDefinitions
-        , "Result" .= resultDefinitions
-        ]
-
-instance FromJSON Definitions where
-    parseJSON (Object v) = Definitions
-        <$> v .: "Condition"
-        <*> v .: "Datum"
-        <*> v .: "GttGetOrders"
-        <*> v .: "Meta"
-        <*> v .: "Order"
-        <*> v .: "OrderResult"
-        <*> v .: "Result"
-
-instance ToJSON Condition where
-    toJSON (Condition additionalPropertiesCondition propertiesCondition requiredCondition titleCondition conditionTypeCondition) =
-        object
-        [ "additionalProperties" .= additionalPropertiesCondition
-        , "properties" .= propertiesCondition
-        , "required" .= requiredCondition
-        , "title" .= titleCondition
-        , "type" .= conditionTypeCondition
-        ]
-
-instance FromJSON Condition where
-    parseJSON (Object v) = Condition
-        <$> v .: "additionalProperties"
-        <*> v .: "properties"
-        <*> v .: "required"
-        <*> v .: "title"
-        <*> v .: "type"
-
-instance ToJSON ConditionProperties where
-    toJSON (ConditionProperties exchangeConditionProperties instrumentTokenConditionProperties lastPriceConditionProperties tradingsymbolConditionProperties triggerValuesConditionProperties) =
-        object
-        [ "exchange" .= exchangeConditionProperties
-        , "instrument_token" .= instrumentTokenConditionProperties
-        , "last_price" .= lastPriceConditionProperties
-        , "tradingsymbol" .= tradingsymbolConditionProperties
-        , "trigger_values" .= triggerValuesConditionProperties
-        ]
-
-instance FromJSON ConditionProperties where
-    parseJSON (Object v) = ConditionProperties
-        <$> v .: "exchange"
-        <*> v .: "instrument_token"
-        <*> v .: "last_price"
-        <*> v .: "tradingsymbol"
-        <*> v .: "trigger_values"
-
-instance ToJSON Exchange where
-    toJSON (Exchange exchangeTypeExchange) =
-        object
-        [ "type" .= exchangeTypeExchange
-        ]
-
-instance FromJSON Exchange where
-    parseJSON (Object v) = Exchange
-        <$> v .: "type"
-
-instance ToJSON Type where
-    toJSON IntegerType = "integer"
-    toJSON NullType = "null"
-    toJSON NumberType = "number"
-    toJSON StringType = "string"
-
-instance FromJSON Type where
-    parseJSON = withText "Type" parseText
-        where
-            parseText "integer" = return IntegerType
-            parseText "null" = return NullType
-            parseText "number" = return NumberType
-            parseText "string" = return StringType
-
-instance ToJSON TriggerValues where
-    toJSON (TriggerValues itemsTriggerValues triggerValuesTypeTriggerValues) =
-        object
-        [ "items" .= itemsTriggerValues
-        , "type" .= triggerValuesTypeTriggerValues
-        ]
-
-instance FromJSON TriggerValues where
-    parseJSON (Object v) = TriggerValues
-        <$> v .: "items"
-        <*> v .: "type"
+        <$> v .:? "data"
+        <*> v .:? "status"
 
 instance ToJSON Datum where
-    toJSON (Datum additionalPropertiesDatum propertiesDatum requiredDatum titleDatum datumTypeDatum) =
+    toJSON (Datum conditionDatum createdAtDatum expiresAtDatum datumIDDatum metaDatum ordersDatum parentTriggerDatum statusDatum datumTypeDatum updatedAtDatum userIDDatum) =
         object
-        [ "additionalProperties" .= additionalPropertiesDatum
-        , "properties" .= propertiesDatum
-        , "required" .= requiredDatum
-        , "title" .= titleDatum
+        [ "condition" .= conditionDatum
+        , "created_at" .= createdAtDatum
+        , "expires_at" .= expiresAtDatum
+        , "id" .= datumIDDatum
+        , "meta" .= metaDatum
+        , "orders" .= ordersDatum
+        , "parent_trigger" .= parentTriggerDatum
+        , "status" .= statusDatum
         , "type" .= datumTypeDatum
+        , "updated_at" .= updatedAtDatum
+        , "user_id" .= userIDDatum
         ]
 
 instance FromJSON Datum where
     parseJSON (Object v) = Datum
-        <$> v .: "additionalProperties"
-        <*> v .: "properties"
-        <*> v .: "required"
-        <*> v .: "title"
-        <*> v .: "type"
+        <$> v .:? "condition"
+        <*> v .:? "created_at"
+        <*> v .:? "expires_at"
+        <*> v .:? "id"
+        <*> v .:? "meta"
+        <*> v .:? "orders"
+        <*> v .:? "parent_trigger"
+        <*> v .:? "status"
+        <*> v .:? "type"
+        <*> v .:? "updated_at"
+        <*> v .:? "user_id"
 
-instance ToJSON DatumProperties where
-    toJSON (DatumProperties conditionDatumProperties createdAtDatumProperties expiresAtDatumProperties datumPropertiesIDDatumProperties metaDatumProperties ordersDatumProperties parentTriggerDatumProperties statusDatumProperties datumPropertiesTypeDatumProperties updatedAtDatumProperties userIDDatumProperties) =
+instance ToJSON Condition where
+    toJSON (Condition exchangeCondition instrumentTokenCondition lastPriceCondition tradingsymbolCondition triggerValuesCondition) =
         object
-        [ "condition" .= conditionDatumProperties
-        , "created_at" .= createdAtDatumProperties
-        , "expires_at" .= expiresAtDatumProperties
-        , "id" .= datumPropertiesIDDatumProperties
-        , "meta" .= metaDatumProperties
-        , "orders" .= ordersDatumProperties
-        , "parent_trigger" .= parentTriggerDatumProperties
-        , "status" .= statusDatumProperties
-        , "type" .= datumPropertiesTypeDatumProperties
-        , "updated_at" .= updatedAtDatumProperties
-        , "user_id" .= userIDDatumProperties
+        [ "exchange" .= exchangeCondition
+        , "instrument_token" .= instrumentTokenCondition
+        , "last_price" .= lastPriceCondition
+        , "tradingsymbol" .= tradingsymbolCondition
+        , "trigger_values" .= triggerValuesCondition
         ]
 
-instance FromJSON DatumProperties where
-    parseJSON (Object v) = DatumProperties
-        <$> v .: "condition"
-        <*> v .: "created_at"
-        <*> v .: "expires_at"
-        <*> v .: "id"
-        <*> v .: "meta"
-        <*> v .: "orders"
-        <*> v .: "parent_trigger"
-        <*> v .: "status"
-        <*> v .: "type"
-        <*> v .: "updated_at"
-        <*> v .: "user_id"
-
-instance ToJSON ConditionClass where
-    toJSON (ConditionClass refConditionClass) =
-        object
-        [ "$ref" .= refConditionClass
-        ]
-
-instance FromJSON ConditionClass where
-    parseJSON (Object v) = ConditionClass
-        <$> v .: "$ref"
-
-instance ToJSON CreatedAt where
-    toJSON (CreatedAt formatCreatedAt createdAtTypeCreatedAt) =
-        object
-        [ "format" .= formatCreatedAt
-        , "type" .= createdAtTypeCreatedAt
-        ]
-
-instance FromJSON CreatedAt where
-    parseJSON (Object v) = CreatedAt
-        <$> v .: "format"
-        <*> v .: "type"
+instance FromJSON Condition where
+    parseJSON (Object v) = Condition
+        <$> v .:? "exchange"
+        <*> v .:? "instrument_token"
+        <*> v .:? "last_price"
+        <*> v .:? "tradingsymbol"
+        <*> v .:? "trigger_values"
 
 instance ToJSON Meta where
-    toJSON (Meta anyOfMeta) =
-        object
-        [ "anyOf" .= anyOfMeta
-        ]
+    toJSON = \_ -> emptyObject
 
 instance FromJSON Meta where
-    parseJSON (Object v) = Meta
-        <$> v .: "anyOf"
-
-instance ToJSON AnyOf where
-    toJSON (AnyOf refAnyOf anyOfTypeAnyOf) =
-        object
-        [ "$ref" .= refAnyOf
-        , "type" .= anyOfTypeAnyOf
-        ]
-
-instance FromJSON AnyOf where
-    parseJSON (Object v) = AnyOf
-        <$> v .:? "$ref"
-        <*> v .:? "type"
-
-instance ToJSON Orders where
-    toJSON (Orders itemsOrders ordersTypeOrders) =
-        object
-        [ "items" .= itemsOrders
-        , "type" .= ordersTypeOrders
-        ]
-
-instance FromJSON Orders where
-    parseJSON (Object v) = Orders
-        <$> v .: "items"
-        <*> v .: "type"
-
-instance ToJSON GttGetOrdersClass where
-    toJSON (GttGetOrdersClass additionalPropertiesGttGetOrdersClass propertiesGttGetOrdersClass requiredGttGetOrdersClass titleGttGetOrdersClass gttGetOrdersClassTypeGttGetOrdersClass) =
-        object
-        [ "additionalProperties" .= additionalPropertiesGttGetOrdersClass
-        , "properties" .= propertiesGttGetOrdersClass
-        , "required" .= requiredGttGetOrdersClass
-        , "title" .= titleGttGetOrdersClass
-        , "type" .= gttGetOrdersClassTypeGttGetOrdersClass
-        ]
-
-instance FromJSON GttGetOrdersClass where
-    parseJSON (Object v) = GttGetOrdersClass
-        <$> v .: "additionalProperties"
-        <*> v .: "properties"
-        <*> v .: "required"
-        <*> v .: "title"
-        <*> v .: "type"
-
-instance ToJSON GttGetOrdersProperties where
-    toJSON (GttGetOrdersProperties gttGetOrdersPropertiesDataGttGetOrdersProperties statusGttGetOrdersProperties) =
-        object
-        [ "data" .= gttGetOrdersPropertiesDataGttGetOrdersProperties
-        , "status" .= statusGttGetOrdersProperties
-        ]
-
-instance FromJSON GttGetOrdersProperties where
-    parseJSON (Object v) = GttGetOrdersProperties
-        <$> v .: "data"
-        <*> v .: "status"
-
-instance ToJSON MetaClass where
-    toJSON (MetaClass additionalPropertiesMetaClass titleMetaClass metaClassTypeMetaClass) =
-        object
-        [ "additionalProperties" .= additionalPropertiesMetaClass
-        , "title" .= titleMetaClass
-        , "type" .= metaClassTypeMetaClass
-        ]
-
-instance FromJSON MetaClass where
-    parseJSON (Object v) = MetaClass
-        <$> v .: "additionalProperties"
-        <*> v .: "title"
-        <*> v .: "type"
+    parseJSON emptyObject = return Meta
 
 instance ToJSON Order where
-    toJSON (Order additionalPropertiesOrder propertiesOrder requiredOrder titleOrder orderTypeOrder) =
+    toJSON (Order exchangeOrder orderTypeOrder priceOrder productOrder quantityOrder resultOrder tradingsymbolOrder transactionTypeOrder) =
         object
-        [ "additionalProperties" .= additionalPropertiesOrder
-        , "properties" .= propertiesOrder
-        , "required" .= requiredOrder
-        , "title" .= titleOrder
-        , "type" .= orderTypeOrder
+        [ "exchange" .= exchangeOrder
+        , "order_type" .= orderTypeOrder
+        , "price" .= priceOrder
+        , "product" .= productOrder
+        , "quantity" .= quantityOrder
+        , "result" .= resultOrder
+        , "tradingsymbol" .= tradingsymbolOrder
+        , "transaction_type" .= transactionTypeOrder
         ]
 
 instance FromJSON Order where
     parseJSON (Object v) = Order
-        <$> v .: "additionalProperties"
-        <*> v .: "properties"
-        <*> v .: "required"
-        <*> v .: "title"
-        <*> v .: "type"
-
-instance ToJSON OrderProperties where
-    toJSON (OrderProperties exchangeOrderProperties orderTypeOrderProperties priceOrderProperties productOrderProperties quantityOrderProperties resultOrderProperties tradingsymbolOrderProperties transactionTypeOrderProperties) =
-        object
-        [ "exchange" .= exchangeOrderProperties
-        , "order_type" .= orderTypeOrderProperties
-        , "price" .= priceOrderProperties
-        , "product" .= productOrderProperties
-        , "quantity" .= quantityOrderProperties
-        , "result" .= resultOrderProperties
-        , "tradingsymbol" .= tradingsymbolOrderProperties
-        , "transaction_type" .= transactionTypeOrderProperties
-        ]
-
-instance FromJSON OrderProperties where
-    parseJSON (Object v) = OrderProperties
-        <$> v .: "exchange"
-        <*> v .: "order_type"
-        <*> v .: "price"
-        <*> v .: "product"
-        <*> v .: "quantity"
-        <*> v .: "result"
-        <*> v .: "tradingsymbol"
-        <*> v .: "transaction_type"
-
-instance ToJSON OrderResult where
-    toJSON (OrderResult additionalPropertiesOrderResult propertiesOrderResult requiredOrderResult titleOrderResult orderResultTypeOrderResult) =
-        object
-        [ "additionalProperties" .= additionalPropertiesOrderResult
-        , "properties" .= propertiesOrderResult
-        , "required" .= requiredOrderResult
-        , "title" .= titleOrderResult
-        , "type" .= orderResultTypeOrderResult
-        ]
-
-instance FromJSON OrderResult where
-    parseJSON (Object v) = OrderResult
-        <$> v .: "additionalProperties"
-        <*> v .: "properties"
-        <*> v .: "required"
-        <*> v .: "title"
-        <*> v .: "type"
-
-instance ToJSON OrderResultProperties where
-    toJSON (OrderResultProperties orderIDOrderResultProperties rejectionReasonOrderResultProperties statusOrderResultProperties) =
-        object
-        [ "order_id" .= orderIDOrderResultProperties
-        , "rejection_reason" .= rejectionReasonOrderResultProperties
-        , "status" .= statusOrderResultProperties
-        ]
-
-instance FromJSON OrderResultProperties where
-    parseJSON (Object v) = OrderResultProperties
-        <$> v .: "order_id"
-        <*> v .: "rejection_reason"
-        <*> v .: "status"
+        <$> v .:? "exchange"
+        <*> v .:? "order_type"
+        <*> v .:? "price"
+        <*> v .:? "product"
+        <*> v .:? "quantity"
+        <*> v .:? "result"
+        <*> v .:? "tradingsymbol"
+        <*> v .:? "transaction_type"
 
 instance ToJSON ResultClass where
-    toJSON (ResultClass additionalPropertiesResultClass propertiesResultClass requiredResultClass titleResultClass resultTypeResultClass) =
+    toJSON (ResultClass accountIDResultClass exchangeResultClass metaResultClass orderResultResultClass orderTypeResultClass priceResultClass productResultClass quantityResultClass timestampResultClass tradingsymbolResultClass transactionTypeResultClass triggeredAtResultClass validityResultClass) =
         object
-        [ "additionalProperties" .= additionalPropertiesResultClass
-        , "properties" .= propertiesResultClass
-        , "required" .= requiredResultClass
-        , "title" .= titleResultClass
-        , "type" .= resultTypeResultClass
+        [ "account_id" .= accountIDResultClass
+        , "exchange" .= exchangeResultClass
+        , "meta" .= metaResultClass
+        , "order_result" .= orderResultResultClass
+        , "order_type" .= orderTypeResultClass
+        , "price" .= priceResultClass
+        , "product" .= productResultClass
+        , "quantity" .= quantityResultClass
+        , "timestamp" .= timestampResultClass
+        , "tradingsymbol" .= tradingsymbolResultClass
+        , "transaction_type" .= transactionTypeResultClass
+        , "triggered_at" .= triggeredAtResultClass
+        , "validity" .= validityResultClass
         ]
 
 instance FromJSON ResultClass where
     parseJSON (Object v) = ResultClass
-        <$> v .: "additionalProperties"
-        <*> v .: "properties"
-        <*> v .: "required"
-        <*> v .: "title"
-        <*> v .: "type"
+        <$> v .:? "account_id"
+        <*> v .:? "exchange"
+        <*> v .:? "meta"
+        <*> v .:? "order_result"
+        <*> v .:? "order_type"
+        <*> v .:? "price"
+        <*> v .:? "product"
+        <*> v .:? "quantity"
+        <*> v .:? "timestamp"
+        <*> v .:? "tradingsymbol"
+        <*> v .:? "transaction_type"
+        <*> v .:? "triggered_at"
+        <*> v .:? "validity"
 
-instance ToJSON ResultProperties where
-    toJSON (ResultProperties accountIDResultProperties exchangeResultProperties metaResultProperties orderResultResultProperties orderTypeResultProperties priceResultProperties productResultProperties quantityResultProperties timestampResultProperties tradingsymbolResultProperties transactionTypeResultProperties triggeredAtResultProperties validityResultProperties) =
+instance ToJSON OrderResult where
+    toJSON (OrderResult orderIDOrderResult rejectionReasonOrderResult statusOrderResult) =
         object
-        [ "account_id" .= accountIDResultProperties
-        , "exchange" .= exchangeResultProperties
-        , "meta" .= metaResultProperties
-        , "order_result" .= orderResultResultProperties
-        , "order_type" .= orderTypeResultProperties
-        , "price" .= priceResultProperties
-        , "product" .= productResultProperties
-        , "quantity" .= quantityResultProperties
-        , "timestamp" .= timestampResultProperties
-        , "tradingsymbol" .= tradingsymbolResultProperties
-        , "transaction_type" .= transactionTypeResultProperties
-        , "triggered_at" .= triggeredAtResultProperties
-        , "validity" .= validityResultProperties
+        [ "order_id" .= orderIDOrderResult
+        , "rejection_reason" .= rejectionReasonOrderResult
+        , "status" .= statusOrderResult
         ]
 
-instance FromJSON ResultProperties where
-    parseJSON (Object v) = ResultProperties
-        <$> v .: "account_id"
-        <*> v .: "exchange"
-        <*> v .: "meta"
-        <*> v .: "order_result"
-        <*> v .: "order_type"
-        <*> v .: "price"
-        <*> v .: "product"
-        <*> v .: "quantity"
-        <*> v .: "timestamp"
-        <*> v .: "tradingsymbol"
-        <*> v .: "transaction_type"
-        <*> v .: "triggered_at"
-        <*> v .: "validity"
+instance FromJSON OrderResult where
+    parseJSON (Object v) = OrderResult
+        <$> v .:? "order_id"
+        <*> v .:? "rejection_reason"
+        <*> v .:? "status"
