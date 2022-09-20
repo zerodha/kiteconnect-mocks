@@ -2,11 +2,11 @@
 //
 // To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
 //
-//    using QuickType;
+//    using MfOrderResponse;
 //
 //    var mfOrderResponse = MfOrderResponse.FromJson(jsonString);
 
-namespace QuickType
+namespace MfOrderResponse
 {
     using System;
     using System.Collections.Generic;
@@ -17,105 +17,27 @@ namespace QuickType
 
     public partial class MfOrderResponse
     {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
-
-        [JsonProperty("$schema")]
-        public Uri Schema { get; set; }
-
-        [JsonProperty("definitions")]
-        public Definitions Definitions { get; set; }
-    }
-
-    public partial class Definitions
-    {
-        [JsonProperty("Data")]
+        [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
         public Data Data { get; set; }
 
-        [JsonProperty("MFOrderResponse")]
-        public MfOrderResponseClass MfOrderResponse { get; set; }
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        public string Status { get; set; }
     }
 
     public partial class Data
     {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public DataProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] DataRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class DataProperties
-    {
-        [JsonProperty("order_id")]
-        public OrderId OrderId { get; set; }
-    }
-
-    public partial class OrderId
-    {
-        [JsonProperty("format")]
-        public string Format { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class MfOrderResponseClass
-    {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public MfOrderResponseProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] MfOrderResponseClassRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class MfOrderResponseProperties
-    {
-        [JsonProperty("data")]
-        public DataClass Data { get; set; }
-
-        [JsonProperty("status")]
-        public Status Status { get; set; }
-    }
-
-    public partial class DataClass
-    {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
-    }
-
-    public partial class Status
-    {
-        [JsonProperty("type")]
-        public string Type { get; set; }
+        [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
+        public Guid? OrderId { get; set; }
     }
 
     public partial class MfOrderResponse
     {
-        public static MfOrderResponse FromJson(string json) => JsonConvert.DeserializeObject<MfOrderResponse>(json, QuickType.Converter.Settings);
+        public static MfOrderResponse FromJson(string json) => JsonConvert.DeserializeObject<MfOrderResponse>(json, MfOrderResponse.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this MfOrderResponse self) => JsonConvert.SerializeObject(self, QuickType.Converter.Settings);
+        public static string ToJson(this MfOrderResponse self) => JsonConvert.SerializeObject(self, MfOrderResponse.Converter.Settings);
     }
 
     internal static class Converter

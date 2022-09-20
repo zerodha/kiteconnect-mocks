@@ -2,11 +2,11 @@
 //
 // To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
 //
-//    using QuickType;
+//    using HistoricalOi;
 //
 //    var historicalOi = HistoricalOi.FromJson(jsonString);
 
-namespace QuickType
+namespace HistoricalOi
 {
     using System;
     using System.Collections.Generic;
@@ -17,126 +17,36 @@ namespace QuickType
 
     public partial class HistoricalOi
     {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
-
-        [JsonProperty("$schema")]
-        public Uri Schema { get; set; }
-
-        [JsonProperty("definitions")]
-        public Definitions Definitions { get; set; }
-    }
-
-    public partial class Definitions
-    {
-        [JsonProperty("Candle")]
-        public Candle Candle { get; set; }
-
-        [JsonProperty("Data")]
+        [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
         public Data Data { get; set; }
 
-        [JsonProperty("HistoricalOi")]
-        public HistoricalOiClass HistoricalOi { get; set; }
-    }
-
-    public partial class Candle
-    {
-        [JsonProperty("anyOf")]
-        public AnyOf[] AnyOf { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-    }
-
-    public partial class AnyOf
-    {
-        [JsonProperty("type")]
-        public string Type { get; set; }
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        public string Status { get; set; }
     }
 
     public partial class Data
     {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public DataProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] DataRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
+        [JsonProperty("candles", NullValueHandling = NullValueHandling.Ignore)]
+        public Candle[][] Candles { get; set; }
     }
 
-    public partial class DataProperties
+    public partial struct Candle
     {
-        [JsonProperty("candles")]
-        public Candles Candles { get; set; }
-    }
+        public double? Double;
+        public string String;
 
-    public partial class Candles
-    {
-        [JsonProperty("items")]
-        public Items Items { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class Items
-    {
-        [JsonProperty("items")]
-        public DataClass ItemsItems { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class DataClass
-    {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
-    }
-
-    public partial class HistoricalOiClass
-    {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public HistoricalOiProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] HistoricalOiClassRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class HistoricalOiProperties
-    {
-        [JsonProperty("data")]
-        public DataClass Data { get; set; }
-
-        [JsonProperty("status")]
-        public AnyOf Status { get; set; }
+        public static implicit operator Candle(double Double) => new Candle { Double = Double };
+        public static implicit operator Candle(string String) => new Candle { String = String };
     }
 
     public partial class HistoricalOi
     {
-        public static HistoricalOi FromJson(string json) => JsonConvert.DeserializeObject<HistoricalOi>(json, QuickType.Converter.Settings);
+        public static HistoricalOi FromJson(string json) => JsonConvert.DeserializeObject<HistoricalOi>(json, HistoricalOi.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this HistoricalOi self) => JsonConvert.SerializeObject(self, QuickType.Converter.Settings);
+        public static string ToJson(this HistoricalOi self) => JsonConvert.SerializeObject(self, HistoricalOi.Converter.Settings);
     }
 
     internal static class Converter
@@ -147,8 +57,48 @@ namespace QuickType
             DateParseHandling = DateParseHandling.None,
             Converters =
             {
+                CandleConverter.Singleton,
                 new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
             },
         };
+    }
+
+    internal class CandleConverter : JsonConverter
+    {
+        public override bool CanConvert(Type t) => t == typeof(Candle) || t == typeof(Candle?);
+
+        public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
+        {
+            switch (reader.TokenType)
+            {
+                case JsonToken.Integer:
+                case JsonToken.Float:
+                    var doubleValue = serializer.Deserialize<double>(reader);
+                    return new Candle { Double = doubleValue };
+                case JsonToken.String:
+                case JsonToken.Date:
+                    var stringValue = serializer.Deserialize<string>(reader);
+                    return new Candle { String = stringValue };
+            }
+            throw new Exception("Cannot unmarshal type Candle");
+        }
+
+        public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
+        {
+            var value = (Candle)untypedValue;
+            if (value.Double != null)
+            {
+                serializer.Serialize(writer, value.Double.Value);
+                return;
+            }
+            if (value.String != null)
+            {
+                serializer.Serialize(writer, value.String);
+                return;
+            }
+            throw new Exception("Cannot marshal type Candle");
+        }
+
+        public static readonly CandleConverter Singleton = new CandleConverter();
     }
 }

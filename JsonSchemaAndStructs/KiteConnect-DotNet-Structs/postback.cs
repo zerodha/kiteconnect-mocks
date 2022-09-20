@@ -2,11 +2,11 @@
 //
 // To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
 //
-//    using QuickType;
+//    using Postback;
 //
 //    var postback = Postback.FromJson(jsonString);
 
-namespace QuickType
+namespace Postback
 {
     using System;
     using System.Collections.Generic;
@@ -17,191 +17,121 @@ namespace QuickType
 
     public partial class Postback
     {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
+        [JsonProperty("app_id", NullValueHandling = NullValueHandling.Ignore)]
+        public long? AppId { get; set; }
 
-        [JsonProperty("$schema")]
-        public Uri Schema { get; set; }
+        [JsonProperty("average_price", NullValueHandling = NullValueHandling.Ignore)]
+        public long? AveragePrice { get; set; }
 
-        [JsonProperty("definitions")]
-        public Definitions Definitions { get; set; }
-    }
+        [JsonProperty("cancelled_quantity", NullValueHandling = NullValueHandling.Ignore)]
+        public long? CancelledQuantity { get; set; }
 
-    public partial class Definitions
-    {
-        [JsonProperty("Meta")]
+        [JsonProperty("checksum", NullValueHandling = NullValueHandling.Ignore)]
+        public string Checksum { get; set; }
+
+        [JsonProperty("disclosed_quantity", NullValueHandling = NullValueHandling.Ignore)]
+        public long? DisclosedQuantity { get; set; }
+
+        [JsonProperty("exchange", NullValueHandling = NullValueHandling.Ignore)]
+        public string Exchange { get; set; }
+
+        [JsonProperty("exchange_order_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string ExchangeOrderId { get; set; }
+
+        [JsonProperty("exchange_timestamp", NullValueHandling = NullValueHandling.Ignore)]
+        public DateTimeOffset? ExchangeTimestamp { get; set; }
+
+        [JsonProperty("exchange_update_timestamp", NullValueHandling = NullValueHandling.Ignore)]
+        public DateTimeOffset? ExchangeUpdateTimestamp { get; set; }
+
+        [JsonProperty("filled_quantity", NullValueHandling = NullValueHandling.Ignore)]
+        public long? FilledQuantity { get; set; }
+
+        [JsonProperty("guid", NullValueHandling = NullValueHandling.Ignore)]
+        public string Guid { get; set; }
+
+        [JsonProperty("instrument_token", NullValueHandling = NullValueHandling.Ignore)]
+        public long? InstrumentToken { get; set; }
+
+        [JsonProperty("market_protection", NullValueHandling = NullValueHandling.Ignore)]
+        public long? MarketProtection { get; set; }
+
+        [JsonProperty("meta", NullValueHandling = NullValueHandling.Ignore)]
         public Meta Meta { get; set; }
 
-        [JsonProperty("Postback")]
-        public PostbackClass Postback { get; set; }
+        [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string OrderId { get; set; }
+
+        [JsonProperty("order_timestamp", NullValueHandling = NullValueHandling.Ignore)]
+        public DateTimeOffset? OrderTimestamp { get; set; }
+
+        [JsonProperty("order_type", NullValueHandling = NullValueHandling.Ignore)]
+        public string OrderType { get; set; }
+
+        [JsonProperty("parent_order_id")]
+        public object ParentOrderId { get; set; }
+
+        [JsonProperty("pending_quantity", NullValueHandling = NullValueHandling.Ignore)]
+        public long? PendingQuantity { get; set; }
+
+        [JsonProperty("placed_by", NullValueHandling = NullValueHandling.Ignore)]
+        public string PlacedBy { get; set; }
+
+        [JsonProperty("price", NullValueHandling = NullValueHandling.Ignore)]
+        public long? Price { get; set; }
+
+        [JsonProperty("product", NullValueHandling = NullValueHandling.Ignore)]
+        public string Product { get; set; }
+
+        [JsonProperty("quantity", NullValueHandling = NullValueHandling.Ignore)]
+        public long? Quantity { get; set; }
+
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        public string Status { get; set; }
+
+        [JsonProperty("status_message")]
+        public object StatusMessage { get; set; }
+
+        [JsonProperty("status_message_raw")]
+        public object StatusMessageRaw { get; set; }
+
+        [JsonProperty("tag")]
+        public object Tag { get; set; }
+
+        [JsonProperty("tradingsymbol", NullValueHandling = NullValueHandling.Ignore)]
+        public string Tradingsymbol { get; set; }
+
+        [JsonProperty("transaction_type", NullValueHandling = NullValueHandling.Ignore)]
+        public string TransactionType { get; set; }
+
+        [JsonProperty("trigger_price", NullValueHandling = NullValueHandling.Ignore)]
+        public long? TriggerPrice { get; set; }
+
+        [JsonProperty("unfilled_quantity", NullValueHandling = NullValueHandling.Ignore)]
+        public long? UnfilledQuantity { get; set; }
+
+        [JsonProperty("user_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string UserId { get; set; }
+
+        [JsonProperty("validity", NullValueHandling = NullValueHandling.Ignore)]
+        public string Validity { get; set; }
+
+        [JsonProperty("variety", NullValueHandling = NullValueHandling.Ignore)]
+        public string Variety { get; set; }
     }
 
     public partial class Meta
     {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
     }
-
-    public partial class PostbackClass
-    {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public Properties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] PostbackClassRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class Properties
-    {
-        [JsonProperty("app_id")]
-        public AppId AppId { get; set; }
-
-        [JsonProperty("average_price")]
-        public AppId AveragePrice { get; set; }
-
-        [JsonProperty("cancelled_quantity")]
-        public AppId CancelledQuantity { get; set; }
-
-        [JsonProperty("checksum")]
-        public AppId Checksum { get; set; }
-
-        [JsonProperty("disclosed_quantity")]
-        public AppId DisclosedQuantity { get; set; }
-
-        [JsonProperty("exchange")]
-        public AppId Exchange { get; set; }
-
-        [JsonProperty("exchange_order_id")]
-        public AppId ExchangeOrderId { get; set; }
-
-        [JsonProperty("exchange_timestamp")]
-        public Timestamp ExchangeTimestamp { get; set; }
-
-        [JsonProperty("exchange_update_timestamp")]
-        public Timestamp ExchangeUpdateTimestamp { get; set; }
-
-        [JsonProperty("filled_quantity")]
-        public AppId FilledQuantity { get; set; }
-
-        [JsonProperty("guid")]
-        public AppId Guid { get; set; }
-
-        [JsonProperty("instrument_token")]
-        public AppId InstrumentToken { get; set; }
-
-        [JsonProperty("market_protection")]
-        public AppId MarketProtection { get; set; }
-
-        [JsonProperty("meta")]
-        public MetaClass Meta { get; set; }
-
-        [JsonProperty("order_id")]
-        public AppId OrderId { get; set; }
-
-        [JsonProperty("order_timestamp")]
-        public Timestamp OrderTimestamp { get; set; }
-
-        [JsonProperty("order_type")]
-        public AppId OrderType { get; set; }
-
-        [JsonProperty("parent_order_id")]
-        public AppId ParentOrderId { get; set; }
-
-        [JsonProperty("pending_quantity")]
-        public AppId PendingQuantity { get; set; }
-
-        [JsonProperty("placed_by")]
-        public AppId PlacedBy { get; set; }
-
-        [JsonProperty("price")]
-        public AppId Price { get; set; }
-
-        [JsonProperty("product")]
-        public AppId Product { get; set; }
-
-        [JsonProperty("quantity")]
-        public AppId Quantity { get; set; }
-
-        [JsonProperty("status")]
-        public AppId Status { get; set; }
-
-        [JsonProperty("status_message")]
-        public AppId StatusMessage { get; set; }
-
-        [JsonProperty("status_message_raw")]
-        public AppId StatusMessageRaw { get; set; }
-
-        [JsonProperty("tag")]
-        public AppId Tag { get; set; }
-
-        [JsonProperty("tradingsymbol")]
-        public AppId Tradingsymbol { get; set; }
-
-        [JsonProperty("transaction_type")]
-        public AppId TransactionType { get; set; }
-
-        [JsonProperty("trigger_price")]
-        public AppId TriggerPrice { get; set; }
-
-        [JsonProperty("unfilled_quantity")]
-        public AppId UnfilledQuantity { get; set; }
-
-        [JsonProperty("user_id")]
-        public AppId UserId { get; set; }
-
-        [JsonProperty("validity")]
-        public AppId Validity { get; set; }
-
-        [JsonProperty("variety")]
-        public AppId Variety { get; set; }
-    }
-
-    public partial class AppId
-    {
-        [JsonProperty("type")]
-        public TypeEnum Type { get; set; }
-    }
-
-    public partial class Timestamp
-    {
-        [JsonProperty("format")]
-        public string Format { get; set; }
-
-        [JsonProperty("type")]
-        public TypeEnum Type { get; set; }
-    }
-
-    public partial class MetaClass
-    {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
-    }
-
-    public enum TypeEnum { Integer, Null, String };
 
     public partial class Postback
     {
-        public static Postback FromJson(string json) => JsonConvert.DeserializeObject<Postback>(json, QuickType.Converter.Settings);
+        public static Postback FromJson(string json) => JsonConvert.DeserializeObject<Postback>(json, Postback.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this Postback self) => JsonConvert.SerializeObject(self, QuickType.Converter.Settings);
+        public static string ToJson(this Postback self) => JsonConvert.SerializeObject(self, Postback.Converter.Settings);
     }
 
     internal static class Converter
@@ -212,55 +142,8 @@ namespace QuickType
             DateParseHandling = DateParseHandling.None,
             Converters =
             {
-                TypeEnumConverter.Singleton,
                 new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
             },
         };
-    }
-
-    internal class TypeEnumConverter : JsonConverter
-    {
-        public override bool CanConvert(Type t) => t == typeof(TypeEnum) || t == typeof(TypeEnum?);
-
-        public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
-        {
-            if (reader.TokenType == JsonToken.Null) return null;
-            var value = serializer.Deserialize<string>(reader);
-            switch (value)
-            {
-                case "integer":
-                    return TypeEnum.Integer;
-                case "null":
-                    return TypeEnum.Null;
-                case "string":
-                    return TypeEnum.String;
-            }
-            throw new Exception("Cannot unmarshal type TypeEnum");
-        }
-
-        public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
-        {
-            if (untypedValue == null)
-            {
-                serializer.Serialize(writer, null);
-                return;
-            }
-            var value = (TypeEnum)untypedValue;
-            switch (value)
-            {
-                case TypeEnum.Integer:
-                    serializer.Serialize(writer, "integer");
-                    return;
-                case TypeEnum.Null:
-                    serializer.Serialize(writer, "null");
-                    return;
-                case TypeEnum.String:
-                    serializer.Serialize(writer, "string");
-                    return;
-            }
-            throw new Exception("Cannot marshal type TypeEnum");
-        }
-
-        public static readonly TypeEnumConverter Singleton = new TypeEnumConverter();
     }
 }

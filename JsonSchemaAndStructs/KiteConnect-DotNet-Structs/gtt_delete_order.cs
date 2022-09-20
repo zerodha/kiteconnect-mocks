@@ -2,11 +2,11 @@
 //
 // To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
 //
-//    using QuickType;
+//    using GttDeleteOrder;
 //
 //    var gttDeleteOrder = GttDeleteOrder.FromJson(jsonString);
 
-namespace QuickType
+namespace GttDeleteOrder
 {
     using System;
     using System.Collections.Generic;
@@ -17,96 +17,27 @@ namespace QuickType
 
     public partial class GttDeleteOrder
     {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
-
-        [JsonProperty("$schema")]
-        public Uri Schema { get; set; }
-
-        [JsonProperty("definitions")]
-        public Definitions Definitions { get; set; }
-    }
-
-    public partial class Definitions
-    {
-        [JsonProperty("Data")]
+        [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
         public Data Data { get; set; }
 
-        [JsonProperty("GttDeleteOrder")]
-        public GttDeleteOrderClass GttDeleteOrder { get; set; }
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        public string Status { get; set; }
     }
 
     public partial class Data
     {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public DataProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] DataRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class DataProperties
-    {
-        [JsonProperty("trigger_id")]
-        public TriggerId TriggerId { get; set; }
-    }
-
-    public partial class TriggerId
-    {
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class GttDeleteOrderClass
-    {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public GttDeleteOrderProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] GttDeleteOrderClassRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class GttDeleteOrderProperties
-    {
-        [JsonProperty("data")]
-        public DataClass Data { get; set; }
-
-        [JsonProperty("status")]
-        public TriggerId Status { get; set; }
-    }
-
-    public partial class DataClass
-    {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
+        [JsonProperty("trigger_id", NullValueHandling = NullValueHandling.Ignore)]
+        public long? TriggerId { get; set; }
     }
 
     public partial class GttDeleteOrder
     {
-        public static GttDeleteOrder FromJson(string json) => JsonConvert.DeserializeObject<GttDeleteOrder>(json, QuickType.Converter.Settings);
+        public static GttDeleteOrder FromJson(string json) => JsonConvert.DeserializeObject<GttDeleteOrder>(json, GttDeleteOrder.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this GttDeleteOrder self) => JsonConvert.SerializeObject(self, QuickType.Converter.Settings);
+        public static string ToJson(this GttDeleteOrder self) => JsonConvert.SerializeObject(self, GttDeleteOrder.Converter.Settings);
     }
 
     internal static class Converter

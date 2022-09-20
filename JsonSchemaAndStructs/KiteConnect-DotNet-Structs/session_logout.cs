@@ -2,11 +2,11 @@
 //
 // To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
 //
-//    using QuickType;
+//    using SessionLogout;
 //
 //    var sessionLogout = SessionLogout.FromJson(jsonString);
 
-namespace QuickType
+namespace SessionLogout
 {
     using System;
     using System.Collections.Generic;
@@ -17,63 +17,21 @@ namespace QuickType
 
     public partial class SessionLogout
     {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
+        [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? Data { get; set; }
 
-        [JsonProperty("$schema")]
-        public Uri Schema { get; set; }
-
-        [JsonProperty("definitions")]
-        public Definitions Definitions { get; set; }
-    }
-
-    public partial class Definitions
-    {
-        [JsonProperty("SessionLogout")]
-        public SessionLogoutClass SessionLogout { get; set; }
-    }
-
-    public partial class SessionLogoutClass
-    {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public Properties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] SessionLogoutClassRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class Properties
-    {
-        [JsonProperty("data")]
-        public Data Data { get; set; }
-
-        [JsonProperty("status")]
-        public Data Status { get; set; }
-    }
-
-    public partial class Data
-    {
-        [JsonProperty("type")]
-        public string Type { get; set; }
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        public string Status { get; set; }
     }
 
     public partial class SessionLogout
     {
-        public static SessionLogout FromJson(string json) => JsonConvert.DeserializeObject<SessionLogout>(json, QuickType.Converter.Settings);
+        public static SessionLogout FromJson(string json) => JsonConvert.DeserializeObject<SessionLogout>(json, SessionLogout.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this SessionLogout self) => JsonConvert.SerializeObject(self, QuickType.Converter.Settings);
+        public static string ToJson(this SessionLogout self) => JsonConvert.SerializeObject(self, SessionLogout.Converter.Settings);
     }
 
     internal static class Converter

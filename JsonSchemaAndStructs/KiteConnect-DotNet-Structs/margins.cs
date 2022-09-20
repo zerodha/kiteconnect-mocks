@@ -2,11 +2,11 @@
 //
 // To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
 //
-//    using QuickType;
+//    using Margins;
 //
 //    var margins = Margins.FromJson(jsonString);
 
-namespace QuickType
+namespace Margins
 {
     using System;
     using System.Collections.Generic;
@@ -17,186 +17,66 @@ namespace QuickType
 
     public partial class Margins
     {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
-
-        [JsonProperty("$schema")]
-        public Uri Schema { get; set; }
-
-        [JsonProperty("definitions")]
-        public Definitions Definitions { get; set; }
-    }
-
-    public partial class Definitions
-    {
-        [JsonProperty("Available")]
-        public Available Available { get; set; }
-
-        [JsonProperty("Data")]
+        [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
         public Data Data { get; set; }
 
-        [JsonProperty("Ity")]
-        public Ity Ity { get; set; }
-
-        [JsonProperty("Margins")]
-        public MarginsClass Margins { get; set; }
-    }
-
-    public partial class Available
-    {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public AvailableProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] AvailableRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class AvailableProperties
-    {
-        [JsonProperty("adhoc_margin")]
-        public AdhocMargin AdhocMargin { get; set; }
-
-        [JsonProperty("cash")]
-        public AdhocMargin Cash { get; set; }
-
-        [JsonProperty("collateral")]
-        public AdhocMargin Collateral { get; set; }
-
-        [JsonProperty("intraday_payin")]
-        public AdhocMargin IntradayPayin { get; set; }
-
-        [JsonProperty("live_balance")]
-        public AdhocMargin LiveBalance { get; set; }
-
-        [JsonProperty("opening_balance")]
-        public AdhocMargin OpeningBalance { get; set; }
-    }
-
-    public partial class AdhocMargin
-    {
-        [JsonProperty("type")]
-        public string Type { get; set; }
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        public string Status { get; set; }
     }
 
     public partial class Data
     {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
+        [JsonProperty("commodity", NullValueHandling = NullValueHandling.Ignore)]
+        public Ity Commodity { get; set; }
 
-        [JsonProperty("properties")]
-        public DataProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] DataRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class DataProperties
-    {
-        [JsonProperty("commodity")]
-        public Commodity Commodity { get; set; }
-
-        [JsonProperty("equity")]
-        public Commodity Equity { get; set; }
-    }
-
-    public partial class Commodity
-    {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
+        [JsonProperty("equity", NullValueHandling = NullValueHandling.Ignore)]
+        public Ity Equity { get; set; }
     }
 
     public partial class Ity
     {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
+        [JsonProperty("available", NullValueHandling = NullValueHandling.Ignore)]
+        public Available Available { get; set; }
 
-        [JsonProperty("properties")]
-        public ItyProperties Properties { get; set; }
+        [JsonProperty("enabled", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? Enabled { get; set; }
 
-        [JsonProperty("required")]
-        public string[] ItyRequired { get; set; }
+        [JsonProperty("net", NullValueHandling = NullValueHandling.Ignore)]
+        public double? Net { get; set; }
 
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
+        [JsonProperty("utilised", NullValueHandling = NullValueHandling.Ignore)]
+        public Dictionary<string, double> Utilised { get; set; }
     }
 
-    public partial class ItyProperties
+    public partial class Available
     {
-        [JsonProperty("available")]
-        public Commodity Available { get; set; }
+        [JsonProperty("adhoc_margin", NullValueHandling = NullValueHandling.Ignore)]
+        public long? AdhocMargin { get; set; }
 
-        [JsonProperty("enabled")]
-        public AdhocMargin Enabled { get; set; }
+        [JsonProperty("cash", NullValueHandling = NullValueHandling.Ignore)]
+        public double? Cash { get; set; }
 
-        [JsonProperty("net")]
-        public AdhocMargin Net { get; set; }
+        [JsonProperty("collateral", NullValueHandling = NullValueHandling.Ignore)]
+        public long? Collateral { get; set; }
 
-        [JsonProperty("utilised")]
-        public Utilised Utilised { get; set; }
-    }
+        [JsonProperty("intraday_payin", NullValueHandling = NullValueHandling.Ignore)]
+        public long? IntradayPayin { get; set; }
 
-    public partial class Utilised
-    {
-        [JsonProperty("additionalProperties")]
-        public AdhocMargin AdditionalProperties { get; set; }
+        [JsonProperty("live_balance", NullValueHandling = NullValueHandling.Ignore)]
+        public double? LiveBalance { get; set; }
 
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class MarginsClass
-    {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public MarginsProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] MarginsClassRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class MarginsProperties
-    {
-        [JsonProperty("data")]
-        public Commodity Data { get; set; }
-
-        [JsonProperty("status")]
-        public AdhocMargin Status { get; set; }
+        [JsonProperty("opening_balance", NullValueHandling = NullValueHandling.Ignore)]
+        public double? OpeningBalance { get; set; }
     }
 
     public partial class Margins
     {
-        public static Margins FromJson(string json) => JsonConvert.DeserializeObject<Margins>(json, QuickType.Converter.Settings);
+        public static Margins FromJson(string json) => JsonConvert.DeserializeObject<Margins>(json, Margins.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this Margins self) => JsonConvert.SerializeObject(self, QuickType.Converter.Settings);
+        public static string ToJson(this Margins self) => JsonConvert.SerializeObject(self, Margins.Converter.Settings);
     }
 
     internal static class Converter

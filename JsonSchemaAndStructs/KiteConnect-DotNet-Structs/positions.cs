@@ -2,11 +2,11 @@
 //
 // To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
 //
-//    using QuickType;
+//    using Positions;
 //
 //    var positions = Positions.FromJson(jsonString);
 
-namespace QuickType
+namespace Positions
 {
     using System;
     using System.Collections.Generic;
@@ -17,131 +17,120 @@ namespace QuickType
 
     public partial class Positions
     {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
-
-        [JsonProperty("$schema")]
-        public Uri Schema { get; set; }
-
-        [JsonProperty("definitions")]
-        public Definitions Definitions { get; set; }
-    }
-
-    public partial class Definitions
-    {
-        [JsonProperty("Data")]
+        [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
         public Data Data { get; set; }
 
-        [JsonProperty("Day")]
-        public DayClass Day { get; set; }
-
-        [JsonProperty("Positions")]
-        public PositionsClass Positions { get; set; }
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        public string Status { get; set; }
     }
 
     public partial class Data
     {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
+        [JsonProperty("day", NullValueHandling = NullValueHandling.Ignore)]
+        public Day[] Day { get; set; }
 
-        [JsonProperty("properties")]
-        public DataProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] DataRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class DataProperties
-    {
-        [JsonProperty("day")]
-        public Day Day { get; set; }
-
-        [JsonProperty("net")]
-        public Day Net { get; set; }
+        [JsonProperty("net", NullValueHandling = NullValueHandling.Ignore)]
+        public Day[] Net { get; set; }
     }
 
     public partial class Day
     {
-        [JsonProperty("items")]
-        public DataClass Items { get; set; }
+        [JsonProperty("average_price", NullValueHandling = NullValueHandling.Ignore)]
+        public double? AveragePrice { get; set; }
 
-        [JsonProperty("type")]
-        public string Type { get; set; }
+        [JsonProperty("buy_m2m", NullValueHandling = NullValueHandling.Ignore)]
+        public long? BuyM2M { get; set; }
+
+        [JsonProperty("buy_price", NullValueHandling = NullValueHandling.Ignore)]
+        public double? BuyPrice { get; set; }
+
+        [JsonProperty("buy_quantity", NullValueHandling = NullValueHandling.Ignore)]
+        public long? BuyQuantity { get; set; }
+
+        [JsonProperty("buy_value", NullValueHandling = NullValueHandling.Ignore)]
+        public long? BuyValue { get; set; }
+
+        [JsonProperty("close_price", NullValueHandling = NullValueHandling.Ignore)]
+        public long? ClosePrice { get; set; }
+
+        [JsonProperty("day_buy_price", NullValueHandling = NullValueHandling.Ignore)]
+        public double? DayBuyPrice { get; set; }
+
+        [JsonProperty("day_buy_quantity", NullValueHandling = NullValueHandling.Ignore)]
+        public long? DayBuyQuantity { get; set; }
+
+        [JsonProperty("day_buy_value", NullValueHandling = NullValueHandling.Ignore)]
+        public long? DayBuyValue { get; set; }
+
+        [JsonProperty("day_sell_price", NullValueHandling = NullValueHandling.Ignore)]
+        public long? DaySellPrice { get; set; }
+
+        [JsonProperty("day_sell_quantity", NullValueHandling = NullValueHandling.Ignore)]
+        public long? DaySellQuantity { get; set; }
+
+        [JsonProperty("day_sell_value", NullValueHandling = NullValueHandling.Ignore)]
+        public long? DaySellValue { get; set; }
+
+        [JsonProperty("exchange", NullValueHandling = NullValueHandling.Ignore)]
+        public string Exchange { get; set; }
+
+        [JsonProperty("instrument_token", NullValueHandling = NullValueHandling.Ignore)]
+        public long? InstrumentToken { get; set; }
+
+        [JsonProperty("last_price", NullValueHandling = NullValueHandling.Ignore)]
+        public double? LastPrice { get; set; }
+
+        [JsonProperty("m2m", NullValueHandling = NullValueHandling.Ignore)]
+        public long? M2M { get; set; }
+
+        [JsonProperty("multiplier", NullValueHandling = NullValueHandling.Ignore)]
+        public long? Multiplier { get; set; }
+
+        [JsonProperty("overnight_quantity", NullValueHandling = NullValueHandling.Ignore)]
+        public long? OvernightQuantity { get; set; }
+
+        [JsonProperty("pnl", NullValueHandling = NullValueHandling.Ignore)]
+        public long? Pnl { get; set; }
+
+        [JsonProperty("product", NullValueHandling = NullValueHandling.Ignore)]
+        public string Product { get; set; }
+
+        [JsonProperty("quantity", NullValueHandling = NullValueHandling.Ignore)]
+        public long? Quantity { get; set; }
+
+        [JsonProperty("realised", NullValueHandling = NullValueHandling.Ignore)]
+        public long? Realised { get; set; }
+
+        [JsonProperty("sell_m2m", NullValueHandling = NullValueHandling.Ignore)]
+        public long? SellM2M { get; set; }
+
+        [JsonProperty("sell_price", NullValueHandling = NullValueHandling.Ignore)]
+        public long? SellPrice { get; set; }
+
+        [JsonProperty("sell_quantity", NullValueHandling = NullValueHandling.Ignore)]
+        public long? SellQuantity { get; set; }
+
+        [JsonProperty("sell_value", NullValueHandling = NullValueHandling.Ignore)]
+        public long? SellValue { get; set; }
+
+        [JsonProperty("tradingsymbol", NullValueHandling = NullValueHandling.Ignore)]
+        public string Tradingsymbol { get; set; }
+
+        [JsonProperty("unrealised", NullValueHandling = NullValueHandling.Ignore)]
+        public long? Unrealised { get; set; }
+
+        [JsonProperty("value", NullValueHandling = NullValueHandling.Ignore)]
+        public long? Value { get; set; }
     }
-
-    public partial class DataClass
-    {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
-    }
-
-    public partial class DayClass
-    {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public System.Collections.Generic.Dictionary<string, Property> Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] DayClassRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class Property
-    {
-        [JsonProperty("type")]
-        public TypeEnum Type { get; set; }
-    }
-
-    public partial class PositionsClass
-    {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public PositionsProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] PositionsClassRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class PositionsProperties
-    {
-        [JsonProperty("data")]
-        public DataClass Data { get; set; }
-
-        [JsonProperty("status")]
-        public Property Status { get; set; }
-    }
-
-    public enum TypeEnum { Integer, Number, String };
 
     public partial class Positions
     {
-        public static Positions FromJson(string json) => JsonConvert.DeserializeObject<Positions>(json, QuickType.Converter.Settings);
+        public static Positions FromJson(string json) => JsonConvert.DeserializeObject<Positions>(json, Positions.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this Positions self) => JsonConvert.SerializeObject(self, QuickType.Converter.Settings);
+        public static string ToJson(this Positions self) => JsonConvert.SerializeObject(self, Positions.Converter.Settings);
     }
 
     internal static class Converter
@@ -152,55 +141,8 @@ namespace QuickType
             DateParseHandling = DateParseHandling.None,
             Converters =
             {
-                TypeEnumConverter.Singleton,
                 new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
             },
         };
-    }
-
-    internal class TypeEnumConverter : JsonConverter
-    {
-        public override bool CanConvert(Type t) => t == typeof(TypeEnum) || t == typeof(TypeEnum?);
-
-        public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
-        {
-            if (reader.TokenType == JsonToken.Null) return null;
-            var value = serializer.Deserialize<string>(reader);
-            switch (value)
-            {
-                case "integer":
-                    return TypeEnum.Integer;
-                case "number":
-                    return TypeEnum.Number;
-                case "string":
-                    return TypeEnum.String;
-            }
-            throw new Exception("Cannot unmarshal type TypeEnum");
-        }
-
-        public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
-        {
-            if (untypedValue == null)
-            {
-                serializer.Serialize(writer, null);
-                return;
-            }
-            var value = (TypeEnum)untypedValue;
-            switch (value)
-            {
-                case TypeEnum.Integer:
-                    serializer.Serialize(writer, "integer");
-                    return;
-                case TypeEnum.Number:
-                    serializer.Serialize(writer, "number");
-                    return;
-                case TypeEnum.String:
-                    serializer.Serialize(writer, "string");
-                    return;
-            }
-            throw new Exception("Cannot marshal type TypeEnum");
-        }
-
-        public static readonly TypeEnumConverter Singleton = new TypeEnumConverter();
     }
 }

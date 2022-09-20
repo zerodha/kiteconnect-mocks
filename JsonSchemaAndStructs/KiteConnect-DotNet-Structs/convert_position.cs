@@ -2,11 +2,11 @@
 //
 // To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
 //
-//    using QuickType;
+//    using ConvertPosition;
 //
 //    var convertPosition = ConvertPosition.FromJson(jsonString);
 
-namespace QuickType
+namespace ConvertPosition
 {
     using System;
     using System.Collections.Generic;
@@ -17,63 +17,21 @@ namespace QuickType
 
     public partial class ConvertPosition
     {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
+        [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? Data { get; set; }
 
-        [JsonProperty("$schema")]
-        public Uri Schema { get; set; }
-
-        [JsonProperty("definitions")]
-        public Definitions Definitions { get; set; }
-    }
-
-    public partial class Definitions
-    {
-        [JsonProperty("ConvertPosition")]
-        public ConvertPositionClass ConvertPosition { get; set; }
-    }
-
-    public partial class ConvertPositionClass
-    {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public Properties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] ConvertPositionClassRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class Properties
-    {
-        [JsonProperty("data")]
-        public Data Data { get; set; }
-
-        [JsonProperty("status")]
-        public Data Status { get; set; }
-    }
-
-    public partial class Data
-    {
-        [JsonProperty("type")]
-        public string Type { get; set; }
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        public string Status { get; set; }
     }
 
     public partial class ConvertPosition
     {
-        public static ConvertPosition FromJson(string json) => JsonConvert.DeserializeObject<ConvertPosition>(json, QuickType.Converter.Settings);
+        public static ConvertPosition FromJson(string json) => JsonConvert.DeserializeObject<ConvertPosition>(json, ConvertPosition.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this ConvertPosition self) => JsonConvert.SerializeObject(self, QuickType.Converter.Settings);
+        public static string ToJson(this ConvertPosition self) => JsonConvert.SerializeObject(self, ConvertPosition.Converter.Settings);
     }
 
     internal static class Converter

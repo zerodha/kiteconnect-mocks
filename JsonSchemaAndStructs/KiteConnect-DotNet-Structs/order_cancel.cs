@@ -2,11 +2,11 @@
 //
 // To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
 //
-//    using QuickType;
+//    using OrderCancel;
 //
 //    var orderCancel = OrderCancel.FromJson(jsonString);
 
-namespace QuickType
+namespace OrderCancel
 {
     using System;
     using System.Collections.Generic;
@@ -17,96 +17,27 @@ namespace QuickType
 
     public partial class OrderCancel
     {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
-
-        [JsonProperty("$schema")]
-        public Uri Schema { get; set; }
-
-        [JsonProperty("definitions")]
-        public Definitions Definitions { get; set; }
-    }
-
-    public partial class Definitions
-    {
-        [JsonProperty("Data")]
+        [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
         public Data Data { get; set; }
 
-        [JsonProperty("OrderCancel")]
-        public OrderCancelClass OrderCancel { get; set; }
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        public string Status { get; set; }
     }
 
     public partial class Data
     {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public DataProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] DataRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class DataProperties
-    {
-        [JsonProperty("order_id")]
-        public OrderId OrderId { get; set; }
-    }
-
-    public partial class OrderId
-    {
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class OrderCancelClass
-    {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public OrderCancelProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] OrderCancelClassRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class OrderCancelProperties
-    {
-        [JsonProperty("data")]
-        public DataClass Data { get; set; }
-
-        [JsonProperty("status")]
-        public OrderId Status { get; set; }
-    }
-
-    public partial class DataClass
-    {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
+        [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string OrderId { get; set; }
     }
 
     public partial class OrderCancel
     {
-        public static OrderCancel FromJson(string json) => JsonConvert.DeserializeObject<OrderCancel>(json, QuickType.Converter.Settings);
+        public static OrderCancel FromJson(string json) => JsonConvert.DeserializeObject<OrderCancel>(json, OrderCancel.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this OrderCancel self) => JsonConvert.SerializeObject(self, QuickType.Converter.Settings);
+        public static string ToJson(this OrderCancel self) => JsonConvert.SerializeObject(self, OrderCancel.Converter.Settings);
     }
 
     internal static class Converter

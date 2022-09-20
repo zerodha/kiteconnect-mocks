@@ -2,11 +2,11 @@
 //
 // To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
 //
-//    using QuickType;
+//    using TriggerRange;
 //
 //    var triggerRange = TriggerRange.FromJson(jsonString);
 
-namespace QuickType
+namespace TriggerRange
 {
     using System;
     using System.Collections.Generic;
@@ -17,132 +17,33 @@ namespace QuickType
 
     public partial class TriggerRange
     {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
+        [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
+        public Dictionary<string, Datum> Data { get; set; }
 
-        [JsonProperty("$schema")]
-        public Uri Schema { get; set; }
-
-        [JsonProperty("definitions")]
-        public Definitions Definitions { get; set; }
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        public string Status { get; set; }
     }
 
-    public partial class Definitions
+    public partial class Datum
     {
-        [JsonProperty("Data")]
-        public Data Data { get; set; }
+        [JsonProperty("instrument_token", NullValueHandling = NullValueHandling.Ignore)]
+        public long? InstrumentToken { get; set; }
 
-        [JsonProperty("Nse")]
-        public Nse Nse { get; set; }
+        [JsonProperty("lower", NullValueHandling = NullValueHandling.Ignore)]
+        public double? Lower { get; set; }
 
-        [JsonProperty("TriggerRange")]
-        public TriggerRangeClass TriggerRange { get; set; }
-    }
-
-    public partial class Data
-    {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public DataProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] DataRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class DataProperties
-    {
-        [JsonProperty("NSE:INFY")]
-        public NseInfy NseInfy { get; set; }
-
-        [JsonProperty("NSE:RELIANCE")]
-        public NseInfy NseReliance { get; set; }
-    }
-
-    public partial class NseInfy
-    {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
-    }
-
-    public partial class Nse
-    {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public NseProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] NseRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class NseProperties
-    {
-        [JsonProperty("instrument_token")]
-        public InstrumentToken InstrumentToken { get; set; }
-
-        [JsonProperty("lower")]
-        public InstrumentToken Lower { get; set; }
-
-        [JsonProperty("upper")]
-        public InstrumentToken Upper { get; set; }
-    }
-
-    public partial class InstrumentToken
-    {
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class TriggerRangeClass
-    {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public TriggerRangeProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] TriggerRangeClassRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class TriggerRangeProperties
-    {
-        [JsonProperty("data")]
-        public NseInfy Data { get; set; }
-
-        [JsonProperty("status")]
-        public InstrumentToken Status { get; set; }
+        [JsonProperty("upper", NullValueHandling = NullValueHandling.Ignore)]
+        public double? Upper { get; set; }
     }
 
     public partial class TriggerRange
     {
-        public static TriggerRange FromJson(string json) => JsonConvert.DeserializeObject<TriggerRange>(json, QuickType.Converter.Settings);
+        public static TriggerRange FromJson(string json) => JsonConvert.DeserializeObject<TriggerRange>(json, TriggerRange.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this TriggerRange self) => JsonConvert.SerializeObject(self, QuickType.Converter.Settings);
+        public static string ToJson(this TriggerRange self) => JsonConvert.SerializeObject(self, TriggerRange.Converter.Settings);
     }
 
     internal static class Converter

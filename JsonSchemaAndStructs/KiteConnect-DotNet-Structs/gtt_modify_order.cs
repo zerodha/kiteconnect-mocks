@@ -2,11 +2,11 @@
 //
 // To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
 //
-//    using QuickType;
+//    using GttModifyOrder;
 //
 //    var gttModifyOrder = GttModifyOrder.FromJson(jsonString);
 
-namespace QuickType
+namespace GttModifyOrder
 {
     using System;
     using System.Collections.Generic;
@@ -17,96 +17,27 @@ namespace QuickType
 
     public partial class GttModifyOrder
     {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
-
-        [JsonProperty("$schema")]
-        public Uri Schema { get; set; }
-
-        [JsonProperty("definitions")]
-        public Definitions Definitions { get; set; }
-    }
-
-    public partial class Definitions
-    {
-        [JsonProperty("Data")]
+        [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
         public Data Data { get; set; }
 
-        [JsonProperty("GttModifyOrder")]
-        public GttModifyOrderClass GttModifyOrder { get; set; }
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        public string Status { get; set; }
     }
 
     public partial class Data
     {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public DataProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] DataRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class DataProperties
-    {
-        [JsonProperty("trigger_id")]
-        public TriggerId TriggerId { get; set; }
-    }
-
-    public partial class TriggerId
-    {
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class GttModifyOrderClass
-    {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public GttModifyOrderProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] GttModifyOrderClassRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class GttModifyOrderProperties
-    {
-        [JsonProperty("data")]
-        public DataClass Data { get; set; }
-
-        [JsonProperty("status")]
-        public TriggerId Status { get; set; }
-    }
-
-    public partial class DataClass
-    {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
+        [JsonProperty("trigger_id", NullValueHandling = NullValueHandling.Ignore)]
+        public long? TriggerId { get; set; }
     }
 
     public partial class GttModifyOrder
     {
-        public static GttModifyOrder FromJson(string json) => JsonConvert.DeserializeObject<GttModifyOrder>(json, QuickType.Converter.Settings);
+        public static GttModifyOrder FromJson(string json) => JsonConvert.DeserializeObject<GttModifyOrder>(json, GttModifyOrder.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this GttModifyOrder self) => JsonConvert.SerializeObject(self, QuickType.Converter.Settings);
+        public static string ToJson(this GttModifyOrder self) => JsonConvert.SerializeObject(self, GttModifyOrder.Converter.Settings);
     }
 
     internal static class Converter

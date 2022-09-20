@@ -2,11 +2,11 @@
 //
 // To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
 //
-//    using QuickType;
+//    using MfSipPlace;
 //
 //    var mfSipPlace = MfSipPlace.FromJson(jsonString);
 
-namespace QuickType
+namespace MfSipPlace
 {
     using System;
     using System.Collections.Generic;
@@ -17,96 +17,27 @@ namespace QuickType
 
     public partial class MfSipPlace
     {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
-
-        [JsonProperty("$schema")]
-        public Uri Schema { get; set; }
-
-        [JsonProperty("definitions")]
-        public Definitions Definitions { get; set; }
-    }
-
-    public partial class Definitions
-    {
-        [JsonProperty("Data")]
+        [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
         public Data Data { get; set; }
 
-        [JsonProperty("MFSIPPlace")]
-        public MfsipPlaceClass MfsipPlace { get; set; }
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        public string Status { get; set; }
     }
 
     public partial class Data
     {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public DataProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] DataRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class DataProperties
-    {
-        [JsonProperty("sip_id")]
-        public Sipid SipId { get; set; }
-    }
-
-    public partial class Sipid
-    {
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class MfsipPlaceClass
-    {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public MfsipPlaceProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] MfsipPlaceClassRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class MfsipPlaceProperties
-    {
-        [JsonProperty("data")]
-        public DataClass Data { get; set; }
-
-        [JsonProperty("status")]
-        public Sipid Status { get; set; }
-    }
-
-    public partial class DataClass
-    {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
+        [JsonProperty("sip_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string SipId { get; set; }
     }
 
     public partial class MfSipPlace
     {
-        public static MfSipPlace FromJson(string json) => JsonConvert.DeserializeObject<MfSipPlace>(json, QuickType.Converter.Settings);
+        public static MfSipPlace FromJson(string json) => JsonConvert.DeserializeObject<MfSipPlace>(json, MfSipPlace.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this MfSipPlace self) => JsonConvert.SerializeObject(self, QuickType.Converter.Settings);
+        public static string ToJson(this MfSipPlace self) => JsonConvert.SerializeObject(self, MfSipPlace.Converter.Settings);
     }
 
     internal static class Converter

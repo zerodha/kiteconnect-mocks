@@ -2,11 +2,11 @@
 //
 // To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
 //
-//    using QuickType;
+//    using MfSipCancel;
 //
 //    var mfSipCancel = MfSipCancel.FromJson(jsonString);
 
-namespace QuickType
+namespace MfSipCancel
 {
     using System;
     using System.Collections.Generic;
@@ -17,96 +17,27 @@ namespace QuickType
 
     public partial class MfSipCancel
     {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
-
-        [JsonProperty("$schema")]
-        public Uri Schema { get; set; }
-
-        [JsonProperty("definitions")]
-        public Definitions Definitions { get; set; }
-    }
-
-    public partial class Definitions
-    {
-        [JsonProperty("Data")]
+        [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
         public Data Data { get; set; }
 
-        [JsonProperty("MFSIPCancel")]
-        public MfsipCancelClass MfsipCancel { get; set; }
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        public string Status { get; set; }
     }
 
     public partial class Data
     {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public DataProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] DataRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class DataProperties
-    {
-        [JsonProperty("sip_id")]
-        public Sipid SipId { get; set; }
-    }
-
-    public partial class Sipid
-    {
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class MfsipCancelClass
-    {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public MfsipCancelProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] MfsipCancelClassRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class MfsipCancelProperties
-    {
-        [JsonProperty("data")]
-        public DataClass Data { get; set; }
-
-        [JsonProperty("status")]
-        public Sipid Status { get; set; }
-    }
-
-    public partial class DataClass
-    {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
+        [JsonProperty("sip_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string SipId { get; set; }
     }
 
     public partial class MfSipCancel
     {
-        public static MfSipCancel FromJson(string json) => JsonConvert.DeserializeObject<MfSipCancel>(json, QuickType.Converter.Settings);
+        public static MfSipCancel FromJson(string json) => JsonConvert.DeserializeObject<MfSipCancel>(json, MfSipCancel.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this MfSipCancel self) => JsonConvert.SerializeObject(self, QuickType.Converter.Settings);
+        public static string ToJson(this MfSipCancel self) => JsonConvert.SerializeObject(self, MfSipCancel.Converter.Settings);
     }
 
     internal static class Converter

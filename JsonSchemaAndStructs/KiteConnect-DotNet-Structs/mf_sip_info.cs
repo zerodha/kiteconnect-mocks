@@ -2,11 +2,11 @@
 //
 // To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
 //
-//    using QuickType;
+//    using MfSipInfo;
 //
 //    var mfSipInfo = MfSipInfo.FromJson(jsonString);
 
-namespace QuickType
+namespace MfSipInfo
 {
     using System;
     using System.Collections.Generic;
@@ -17,194 +17,93 @@ namespace QuickType
 
     public partial class MfSipInfo
     {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
-
-        [JsonProperty("$schema")]
-        public Uri Schema { get; set; }
-
-        [JsonProperty("definitions")]
-        public Definitions Definitions { get; set; }
-    }
-
-    public partial class Definitions
-    {
-        [JsonProperty("Data")]
+        [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
         public Data Data { get; set; }
 
-        [JsonProperty("MFSIPInfo")]
-        public MfsipInfoClass MfsipInfo { get; set; }
-
-        [JsonProperty("StepUp")]
-        public StepUpClass StepUp { get; set; }
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        public string Status { get; set; }
     }
 
     public partial class Data
     {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
+        [JsonProperty("completed_instalments", NullValueHandling = NullValueHandling.Ignore)]
+        public long? CompletedInstalments { get; set; }
 
-        [JsonProperty("properties")]
-        public DataProperties Properties { get; set; }
+        [JsonProperty("created", NullValueHandling = NullValueHandling.Ignore)]
+        public DateTimeOffset? Created { get; set; }
 
-        [JsonProperty("required")]
-        public string[] DataRequired { get; set; }
+        [JsonProperty("dividend_type", NullValueHandling = NullValueHandling.Ignore)]
+        public string DividendType { get; set; }
 
-        [JsonProperty("title")]
-        public string Title { get; set; }
+        [JsonProperty("frequency", NullValueHandling = NullValueHandling.Ignore)]
+        public string Frequency { get; set; }
 
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
+        [JsonProperty("fund", NullValueHandling = NullValueHandling.Ignore)]
+        public string Fund { get; set; }
 
-    public partial class DataProperties
-    {
-        [JsonProperty("completed_instalments")]
-        public CompletedInstalments CompletedInstalments { get; set; }
+        [JsonProperty("fund_source", NullValueHandling = NullValueHandling.Ignore)]
+        public string FundSource { get; set; }
 
-        [JsonProperty("created")]
-        public Created Created { get; set; }
+        [JsonProperty("instalment_amount", NullValueHandling = NullValueHandling.Ignore)]
+        public long? InstalmentAmount { get; set; }
 
-        [JsonProperty("dividend_type")]
-        public CompletedInstalments DividendType { get; set; }
+        [JsonProperty("instalment_day", NullValueHandling = NullValueHandling.Ignore)]
+        public long? InstalmentDay { get; set; }
 
-        [JsonProperty("frequency")]
-        public CompletedInstalments Frequency { get; set; }
+        [JsonProperty("instalments", NullValueHandling = NullValueHandling.Ignore)]
+        public long? Instalments { get; set; }
 
-        [JsonProperty("fund")]
-        public CompletedInstalments Fund { get; set; }
+        [JsonProperty("last_instalment", NullValueHandling = NullValueHandling.Ignore)]
+        public DateTimeOffset? LastInstalment { get; set; }
 
-        [JsonProperty("fund_source")]
-        public CompletedInstalments FundSource { get; set; }
+        [JsonProperty("next_instalment", NullValueHandling = NullValueHandling.Ignore)]
+        public DateTimeOffset? NextInstalment { get; set; }
 
-        [JsonProperty("instalment_amount")]
-        public CompletedInstalments InstalmentAmount { get; set; }
+        [JsonProperty("pending_instalments", NullValueHandling = NullValueHandling.Ignore)]
+        public long? PendingInstalments { get; set; }
 
-        [JsonProperty("instalment_day")]
-        public CompletedInstalments InstalmentDay { get; set; }
-
-        [JsonProperty("instalments")]
-        public CompletedInstalments Instalments { get; set; }
-
-        [JsonProperty("last_instalment")]
-        public Created LastInstalment { get; set; }
-
-        [JsonProperty("next_instalment")]
-        public Created NextInstalment { get; set; }
-
-        [JsonProperty("pending_instalments")]
-        public CompletedInstalments PendingInstalments { get; set; }
-
-        [JsonProperty("sip_id")]
-        public CompletedInstalments SipId { get; set; }
+        [JsonProperty("sip_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string SipId { get; set; }
 
         [JsonProperty("sip_reg_num")]
-        public CompletedInstalments SipRegNum { get; set; }
+        public object SipRegNum { get; set; }
 
-        [JsonProperty("sip_type")]
-        public CompletedInstalments SipType { get; set; }
+        [JsonProperty("sip_type", NullValueHandling = NullValueHandling.Ignore)]
+        public string SipType { get; set; }
 
-        [JsonProperty("status")]
-        public CompletedInstalments Status { get; set; }
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        public string Status { get; set; }
 
-        [JsonProperty("step_up")]
+        [JsonProperty("step_up", NullValueHandling = NullValueHandling.Ignore)]
         public StepUp StepUp { get; set; }
 
-        [JsonProperty("tag")]
-        public CompletedInstalments Tag { get; set; }
+        [JsonProperty("tag", NullValueHandling = NullValueHandling.Ignore)]
+        public string Tag { get; set; }
 
-        [JsonProperty("tradingsymbol")]
-        public CompletedInstalments Tradingsymbol { get; set; }
+        [JsonProperty("tradingsymbol", NullValueHandling = NullValueHandling.Ignore)]
+        public string Tradingsymbol { get; set; }
 
-        [JsonProperty("transaction_type")]
-        public CompletedInstalments TransactionType { get; set; }
+        [JsonProperty("transaction_type", NullValueHandling = NullValueHandling.Ignore)]
+        public string TransactionType { get; set; }
 
-        [JsonProperty("trigger_price")]
-        public CompletedInstalments TriggerPrice { get; set; }
-    }
-
-    public partial class CompletedInstalments
-    {
-        [JsonProperty("type")]
-        public TypeEnum Type { get; set; }
-    }
-
-    public partial class Created
-    {
-        [JsonProperty("format")]
-        public string Format { get; set; }
-
-        [JsonProperty("type")]
-        public TypeEnum Type { get; set; }
+        [JsonProperty("trigger_price", NullValueHandling = NullValueHandling.Ignore)]
+        public long? TriggerPrice { get; set; }
     }
 
     public partial class StepUp
     {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
+        [JsonProperty("15-02", NullValueHandling = NullValueHandling.Ignore)]
+        public long? The1502 { get; set; }
     }
-
-    public partial class MfsipInfoClass
-    {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public MfsipInfoProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] MfsipInfoClassRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class MfsipInfoProperties
-    {
-        [JsonProperty("data")]
-        public StepUp Data { get; set; }
-
-        [JsonProperty("status")]
-        public CompletedInstalments Status { get; set; }
-    }
-
-    public partial class StepUpClass
-    {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public StepUpProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] StepUpClassRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class StepUpProperties
-    {
-        [JsonProperty("15-02")]
-        public CompletedInstalments The1502 { get; set; }
-    }
-
-    public enum TypeEnum { Integer, Null, Number, String };
 
     public partial class MfSipInfo
     {
-        public static MfSipInfo FromJson(string json) => JsonConvert.DeserializeObject<MfSipInfo>(json, QuickType.Converter.Settings);
+        public static MfSipInfo FromJson(string json) => JsonConvert.DeserializeObject<MfSipInfo>(json, MfSipInfo.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this MfSipInfo self) => JsonConvert.SerializeObject(self, QuickType.Converter.Settings);
+        public static string ToJson(this MfSipInfo self) => JsonConvert.SerializeObject(self, MfSipInfo.Converter.Settings);
     }
 
     internal static class Converter
@@ -215,60 +114,8 @@ namespace QuickType
             DateParseHandling = DateParseHandling.None,
             Converters =
             {
-                TypeEnumConverter.Singleton,
                 new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
             },
         };
-    }
-
-    internal class TypeEnumConverter : JsonConverter
-    {
-        public override bool CanConvert(Type t) => t == typeof(TypeEnum) || t == typeof(TypeEnum?);
-
-        public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
-        {
-            if (reader.TokenType == JsonToken.Null) return null;
-            var value = serializer.Deserialize<string>(reader);
-            switch (value)
-            {
-                case "integer":
-                    return TypeEnum.Integer;
-                case "null":
-                    return TypeEnum.Null;
-                case "number":
-                    return TypeEnum.Number;
-                case "string":
-                    return TypeEnum.String;
-            }
-            throw new Exception("Cannot unmarshal type TypeEnum");
-        }
-
-        public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
-        {
-            if (untypedValue == null)
-            {
-                serializer.Serialize(writer, null);
-                return;
-            }
-            var value = (TypeEnum)untypedValue;
-            switch (value)
-            {
-                case TypeEnum.Integer:
-                    serializer.Serialize(writer, "integer");
-                    return;
-                case TypeEnum.Null:
-                    serializer.Serialize(writer, "null");
-                    return;
-                case TypeEnum.Number:
-                    serializer.Serialize(writer, "number");
-                    return;
-                case TypeEnum.String:
-                    serializer.Serialize(writer, "string");
-                    return;
-            }
-            throw new Exception("Cannot marshal type TypeEnum");
-        }
-
-        public static readonly TypeEnumConverter Singleton = new TypeEnumConverter();
     }
 }

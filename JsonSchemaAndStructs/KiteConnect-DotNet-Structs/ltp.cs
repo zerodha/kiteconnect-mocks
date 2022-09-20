@@ -2,11 +2,11 @@
 //
 // To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
 //
-//    using QuickType;
+//    using Ltp;
 //
 //    var ltp = Ltp.FromJson(jsonString);
 
-namespace QuickType
+namespace Ltp
 {
     using System;
     using System.Collections.Generic;
@@ -17,126 +17,30 @@ namespace QuickType
 
     public partial class Ltp
     {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
+        [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
+        public Dictionary<string, Datum> Data { get; set; }
 
-        [JsonProperty("$schema")]
-        public Uri Schema { get; set; }
-
-        [JsonProperty("definitions")]
-        public Definitions Definitions { get; set; }
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        public string Status { get; set; }
     }
 
-    public partial class Definitions
+    public partial class Datum
     {
-        [JsonProperty("Data")]
-        public Data Data { get; set; }
+        [JsonProperty("instrument_token", NullValueHandling = NullValueHandling.Ignore)]
+        public long? InstrumentToken { get; set; }
 
-        [JsonProperty("Ltp")]
-        public LtpClass Ltp { get; set; }
-
-        [JsonProperty("NseInfy")]
-        public NseInfyClass NseInfy { get; set; }
-    }
-
-    public partial class Data
-    {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public DataProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] DataRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class DataProperties
-    {
-        [JsonProperty("NSE:INFY")]
-        public NseInfy NseInfy { get; set; }
-    }
-
-    public partial class NseInfy
-    {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
-    }
-
-    public partial class LtpClass
-    {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public LtpProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] LtpClassRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class LtpProperties
-    {
-        [JsonProperty("data")]
-        public NseInfy Data { get; set; }
-
-        [JsonProperty("status")]
-        public Status Status { get; set; }
-    }
-
-    public partial class Status
-    {
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class NseInfyClass
-    {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public NseInfyProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] NseInfyClassRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class NseInfyProperties
-    {
-        [JsonProperty("instrument_token")]
-        public Status InstrumentToken { get; set; }
-
-        [JsonProperty("last_price")]
-        public Status LastPrice { get; set; }
+        [JsonProperty("last_price", NullValueHandling = NullValueHandling.Ignore)]
+        public double? LastPrice { get; set; }
     }
 
     public partial class Ltp
     {
-        public static Ltp FromJson(string json) => JsonConvert.DeserializeObject<Ltp>(json, QuickType.Converter.Settings);
+        public static Ltp FromJson(string json) => JsonConvert.DeserializeObject<Ltp>(json, Ltp.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this Ltp self) => JsonConvert.SerializeObject(self, QuickType.Converter.Settings);
+        public static string ToJson(this Ltp self) => JsonConvert.SerializeObject(self, Ltp.Converter.Settings);
     }
 
     internal static class Converter

@@ -2,11 +2,11 @@
 //
 // To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
 //
-//    using QuickType;
+//    using OrderResponse;
 //
 //    var orderResponse = OrderResponse.FromJson(jsonString);
 
-namespace QuickType
+namespace OrderResponse
 {
     using System;
     using System.Collections.Generic;
@@ -17,96 +17,27 @@ namespace QuickType
 
     public partial class OrderResponse
     {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
-
-        [JsonProperty("$schema")]
-        public Uri Schema { get; set; }
-
-        [JsonProperty("definitions")]
-        public Definitions Definitions { get; set; }
-    }
-
-    public partial class Definitions
-    {
-        [JsonProperty("Data")]
+        [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
         public Data Data { get; set; }
 
-        [JsonProperty("OrderResponse")]
-        public OrderResponseClass OrderResponse { get; set; }
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        public string Status { get; set; }
     }
 
     public partial class Data
     {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public DataProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] DataRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class DataProperties
-    {
-        [JsonProperty("order_id")]
-        public OrderId OrderId { get; set; }
-    }
-
-    public partial class OrderId
-    {
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class OrderResponseClass
-    {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public OrderResponseProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] OrderResponseClassRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class OrderResponseProperties
-    {
-        [JsonProperty("data")]
-        public DataClass Data { get; set; }
-
-        [JsonProperty("status")]
-        public OrderId Status { get; set; }
-    }
-
-    public partial class DataClass
-    {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
+        [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string OrderId { get; set; }
     }
 
     public partial class OrderResponse
     {
-        public static OrderResponse FromJson(string json) => JsonConvert.DeserializeObject<OrderResponse>(json, QuickType.Converter.Settings);
+        public static OrderResponse FromJson(string json) => JsonConvert.DeserializeObject<OrderResponse>(json, OrderResponse.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this OrderResponse self) => JsonConvert.SerializeObject(self, QuickType.Converter.Settings);
+        public static string ToJson(this OrderResponse self) => JsonConvert.SerializeObject(self, OrderResponse.Converter.Settings);
     }
 
     internal static class Converter

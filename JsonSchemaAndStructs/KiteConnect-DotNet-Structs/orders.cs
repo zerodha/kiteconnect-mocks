@@ -2,11 +2,11 @@
 //
 // To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
 //
-//    using QuickType;
+//    using Orders;
 //
 //    var orders = Orders.FromJson(jsonString);
 
-namespace QuickType
+namespace Orders
 {
     using System;
     using System.Collections.Generic;
@@ -17,299 +17,147 @@ namespace QuickType
 
     public partial class Orders
     {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
+        [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
+        public Datum[] Data { get; set; }
 
-        [JsonProperty("$schema")]
-        public Uri Schema { get; set; }
-
-        [JsonProperty("definitions")]
-        public Definitions Definitions { get; set; }
-    }
-
-    public partial class Definitions
-    {
-        [JsonProperty("Datum")]
-        public Datum Datum { get; set; }
-
-        [JsonProperty("Iceberg")]
-        public Iceberg Iceberg { get; set; }
-
-        [JsonProperty("Meta")]
-        public MetaClass Meta { get; set; }
-
-        [JsonProperty("Orders")]
-        public OrdersClass Orders { get; set; }
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        public string Status { get; set; }
     }
 
     public partial class Datum
     {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
+        [JsonProperty("average_price", NullValueHandling = NullValueHandling.Ignore)]
+        public long? AveragePrice { get; set; }
 
-        [JsonProperty("properties")]
-        public DatumProperties Properties { get; set; }
+        [JsonProperty("cancelled_quantity", NullValueHandling = NullValueHandling.Ignore)]
+        public long? CancelledQuantity { get; set; }
 
-        [JsonProperty("required")]
-        public string[] DatumRequired { get; set; }
+        [JsonProperty("disclosed_quantity", NullValueHandling = NullValueHandling.Ignore)]
+        public long? DisclosedQuantity { get; set; }
 
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class DatumProperties
-    {
-        [JsonProperty("average_price")]
-        public AveragePrice AveragePrice { get; set; }
-
-        [JsonProperty("cancelled_quantity")]
-        public AveragePrice CancelledQuantity { get; set; }
-
-        [JsonProperty("disclosed_quantity")]
-        public AveragePrice DisclosedQuantity { get; set; }
-
-        [JsonProperty("exchange")]
-        public AveragePrice Exchange { get; set; }
+        [JsonProperty("exchange", NullValueHandling = NullValueHandling.Ignore)]
+        public string Exchange { get; set; }
 
         [JsonProperty("exchange_order_id")]
-        public ExchangeOrderId ExchangeOrderId { get; set; }
+        public string ExchangeOrderId { get; set; }
 
         [JsonProperty("exchange_timestamp")]
-        public ExchangeETimestamp ExchangeTimestamp { get; set; }
+        public DateTimeOffset? ExchangeTimestamp { get; set; }
 
         [JsonProperty("exchange_update_timestamp")]
-        public ExchangeETimestamp ExchangeUpdateTimestamp { get; set; }
+        public DateTimeOffset? ExchangeUpdateTimestamp { get; set; }
 
-        [JsonProperty("filled_quantity")]
-        public AveragePrice FilledQuantity { get; set; }
+        [JsonProperty("filled_quantity", NullValueHandling = NullValueHandling.Ignore)]
+        public long? FilledQuantity { get; set; }
 
-        [JsonProperty("guid")]
-        public AveragePrice Guid { get; set; }
+        [JsonProperty("guid", NullValueHandling = NullValueHandling.Ignore)]
+        public string Guid { get; set; }
 
-        [JsonProperty("instrument_token")]
-        public AveragePrice InstrumentToken { get; set; }
+        [JsonProperty("instrument_token", NullValueHandling = NullValueHandling.Ignore)]
+        public long? InstrumentToken { get; set; }
 
-        [JsonProperty("market_protection")]
-        public AveragePrice MarketProtection { get; set; }
+        [JsonProperty("market_protection", NullValueHandling = NullValueHandling.Ignore)]
+        public long? MarketProtection { get; set; }
 
-        [JsonProperty("meta")]
+        [JsonProperty("meta", NullValueHandling = NullValueHandling.Ignore)]
         public Meta Meta { get; set; }
 
-        [JsonProperty("modified")]
-        public AveragePrice Modified { get; set; }
+        [JsonProperty("modified", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? Modified { get; set; }
 
-        [JsonProperty("order_id")]
-        public AveragePrice OrderId { get; set; }
+        [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string OrderId { get; set; }
 
-        [JsonProperty("order_timestamp")]
-        public OrderTimestamp OrderTimestamp { get; set; }
+        [JsonProperty("order_timestamp", NullValueHandling = NullValueHandling.Ignore)]
+        public DateTimeOffset? OrderTimestamp { get; set; }
 
-        [JsonProperty("order_type")]
-        public AveragePrice OrderType { get; set; }
+        [JsonProperty("order_type", NullValueHandling = NullValueHandling.Ignore)]
+        public string OrderType { get; set; }
 
         [JsonProperty("parent_order_id")]
-        public AveragePrice ParentOrderId { get; set; }
+        public object ParentOrderId { get; set; }
 
-        [JsonProperty("pending_quantity")]
-        public AveragePrice PendingQuantity { get; set; }
+        [JsonProperty("pending_quantity", NullValueHandling = NullValueHandling.Ignore)]
+        public long? PendingQuantity { get; set; }
 
-        [JsonProperty("placed_by")]
-        public AveragePrice PlacedBy { get; set; }
+        [JsonProperty("placed_by", NullValueHandling = NullValueHandling.Ignore)]
+        public string PlacedBy { get; set; }
 
-        [JsonProperty("price")]
-        public AveragePrice Price { get; set; }
+        [JsonProperty("price", NullValueHandling = NullValueHandling.Ignore)]
+        public long? Price { get; set; }
 
-        [JsonProperty("product")]
-        public AveragePrice Product { get; set; }
+        [JsonProperty("product", NullValueHandling = NullValueHandling.Ignore)]
+        public string Product { get; set; }
 
-        [JsonProperty("quantity")]
-        public AveragePrice Quantity { get; set; }
+        [JsonProperty("quantity", NullValueHandling = NullValueHandling.Ignore)]
+        public long? Quantity { get; set; }
 
-        [JsonProperty("status")]
-        public AveragePrice Status { get; set; }
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        public string Status { get; set; }
 
         [JsonProperty("status_message")]
-        public ExchangeOrderId StatusMessage { get; set; }
+        public string StatusMessage { get; set; }
 
         [JsonProperty("status_message_raw")]
-        public ExchangeOrderId StatusMessageRaw { get; set; }
+        public string StatusMessageRaw { get; set; }
 
         [JsonProperty("tag")]
-        public ExchangeOrderId Tag { get; set; }
+        public string Tag { get; set; }
 
-        [JsonProperty("tags")]
-        public Tags Tags { get; set; }
+        [JsonProperty("tags", NullValueHandling = NullValueHandling.Ignore)]
+        public string[] Tags { get; set; }
 
-        [JsonProperty("tradingsymbol")]
-        public AveragePrice Tradingsymbol { get; set; }
+        [JsonProperty("tradingsymbol", NullValueHandling = NullValueHandling.Ignore)]
+        public string Tradingsymbol { get; set; }
 
-        [JsonProperty("transaction_type")]
-        public AveragePrice TransactionType { get; set; }
+        [JsonProperty("transaction_type", NullValueHandling = NullValueHandling.Ignore)]
+        public string TransactionType { get; set; }
 
-        [JsonProperty("trigger_price")]
-        public AveragePrice TriggerPrice { get; set; }
+        [JsonProperty("trigger_price", NullValueHandling = NullValueHandling.Ignore)]
+        public long? TriggerPrice { get; set; }
 
-        [JsonProperty("validity")]
-        public AveragePrice Validity { get; set; }
+        [JsonProperty("validity", NullValueHandling = NullValueHandling.Ignore)]
+        public string Validity { get; set; }
 
-        [JsonProperty("validity_ttl")]
-        public AveragePrice ValidityTtl { get; set; }
+        [JsonProperty("validity_ttl", NullValueHandling = NullValueHandling.Ignore)]
+        public long? ValidityTtl { get; set; }
 
-        [JsonProperty("variety")]
-        public AveragePrice Variety { get; set; }
-    }
-
-    public partial class AveragePrice
-    {
-        [JsonProperty("type")]
-        public TypeEnum Type { get; set; }
-    }
-
-    public partial class ExchangeOrderId
-    {
-        [JsonProperty("anyOf")]
-        public AveragePrice[] AnyOf { get; set; }
-    }
-
-    public partial class ExchangeETimestamp
-    {
-        [JsonProperty("anyOf")]
-        public OrderTimestamp[] AnyOf { get; set; }
-    }
-
-    public partial class OrderTimestamp
-    {
-        [JsonProperty("format", NullValueHandling = NullValueHandling.Ignore)]
-        public string Format { get; set; }
-
-        [JsonProperty("type")]
-        public TypeEnum Type { get; set; }
+        [JsonProperty("variety", NullValueHandling = NullValueHandling.Ignore)]
+        public string Variety { get; set; }
     }
 
     public partial class Meta
     {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
-    }
-
-    public partial class Tags
-    {
-        [JsonProperty("items")]
-        public AveragePrice Items { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
+        [JsonProperty("iceberg", NullValueHandling = NullValueHandling.Ignore)]
+        public Iceberg Iceberg { get; set; }
     }
 
     public partial class Iceberg
     {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
+        [JsonProperty("leg", NullValueHandling = NullValueHandling.Ignore)]
+        public long? Leg { get; set; }
 
-        [JsonProperty("properties")]
-        public IcebergProperties Properties { get; set; }
+        [JsonProperty("leg_quantity", NullValueHandling = NullValueHandling.Ignore)]
+        public long? LegQuantity { get; set; }
 
-        [JsonProperty("required")]
-        public string[] IcebergRequired { get; set; }
+        [JsonProperty("legs", NullValueHandling = NullValueHandling.Ignore)]
+        public long? Legs { get; set; }
 
-        [JsonProperty("title")]
-        public string Title { get; set; }
+        [JsonProperty("remaining_quantity", NullValueHandling = NullValueHandling.Ignore)]
+        public long? RemainingQuantity { get; set; }
 
-        [JsonProperty("type")]
-        public string Type { get; set; }
+        [JsonProperty("total_quantity", NullValueHandling = NullValueHandling.Ignore)]
+        public long? TotalQuantity { get; set; }
     }
-
-    public partial class IcebergProperties
-    {
-        [JsonProperty("leg")]
-        public AveragePrice Leg { get; set; }
-
-        [JsonProperty("leg_quantity")]
-        public AveragePrice LegQuantity { get; set; }
-
-        [JsonProperty("legs")]
-        public AveragePrice Legs { get; set; }
-
-        [JsonProperty("remaining_quantity")]
-        public AveragePrice RemainingQuantity { get; set; }
-
-        [JsonProperty("total_quantity")]
-        public AveragePrice TotalQuantity { get; set; }
-    }
-
-    public partial class MetaClass
-    {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public MetaProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public object[] MetaClassRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class MetaProperties
-    {
-        [JsonProperty("iceberg")]
-        public Meta Iceberg { get; set; }
-    }
-
-    public partial class OrdersClass
-    {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public OrdersProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] OrdersClassRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class OrdersProperties
-    {
-        [JsonProperty("data")]
-        public Data Data { get; set; }
-
-        [JsonProperty("status")]
-        public AveragePrice Status { get; set; }
-    }
-
-    public partial class Data
-    {
-        [JsonProperty("items")]
-        public Meta Items { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public enum TypeEnum { Boolean, Integer, Null, String };
 
     public partial class Orders
     {
-        public static Orders FromJson(string json) => JsonConvert.DeserializeObject<Orders>(json, QuickType.Converter.Settings);
+        public static Orders FromJson(string json) => JsonConvert.DeserializeObject<Orders>(json, Orders.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this Orders self) => JsonConvert.SerializeObject(self, QuickType.Converter.Settings);
+        public static string ToJson(this Orders self) => JsonConvert.SerializeObject(self, Orders.Converter.Settings);
     }
 
     internal static class Converter
@@ -320,60 +168,8 @@ namespace QuickType
             DateParseHandling = DateParseHandling.None,
             Converters =
             {
-                TypeEnumConverter.Singleton,
                 new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
             },
         };
-    }
-
-    internal class TypeEnumConverter : JsonConverter
-    {
-        public override bool CanConvert(Type t) => t == typeof(TypeEnum) || t == typeof(TypeEnum?);
-
-        public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
-        {
-            if (reader.TokenType == JsonToken.Null) return null;
-            var value = serializer.Deserialize<string>(reader);
-            switch (value)
-            {
-                case "boolean":
-                    return TypeEnum.Boolean;
-                case "integer":
-                    return TypeEnum.Integer;
-                case "null":
-                    return TypeEnum.Null;
-                case "string":
-                    return TypeEnum.String;
-            }
-            throw new Exception("Cannot unmarshal type TypeEnum");
-        }
-
-        public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
-        {
-            if (untypedValue == null)
-            {
-                serializer.Serialize(writer, null);
-                return;
-            }
-            var value = (TypeEnum)untypedValue;
-            switch (value)
-            {
-                case TypeEnum.Boolean:
-                    serializer.Serialize(writer, "boolean");
-                    return;
-                case TypeEnum.Integer:
-                    serializer.Serialize(writer, "integer");
-                    return;
-                case TypeEnum.Null:
-                    serializer.Serialize(writer, "null");
-                    return;
-                case TypeEnum.String:
-                    serializer.Serialize(writer, "string");
-                    return;
-            }
-            throw new Exception("Cannot marshal type TypeEnum");
-        }
-
-        public static readonly TypeEnumConverter Singleton = new TypeEnumConverter();
     }
 }

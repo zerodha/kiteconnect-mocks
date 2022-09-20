@@ -2,11 +2,11 @@
 //
 // To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
 //
-//    using QuickType;
+//    using Holdings;
 //
 //    var holdings = Holdings.FromJson(jsonString);
 
-namespace QuickType
+namespace Holdings
 {
     using System;
     using System.Collections.Generic;
@@ -17,179 +17,90 @@ namespace QuickType
 
     public partial class Holdings
     {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
+        [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
+        public Datum[] Data { get; set; }
 
-        [JsonProperty("$schema")]
-        public Uri Schema { get; set; }
-
-        [JsonProperty("definitions")]
-        public Definitions Definitions { get; set; }
-    }
-
-    public partial class Definitions
-    {
-        [JsonProperty("Datum")]
-        public Datum Datum { get; set; }
-
-        [JsonProperty("Holdings")]
-        public HoldingsClass Holdings { get; set; }
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        public string Status { get; set; }
     }
 
     public partial class Datum
     {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
+        [JsonProperty("authorised_date", NullValueHandling = NullValueHandling.Ignore)]
+        public DateTimeOffset? AuthorisedDate { get; set; }
 
-        [JsonProperty("properties")]
-        public DatumProperties Properties { get; set; }
+        [JsonProperty("authorised_quantity", NullValueHandling = NullValueHandling.Ignore)]
+        public long? AuthorisedQuantity { get; set; }
 
-        [JsonProperty("required")]
-        public string[] DatumRequired { get; set; }
+        [JsonProperty("average_price", NullValueHandling = NullValueHandling.Ignore)]
+        public double? AveragePrice { get; set; }
 
-        [JsonProperty("title")]
-        public string Title { get; set; }
+        [JsonProperty("close_price", NullValueHandling = NullValueHandling.Ignore)]
+        public double? ClosePrice { get; set; }
 
-        [JsonProperty("type")]
-        public string Type { get; set; }
+        [JsonProperty("collateral_quantity", NullValueHandling = NullValueHandling.Ignore)]
+        public long? CollateralQuantity { get; set; }
+
+        [JsonProperty("collateral_type", NullValueHandling = NullValueHandling.Ignore)]
+        public string CollateralType { get; set; }
+
+        [JsonProperty("day_change", NullValueHandling = NullValueHandling.Ignore)]
+        public double? DayChange { get; set; }
+
+        [JsonProperty("day_change_percentage", NullValueHandling = NullValueHandling.Ignore)]
+        public double? DayChangePercentage { get; set; }
+
+        [JsonProperty("discrepancy", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? Discrepancy { get; set; }
+
+        [JsonProperty("exchange", NullValueHandling = NullValueHandling.Ignore)]
+        public string Exchange { get; set; }
+
+        [JsonProperty("instrument_token", NullValueHandling = NullValueHandling.Ignore)]
+        public long? InstrumentToken { get; set; }
+
+        [JsonProperty("isin", NullValueHandling = NullValueHandling.Ignore)]
+        public string Isin { get; set; }
+
+        [JsonProperty("last_price", NullValueHandling = NullValueHandling.Ignore)]
+        public double? LastPrice { get; set; }
+
+        [JsonProperty("opening_quantity", NullValueHandling = NullValueHandling.Ignore)]
+        public long? OpeningQuantity { get; set; }
+
+        [JsonProperty("pnl", NullValueHandling = NullValueHandling.Ignore)]
+        public double? Pnl { get; set; }
+
+        [JsonProperty("price", NullValueHandling = NullValueHandling.Ignore)]
+        public long? Price { get; set; }
+
+        [JsonProperty("product", NullValueHandling = NullValueHandling.Ignore)]
+        public string Product { get; set; }
+
+        [JsonProperty("quantity", NullValueHandling = NullValueHandling.Ignore)]
+        public long? Quantity { get; set; }
+
+        [JsonProperty("realised_quantity", NullValueHandling = NullValueHandling.Ignore)]
+        public long? RealisedQuantity { get; set; }
+
+        [JsonProperty("t1_quantity", NullValueHandling = NullValueHandling.Ignore)]
+        public long? T1Quantity { get; set; }
+
+        [JsonProperty("tradingsymbol", NullValueHandling = NullValueHandling.Ignore)]
+        public string Tradingsymbol { get; set; }
+
+        [JsonProperty("used_quantity", NullValueHandling = NullValueHandling.Ignore)]
+        public long? UsedQuantity { get; set; }
     }
-
-    public partial class DatumProperties
-    {
-        [JsonProperty("authorised_date")]
-        public AuthorisedDate AuthorisedDate { get; set; }
-
-        [JsonProperty("authorised_quantity")]
-        public AuthorisedQuantity AuthorisedQuantity { get; set; }
-
-        [JsonProperty("average_price")]
-        public AuthorisedQuantity AveragePrice { get; set; }
-
-        [JsonProperty("close_price")]
-        public AuthorisedQuantity ClosePrice { get; set; }
-
-        [JsonProperty("collateral_quantity")]
-        public AuthorisedQuantity CollateralQuantity { get; set; }
-
-        [JsonProperty("collateral_type")]
-        public AuthorisedQuantity CollateralType { get; set; }
-
-        [JsonProperty("day_change")]
-        public AuthorisedQuantity DayChange { get; set; }
-
-        [JsonProperty("day_change_percentage")]
-        public AuthorisedQuantity DayChangePercentage { get; set; }
-
-        [JsonProperty("discrepancy")]
-        public AuthorisedQuantity Discrepancy { get; set; }
-
-        [JsonProperty("exchange")]
-        public AuthorisedQuantity Exchange { get; set; }
-
-        [JsonProperty("instrument_token")]
-        public AuthorisedQuantity InstrumentToken { get; set; }
-
-        [JsonProperty("isin")]
-        public AuthorisedQuantity Isin { get; set; }
-
-        [JsonProperty("last_price")]
-        public AuthorisedQuantity LastPrice { get; set; }
-
-        [JsonProperty("opening_quantity")]
-        public AuthorisedQuantity OpeningQuantity { get; set; }
-
-        [JsonProperty("pnl")]
-        public AuthorisedQuantity Pnl { get; set; }
-
-        [JsonProperty("price")]
-        public AuthorisedQuantity Price { get; set; }
-
-        [JsonProperty("product")]
-        public AuthorisedQuantity Product { get; set; }
-
-        [JsonProperty("quantity")]
-        public AuthorisedQuantity Quantity { get; set; }
-
-        [JsonProperty("realised_quantity")]
-        public AuthorisedQuantity RealisedQuantity { get; set; }
-
-        [JsonProperty("t1_quantity")]
-        public AuthorisedQuantity T1Quantity { get; set; }
-
-        [JsonProperty("tradingsymbol")]
-        public AuthorisedQuantity Tradingsymbol { get; set; }
-
-        [JsonProperty("used_quantity")]
-        public AuthorisedQuantity UsedQuantity { get; set; }
-    }
-
-    public partial class AuthorisedDate
-    {
-        [JsonProperty("format")]
-        public string Format { get; set; }
-
-        [JsonProperty("type")]
-        public TypeEnum Type { get; set; }
-    }
-
-    public partial class AuthorisedQuantity
-    {
-        [JsonProperty("type")]
-        public TypeEnum Type { get; set; }
-    }
-
-    public partial class HoldingsClass
-    {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public HoldingsProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] HoldingsClassRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class HoldingsProperties
-    {
-        [JsonProperty("data")]
-        public Data Data { get; set; }
-
-        [JsonProperty("status")]
-        public AuthorisedQuantity Status { get; set; }
-    }
-
-    public partial class Data
-    {
-        [JsonProperty("items")]
-        public Items Items { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class Items
-    {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
-    }
-
-    public enum TypeEnum { Boolean, Integer, Number, String };
 
     public partial class Holdings
     {
-        public static Holdings FromJson(string json) => JsonConvert.DeserializeObject<Holdings>(json, QuickType.Converter.Settings);
+        public static Holdings FromJson(string json) => JsonConvert.DeserializeObject<Holdings>(json, Holdings.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this Holdings self) => JsonConvert.SerializeObject(self, QuickType.Converter.Settings);
+        public static string ToJson(this Holdings self) => JsonConvert.SerializeObject(self, Holdings.Converter.Settings);
     }
 
     internal static class Converter
@@ -200,60 +111,8 @@ namespace QuickType
             DateParseHandling = DateParseHandling.None,
             Converters =
             {
-                TypeEnumConverter.Singleton,
                 new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
             },
         };
-    }
-
-    internal class TypeEnumConverter : JsonConverter
-    {
-        public override bool CanConvert(Type t) => t == typeof(TypeEnum) || t == typeof(TypeEnum?);
-
-        public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
-        {
-            if (reader.TokenType == JsonToken.Null) return null;
-            var value = serializer.Deserialize<string>(reader);
-            switch (value)
-            {
-                case "boolean":
-                    return TypeEnum.Boolean;
-                case "integer":
-                    return TypeEnum.Integer;
-                case "number":
-                    return TypeEnum.Number;
-                case "string":
-                    return TypeEnum.String;
-            }
-            throw new Exception("Cannot unmarshal type TypeEnum");
-        }
-
-        public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
-        {
-            if (untypedValue == null)
-            {
-                serializer.Serialize(writer, null);
-                return;
-            }
-            var value = (TypeEnum)untypedValue;
-            switch (value)
-            {
-                case TypeEnum.Boolean:
-                    serializer.Serialize(writer, "boolean");
-                    return;
-                case TypeEnum.Integer:
-                    serializer.Serialize(writer, "integer");
-                    return;
-                case TypeEnum.Number:
-                    serializer.Serialize(writer, "number");
-                    return;
-                case TypeEnum.String:
-                    serializer.Serialize(writer, "string");
-                    return;
-            }
-            throw new Exception("Cannot marshal type TypeEnum");
-        }
-
-        public static readonly TypeEnumConverter Singleton = new TypeEnumConverter();
     }
 }

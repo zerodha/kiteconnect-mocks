@@ -2,11 +2,11 @@
 //
 // To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
 //
-//    using QuickType;
+//    using Profile;
 //
 //    var profile = Profile.FromJson(jsonString);
 
-namespace QuickType
+namespace Profile
 {
     using System;
     using System.Collections.Generic;
@@ -17,164 +17,63 @@ namespace QuickType
 
     public partial class Profile
     {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
-
-        [JsonProperty("$schema")]
-        public Uri Schema { get; set; }
-
-        [JsonProperty("definitions")]
-        public Definitions Definitions { get; set; }
-    }
-
-    public partial class Definitions
-    {
-        [JsonProperty("Data")]
+        [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
         public Data Data { get; set; }
 
-        [JsonProperty("Meta")]
-        public MetaClass Meta { get; set; }
-
-        [JsonProperty("Profile")]
-        public ProfileClass Profile { get; set; }
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        public string Status { get; set; }
     }
 
     public partial class Data
     {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public DataProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] DataRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class DataProperties
-    {
         [JsonProperty("avatar_url")]
-        public AvatarUrl AvatarUrl { get; set; }
+        public object AvatarUrl { get; set; }
 
-        [JsonProperty("broker")]
-        public AvatarUrl Broker { get; set; }
+        [JsonProperty("broker", NullValueHandling = NullValueHandling.Ignore)]
+        public string Broker { get; set; }
 
-        [JsonProperty("email")]
-        public AvatarUrl Email { get; set; }
+        [JsonProperty("email", NullValueHandling = NullValueHandling.Ignore)]
+        public string Email { get; set; }
 
-        [JsonProperty("exchanges")]
-        public Exchanges Exchanges { get; set; }
+        [JsonProperty("exchanges", NullValueHandling = NullValueHandling.Ignore)]
+        public string[] Exchanges { get; set; }
 
-        [JsonProperty("meta")]
+        [JsonProperty("meta", NullValueHandling = NullValueHandling.Ignore)]
         public Meta Meta { get; set; }
 
-        [JsonProperty("order_types")]
-        public Exchanges OrderTypes { get; set; }
+        [JsonProperty("order_types", NullValueHandling = NullValueHandling.Ignore)]
+        public string[] OrderTypes { get; set; }
 
-        [JsonProperty("products")]
-        public Exchanges Products { get; set; }
+        [JsonProperty("products", NullValueHandling = NullValueHandling.Ignore)]
+        public string[] Products { get; set; }
 
-        [JsonProperty("user_id")]
-        public AvatarUrl UserId { get; set; }
+        [JsonProperty("user_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string UserId { get; set; }
 
-        [JsonProperty("user_name")]
-        public AvatarUrl UserName { get; set; }
+        [JsonProperty("user_name", NullValueHandling = NullValueHandling.Ignore)]
+        public string UserName { get; set; }
 
-        [JsonProperty("user_shortname")]
-        public AvatarUrl UserShortname { get; set; }
+        [JsonProperty("user_shortname", NullValueHandling = NullValueHandling.Ignore)]
+        public string UserShortname { get; set; }
 
-        [JsonProperty("user_type")]
-        public AvatarUrl UserType { get; set; }
-    }
-
-    public partial class AvatarUrl
-    {
-        [JsonProperty("type")]
-        public TypeEnum Type { get; set; }
-    }
-
-    public partial class Exchanges
-    {
-        [JsonProperty("items")]
-        public AvatarUrl Items { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
+        [JsonProperty("user_type", NullValueHandling = NullValueHandling.Ignore)]
+        public string UserType { get; set; }
     }
 
     public partial class Meta
     {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
+        [JsonProperty("demat_consent", NullValueHandling = NullValueHandling.Ignore)]
+        public string DematConsent { get; set; }
     }
-
-    public partial class MetaClass
-    {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public MetaProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] MetaClassRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class MetaProperties
-    {
-        [JsonProperty("demat_consent")]
-        public AvatarUrl DematConsent { get; set; }
-    }
-
-    public partial class ProfileClass
-    {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public ProfileProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] ProfileClassRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class ProfileProperties
-    {
-        [JsonProperty("data")]
-        public Meta Data { get; set; }
-
-        [JsonProperty("status")]
-        public AvatarUrl Status { get; set; }
-    }
-
-    public enum TypeEnum { Null, String };
 
     public partial class Profile
     {
-        public static Profile FromJson(string json) => JsonConvert.DeserializeObject<Profile>(json, QuickType.Converter.Settings);
+        public static Profile FromJson(string json) => JsonConvert.DeserializeObject<Profile>(json, Profile.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this Profile self) => JsonConvert.SerializeObject(self, QuickType.Converter.Settings);
+        public static string ToJson(this Profile self) => JsonConvert.SerializeObject(self, Profile.Converter.Settings);
     }
 
     internal static class Converter
@@ -185,50 +84,8 @@ namespace QuickType
             DateParseHandling = DateParseHandling.None,
             Converters =
             {
-                TypeEnumConverter.Singleton,
                 new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
             },
         };
-    }
-
-    internal class TypeEnumConverter : JsonConverter
-    {
-        public override bool CanConvert(Type t) => t == typeof(TypeEnum) || t == typeof(TypeEnum?);
-
-        public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
-        {
-            if (reader.TokenType == JsonToken.Null) return null;
-            var value = serializer.Deserialize<string>(reader);
-            switch (value)
-            {
-                case "null":
-                    return TypeEnum.Null;
-                case "string":
-                    return TypeEnum.String;
-            }
-            throw new Exception("Cannot unmarshal type TypeEnum");
-        }
-
-        public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
-        {
-            if (untypedValue == null)
-            {
-                serializer.Serialize(writer, null);
-                return;
-            }
-            var value = (TypeEnum)untypedValue;
-            switch (value)
-            {
-                case TypeEnum.Null:
-                    serializer.Serialize(writer, "null");
-                    return;
-                case TypeEnum.String:
-                    serializer.Serialize(writer, "string");
-                    return;
-            }
-            throw new Exception("Cannot marshal type TypeEnum");
-        }
-
-        public static readonly TypeEnumConverter Singleton = new TypeEnumConverter();
     }
 }

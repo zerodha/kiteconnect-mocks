@@ -2,11 +2,11 @@
 //
 // To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
 //
-//    using QuickType;
+//    using OrderTrades;
 //
 //    var orderTrades = OrderTrades.FromJson(jsonString);
 
-namespace QuickType
+namespace OrderTrades
 {
     using System;
     using System.Collections.Generic;
@@ -17,152 +17,64 @@ namespace QuickType
 
     public partial class OrderTrades
     {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
+        [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
+        public Datum[] Data { get; set; }
 
-        [JsonProperty("$schema")]
-        public Uri Schema { get; set; }
-
-        [JsonProperty("definitions")]
-        public Definitions Definitions { get; set; }
-    }
-
-    public partial class Definitions
-    {
-        [JsonProperty("Datum")]
-        public Datum Datum { get; set; }
-
-        [JsonProperty("OrderTrades")]
-        public OrderTradesClass OrderTrades { get; set; }
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        public string Status { get; set; }
     }
 
     public partial class Datum
     {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
+        [JsonProperty("average_price", NullValueHandling = NullValueHandling.Ignore)]
+        public long? AveragePrice { get; set; }
 
-        [JsonProperty("properties")]
-        public DatumProperties Properties { get; set; }
+        [JsonProperty("exchange", NullValueHandling = NullValueHandling.Ignore)]
+        public string Exchange { get; set; }
 
-        [JsonProperty("required")]
-        public string[] DatumRequired { get; set; }
+        [JsonProperty("exchange_order_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string ExchangeOrderId { get; set; }
 
-        [JsonProperty("title")]
-        public string Title { get; set; }
+        [JsonProperty("exchange_timestamp", NullValueHandling = NullValueHandling.Ignore)]
+        public DateTimeOffset? ExchangeTimestamp { get; set; }
 
-        [JsonProperty("type")]
-        public string Type { get; set; }
+        [JsonProperty("fill_timestamp", NullValueHandling = NullValueHandling.Ignore)]
+        public DateTimeOffset? FillTimestamp { get; set; }
+
+        [JsonProperty("instrument_token", NullValueHandling = NullValueHandling.Ignore)]
+        public long? InstrumentToken { get; set; }
+
+        [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string OrderId { get; set; }
+
+        [JsonProperty("order_timestamp", NullValueHandling = NullValueHandling.Ignore)]
+        public DateTimeOffset? OrderTimestamp { get; set; }
+
+        [JsonProperty("product", NullValueHandling = NullValueHandling.Ignore)]
+        public string Product { get; set; }
+
+        [JsonProperty("quantity", NullValueHandling = NullValueHandling.Ignore)]
+        public long? Quantity { get; set; }
+
+        [JsonProperty("trade_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(ParseStringConverter))]
+        public long? TradeId { get; set; }
+
+        [JsonProperty("tradingsymbol", NullValueHandling = NullValueHandling.Ignore)]
+        public string Tradingsymbol { get; set; }
+
+        [JsonProperty("transaction_type", NullValueHandling = NullValueHandling.Ignore)]
+        public string TransactionType { get; set; }
     }
-
-    public partial class DatumProperties
-    {
-        [JsonProperty("average_price")]
-        public AveragePrice AveragePrice { get; set; }
-
-        [JsonProperty("exchange")]
-        public AveragePrice Exchange { get; set; }
-
-        [JsonProperty("exchange_order_id")]
-        public AveragePrice ExchangeOrderId { get; set; }
-
-        [JsonProperty("exchange_timestamp")]
-        public ExchangeTimestamp ExchangeTimestamp { get; set; }
-
-        [JsonProperty("fill_timestamp")]
-        public ExchangeTimestamp FillTimestamp { get; set; }
-
-        [JsonProperty("instrument_token")]
-        public AveragePrice InstrumentToken { get; set; }
-
-        [JsonProperty("order_id")]
-        public AveragePrice OrderId { get; set; }
-
-        [JsonProperty("order_timestamp")]
-        public ExchangeTimestamp OrderTimestamp { get; set; }
-
-        [JsonProperty("product")]
-        public AveragePrice Product { get; set; }
-
-        [JsonProperty("quantity")]
-        public AveragePrice Quantity { get; set; }
-
-        [JsonProperty("trade_id")]
-        public ExchangeTimestamp TradeId { get; set; }
-
-        [JsonProperty("tradingsymbol")]
-        public AveragePrice Tradingsymbol { get; set; }
-
-        [JsonProperty("transaction_type")]
-        public AveragePrice TransactionType { get; set; }
-    }
-
-    public partial class AveragePrice
-    {
-        [JsonProperty("type")]
-        public TypeEnum Type { get; set; }
-    }
-
-    public partial class ExchangeTimestamp
-    {
-        [JsonProperty("format")]
-        public string Format { get; set; }
-
-        [JsonProperty("type")]
-        public TypeEnum Type { get; set; }
-    }
-
-    public partial class OrderTradesClass
-    {
-        [JsonProperty("additionalProperties")]
-        public bool AdditionalProperties { get; set; }
-
-        [JsonProperty("properties")]
-        public OrderTradesProperties Properties { get; set; }
-
-        [JsonProperty("required")]
-        public string[] OrderTradesClassRequired { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class OrderTradesProperties
-    {
-        [JsonProperty("data")]
-        public Data Data { get; set; }
-
-        [JsonProperty("status")]
-        public AveragePrice Status { get; set; }
-    }
-
-    public partial class Data
-    {
-        [JsonProperty("items")]
-        public Items Items { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-    }
-
-    public partial class Items
-    {
-        [JsonProperty("$ref")]
-        public string Ref { get; set; }
-    }
-
-    public enum TypeEnum { Integer, String };
 
     public partial class OrderTrades
     {
-        public static OrderTrades FromJson(string json) => JsonConvert.DeserializeObject<OrderTrades>(json, QuickType.Converter.Settings);
+        public static OrderTrades FromJson(string json) => JsonConvert.DeserializeObject<OrderTrades>(json, OrderTrades.Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this OrderTrades self) => JsonConvert.SerializeObject(self, QuickType.Converter.Settings);
+        public static string ToJson(this OrderTrades self) => JsonConvert.SerializeObject(self, OrderTrades.Converter.Settings);
     }
 
     internal static class Converter
@@ -173,28 +85,25 @@ namespace QuickType
             DateParseHandling = DateParseHandling.None,
             Converters =
             {
-                TypeEnumConverter.Singleton,
                 new IsoDateTimeConverter { DateTimeStyles = DateTimeStyles.AssumeUniversal }
             },
         };
     }
 
-    internal class TypeEnumConverter : JsonConverter
+    internal class ParseStringConverter : JsonConverter
     {
-        public override bool CanConvert(Type t) => t == typeof(TypeEnum) || t == typeof(TypeEnum?);
+        public override bool CanConvert(Type t) => t == typeof(long) || t == typeof(long?);
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
         {
             if (reader.TokenType == JsonToken.Null) return null;
             var value = serializer.Deserialize<string>(reader);
-            switch (value)
+            long l;
+            if (Int64.TryParse(value, out l))
             {
-                case "integer":
-                    return TypeEnum.Integer;
-                case "string":
-                    return TypeEnum.String;
+                return l;
             }
-            throw new Exception("Cannot unmarshal type TypeEnum");
+            throw new Exception("Cannot unmarshal type long");
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
@@ -204,19 +113,11 @@ namespace QuickType
                 serializer.Serialize(writer, null);
                 return;
             }
-            var value = (TypeEnum)untypedValue;
-            switch (value)
-            {
-                case TypeEnum.Integer:
-                    serializer.Serialize(writer, "integer");
-                    return;
-                case TypeEnum.String:
-                    serializer.Serialize(writer, "string");
-                    return;
-            }
-            throw new Exception("Cannot marshal type TypeEnum");
+            var value = (long)untypedValue;
+            serializer.Serialize(writer, value.ToString());
+            return;
         }
 
-        public static readonly TypeEnumConverter Singleton = new TypeEnumConverter();
+        public static readonly ParseStringConverter Singleton = new ParseStringConverter();
     }
 }
