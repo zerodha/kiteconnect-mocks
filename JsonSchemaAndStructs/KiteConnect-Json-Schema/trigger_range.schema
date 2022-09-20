@@ -10,27 +10,16 @@
                     "type": "string"
                 },
                 "data": {
-                    "$ref": "#/definitions/Data"
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/Datum"
+                    }
                 }
             },
             "required": [],
             "title": "TriggerRange"
         },
-        "Data": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "NSE:INFY": {
-                    "$ref": "#/definitions/Nse"
-                },
-                "NSE:RELIANCE": {
-                    "$ref": "#/definitions/Nse"
-                }
-            },
-            "required": [],
-            "title": "Data"
-        },
-        "Nse": {
+        "Datum": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
@@ -45,7 +34,7 @@
                 }
             },
             "required": [],
-            "title": "Nse"
+            "title": "Datum"
         }
     }
 }
