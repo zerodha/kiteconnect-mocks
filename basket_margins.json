@@ -18,8 +18,8 @@
       },
       "leverage": 0,
       "charges": {
-        "transaction_charge": 0,
-        "transaction_charge_type": "",
+        "transaction_tax": 0,
+        "transaction_tax_type": "",
         "exchange_turnover_charge": 0,
         "sebi_turnover_charge": 0,
         "brokerage": 0,
@@ -51,8 +51,8 @@
       },
       "leverage": 0,
       "charges": {
-        "transaction_charge": 0,
-        "transaction_charge_type": "",
+        "transaction_tax": 0,
+        "transaction_tax_type": "",
         "exchange_turnover_charge": 0,
         "sebi_turnover_charge": 0,
         "brokerage": 0,
@@ -85,8 +85,8 @@
         },
         "leverage": 1,
         "charges": {
-          "transaction_charge": 0,
-          "transaction_charge_type": "",
+          "transaction_tax": 0,
+          "transaction_tax_type": "",
           "exchange_turnover_charge": 0,
           "sebi_turnover_charge": 0,
           "brokerage": 0,
@@ -118,8 +118,8 @@
         },
         "leverage": 1,
         "charges": {
-          "transaction_charge": 0,
-          "transaction_charge_type": "",
+          "transaction_tax": 0,
+          "transaction_tax_type": "",
           "exchange_turnover_charge": 0,
           "sebi_turnover_charge": 0,
           "brokerage": 0,

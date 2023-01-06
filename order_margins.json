@@ -18,8 +18,8 @@
       },
       "leverage": 1,
       "charges": {
-        "transaction_charge": 1.498,
-        "transaction_charge_type": "stt",
+        "transaction_tax": 1.498,
+        "transaction_tax_type": "stt",
         "exchange_turnover_charge": 0.051681,
         "sebi_turnover_charge": 0.001498,
         "brokerage": 0.01,
