@@ -5,9 +5,9 @@
       "type": "",
       "tradingsymbol": "",
       "exchange": "",
-      "span": 132257.58,
-      "exposure": 56597.19,
-      "option_premium": 0,
+      "span": 66832.5,
+      "exposure": 29151.225000000002,
+      "option_premium": 521.25,
       "additional": 0,
       "bo": 0,
       "cash": 0,
@@ -32,15 +32,15 @@
         },
         "total": 0
       },
-      "total": 188854.77
+      "total": 96504.975
     },
     "final": {
       "type": "",
       "tradingsymbol": "",
       "exchange": "",
-      "span": 26000.519999999986,
-      "exposure": 9452.689999999999,
-      "option_premium": 0,
+      "span": 7788.000000000007,
+      "exposure": 29151.225000000002,
+      "option_premium": -2152.5,
       "additional": 0,
       "bo": 0,
       "cash": 0,
@@ -65,15 +65,15 @@
         },
         "total": 0
       },
-      "total": 35453.209999999985
+      "total": 34786.725000000006
     },
     "orders": [
       {
         "type": "equity",
-        "tradingsymbol": "NIFTY23JANFUT",
+        "tradingsymbol": "NIFTY23JUL20600CE",
         "exchange": "NFO",
-        "span": 132257.58,
-        "exposure": 28239.120000000003,
+        "span": 66832.5,
+        "exposure": 29151.225000000002,
         "option_premium": 0,
         "additional": 0,
         "bo": 0,
@@ -85,29 +85,29 @@
         },
         "leverage": 1,
         "charges": {
-          "transaction_tax": 0,
-          "transaction_tax_type": "",
-          "exchange_turnover_charge": 0,
-          "sebi_turnover_charge": 0,
-          "brokerage": 0,
+          "transaction_tax": 1.67109375,
+          "transaction_tax_type": "stt",
+          "exchange_turnover_charge": 1.336875,
+          "sebi_turnover_charge": 0.00267375,
+          "brokerage": 20,
           "stamp_duty": 0,
           "gst": {
-            "igst": 0,
+            "igst": 3.8411187749999995,
             "cgst": 0,
             "sgst": 0,
-            "total": 0
+            "total": 3.8411187749999995
           },
-          "total": 0
+          "total": 26.851761274999998
         },
-        "total": 160496.69999999998
+        "total": 95983.725
       },
       {
         "type": "equity",
-        "tradingsymbol": "NIFTY23FEBFUT",
+        "tradingsymbol": "NIFTY23JUL20700CE",
         "exchange": "NFO",
         "span": 0,
-        "exposure": 28358.07,
-        "option_premium": 0,
+        "exposure": 0,
+        "option_premium": 521.25,
         "additional": 0,
         "bo": 0,
         "cash": 0,
@@ -119,21 +119,36 @@
         "leverage": 1,
         "charges": {
           "transaction_tax": 0,
-          "transaction_tax_type": "",
-          "exchange_turnover_charge": 0,
-          "sebi_turnover_charge": 0,
-          "brokerage": 0,
+          "transaction_tax_type": "stt",
+          "exchange_turnover_charge": 0.260625,
+          "sebi_turnover_charge": 0.00052125,
+          "brokerage": 20,
           "stamp_duty": 0,
           "gst": {
-            "igst": 0,
+            "igst": 3.6470063249999995,
             "cgst": 0,
             "sgst": 0,
-            "total": 0
+            "total": 3.6470063249999995
           },
-          "total": 0
+          "total": 23.908152575
         },
-        "total": 28358.07
+        "total": 521.25
       }
-    ]
+    ],
+    "charges": {
+      "transaction_tax": 0,
+      "transaction_tax_type": "",
+      "exchange_turnover_charge": 0,
+      "sebi_turnover_charge": 0.003195,
+      "brokerage": 40,
+      "stamp_duty": 0,
+      "gst": {
+        "igst": 0,
+        "cgst": 0,
+        "sgst": 0,
+        "total": 0
+      },
+      "total": 0
+    }
   }
 }
