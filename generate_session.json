@@ -35,8 +35,8 @@
         "access_token": "XXXXXX",
         "public_token": "XXXXXXXX",
         "enctoken": "XXXXXX",
-        "refresh_token": '',
-        "silo": '',
+        "refresh_token": "",
+        "silo": "",
         "login_time": "2021-01-01 16:15:14",
         "meta": {
             "demat_consent": "physical"
